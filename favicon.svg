@@ -11,9 +11,29 @@
     </linearGradient>
   </defs>
 
-  <rect x="1.5" y="1.5" width="41" height="41" rx="10" fill="url(#tit-bg)" stroke="#00f0ff" stroke-width="1.5"/>
-  <path d="M 6.5 13.5 H 17.5 V 17 H 13.5 V 30.5 H 10.5 V 17 H 6.5 Z" fill="url(#tit-neon)"/>
-  <circle cx="22" cy="12.5" r="2.5" fill="#00ff9d"/>
-  <rect x="20.5" y="18" width="3" height="12.5" rx="1.2" fill="#00f0ff"/>
-  <path d="M 26.5 13.5 H 37.5 V 17 H 33.5 V 30.5 H 30.5 V 17 H 26.5 Z" fill="url(#tit-neon)"/>
+  <style>
+    @keyframes tit-pulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
+    }
+    .tit-fav-letters {
+      animation: tit-pulse 2.5s ease-in-out infinite;
+    }
+  </style>
+
+  <!-- Frame -->
+  <rect x="1.5" y="1.5" width="41" height="41" rx="10" fill="url(#tit-bg)" stroke="#00f0ff" stroke-width="1.8"/>
+
+  <!-- Soft Rounded Letters: T - i - T -->
+  <g class="tit-fav-letters">
+    <!-- Left T -->
+    <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Center i -->
+    <circle cx="22" cy="12" r="2.4" fill="#00ff9d"/>
+    <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
+
+    <!-- Right T -->
+    <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
 </svg>

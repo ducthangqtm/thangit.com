@@ -23,16 +23,16 @@
     @keyframes tit-radar-pulse {
       0% {
         r: 2px;
-        opacity: 0.9;
+        opacity: 0.95;
         stroke-width: 1.4px;
       }
       60% {
-        opacity: 0.4;
+        opacity: 0.35;
       }
       100% {
         r: 9.5px;
         opacity: 0;
-        stroke-width: 0.4px;
+        stroke-width: 0.3px;
       }
     }
     @keyframes tit-beacon-core {
@@ -47,7 +47,7 @@
     }
     @keyframes tit-packet-flow {
       0% {
-        cy: 19px;
+        cy: 18.5px;
         opacity: 0;
       }
       25% {
@@ -57,7 +57,7 @@
         opacity: 1;
       }
       100% {
-        cy: 31px;
+        cy: 29px;
         opacity: 0;
       }
     }
@@ -81,7 +81,7 @@
       stroke-width: 1.6;
       stroke-linecap: round;
       stroke-dasharray: 32 128;
-      animation: tit-border-scan 4s linear infinite;
+      animation: tit-border-scan 4.5s linear infinite;
     }
     .tit-wave-1 {
       fill: none;
@@ -101,7 +101,7 @@
       animation: tit-packet-flow 1.8s ease-in-out infinite;
     }
     .tit-letters {
-      animation: tit-letters-glow 3s ease-in-out infinite;
+      animation: tit-letters-glow 3.5s ease-in-out infinite;
     }
   </style>
 
@@ -111,28 +111,25 @@
   <!-- Cyber Light Scanning Perimeter Beam -->
   <rect x="1.5" y="1.5" width="41" height="41" rx="10" class="tit-frame-scan"/>
 
-  <!-- Subtle Inner Grid / Circuit lines -->
-  <line x1="22" y1="4" x2="22" y2="8" stroke="rgba(0, 240, 255, 0.3)" stroke-width="1" stroke-dasharray="1 2"/>
-  <line x1="22" y1="36" x2="22" y2="40" stroke="rgba(0, 255, 157, 0.3)" stroke-width="1" stroke-dasharray="1 2"/>
-
-  <!-- Letters Group: T - i - T -->
+  <!-- Letters Group: Smooth, Soft Rounded T - i - T -->
   <g class="tit-letters">
-    <!-- Left T -->
-    <path d="M 6.5 13.5 H 17.5 V 17 H 13.5 V 30.5 H 10.5 V 17 H 6.5 Z" fill="url(#tit-neon)"/>
+    <!-- Left T: Rounded top bar and stem -->
+    <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
     
-    <!-- Center i: Stem -->
-    <rect x="20.5" y="18" width="3" height="12.5" rx="1.2" fill="#00f0ff"/>
-    <!-- Packet pulsing through stem -->
-    <circle cx="22" cy="24" r="1.2" class="tit-packet"/>
+    <!-- Center i: Soft Stem -->
+    <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
+    
+    <!-- Pulse Packet flowing down stem -->
+    <circle cx="22" cy="23.5" r="1.2" class="tit-packet"/>
 
-    <!-- Right T -->
-    <path d="M 26.5 13.5 H 37.5 V 17 H 33.5 V 30.5 H 30.5 V 17 H 26.5 Z" fill="url(#tit-neon)"/>
+    <!-- Right T: Rounded top bar and stem -->
+    <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 
-  <!-- Center i: Radar Transmission Waves (Expanding from antenna beacon) -->
-  <circle cx="22" cy="12.5" r="2" class="tit-wave-1"/>
-  <circle cx="22" cy="12.5" r="2" class="tit-wave-2"/>
+  <!-- Center i: Radar Transmission Waves -->
+  <circle cx="22" cy="12" r="2" class="tit-wave-1"/>
+  <circle cx="22" cy="12" r="2" class="tit-wave-2"/>
 
   <!-- Center i: Antenna Beacon Dot -->
-  <circle cx="22" cy="12.5" r="2.3" class="tit-beacon"/>
+  <circle cx="22" cy="12" r="2.3" class="tit-beacon"/>
 </svg>
