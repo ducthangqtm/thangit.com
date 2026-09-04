@@ -1,18 +1,16 @@
 /* ==========================================================================
-   THANGIT.COM — Ultra-Minimalist Click-to-Open Web OS & Bento Hub
-   Zero Clutter • Fast • Modal / Drawer on Click • Modern Tech Aesthetic
+   THANGIT.COM — Perfectly Balanced Ultra-Minimal Web OS & Hub
+   Centered • Proportional • Zero Off-Center Bugs • Sleek Cyber Obsidian
    ========================================================================== */
 
 :root {
   --bg-base: #06080d;
   --bg-card: #0b0f17;
   --bg-card-hover: #111827;
-  --bg-card-active: rgba(0, 240, 255, 0.06);
-  --bg-glass: rgba(11, 15, 23, 0.88);
   --bg-modal: #080c14;
 
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(0, 240, 255, 0.4);
+  --border-hover: rgba(0, 240, 255, 0.45);
   --border-active: #00f0ff;
 
   --text-title: #f8fafc;
@@ -61,25 +59,25 @@ body {
   position: relative;
 }
 
-/* Ambient Cyber Glow */
+/* Ambient Radial Glow */
 body::before {
   content: '';
   position: fixed;
-  top: -150px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(168, 85, 247, 0.03) 50%, transparent 70%);
+  width: 700px;
+  height: 450px;
+  background: radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.08), rgba(168, 85, 247, 0.03) 50%, transparent 75%);
   filter: blur(80px);
   pointer-events: none;
   z-index: -1;
 }
 
-/* Containers */
+/* Base Container */
 .container {
   width: 100%;
-  max-width: 720px;
+  max-width: 660px;
   margin-inline: auto;
   padding-inline: 1.25rem;
 }
@@ -88,7 +86,8 @@ body::before {
    HEADER
    ========================================================================== */
 .header-nav {
-  padding: 1.25rem 0 0.5rem;
+  padding: 1.1rem 0;
+  width: 100%;
 }
 .header-inner {
   display: flex;
@@ -119,7 +118,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.25rem 0.65rem;
+  padding: 0.28rem 0.65rem;
   border-radius: var(--radius-full);
   background: rgba(0, 255, 157, 0.06);
   border: 1px solid rgba(0, 255, 157, 0.25);
@@ -141,22 +140,32 @@ body::before {
 }
 
 /* ==========================================================================
-   MAIN ULTRA-MINIMAL HUB
+   MAIN HUB: PERFECTLY CENTERED VERTICALLY & HORIZONTALLY
    ========================================================================== */
 .main-hub {
-  padding: 1.5rem 0 2rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0;
+  width: 100%;
+}
+
+.hub-center-wrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-/* Avatar Card */
+/* Avatar: Dead Center */
 .profile-avatar-wrap {
   position: relative;
-  width: 88px;
-  height: 88px;
-  margin-bottom: 1rem;
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 1.15rem;
+  display: block;
 }
 .profile-avatar {
   width: 100%;
@@ -164,8 +173,9 @@ body::before {
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
-  border: 2px solid var(--neon-cyan);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+  border: 2.5px solid var(--neon-cyan);
+  box-shadow: 0 0 22px rgba(0, 240, 255, 0.28);
+  display: block;
 }
 .avatar-status-dot {
   position: absolute;
@@ -180,7 +190,7 @@ body::before {
 }
 
 .profile-name {
-  font-size: 1.65rem;
+  font-size: clamp(1.5rem, 3.5vw, 1.85rem);
   font-weight: 800;
   color: var(--text-title);
   letter-spacing: -0.5px;
@@ -196,15 +206,16 @@ body::before {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--neon-cyan);
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
+  letter-spacing: 0.2px;
 }
 
 .profile-tagline {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-body);
   max-width: 480px;
-  margin: 0.5rem auto 1.25rem;
-  line-height: 1.5;
+  margin: 0.65rem auto 1.25rem;
+  line-height: 1.55;
 }
 
 /* Social Icon Dock */
@@ -213,13 +224,13 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.85rem;
   flex-wrap: wrap;
 }
 .social-btn {
   width: 42px;
   height: 42px;
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   color: var(--text-body);
@@ -244,21 +255,22 @@ body::before {
 }
 
 /* ==========================================================================
-   APP LAUNCHER TILES (4 NÚT MỞ TÍNH NĂNG KHI CLICK)
+   APP LAUNCHER TILES (4 NÚT MỞ TÍNH NĂNG)
    ========================================================================== */
 .launcher-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.85rem;
   width: 100%;
-  margin-bottom: 1.75rem;
+  max-width: 620px;
+  margin: 0 auto 1.65rem;
 }
 
 .launcher-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1.15rem 1rem;
+  padding: 1.1rem 1rem;
   display: flex;
   align-items: center;
   gap: 0.85rem;
@@ -266,13 +278,12 @@ body::before {
   cursor: pointer;
   transition: all var(--transition-normal);
   color: inherit;
-  border: 1px solid var(--border-subtle);
 }
 .launcher-card:hover {
   background: var(--bg-card-hover);
   border-color: var(--border-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px -6px rgba(0, 240, 255, 0.18);
+  box-shadow: 0 8px 24px -6px rgba(0, 240, 255, 0.2);
 }
 .launcher-icon {
   width: 42px;
@@ -280,7 +291,7 @@ body::before {
   border-radius: 10px;
   display: grid;
   place-items: center;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   flex-shrink: 0;
 }
 .icon-tools { background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.25); color: var(--neon-cyan); }
@@ -299,7 +310,7 @@ body::before {
   color: var(--text-muted);
 }
 
-/* Key Metrics Chips (Dưới cùng) */
+/* 4 Metric Chips: Proportional & Centered */
 .metric-chips-row {
   display: flex;
   align-items: center;
@@ -307,12 +318,14 @@ body::before {
   gap: 0.65rem;
   flex-wrap: wrap;
   width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
 }
 .metric-chip {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
-  padding: 0.35rem 0.75rem;
+  padding: 0.35rem 0.8rem;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--text-muted);
@@ -322,7 +335,7 @@ body::before {
 }
 
 /* ==========================================================================
-   MODAL / DRAWER SYSTEM (HIỆN KHI ẤN VÀO NÚT)
+   MODALS SYSTEM
    ========================================================================== */
 .modal-overlay {
   position: fixed;
@@ -343,7 +356,7 @@ body::before {
 
 .modal-card {
   width: 100%;
-  max-width: 620px;
+  max-width: 600px;
   background: var(--bg-modal);
   border: 1px solid var(--border-hover);
   border-radius: var(--radius-lg);
@@ -352,10 +365,10 @@ body::before {
   max-height: 85vh;
   display: flex;
   flex-direction: column;
-  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: modalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 @keyframes modalPop {
-  from { transform: scale(0.94) translateY(8px); opacity: 0; }
+  from { transform: scale(0.95) translateY(6px); opacity: 0; }
   to { transform: scale(1) translateY(0); opacity: 1; }
 }
 
@@ -373,7 +386,7 @@ body::before {
   gap: 0.5rem;
 }
 .modal-title {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--text-title);
   font-family: var(--font-mono);
@@ -405,11 +418,12 @@ body::before {
   gap: 1rem;
 }
 
-/* Modals Content Styling */
+/* Modals Content */
 .modal-tabs {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+  flex-wrap: wrap;
 }
 .modal-tab-btn {
   background: var(--bg-card);
@@ -435,7 +449,7 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Tool Elements */
+/* Tool Form Elements */
 .input-compact {
   background: #0f172a;
   border: 1px solid var(--border-subtle);
@@ -445,11 +459,8 @@ body::before {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   outline: none;
-  width: 100%;
 }
-.input-compact:focus {
-  border-color: var(--neon-cyan);
-}
+.input-compact:focus { border-color: var(--neon-cyan); }
 .btn-calc {
   background: var(--neon-cyan);
   color: #050a12;
@@ -492,7 +503,6 @@ body::before {
   border-left: 2px solid var(--neon-cyan);
   padding-left: 1rem;
   margin-bottom: 1rem;
-  position: relative;
 }
 .timeline-modal-item.current { border-left-color: var(--neon-green); }
 .timeline-comp-name { font-weight: 700; font-size: 0.95rem; color: var(--text-title); }
@@ -571,6 +581,7 @@ body::before {
   font-family: var(--font-mono);
   color: var(--text-dim);
   text-align: center;
+  width: 100%;
 }
 
 /* Responsive */
