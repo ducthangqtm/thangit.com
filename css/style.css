@@ -352,183 +352,145 @@ body::after {
 }
 
 /* ==========================================================================
-   HERO SECTION: COMPACT & SLEEK
+   HERO SECTION: MINIMALIST & CLEAN (CHỐNG NGỢP THÔNG TIN)
    ========================================================================== */
 .hero-section {
-  padding: 3.25rem 0 2.25rem;
+  padding: 3.5rem 0 2.5rem;
   position: relative;
+  text-align: center;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.35fr 0.85fr;
-  gap: 2.5rem;
-  align-items: center;
-}
-
-.hero-intro {
+.hero-compact {
+  max-width: 680px;
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 
-.hero-badge-cluster {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.hero-title {
-  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: -0.75px;
-  line-height: 1.15;
-}
-.hero-title .gradient-text {
-  background: linear-gradient(135deg, #f8fafc 30%, var(--neon-cyan) 80%, var(--neon-green) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero-subtitle {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--neon-cyan);
-  font-family: var(--font-mono);
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.hero-desc {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  max-width: 540px;
-  line-height: 1.6;
-}
-
-.hero-stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-  padding: 0.85rem 1.1rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  margin-top: 0.25rem;
-}
-.stat-box {
-  display: flex;
-  flex-direction: column;
-}
-.stat-number {
-  font-family: var(--font-mono);
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--text-main);
-  line-height: 1.2;
-}
-.stat-number span {
-  color: var(--neon-green);
-  font-size: 1rem;
-}
-.stat-label {
-  font-size: 0.72rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  margin-top: 0.1rem;
-}
-
-.hero-cta-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.35rem;
-}
-
-/* Avatar Card */
-.hero-visual {
-  display: flex;
-  justify-content: center;
+.hero-avatar-wrap {
   position: relative;
+  margin-bottom: 0.35rem;
 }
-.avatar-card {
+.avatar-ring {
   position: relative;
-  width: 100%;
-  max-width: 310px;
-  border-radius: 20px;
-  padding: 10px;
-  background: linear-gradient(145deg, rgba(56, 189, 248, 0.12), rgba(168, 85, 247, 0.04));
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 240, 255, 0.12);
-  backdrop-filter: blur(12px);
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--neon-cyan), rgba(168, 85, 247, 0.4), var(--neon-green));
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
+  transition: transform 0.3s ease;
 }
-.avatar-img-wrap {
-  position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-  aspect-ratio: 4/5;
-  background: #020617;
+.avatar-ring:hover {
+  transform: scale(1.05);
 }
-.avatar-img-wrap img {
+.hero-avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  border-radius: 50%;
+  border: 3px solid #06090e;
   display: block;
-  transition: transform 0.4s ease;
 }
-.avatar-card:hover .avatar-img-wrap img {
-  transform: scale(1.03);
+.status-led-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--neon-green);
+  border: 2.5px solid #06090e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-green);
 }
 
-.avatar-overlay-badge {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  right: 14px;
-  background: rgba(6, 9, 14, 0.88);
-  border: 1px solid var(--border-card);
-  backdrop-filter: blur(8px);
-  padding: 0.65rem 0.85rem;
-  border-radius: var(--radius-md);
+.hero-name {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+.hero-accent {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-role {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-.avatar-user-info h4 {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
-.avatar-user-info p {
-  font-size: 0.72rem;
-  color: var(--neon-cyan);
+  justify-content: center;
+  gap: 0.5rem;
   font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
 }
-.radar-ring {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid var(--neon-green);
-  display: grid;
-  place-items: center;
+.role-sep {
+  color: var(--text-dim);
+}
+.role-highlight {
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+
+.hero-bio {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+/* Social Icon Dock (Chỉ hiện Icon, hover phát sáng neon) */
+.social-icon-dock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+.social-icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(13, 19, 32, 0.8);
+  border: 1px solid var(--border-card);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
   position: relative;
 }
-.radar-ring::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 1px solid var(--neon-green);
-  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+.social-icon-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  transition: transform 0.2s ease;
 }
-@keyframes ping {
-  75%, 100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
+.social-icon-btn:hover {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+}
+.social-icon-btn:hover svg {
+  transform: scale(1.1);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 }
 
 /* ==========================================================================
