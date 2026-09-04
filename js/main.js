@@ -123,7 +123,25 @@ async function initNetworkInspector() {
   const tlsEl = document.getElementById('inspector-tls');
   const userAgentEl = document.getElementById('inspector-ua');
 
-  if (!ipEl) return;
+  // Home badge elements
+  const homeIp = document.getElementById('home-visitor-ip');
+  const homeNode = document.getElementById('home-visitor-node');
+  const homeProto = document.getElementById('home-visitor-proto');
+
+  function applyNetworkData(ip, colo, http, tls, uag) {
+    if (ipEl) ipEl.textContent = ip;
+    if (homeIp) homeIp.textContent = ip;
+
+    if (coloEl) coloEl.textContent = colo ? `${colo} (Edge POP)` : 'Global Edge';
+    if (homeNode) homeNode.textContent = colo ? `${colo} Edge` : 'HAN Edge';
+
+    const displayHttp = (http || 'HTTP/3').toUpperCase();
+    if (protoEl) protoEl.textContent = displayHttp;
+    if (homeProto) homeProto.textContent = displayHttp;
+
+    if (tlsEl) tlsEl.textContent = tls || 'TLS 1.3';
+    if (uag && userAgentEl) userAgentEl.textContent = uag.substring(0, 35) + '...';
+  }
 
   try {
     const res = await fetch('/cdn-cgi/trace');
@@ -136,29 +154,21 @@ async function initNetworkInspector() {
         if (k && v) data[k.trim()] = v.trim();
       });
 
-      if (data.ip) ipEl.textContent = data.ip;
-      if (data.colo) coloEl.textContent = `${data.colo} (Edge)`;
-      if (data.http) protoEl.textContent = data.http.toUpperCase();
-      if (data.tls) tlsEl.textContent = data.tls;
-      if (data.uag && userAgentEl) userAgentEl.textContent = data.uag.substring(0, 35) + '...';
-      return;
+      if (data.ip) {
+        applyNetworkData(data.ip, data.colo, data.http, data.tls, data.uag);
+        return;
+      }
     }
   } catch (err) {
-    // Fallback
+    // Fallback to external IP lookup
   }
 
   try {
     const fallbackRes = await fetch('https://api.ipify.org?format=json');
     const fallbackData = await fallbackRes.json();
-    ipEl.textContent = fallbackData.ip || '127.0.0.1';
-    coloEl.textContent = 'HAN / SGN';
-    protoEl.textContent = 'HTTP/2 (SSL)';
-    tlsEl.textContent = 'TLS 1.3';
+    applyNetworkData(fallbackData.ip || '127.0.0.1', 'HAN', 'HTTP/3', 'TLS 1.3');
   } catch {
-    ipEl.textContent = '192.168.1.1 (Local)';
-    coloEl.textContent = 'HAN Edge';
-    protoEl.textContent = 'HTTP/2';
-    tlsEl.textContent = 'TLS 1.3';
+    applyNetworkData('192.168.1.1', 'HAN', 'HTTP/3', 'TLS 1.3');
   }
 }
 
@@ -464,6 +474,21 @@ function initCopyButtons() {
       if (ip) {
         navigator.clipboard.writeText(ip).then(() => {
           showToast(`📋 Đã sao chép IP: <strong>${ip}</strong>`);
+        });
+      }
+    });
+  }
+
+  const btnCopyHomeIp = document.getElementById('btn-copy-home-ip');
+  if (btnCopyHomeIp) {
+    btnCopyHomeIp.addEventListener('click', (e) => {
+      e.stopPropagation(); // Không kích hoạt mở modal khi chỉ bấm copy
+      const ip = document.getElementById('home-visitor-ip')?.textContent;
+      if (ip && !ip.includes('Đang phân tích')) {
+        navigator.clipboard.writeText(ip).then(() => {
+          showToast(`📋 Đã sao chép IP của bạn: <strong>${ip}</strong>`);
+        }).catch(() => {
+          showToast(`📋 Đã sao chép IP: ${ip}`);
         });
       }
     });

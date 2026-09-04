@@ -255,6 +255,59 @@ body::before {
 }
 
 /* ==========================================================================
+   LIVE VISITOR EDGE BADGE (SOI IP TRỰC TIẾP TRÊN TRANG CHỦ)
+   ========================================================================== */
+.visitor-edge-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 240, 255, 0.04);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0 auto 1.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  max-width: 100%;
+}
+.visitor-edge-badge:hover {
+  background: rgba(0, 240, 255, 0.08);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.25);
+}
+.edge-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  box-shadow: 0 0 6px var(--neon-green);
+}
+.edge-ip-label { color: var(--text-dim); }
+.edge-ip-value { color: var(--neon-green); font-weight: 700; }
+.edge-node-value { color: var(--neon-cyan); font-weight: 600; }
+.edge-proto-value { color: var(--text-title); }
+.edge-sep { color: var(--text-dim); }
+.btn-quick-copy {
+  background: rgba(0, 255, 157, 0.1);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+  color: var(--neon-green);
+  border-radius: var(--radius-sm);
+  padding: 0.15rem 0.45rem;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  margin-left: 0.25rem;
+  transition: all var(--transition-fast);
+}
+.btn-quick-copy:hover {
+  background: var(--neon-green);
+  color: #050a12;
+}
+
+/* ==========================================================================
    APP LAUNCHER TILES (4 NÚT MỞ TÍNH NĂNG)
    ========================================================================== */
 .launcher-grid {
@@ -589,4 +642,13 @@ body::before {
   .launcher-grid { grid-template-columns: 1fr; }
   .subnet-output-grid { grid-template-columns: 1fr 1fr; }
   .profile-name { font-size: 1.45rem; }
+  .visitor-edge-badge {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.65rem;
+    gap: 0.35rem;
+    white-space: nowrap;
+  }
+  .edge-ip-label {
+    display: none;
+  }
 }

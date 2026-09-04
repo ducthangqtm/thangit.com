@@ -90,6 +90,18 @@
         </a>
       </div>
 
+      <!-- Live Visitor IP & Edge Badge (Phát hiện IP & Hạ tầng truy cập thời gian thực) -->
+      <div class="visitor-edge-badge" data-open="modal-tools" title="Bấm để mở chi tiết Network Toolbox">
+        <span class="edge-live-dot"></span>
+        <span class="edge-ip-label">IP CỦA BẠN:</span>
+        <strong class="edge-ip-value" id="home-visitor-ip">Đang phân tích...</strong>
+        <span class="edge-sep">•</span>
+        <span class="edge-node-value" id="home-visitor-node">HAN Edge</span>
+        <span class="edge-sep">•</span>
+        <span class="edge-proto-value" id="home-visitor-proto">HTTP/3</span>
+        <button class="btn-quick-copy" id="btn-copy-home-ip" title="Sao chép IP nhanh">📋 Copy</button>
+      </div>
+
       <!-- 4 Nút Chức Năng Chính (BẤM VÀO MỚI MỞ TÍNH NĂNG) -->
       <div class="launcher-grid">
         <!-- 1. Network Toolbox -->
@@ -97,7 +109,7 @@
           <div class="launcher-icon icon-tools">🛠️</div>
           <div class="launcher-info">
             <h3>Network Toolbox</h3>
-            <p>Subnet Calc, IP Edge, Key Gen, Ping</p>
+            <p>IP Edge, Subnet Calc, Key Gen, Ping</p>
           </div>
         </div>
 
@@ -141,12 +153,14 @@
   </main>
 
   <!-- ========================================================================
-       MODAL 1: NETWORK TOOLBOX
-       ======================================================================== -->
+       MODALS / CLICK-TO-OPEN APPS
+       ========================================================================= -->
+
+  <!-- 1. MODAL: NETWORK TOOLBOX -->
   <div class="modal-overlay" id="modal-tools" role="dialog" aria-modal="true">
-    <div class="modal-card">
+    <div class="modal-window">
       <div class="modal-header">
-        <div class="modal-title-wrap">
+        <div class="modal-header-left">
           <span>🛠️</span>
           <span class="modal-title">NOC LIVE NETWORK TOOLBOX</span>
         </div>
@@ -155,14 +169,43 @@
 
       <div class="modal-body">
         <div class="modal-tabs">
-          <button class="modal-tab-btn active" data-tab="tab-subnet">Subnet Calc</button>
+          <button class="modal-tab-btn active" data-tab="tab-inspector">IP Edge</button>
+          <button class="modal-tab-btn" data-tab="tab-subnet">Subnet Calc</button>
           <button class="modal-tab-btn" data-tab="tab-pwd">Key Generator</button>
-          <button class="modal-tab-btn" data-tab="tab-inspector">IP Edge</button>
           <button class="modal-tab-btn" data-tab="tab-ping">Latency Ping</button>
         </div>
 
-        <!-- Tab 1: Subnet Calc -->
-        <div class="tool-panel-content active" id="tab-subnet">
+        <!-- Tab 1: IP Edge Inspector (Mặc định mở đầu tiên) -->
+        <div class="tool-panel-content active" id="tab-inspector">
+          <div class="keygen-box" style="margin-bottom:0.85rem;">
+            <div>
+              <div style="font-size:0.72rem; color:var(--text-dim); font-family:var(--font-mono);">PUBLIC IP CỦA BẠN</div>
+              <div class="keygen-val" id="inspector-ip" style="font-size:1.3rem;">Đang tải...</div>
+            </div>
+            <button class="btn-calc" id="btn-copy-ip-val" style="padding:0.4rem 0.75rem; font-size:0.75rem;">Copy IP</button>
+          </div>
+          <div class="subnet-output-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="sub-cell">
+              <span class="sub-cell-label">Data Center (POP)</span>
+              <span class="sub-cell-val" id="inspector-colo">HAN (Hanoi Edge)</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Giao Thức</span>
+              <span class="sub-cell-val" id="inspector-proto">HTTP/3 (QUIC)</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Tiêu chuẩn mã hóa</span>
+              <span class="sub-cell-val" id="inspector-tls">TLS 1.3</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Trình duyệt</span>
+              <span class="sub-cell-val" id="inspector-ua" style="font-size:0.75rem;">Chrome / Webkit</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Subnet Calc -->
+        <div class="tool-panel-content" id="tab-subnet">
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;">
             <input type="text" id="calc-ip" class="input-compact" style="flex:2; min-width:140px;" value="192.168.1.1" placeholder="Địa chỉ IP">
             <select id="calc-mask" class="input-compact" style="flex:1; min-width:120px;">
@@ -206,7 +249,7 @@
           </div>
         </div>
 
-        <!-- Tab 2: Password Gen -->
+        <!-- Tab 3: Password Gen -->
         <div class="tool-panel-content" id="tab-pwd">
           <div class="keygen-box">
             <span class="keygen-val" id="pwd-result">Tạo mật khẩu...</span>
@@ -221,36 +264,6 @@
             <span id="pwd-length-val" style="display:none">16</span>
           </div>
         </div>
-
-        <!-- Tab 3: IP Edge Inspector -->
-        <div class="tool-panel-content" id="tab-inspector">
-          <div class="keygen-box" style="margin-bottom:0.85rem;">
-            <div>
-              <div style="font-size:0.72rem; color:var(--text-dim); font-family:var(--font-mono);">PUBLIC IP CỦA BẠN</div>
-              <div class="keygen-val" id="inspector-ip" style="font-size:1.3rem;">Đang tải...</div>
-            </div>
-            <button class="btn-calc" id="btn-copy-ip-val" style="padding:0.4rem 0.75rem; font-size:0.75rem;">Copy IP</button>
-          </div>
-          <div class="subnet-output-grid" style="grid-template-columns: repeat(2, 1fr);">
-            <div class="sub-cell">
-              <span class="sub-cell-label">Data Center (POP)</span>
-              <span class="sub-cell-val" id="inspector-colo">HAN (Hanoi Edge)</span>
-            </div>
-            <div class="sub-cell">
-              <span class="sub-cell-label">Giao Thức</span>
-              <span class="sub-cell-val" id="inspector-proto">HTTP/3 (QUIC)</span>
-            </div>
-            <div class="sub-cell">
-              <span class="sub-cell-label">Tiêu chuẩn mã hóa</span>
-              <span class="sub-cell-val" id="inspector-tls">TLS 1.3</span>
-            </div>
-            <div class="sub-cell">
-              <span class="sub-cell-label">Trình duyệt</span>
-              <span class="sub-cell-val" id="inspector-ua" style="font-size:0.75rem;">Chrome / Webkit</span>
-            </div>
-          </div>
-        </div>
-
         <!-- Tab 4: Latency Ping -->
         <div class="tool-panel-content" id="tab-ping">
           <div class="subnet-output-grid" style="grid-template-columns: repeat(2, 1fr); margin-top:0;">
