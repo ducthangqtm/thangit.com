@@ -323,6 +323,33 @@
             <span class="bento-action-link">Gõ lệnh terminal (phím ~) →</span>
           </div>
         </div>
+
+        <!-- Bento 5: TiT Pocket Super App (Full-Width Launcher) -->
+        <div class="bento-card bento-super-app" data-open="modal-pocket-tools">
+          <div class="bento-card-header">
+            <div class="bento-card-icon" style="background: rgba(0, 240, 255, 0.12); color: var(--neon-cyan);">⚡</div>
+            <div>
+              <h3 class="bento-card-title">TiT Pocket Super Toolbox</h3>
+              <p class="bento-card-subtitle">8 Tiện ích bỏ túi: QR Studio, Thời tiết, Giá Coin, Bóng đá, Máy tính, Lịch âm, Ngoại tệ, Giờ thế giới</p>
+            </div>
+            <span class="bento-badge-tag" style="background: rgba(0, 255, 157, 0.15); color: var(--neon-green); border-color: var(--neon-green);">8-in-1 Hub</span>
+          </div>
+
+          <!-- Live dynamic preview chips -->
+          <div class="bento-super-chips">
+            <div class="super-chip-preview">🌤️ <span id="chip-weather-preview">Hà Nội: 31°C</span></div>
+            <div class="super-chip-preview">🪙 BTC: <strong id="chip-btc-price">$81,000</strong> <span id="chip-btc-change" class="chip-green">+4.2%</span></div>
+            <div class="super-chip-preview">⚽ <strong>EPL & C1 Live</strong></div>
+            <div class="super-chip-preview">🔲 <strong>VietQR & Wi-Fi</strong></div>
+            <div class="super-chip-preview">📅 <strong>Lịch Âm</strong></div>
+            <div class="super-chip-preview">💵 <strong>Tỷ giá USD/VND</strong></div>
+            <div class="super-chip-preview">🌍 <strong>Giờ Quốc Tế</strong></div>
+          </div>
+
+          <div class="bento-card-footer">
+            <span class="bento-action-link">Mở toàn bộ 8 siêu tiện ích bỏ túi →</span>
+          </div>
+        </div>
       </div>
 
       <!-- 4 Chips Số Liệu Minh Chứng (Gọn Gàng) -->
@@ -378,6 +405,326 @@
         </div>
 
         <button class="btn-calc" style="width: 100%; margin-top: 0.75rem; padding: 0.65rem;" data-close="modal-ios-install">Đã hiểu & Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TIT POCKET SUPER APP (8-IN-1 HUB) -->
+  <div class="modal-overlay" id="modal-pocket-tools" role="dialog" aria-modal="true">
+    <div class="modal-window modal-pocket-window">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span>⚡</span>
+          <span class="modal-title">TIT POCKET SUPER TOOLBOX</span>
+        </div>
+        <button class="btn-close-modal" data-close="modal-pocket-tools" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 1.15rem;">
+        <!-- Scrollable Tabs Nav -->
+        <div class="pocket-tabs-nav" id="pocket-tabs-bar">
+          <button class="pocket-tab-btn active" data-pocket-tab="tab-p-qr">🔲 Tạo QR</button>
+          <button class="pocket-tab-btn" data-pocket-tab="tab-p-weather">🌤️ Thời Tiết</button>
+          <button class="pocket-tab-btn" data-pocket-tab="tab-p-crypto">🪙 Giá Coin</button>
+          <button class="pocket-tab-btn" data-pocket-tab="tab-p-football">⚽ Bóng Đá</button>
+          <button class="pocket-tab-btn" data-pocket-tab="tab-p-calc">🧮 Máy Tính</button>
+          <button class="pocket-tab-btn" data-pocket-tab="tab-p-lunar">📅 Lịch Âm</button>
+          <button class="pocket-tab-btn" data-pocket-tab="tab-p-converter">⚖️ Đổi Đơn Vị</button>
+          <button class="pocket-tab-btn" data-pocket-tab="tab-p-world">🌍 Giờ Quốc Tế</button>
+        </div>
+
+        <!-- 1. TAB QR STUDIO -->
+        <div class="pocket-panel active" id="tab-p-qr">
+          <div class="qr-studio-layout">
+            <div class="qr-form-group">
+              <div class="qr-type-selector">
+                <button class="qr-type-btn active" data-qr-type="bank">🏦 VietQR Bank</button>
+                <button class="qr-type-btn" data-qr-type="wifi">📶 Wi-Fi 1-Chạm</button>
+                <button class="qr-type-btn" data-qr-type="url">🔗 Link Web</button>
+                <button class="qr-type-btn" data-qr-type="vcard">📇 Danh Thiếp</button>
+                <button class="qr-type-btn" data-qr-type="text">📝 Văn Bản</button>
+              </div>
+
+              <!-- Sub-Form: Bank -->
+              <div id="qr-form-bank" class="qr-subform">
+                <div style="margin-bottom:0.45rem;">
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">NGÂN HÀNG HƯỞNG THỤ</label>
+                  <select id="qr-bank-select" class="qr-select-field">
+                    <option value="vcb">Vietcombank (VCB)</option>
+                    <option value="mb" selected>MB Bank (Quân Đội)</option>
+                    <option value="tcb">Techcombank (TCB)</option>
+                    <option value="acb">ACB (Á Châu)</option>
+                    <option value="vpb">VPBank</option>
+                    <option value="tpb">TPBank (Tiên Phong)</option>
+                    <option value="bidv">BIDV</option>
+                    <option value="vba">Agribank</option>
+                    <option value="msb">MSB (Hàng Hải)</option>
+                    <option value="stb">Sacombank</option>
+                    <option value="vib">VIB (Quốc Tế)</option>
+                    <option value="shb">SHB</option>
+                    <option value="scb">SCB</option>
+                    <option value="ocb">OCB</option>
+                  </select>
+                </div>
+                <div style="margin-bottom:0.45rem;">
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">SỐ TÀI KHOẢN</label>
+                  <input type="text" id="qr-bank-acc" class="qr-input-field" placeholder="Ví dụ: 0986192092" value="0986192092">
+                </div>
+                <div style="margin-bottom:0.45rem;">
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">SỐ TIỀN (VNĐ - TÙY CHỌN)</label>
+                  <input type="number" id="qr-bank-amount" class="qr-input-field" placeholder="Để trống nếu người gửi tự điền">
+                </div>
+                <div>
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">LỜI NHẮN CHUYỂN KHOẢN</label>
+                  <input type="text" id="qr-bank-desc" class="qr-input-field" placeholder="Ví dụ: Chuyen tien dich vu" value="Thanh toan TiT">
+                </div>
+              </div>
+
+              <!-- Sub-Form: Wi-Fi -->
+              <div id="qr-form-wifi" class="qr-subform" style="display:none;">
+                <div style="margin-bottom:0.45rem;">
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">TÊN WI-FI (SSID)</label>
+                  <input type="text" id="qr-wifi-ssid" class="qr-input-field" placeholder="Tên mạng Wi-Fi...">
+                </div>
+                <div style="margin-bottom:0.45rem;">
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">MẬT KHẨU WI-FI</label>
+                  <input type="text" id="qr-wifi-pass" class="qr-input-field" placeholder="Mật khẩu Wi-Fi...">
+                </div>
+                <div>
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">CHUẨN BẢO MẬT</label>
+                  <select id="qr-wifi-type" class="qr-select-field">
+                    <option value="WPA" selected>WPA / WPA2 / WPA3 (Phổ biến)</option>
+                    <option value="WEP">WEP</option>
+                    <option value="nopass">Không có mật khẩu</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Sub-Form: URL -->
+              <div id="qr-form-url" class="qr-subform" style="display:none;">
+                <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">ĐƯỜNG DẪN WEBSITE (URL)</label>
+                <input type="url" id="qr-url-input" class="qr-input-field" placeholder="https://..." value="https://thangit.com">
+              </div>
+
+              <!-- Sub-Form: vCard -->
+              <div id="qr-form-vcard" class="qr-subform" style="display:none;">
+                <div style="margin-bottom:0.45rem;">
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">HỌ VÀ TÊN</label>
+                  <input type="text" id="qr-vc-name" class="qr-input-field" value="Nguyễn Đức Thắng">
+                </div>
+                <div style="margin-bottom:0.45rem;">
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">SỐ ĐIỆN THOẠI</label>
+                  <input type="tel" id="qr-vc-phone" class="qr-input-field" value="0986192092">
+                </div>
+                <div style="margin-bottom:0.45rem;">
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">EMAIL</label>
+                  <input type="email" id="qr-vc-email" class="qr-input-field" value="contact@thangit.com">
+                </div>
+                <div>
+                  <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">CÔNG TY / CHỨC VỤ</label>
+                  <input type="text" id="qr-vc-org" class="qr-input-field" value="Senior Network Administrator">
+                </div>
+              </div>
+
+              <!-- Sub-Form: Text -->
+              <div id="qr-form-text" class="qr-subform" style="display:none;">
+                <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:3px;">NỘI DUNG VĂN BẢN</label>
+                <textarea id="qr-text-input" class="qr-input-field" style="height:110px; resize:none;" placeholder="Nhập ghi chú, mã khuyến mãi, văn bản bất kỳ..."></textarea>
+              </div>
+
+              <button class="btn-calc" id="btn-generate-qr" style="margin-top:0.4rem; padding:0.6rem; width:100%;">Tạo Mã QR Ngay</button>
+            </div>
+
+            <!-- QR Preview -->
+            <div class="qr-preview-box">
+              <div class="qr-canvas-wrap">
+                <canvas id="qr-canvas"></canvas>
+              </div>
+              <div style="display:flex; gap:0.4rem; width:100%;">
+                <button class="btn-calc" id="btn-download-qr" style="flex:1; padding:0.45rem 0.5rem; font-size:0.75rem;">💾 Tải ảnh</button>
+                <button class="btn-calc" id="btn-copy-qr-text" style="flex:1; padding:0.45rem 0.5rem; font-size:0.75rem;">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. TAB WEATHER -->
+        <div class="pocket-panel" id="tab-p-weather">
+          <div class="weather-city-pills" id="weather-cities-nav">
+            <button class="weather-city-btn active" data-city="hanoi">Hà Nội</button>
+            <button class="weather-city-btn" data-city="hcm">TP. Hồ Chí Minh</button>
+            <button class="weather-city-btn" data-city="danang">Đà Nẵng</button>
+            <button class="weather-city-btn" data-city="haiphong">Hải Phòng</button>
+            <button class="weather-city-btn" data-city="cantho">Cần Thơ</button>
+            <button class="weather-city-btn" data-city="dalat">Đà Lạt</button>
+            <button class="weather-city-btn" id="btn-geo-weather">📍 GPS Của Tôi</button>
+          </div>
+
+          <div class="weather-hero-card">
+            <div>
+              <div id="w-city-title" style="font-size:1.15rem; font-weight:700; color:#fff;">Hà Nội</div>
+              <div id="w-condition-text" style="font-size:0.85rem; color:var(--neon-cyan); margin:0.25rem 0 0.5rem;">Đang cập nhật...</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Cảm giác như: <strong id="w-feels-like" style="color:#fff;">--°C</strong></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="weather-temp-main" id="w-temp-val">--°C</div>
+              <div id="w-icon-emoji" style="font-size:2.2rem; line-height:1;">🌤️</div>
+            </div>
+          </div>
+
+          <div class="weather-grid-metrics">
+            <div class="sub-cell">
+              <span class="sub-cell-label">Độ Ẩm</span>
+              <span class="sub-cell-val" id="w-humidity">--%</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Tốc Độ Gió</span>
+              <span class="sub-cell-val" id="w-wind">-- km/h</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Chỉ Số UV</span>
+              <span class="sub-cell-val" id="w-uv">Thấp</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Xác Suất Mưa</span>
+              <span class="sub-cell-val" id="w-rain">--%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. TAB CRYPTO TRACKER -->
+        <div class="pocket-panel" id="tab-p-crypto">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span style="font-size:0.75rem; color:var(--text-muted);">Nguồn: <strong>Binance Real-Time Ticker</strong></span>
+            <button class="btn-quick-copy" id="btn-refresh-crypto">🔄 Làm mới</button>
+          </div>
+          <div class="crypto-grid" id="crypto-cards-grid">
+            <div style="grid-column:1/-1; text-align:center; padding:1.5rem; color:var(--text-dim);">Đang kết nối sàn Binance...</div>
+          </div>
+        </div>
+
+        <!-- 4. TAB FOOTBALL ESPN -->
+        <div class="pocket-panel" id="tab-p-football">
+          <div class="football-leagues-nav" id="football-leagues-bar">
+            <button class="football-league-btn active" data-league="eng.1">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Ngoại Hạng Anh</button>
+            <button class="football-league-btn" data-league="uefa.champions">🏆 Cúp C1 (UCL)</button>
+            <button class="football-league-btn" data-league="esp.1">🇪🇸 La Liga</button>
+            <button class="football-league-btn" data-league="ita.1">🇮🇹 Serie A</button>
+            <button class="football-league-btn" data-league="ger.1">🇩🇪 Bundesliga</button>
+          </div>
+          <div class="matches-list" id="football-matches-list">
+            <div style="text-align:center; padding:1.5rem; color:var(--text-dim);">Đang tải lịch thi đấu ESPN...</div>
+          </div>
+        </div>
+
+        <!-- 5. TAB CALCULATOR -->
+        <div class="pocket-panel" id="tab-p-calc">
+          <div class="calc-wrapper">
+            <div class="calc-screen">
+              <div class="calc-history" id="calc-history-view">&nbsp;</div>
+              <div class="calc-display" id="calc-display-view">0</div>
+            </div>
+            <div class="calc-grid">
+              <button class="calc-btn func" data-calc-action="clear">AC</button>
+              <button class="calc-btn func" data-calc-action="plusminus">±</button>
+              <button class="calc-btn func" data-calc-action="percent">%</button>
+              <button class="calc-btn op" data-calc-action="divide">÷</button>
+
+              <button class="calc-btn num" data-calc-num="7">7</button>
+              <button class="calc-btn num" data-calc-num="8">8</button>
+              <button class="calc-btn num" data-calc-num="9">9</button>
+              <button class="calc-btn op" data-calc-action="multiply">×</button>
+
+              <button class="calc-btn num" data-calc-num="4">4</button>
+              <button class="calc-btn num" data-calc-num="5">5</button>
+              <button class="calc-btn num" data-calc-num="6">6</button>
+              <button class="calc-btn op" data-calc-action="minus">-</button>
+
+              <button class="calc-btn num" data-calc-num="1">1</button>
+              <button class="calc-btn num" data-calc-num="2">2</button>
+              <button class="calc-btn num" data-calc-num="3">3</button>
+              <button class="calc-btn op" data-calc-action="plus">+</button>
+
+              <button class="calc-btn num" data-calc-num="0">0</button>
+              <button class="calc-btn num" data-calc-num=".">.</button>
+              <button class="calc-btn func" data-calc-action="backspace">⌫</button>
+              <button class="calc-btn equal" data-calc-action="equals">=</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. TAB LUNAR CALENDAR -->
+        <div class="pocket-panel" id="tab-p-lunar">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.85rem;">
+            <input type="date" id="lunar-date-picker" class="qr-input-field" style="max-width:210px;">
+            <button class="btn-calc" id="btn-lunar-today" style="padding:0.5rem 0.85rem; font-size:0.75rem;">Hôm Nay</button>
+          </div>
+
+          <div class="lunar-hero-card">
+            <div id="lunar-solar-header" style="font-size:0.9rem; color:var(--text-muted); font-family:var(--font-mono);">Dương lịch: --/--/----</div>
+            <div style="font-size:0.8rem; color:var(--neon-cyan); margin-top:0.3rem;">ÂM LỊCH VIỆT NAM</div>
+            <div class="lunar-big-day" id="lunar-day-display">--</div>
+            <div class="lunar-canchi-badge" id="lunar-month-year-display">Tháng -- • Năm --</div>
+            <div id="lunar-canchi-day" style="font-size:0.85rem; color:var(--neon-green); margin-top:0.35rem; font-family:var(--font-mono);">Ngày: --</div>
+          </div>
+
+          <div class="lunar-meta-row">
+            <div class="sub-cell">
+              <span class="sub-cell-label">Trực & Trạng Thái</span>
+              <span class="sub-cell-val" id="lunar-status-text" style="color:var(--neon-green);">Hoàng Đạo</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Tiết Khí</span>
+              <span class="sub-cell-val" id="lunar-tietkhi-text">--</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Giờ Hoàng Đạo</span>
+              <span class="sub-cell-val" id="lunar-good-hours">Dần, Thìn, Tỵ, Thân</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. TAB UNIT & CURRENCY CONVERTER -->
+        <div class="pocket-panel" id="tab-p-converter">
+          <div class="converter-card">
+            <div style="margin-bottom:0.75rem;">
+              <label style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:4px;">LOẠI ĐƠN VỊ CẦN CHUYỂN ĐỔI</label>
+              <select id="conv-cat-select" class="converter-select" style="width:100%; font-size:0.9rem;">
+                <option value="currency" selected>💵 Ngoại Tệ & Tiền Tệ (Live Exchange Rates)</option>
+                <option value="data">💾 Dung Lượng Lưu Trữ IT (Bytes, KB, MB, GB, TB)</option>
+                <option value="speed">🚀 Tốc Độ Mạng (Mbps, MB/s, Gbps)</option>
+                <option value="length">📏 Chiều Dài & Khoảng Cách (m, km, inch, ft, mile)</option>
+                <option value="mass">⚖️ Khối Lượng (kg, g, lb, oz)</option>
+                <option value="temp">🌡️ Nhiệt Độ (°C, °F)</option>
+              </select>
+            </div>
+
+            <div class="converter-dual-row">
+              <div class="converter-box">
+                <input type="number" id="conv-val-1" class="converter-input" value="100">
+                <select id="conv-unit-1" class="converter-select"></select>
+              </div>
+
+              <button class="converter-swap-btn" id="btn-conv-swap" title="Đảo chiều chuyển đổi">⇄</button>
+
+              <div class="converter-box">
+                <input type="number" id="conv-val-2" class="converter-input" value="0">
+                <select id="conv-unit-2" class="converter-select"></select>
+              </div>
+            </div>
+
+            <div id="conv-rate-note" style="font-size:0.72rem; color:var(--text-muted); text-align:center; font-family:var(--font-mono);">
+              Tỷ giá thời gian thực cập nhật tự động.
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. TAB WORLD CLOCK -->
+        <div class="pocket-panel" id="tab-p-world">
+          <div class="world-clock-grid" id="world-clock-container">
+            <!-- Dynamically populated world clocks -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -657,6 +1004,8 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260904_5"></script>
+  <script src="js/lunar.js?v=20260904_6"></script>
+  <script src="js/qrcode.min.js?v=20260904_6"></script>
+  <script src="js/main.js?v=20260904_6"></script>
 </body>
 </html>

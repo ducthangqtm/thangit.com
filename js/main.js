@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initServiceWorker();
   initPullToRefresh();
   initPWAInstallPrompt();
+  initPocketTools();
 });
 
 function initPWAInstallPrompt() {
@@ -843,4 +844,897 @@ function initAnimatedFavicon() {
 
   start();
 }
+
+/* ==========================================================================
+   TIT POCKET SUPER APP CONTROLLER (8-IN-1 UTILITIES)
+   ========================================================================== */
+function initPocketTools() {
+  // 1. Tab Switcher
+  const tabBtns = document.querySelectorAll('[data-pocket-tab]');
+  const panels = document.querySelectorAll('.pocket-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetId = btn.getAttribute('data-pocket-tab');
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) targetPanel.classList.add('active');
+    });
+  });
+
+  // 2. Initialize Sub-modules
+  initQRStudio();
+  initWeather();
+  initCrypto();
+  initFootball();
+  initCalculator();
+  initLunarCalendar();
+  initConverter();
+  initWorldClock();
+}
+
+/* --- MODULE 1: UNIVERSAL QR STUDIO --- */
+function initQRStudio() {
+  const typeBtns = document.querySelectorAll('[data-qr-type]');
+  const subforms = document.querySelectorAll('.qr-subform');
+  const canvas = document.getElementById('qr-canvas');
+  const btnGenerate = document.getElementById('btn-generate-qr');
+  const btnDownload = document.getElementById('btn-download-qr');
+  const btnCopy = document.getElementById('btn-copy-qr-text');
+
+  let currentType = 'bank';
+  let lastPayload = '';
+
+  typeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      typeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentType = btn.getAttribute('data-qr-type');
+
+      subforms.forEach(f => f.style.display = 'none');
+      const activeForm = document.getElementById(`qr-form-${currentType}`);
+      if (activeForm) activeForm.style.display = 'block';
+
+      generateQR();
+    });
+  });
+
+  function getQRPayload() {
+    if (currentType === 'bank') {
+      const bank = document.getElementById('qr-bank-select')?.value || 'mb';
+      const acc = document.getElementById('qr-bank-acc')?.value.trim() || '0986192092';
+      const amount = document.getElementById('qr-bank-amount')?.value.trim() || '';
+      const desc = document.getElementById('qr-bank-desc')?.value.trim() || 'Thanh toan TiT';
+      // Official VietQR API format for seamless banking app scan
+      return `https://img.vietqr.io/image/${bank}-${acc}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(desc)}`;
+    }
+    if (currentType === 'wifi') {
+      const ssid = document.getElementById('qr-wifi-ssid')?.value.trim() || 'THANGIT_WIFI';
+      const pass = document.getElementById('qr-wifi-pass')?.value || '';
+      const type = document.getElementById('qr-wifi-type')?.value || 'WPA';
+      return `WIFI:S:${ssid};T:${type};P:${pass};;`;
+    }
+    if (currentType === 'url') {
+      return document.getElementById('qr-url-input')?.value.trim() || 'https://thangit.com';
+    }
+    if (currentType === 'vcard') {
+      const name = document.getElementById('qr-vc-name')?.value.trim() || 'Nguyễn Đức Thắng';
+      const phone = document.getElementById('qr-vc-phone')?.value.trim() || '0986192092';
+      const email = document.getElementById('qr-vc-email')?.value.trim() || 'contact@thangit.com';
+      const org = document.getElementById('qr-vc-org')?.value.trim() || 'Thắng IT';
+      return `BEGIN:VCARD\nVERSION:3.0\nN:${name}\nFN:${name}\nTEL;TYPE=CELL:${phone}\nEMAIL:${email}\nORG:${org}\nEND:VCARD`;
+    }
+    if (currentType === 'text') {
+      return document.getElementById('qr-text-input')?.value.trim() || 'THANGIT.COM — Senior Network Administrator';
+    }
+    return 'https://thangit.com';
+  }
+
+  function generateQR() {
+    lastPayload = getQRPayload();
+    if (window.TiTQR && canvas) {
+      window.TiTQR.render(canvas, { text: lastPayload, size: 260 });
+    }
+  }
+
+  if (btnGenerate) btnGenerate.addEventListener('click', (e) => {
+    e.preventDefault();
+    generateQR();
+  });
+
+  if (btnDownload && canvas) {
+    btnDownload.addEventListener('click', (e) => {
+      e.preventDefault();
+      try {
+        const link = document.createElement('a');
+        link.download = `tit_qr_${currentType}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      } catch (err) {
+        // Fallback direct open
+        if (lastPayload.startsWith('http')) window.open(lastPayload, '_blank');
+      }
+    });
+  }
+
+  if (btnCopy) {
+    btnCopy.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (lastPayload) {
+        navigator.clipboard.writeText(lastPayload).then(() => {
+          const toast = document.getElementById('global-toast');
+          if (toast) {
+            toast.textContent = '📋 Đã sao chép nội dung QR!';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+          }
+        });
+      }
+    });
+  }
+
+  // Initial render
+  setTimeout(generateQR, 200);
+}
+
+/* --- MODULE 2: WEATHER & TEMPERATURE (OPEN-METEO) --- */
+function initWeather() {
+  const cityBtns = document.querySelectorAll('.weather-city-btn[data-city]');
+  const geoBtn = document.getElementById('btn-geo-weather');
+
+  const CITIES = {
+    hanoi: { lat: 21.0285, lon: 105.8542, name: 'Hà Nội' },
+    hcm: { lat: 10.8231, lon: 106.6297, name: 'TP. Hồ Chí Minh' },
+    danang: { lat: 16.0544, lon: 108.2022, name: 'Đà Nẵng' },
+    haiphong: { lat: 20.8449, lon: 106.6881, name: 'Hải Phòng' },
+    cantho: { lat: 10.0452, lon: 105.7469, name: 'Cần Thơ' },
+    dalat: { lat: 11.9404, lon: 108.4583, name: 'Đà Lạt' }
+  };
+
+  const WMO_MAP = {
+    0: { text: 'Trời quang đãng', icon: '☀️' },
+    1: { text: 'Chủ yếu quang đãng', icon: '🌤️' },
+    2: { text: 'Mây rải rác', icon: '⛅' },
+    3: { text: 'Trời nhiều mây', icon: '☁️' },
+    45: { text: 'Có sương mù', icon: '🌫️' },
+    48: { text: 'Sương mù dày', icon: '🌫️' },
+    51: { text: 'Mưa phùn nhẹ', icon: '🌦️' },
+    53: { text: 'Mưa phùn vừa', icon: '🌦️' },
+    55: { text: 'Mưa phùn nặng hạt', icon: '🌧️' },
+    61: { text: 'Mưa rào nhẹ', icon: '🌦️' },
+    63: { text: 'Mưa vừa', icon: '🌧️' },
+    65: { text: 'Mưa to', icon: '🌧️' },
+    80: { text: 'Mưa rào ngắt quãng', icon: '🌦️' },
+    81: { text: 'Mưa rào nặng hạt', icon: '🌧️' },
+    95: { text: 'Có dông sét', icon: '⛈️' }
+  };
+
+  async function fetchWeather(lat, lon, cityName) {
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=uv_index_max,precipitation_probability_max&timezone=Asia%2FBangkok`;
+      const res = await fetch(url);
+      if (!res.ok) return;
+      const data = await res.json();
+      const cur = data.current;
+      const daily = data.daily;
+
+      const code = cur.weather_code || 0;
+      const wInfo = WMO_MAP[code] || { text: 'Trời mát mẻ', icon: '🌤️' };
+
+      const cityTitle = document.getElementById('w-city-title');
+      const tempVal = document.getElementById('w-temp-val');
+      const condText = document.getElementById('w-condition-text');
+      const feelsLike = document.getElementById('w-feels-like');
+      const iconEmoji = document.getElementById('w-icon-emoji');
+      const humidity = document.getElementById('w-humidity');
+      const wind = document.getElementById('w-wind');
+      const uv = document.getElementById('w-uv');
+      const rain = document.getElementById('w-rain');
+      const homeChip = document.getElementById('chip-weather-preview');
+
+      if (cityTitle) cityTitle.textContent = cityName;
+      if (tempVal) tempVal.textContent = `${Math.round(cur.temperature_2m)}°C`;
+      if (condText) condText.textContent = wInfo.text;
+      if (feelsLike) feelsLike.textContent = `${Math.round(cur.apparent_temperature)}°C`;
+      if (iconEmoji) iconEmoji.textContent = wInfo.icon;
+      if (humidity) humidity.textContent = `${cur.relative_humidity_2m}%`;
+      if (wind) wind.textContent = `${cur.wind_speed_10m} km/h`;
+
+      const uvVal = daily && daily.uv_index_max ? daily.uv_index_max[0] : 4;
+      if (uv) uv.textContent = uvVal > 7 ? `${uvVal} (Rất Cao)` : (uvVal > 4 ? `${uvVal} (Trung Bình)` : `${uvVal} (Thấp)`);
+
+      const rainProb = daily && daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : 0;
+      if (rain) rain.textContent = `${rainProb}%`;
+
+      // Update home hub preview chip
+      if (homeChip) {
+        homeChip.textContent = `${cityName}: ${Math.round(cur.temperature_2m)}°C ${wInfo.icon}`;
+      }
+    } catch (e) {
+      console.warn('Weather fetch error:', e);
+    }
+  }
+
+  cityBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cityBtns.forEach(b => b.classList.remove('active'));
+      if (geoBtn) geoBtn.classList.remove('active');
+      btn.classList.add('active');
+
+      const cKey = btn.getAttribute('data-city');
+      const target = CITIES[cKey];
+      if (target) fetchWeather(target.lat, target.lon, target.name);
+    });
+  });
+
+  if (geoBtn) {
+    geoBtn.addEventListener('click', () => {
+      if (navigator.geolocation) {
+        geoBtn.textContent = '📍 Đang lấy GPS...';
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            cityBtns.forEach(b => b.classList.remove('active'));
+            geoBtn.classList.add('active');
+            geoBtn.textContent = '📍 Vị Trí Của Tôi';
+            fetchWeather(pos.coords.latitude, pos.coords.longitude, 'Vị Trí Của Bạn');
+          },
+          () => {
+            geoBtn.textContent = '📍 GPS Bị Chặn';
+            setTimeout(() => { geoBtn.textContent = '📍 GPS Của Tôi'; }, 2000);
+          }
+        );
+      }
+    });
+  }
+
+  // Load Hanoi by default
+  fetchWeather(CITIES.hanoi.lat, CITIES.hanoi.lon, CITIES.hanoi.name);
+}
+
+/* --- MODULE 3: LIVE CRYPTO TRACKER (BINANCE API) --- */
+function initCrypto() {
+  const container = document.getElementById('crypto-cards-grid');
+  const refreshBtn = document.getElementById('btn-refresh-crypto');
+  const chipBtc = document.getElementById('chip-btc-price');
+  const chipBtcChange = document.getElementById('chip-btc-change');
+
+  const COIN_META = {
+    'BTCUSDT': { symbol: 'BTC', name: 'Bitcoin', icon: '₿', decimals: 2 },
+    'ETHUSDT': { symbol: 'ETH', name: 'Ethereum', icon: 'Ξ', decimals: 2 },
+    'SOLUSDT': { symbol: 'SOL', name: 'Solana', icon: '◎', decimals: 2 },
+    'BNBUSDT': { symbol: 'BNB', name: 'BNB Chain', icon: '🟡', decimals: 2 },
+    'XRPUSDT': { symbol: 'XRP', name: 'Ripple', icon: '✕', decimals: 4 },
+    'DOGEUSDT': { symbol: 'DOGE', name: 'Dogecoin', icon: 'Ð', decimals: 4 },
+    'ADAUSDT': { symbol: 'ADA', name: 'Cardano', icon: '₳', decimals: 4 },
+    'SUIUSDT': { symbol: 'SUI', name: 'Sui Network', icon: '💧', decimals: 4 },
+    'NEARUSDT': { symbol: 'NEAR', name: 'NEAR Protocol', icon: 'Ⓝ', decimals: 3 },
+    'PEPEUSDT': { symbol: 'PEPE', name: 'Pepe Meme', icon: '🐸', decimals: 8 }
+  };
+
+  const SYMBOLS = Object.keys(COIN_META);
+
+  async function fetchCrypto() {
+    try {
+      const url = `https://api.binance.com/api/v3/ticker/24hr?symbols=${encodeURIComponent(JSON.stringify(SYMBOLS))}`;
+      const res = await fetch(url);
+      if (!res.ok) return;
+      const data = await res.json();
+
+      let html = '';
+      const USD_VND_RATE = 26000;
+
+      data.forEach(item => {
+        const meta = COIN_META[item.symbol];
+        if (!meta) return;
+
+        const price = parseFloat(item.lastPrice);
+        const changePercent = parseFloat(item.priceChangePercent);
+        const isUp = changePercent >= 0;
+        const changeSign = isUp ? '+' : '';
+        const changeClass = isUp ? 'up' : 'down';
+        const vndVal = (price * USD_VND_RATE).toLocaleString('vi-VN', { maximumFractionDigits: 0 });
+
+        let formattedPrice = price.toLocaleString('en-US', {
+          minimumFractionDigits: meta.decimals > 2 ? meta.decimals : 2,
+          maximumFractionDigits: meta.decimals
+        });
+
+        // Update home hub preview if BTC
+        if (item.symbol === 'BTCUSDT') {
+          if (chipBtc) chipBtc.textContent = `$${Math.round(price).toLocaleString('en-US')}`;
+          if (chipBtcChange) {
+            chipBtcChange.textContent = `${changeSign}${changePercent.toFixed(2)}%`;
+            chipBtcChange.className = isUp ? 'chip-green' : 'chip-red';
+          }
+        }
+
+        html += `
+          <div class="crypto-card">
+            <div>
+              <div class="crypto-symbol">${meta.icon} ${meta.symbol}</div>
+              <div class="crypto-name">${meta.name}</div>
+              <span class="crypto-change ${changeClass}">${changeSign}${changePercent.toFixed(2)}%</span>
+            </div>
+            <div>
+              <div class="crypto-price">$${formattedPrice}</div>
+              <div class="crypto-vnd">≈ ${vndVal} ₫</div>
+            </div>
+          </div>
+        `;
+      });
+
+      if (container) container.innerHTML = html;
+    } catch (e) {
+      console.warn('Crypto fetch error:', e);
+    }
+  }
+
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      refreshBtn.textContent = '🔄 Đang tải...';
+      fetchCrypto().then(() => {
+        setTimeout(() => { refreshBtn.textContent = '🔄 Làm mới'; }, 500);
+      });
+    });
+  }
+
+  fetchCrypto();
+  setInterval(fetchCrypto, 20000); // 20s auto refresh
+}
+
+/* --- MODULE 4: ESPN LIVE FOOTBALL SCORES & FIXTURES --- */
+function initFootball() {
+  const leagueBtns = document.querySelectorAll('.football-league-btn[data-league]');
+  const container = document.getElementById('football-matches-list');
+
+  let currentLeague = 'eng.1';
+
+  async function fetchFootball(league) {
+    if (!container) return;
+    container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-dim);">Đang tải lịch thi đấu ESPN...</div>';
+
+    try {
+      const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${league}/scoreboard`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Network response not ok');
+      const data = await res.json();
+      const events = data.events || [];
+
+      if (events.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-muted);">Không có trận đấu nào hôm nay.</div>';
+        return;
+      }
+
+      let html = '';
+      events.slice(0, 10).forEach(ev => {
+        const comp = ev.competitions && ev.competitions[0];
+        if (!comp) return;
+
+        const home = comp.competitors.find(c => c.homeAway === 'home') || comp.competitors[0];
+        const away = comp.competitors.find(c => c.homeAway === 'away') || comp.competitors[1];
+        const status = comp.status;
+
+        const state = status.type.state; // 'pre', 'in', 'post'
+        let centerHtml = '';
+
+        if (state === 'in') {
+          centerHtml = `
+            <div class="match-score" style="color:var(--neon-cyan);">${home.score || 0} - ${away.score || 0}</div>
+            <span class="match-status-badge live">● LIVE ${status.displayClock || ''}</span>
+          `;
+        } else if (state === 'post') {
+          centerHtml = `
+            <div class="match-score">${home.score || 0} - ${away.score || 0}</div>
+            <span class="match-status-badge">FT (Hết giờ)</span>
+          `;
+        } else {
+          // Scheduled: format time in Vietnam GMT+7
+          const matchDate = new Date(comp.date);
+          const timeStr = matchDate.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Ho_Chi_Minh' });
+          const dateStr = matchDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', timeZone: 'Asia/Ho_Chi_Minh' });
+          centerHtml = `
+            <div class="match-score" style="font-size:0.95rem; color:var(--neon-green);">${timeStr}</div>
+            <span class="match-status-badge">${dateStr}</span>
+          `;
+        }
+
+        const homeLogo = home.team.logo || 'assets/images/favicon-32x32.png';
+        const awayLogo = away.team.logo || 'assets/images/favicon-32x32.png';
+
+        html += `
+          <div class="match-card">
+            <div class="match-team">
+              <img src="${homeLogo}" alt="${home.team.displayName}" class="match-team-logo" onerror="this.style.opacity=0.3;">
+              <span class="match-team-name">${home.team.shortDisplayName || home.team.displayName}</span>
+            </div>
+            <div class="match-center-info">
+              ${centerHtml}
+            </div>
+            <div class="match-team away">
+              <img src="${awayLogo}" alt="${away.team.displayName}" class="match-team-logo" onerror="this.style.opacity=0.3;">
+              <span class="match-team-name">${away.team.shortDisplayName || away.team.displayName}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    } catch (e) {
+      container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-dim);">Tạm thời chưa có dữ liệu lịch đấu. Vui lòng thử lại sau.</div>';
+    }
+  }
+
+  leagueBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      leagueBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentLeague = btn.getAttribute('data-league');
+      fetchFootball(currentLeague);
+    });
+  });
+
+  fetchFootball(currentLeague);
+}
+
+/* --- MODULE 5: SMART CALCULATOR --- */
+function initCalculator() {
+  const historyView = document.getElementById('calc-history-view');
+  const displayView = document.getElementById('calc-display-view');
+  const numBtns = document.querySelectorAll('[data-calc-num]');
+  const actionBtns = document.querySelectorAll('[data-calc-action]');
+
+  let currentDisplay = '0';
+  let prevValue = null;
+  let currentOp = null;
+  let waitingForOperand = false;
+
+  function updateView() {
+    if (displayView) displayView.textContent = currentDisplay;
+  }
+
+  function inputDigit(digit) {
+    if (waitingForOperand) {
+      currentDisplay = digit;
+      waitingForOperand = false;
+    } else {
+      currentDisplay = currentDisplay === '0' ? digit : currentDisplay + digit;
+    }
+    updateView();
+  }
+
+  function inputDecimal() {
+    if (waitingForOperand) {
+      currentDisplay = '0.';
+      waitingForOperand = false;
+      updateView();
+      return;
+    }
+    if (!currentDisplay.includes('.')) {
+      currentDisplay += '.';
+      updateView();
+    }
+  }
+
+  function handleOp(nextOp) {
+    const inputValue = parseFloat(currentDisplay);
+
+    if (prevValue === null) {
+      prevValue = inputValue;
+    } else if (currentOp) {
+      const result = calculate(prevValue, inputValue, currentOp);
+      currentDisplay = String(parseFloat(result.toFixed(8)));
+      prevValue = result;
+      updateView();
+    }
+
+    waitingForOperand = true;
+    currentOp = nextOp;
+
+    const opSymbols = { plus: '+', minus: '-', multiply: '×', divide: '÷' };
+    if (historyView) historyView.textContent = `${prevValue} ${opSymbols[nextOp] || ''}`;
+  }
+
+  function calculate(first, second, op) {
+    if (op === 'plus') return first + second;
+    if (op === 'minus') return first - second;
+    if (op === 'multiply') return first * second;
+    if (op === 'divide') return second !== 0 ? first / second : 0;
+    return second;
+  }
+
+  function handleAction(action) {
+    if (action === 'clear') {
+      currentDisplay = '0';
+      prevValue = null;
+      currentOp = null;
+      waitingForOperand = false;
+      if (historyView) historyView.innerHTML = '&nbsp;';
+      updateView();
+    } else if (action === 'backspace') {
+      if (currentDisplay.length > 1) {
+        currentDisplay = currentDisplay.slice(0, -1);
+      } else {
+        currentDisplay = '0';
+      }
+      updateView();
+    } else if (action === 'plusminus') {
+      currentDisplay = String(parseFloat(currentDisplay) * -1);
+      updateView();
+    } else if (action === 'percent') {
+      currentDisplay = String(parseFloat(currentDisplay) / 100);
+      updateView();
+    } else if (action === 'equals') {
+      if (currentOp && prevValue !== null) {
+        const inputValue = parseFloat(currentDisplay);
+        const result = calculate(prevValue, inputValue, currentOp);
+        if (historyView) historyView.innerHTML = '&nbsp;';
+        currentDisplay = String(parseFloat(result.toFixed(8)));
+        prevValue = null;
+        currentOp = null;
+        waitingForOperand = true;
+        updateView();
+      }
+    } else {
+      handleOp(action);
+    }
+  }
+
+  numBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.getAttribute('data-calc-num');
+      if (val === '.') inputDecimal();
+      else inputDigit(val);
+    });
+  });
+
+  actionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const act = btn.getAttribute('data-calc-action');
+      handleAction(act);
+    });
+  });
+}
+
+/* --- MODULE 6: LUNAR CALENDAR (HỒ NGỌC ĐỨC ALGORITHM) --- */
+function initLunarCalendar() {
+  const datePicker = document.getElementById('lunar-date-picker');
+  const btnToday = document.getElementById('btn-lunar-today');
+  const solarHeader = document.getElementById('lunar-solar-header');
+  const lunarDayDisplay = document.getElementById('lunar-day-display');
+  const lunarMonthYearDisplay = document.getElementById('lunar-month-year-display');
+  const lunarCanChiDay = document.getElementById('lunar-canchi-day');
+  const hoangDaoStatus = document.getElementById('lunar-status-text');
+  const tietKhiText = document.getElementById('lunar-tietkhi-text');
+
+  function updateLunar(dateObj) {
+    if (!window.VietLunar) return;
+
+    const d = dateObj.getDate();
+    const m = dateObj.getMonth() + 1;
+    const y = dateObj.getFullYear();
+
+    const lunar = window.VietLunar.convertSolar2Lunar(d, m, y, 7);
+    const canChiYear = window.VietLunar.getCanChiYear(lunar.year);
+    const canChiMonth = window.VietLunar.getCanChiMonth(lunar.month, lunar.year);
+    const canChiDay = window.VietLunar.getCanChiDay(lunar.jd);
+    const status = window.VietLunar.getHoangDaoStatus(lunar.jd, 'Dần');
+    const tietKhi = window.VietLunar.getTietKhi(lunar.jd);
+
+    const DAYS_VN = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    const dayOfWeek = DAYS_VN[dateObj.getDay()];
+
+    if (solarHeader) solarHeader.textContent = `${dayOfWeek}, ngày ${d < 10 ? '0' + d : d}/${m < 10 ? '0' + m : m}/${y}`;
+    if (lunarDayDisplay) lunarDayDisplay.textContent = `${lunar.day}`;
+    if (lunarMonthYearDisplay) lunarMonthYearDisplay.textContent = `Tháng ${lunar.month}${lunar.isLeap ? ' (Nhuận)' : ''} • Năm ${canChiYear}`;
+    if (lunarCanChiDay) lunarCanChiDay.textContent = `Ngày: ${canChiDay} • Tháng: ${canChiMonth}`;
+    if (hoangDaoStatus) {
+      hoangDaoStatus.textContent = status;
+      hoangDaoStatus.style.color = status.includes('Hoàng Đạo') ? 'var(--neon-green)' : 'var(--text-muted)';
+    }
+    if (tietKhiText) tietKhiText.textContent = tietKhi;
+
+    // Sync input date
+    if (datePicker) {
+      const yyyy = y;
+      const mm = m < 10 ? '0' + m : m;
+      const dd = d < 10 ? '0' + d : d;
+      datePicker.value = `${yyyy}-${mm}-${dd}`;
+    }
+  }
+
+  if (datePicker) {
+    datePicker.addEventListener('change', () => {
+      const parts = datePicker.value.split('-');
+      if (parts.length === 3) {
+        const pickedDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+        updateLunar(pickedDate);
+      }
+    });
+  }
+
+  if (btnToday) {
+    btnToday.addEventListener('click', () => {
+      updateLunar(new Date());
+    });
+  }
+
+  updateLunar(new Date());
+}
+
+/* --- MODULE 7: MULTI-UNIT & REAL-TIME CURRENCY CONVERTER --- */
+function initConverter() {
+  const catSelect = document.getElementById('conv-cat-select');
+  const unit1 = document.getElementById('conv-unit-1');
+  const unit2 = document.getElementById('conv-unit-2');
+  const val1 = document.getElementById('conv-val-1');
+  const val2 = document.getElementById('conv-val-2');
+  const btnSwap = document.getElementById('btn-conv-swap');
+  const note = document.getElementById('conv-rate-note');
+
+  let currencyRates = { USD: 1, VND: 26000, EUR: 0.86, JPY: 156, GBP: 0.74, CNY: 6.73, KRW: 1356, SGD: 1.26, THB: 32.9, AUD: 1.39, CAD: 1.38 };
+
+  const CATEGORIES = {
+    currency: {
+      units: {
+        USD: { name: 'USD — Đô la Mỹ', factor: 1 },
+        VND: { name: 'VND — Việt Nam Đồng', factor: 26000 },
+        EUR: { name: 'EUR — Euro Châu Âu', factor: 0.86 },
+        JPY: { name: 'JPY — Yên Nhật', factor: 156 },
+        GBP: { name: 'GBP — Bảng Anh', factor: 0.74 },
+        CNY: { name: 'CNY — Nhân dân tệ', factor: 6.73 },
+        KRW: { name: 'KRW — Won Hàn Quốc', factor: 1356 },
+        SGD: { name: 'SGD — Đô la Singapore', factor: 1.26 },
+        THB: { name: 'THB — Baht Thái Lan', factor: 32.9 },
+        AUD: { name: 'AUD — Đô la Úc', factor: 1.39 }
+      }
+    },
+    data: {
+      units: {
+        B: { name: 'Byte (B)', factor: 1 },
+        KB: { name: 'Kilobyte (KB)', factor: 1024 },
+        MB: { name: 'Megabyte (MB)', factor: 1048576 },
+        GB: { name: 'Gigabyte (GB)', factor: 1073741824 },
+        TB: { name: 'Terabyte (TB)', factor: 1099511627776 },
+        PB: { name: 'Petabyte (PB)', factor: 1125899906842624 }
+      }
+    },
+    speed: {
+      units: {
+        Mbps: { name: 'Megabit/giây (Mbps - Mạng)', factor: 1 },
+        MBs: { name: 'Megabyte/giây (MB/s - Tải file)', factor: 8 },
+        Kbps: { name: 'Kilobit/giây (Kbps)', factor: 0.001 },
+        Gbps: { name: 'Gigabit/giây (Gbps)', factor: 1000 }
+      }
+    },
+    length: {
+      units: {
+        m: { name: 'Mét (m)', factor: 1 },
+        km: { name: 'Kilômét (km)', factor: 1000 },
+        cm: { name: 'Centimét (cm)', factor: 0.01 },
+        mm: { name: 'Milimét (mm)', factor: 0.001 },
+        inch: { name: 'Inch (in)', factor: 0.0254 },
+        ft: { name: 'Foot (ft)', factor: 0.3048 },
+        mile: { name: 'Dặm (Mile)', factor: 1609.34 }
+      }
+    },
+    mass: {
+      units: {
+        kg: { name: 'Kilôgam (kg)', factor: 1 },
+        g: { name: 'Gam (g)', factor: 0.001 },
+        lb: { name: 'Pound (lbs)', factor: 0.453592 },
+        oz: { name: 'Ounce (oz)', factor: 0.0283495 }
+      }
+    },
+    temp: {
+      units: {
+        C: { name: 'Độ C (°C)', factor: 1 },
+        F: { name: 'Độ F (°F)', factor: 1 }
+      }
+    }
+  };
+
+  // Fetch live exchange rates
+  async function fetchLiveCurrency() {
+    try {
+      const res = await fetch('https://open.er-api.com/v6/latest/USD');
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.rates) {
+        currencyRates = data.rates;
+        Object.keys(CATEGORIES.currency.units).forEach(k => {
+          if (currencyRates[k]) CATEGORIES.currency.units[k].factor = currencyRates[k];
+        });
+        if (note) note.textContent = `Tỷ giá trực tiếp cập nhật lúc ${new Date().toLocaleTimeString('vi-VN')}. 1 USD ≈ ${currencyRates.VND ? Math.round(currencyRates.VND).toLocaleString('vi-VN') : 26000} ₫`;
+        recalc(1);
+      }
+    } catch (e) {
+      console.warn('Currency rate fetch error:', e);
+    }
+  }
+
+  function populateUnitSelects(catKey) {
+    const cat = CATEGORIES[catKey];
+    if (!cat) return;
+
+    let opts = '';
+    Object.keys(cat.units).forEach(u => {
+      opts += `<option value="${u}">${cat.units[u].name}</option>`;
+    });
+
+    if (unit1) unit1.innerHTML = opts;
+    if (unit2) unit2.innerHTML = opts;
+
+    const keys = Object.keys(cat.units);
+    if (unit1 && keys[0]) unit1.value = keys[0];
+    if (unit2 && keys[1]) unit2.value = keys[1];
+
+    if (catKey === 'currency' && unit1 && unit2) {
+      unit1.value = 'USD';
+      unit2.value = 'VND';
+    } else if (catKey === 'data' && unit1 && unit2) {
+      unit1.value = 'GB';
+      unit2.value = 'MB';
+    } else if (catKey === 'speed' && unit1 && unit2) {
+      unit1.value = 'Mbps';
+      unit2.value = 'MBs';
+    }
+
+    recalc(1);
+  }
+
+  function recalc(fromInput) {
+    const catKey = catSelect ? catSelect.value : 'currency';
+    const cat = CATEGORIES[catKey];
+    if (!cat) return;
+
+    const u1 = unit1 ? unit1.value : '';
+    const u2 = unit2 ? unit2.value : '';
+
+    if (catKey === 'temp') {
+      if (fromInput === 1 && val1 && val2) {
+        const v = parseFloat(val1.value) || 0;
+        if (u1 === u2) val2.value = v;
+        else if (u1 === 'C' && u2 === 'F') val2.value = parseFloat(((v * 9/5) + 32).toFixed(2));
+        else if (u1 === 'F' && u2 === 'C') val2.value = parseFloat(((v - 32) * 5/9).toFixed(2));
+      } else if (fromInput === 2 && val1 && val2) {
+        const v = parseFloat(val2.value) || 0;
+        if (u1 === u2) val1.value = v;
+        else if (u2 === 'C' && u1 === 'F') val1.value = parseFloat(((v * 9/5) + 32).toFixed(2));
+        else if (u2 === 'F' && u1 === 'C') val1.value = parseFloat(((v - 32) * 5/9).toFixed(2));
+      }
+      return;
+    }
+
+    const factor1 = cat.units[u1]?.factor || 1;
+    const factor2 = cat.units[u2]?.factor || 1;
+
+    if (catKey === 'currency') {
+      // Rates are based on USD = 1
+      if (fromInput === 1 && val1 && val2) {
+        const amount = parseFloat(val1.value) || 0;
+        const inUSD = amount / factor1;
+        const out = inUSD * factor2;
+        val2.value = parseFloat(out.toFixed(out < 1 ? 4 : 2));
+      } else if (fromInput === 2 && val1 && val2) {
+        const amount = parseFloat(val2.value) || 0;
+        const inUSD = amount / factor2;
+        const out = inUSD * factor1;
+        val1.value = parseFloat(out.toFixed(out < 1 ? 4 : 2));
+      }
+    } else {
+      // Standard linear factor to base
+      if (fromInput === 1 && val1 && val2) {
+        const v = parseFloat(val1.value) || 0;
+        const inBase = v * factor1;
+        const out = inBase / factor2;
+        val2.value = parseFloat(out.toFixed(out < 0.01 ? 6 : 4));
+      } else if (fromInput === 2 && val1 && val2) {
+        const v = parseFloat(val2.value) || 0;
+        const inBase = v * factor2;
+        const out = inBase / factor1;
+        val1.value = parseFloat(out.toFixed(out < 0.01 ? 6 : 4));
+      }
+    }
+  }
+
+  if (catSelect) {
+    catSelect.addEventListener('change', () => {
+      populateUnitSelects(catSelect.value);
+    });
+  }
+
+  if (val1) val1.addEventListener('input', () => recalc(1));
+  if (val2) val2.addEventListener('input', () => recalc(2));
+  if (unit1) unit1.addEventListener('change', () => recalc(1));
+  if (unit2) unit2.addEventListener('change', () => recalc(1));
+
+  if (btnSwap && unit1 && unit2) {
+    btnSwap.addEventListener('click', () => {
+      const tempU = unit1.value;
+      unit1.value = unit2.value;
+      unit2.value = tempU;
+      recalc(1);
+    });
+  }
+
+  populateUnitSelects('currency');
+  fetchLiveCurrency();
+}
+
+/* --- MODULE 8: WORLD CLOCK & TIMEZONES --- */
+function initWorldClock() {
+  const container = document.getElementById('world-clock-container');
+  if (!container) return;
+
+  const CITIES = [
+    { city: 'Hà Nội / TP.HCM', country: '🇻🇳 Việt Nam', tz: 'Asia/Ho_Chi_Minh', offset: 0 },
+    { city: 'Tokyo', country: '🇯🇵 Nhật Bản', tz: 'Asia/Tokyo', offset: 2 },
+    { city: 'Singapore', country: '🇸🇬 Singapore', tz: 'Asia/Singapore', offset: 1 },
+    { city: 'London', country: '🇬🇧 Vương Quốc Anh', tz: 'Europe/London', offset: -6 },
+    { city: 'Frankfurt / Paris', country: '🇩🇪 Đức / Pháp', tz: 'Europe/Berlin', offset: -5 },
+    { city: 'New York', country: '🇺🇸 Mỹ (EST)', tz: 'America/New_York', offset: -11 },
+    { city: 'San Francisco', country: '🇺🇸 Silicon Valley', tz: 'America/Los_Angeles', offset: -14 },
+    { city: 'Sydney', country: '🇦🇺 Úc (AEST)', tz: 'Australia/Sydney', offset: 3 }
+  ];
+
+  function renderClocks() {
+    let html = '';
+    const now = new Date();
+
+    CITIES.forEach(c => {
+      const timeFormatter = new Intl.DateTimeFormat('vi-VN', {
+        timeZone: c.tz,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+      const dateFormatter = new Intl.DateTimeFormat('vi-VN', {
+        timeZone: c.tz,
+        weekday: 'short',
+        day: '2-digit',
+        month: '2-digit'
+      });
+
+      const timeStr = timeFormatter.format(now);
+      const dateStr = dateFormatter.format(now);
+
+      const hourOnly = parseInt(timeStr.split(':')[0], 10);
+      const isDay = hourOnly >= 6 && hourOnly < 18;
+      const dayNightIcon = isDay ? '☀️' : '🌙';
+
+      let offsetLabel = '';
+      if (c.offset === 0) {
+        offsetLabel = 'Múi giờ của bạn';
+      } else if (c.offset > 0) {
+        offsetLabel = `Nhanh hơn ${c.offset} tiếng`;
+      } else {
+        offsetLabel = `Chậm hơn ${Math.abs(c.offset)} tiếng`;
+      }
+
+      html += `
+        <div class="world-clock-card">
+          <div>
+            <div class="clock-city-name">${c.country.split(' ')[0]} ${c.city}</div>
+            <div class="clock-offset">${offsetLabel}</div>
+          </div>
+          <div>
+            <div class="clock-time-display">${dayNightIcon} ${timeStr}</div>
+            <div class="clock-date-display">${dateStr}</div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  renderClocks();
+  setInterval(renderClocks, 1000);
+}
+
 

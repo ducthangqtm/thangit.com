@@ -1232,7 +1232,622 @@ body::before {
   width: 100%;
 }
 
-/* Responsive */
+/* ==========================================================================
+   TiT POCKET SUPER APP (8-IN-1 UTILITY HUB)
+   ========================================================================== */
+
+/* Bento 5: Full-Width Super App Launcher Card */
+.bento-card.bento-super-app {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(13, 24, 41, 0.75) 0%, rgba(6, 11, 19, 0.85) 100%);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+.bento-card.bento-super-app:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 10px 32px rgba(0, 240, 255, 0.22);
+}
+.bento-super-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0.5rem;
+}
+.super-chip-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+.super-chip-preview strong {
+  color: var(--neon-cyan);
+}
+.super-chip-preview .chip-green {
+  color: var(--neon-green);
+}
+.super-chip-preview .chip-red {
+  color: #ff3366;
+}
+
+/* Pocket Tools Modal Window */
+.modal-window.modal-pocket-window {
+  max-width: 680px;
+  max-height: 88vh;
+}
+
+/* Scrollable Horizontal Pill Tabs */
+.pocket-tabs-nav {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.pocket-tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+.pocket-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+.pocket-tab-btn:hover {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--text-primary);
+  border-color: rgba(0, 240, 255, 0.3);
+}
+.pocket-tab-btn.active {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+}
+
+/* Common Card & Panel Utilities */
+.pocket-panel {
+  display: none;
+  animation: tabFadeIn 0.25s ease-out;
+}
+.pocket-panel.active {
+  display: block;
+}
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- TAB 1: UNIVERSAL QR STUDIO --- */
+.qr-studio-layout {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (max-width: 620px) {
+  .qr-studio-layout {
+    grid-template-columns: 1fr;
+  }
+}
+.qr-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.qr-type-selector {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.qr-type-btn {
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+.qr-type-btn.active {
+  background: rgba(0, 240, 255, 0.18);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-weight: 700;
+}
+.qr-input-field,
+.qr-select-field {
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-glass);
+  color: #fff;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.qr-input-field:focus,
+.qr-select-field:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+}
+.qr-preview-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+.qr-canvas-wrap {
+  width: 200px;
+  height: 200px;
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.2);
+}
+.qr-canvas-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* --- TAB 2: WEATHER & TEMP --- */
+.weather-hero-card {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.12) 0%, rgba(112, 0, 255, 0.12) 100%);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+.weather-temp-main {
+  font-size: 2.8rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #fff;
+  line-height: 1;
+}
+.weather-city-pills {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+.weather-city-btn {
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.weather-city-btn.active {
+  background: var(--neon-cyan);
+  color: #04070d;
+  font-weight: 700;
+  border-color: var(--neon-cyan);
+}
+.weather-grid-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+}
+@media (max-width: 540px) {
+  .weather-grid-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- TAB 3: LIVE CRYPTO TRACKER --- */
+.crypto-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (max-width: 560px) {
+  .crypto-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.crypto-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.crypto-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--neon-cyan);
+}
+.crypto-symbol {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.crypto-name {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+.crypto-price {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-align: right;
+}
+.crypto-vnd {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+.crypto-change {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  margin-top: 0.2rem;
+}
+.crypto-change.up {
+  background: rgba(0, 255, 157, 0.15);
+  color: var(--neon-green);
+  border: 1px solid rgba(0, 255, 157, 0.4);
+}
+.crypto-change.down {
+  background: rgba(255, 51, 102, 0.15);
+  color: #ff3366;
+  border: 1px solid rgba(255, 51, 102, 0.4);
+}
+
+/* --- TAB 4: ESPN FOOTBALL --- */
+.football-leagues-nav {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+.football-league-btn {
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.football-league-btn.active {
+  background: var(--neon-green);
+  color: #04070d;
+  font-weight: 700;
+  border-color: var(--neon-green);
+}
+.matches-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-height: 52vh;
+  overflow-y: auto;
+}
+.match-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.95rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+}
+.match-team {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.match-team.away {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.match-team-logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+.match-team-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.match-center-info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 85px;
+}
+.match-score {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #fff;
+}
+.match-status-badge {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-dim);
+}
+.match-status-badge.live {
+  background: rgba(255, 51, 102, 0.2);
+  color: #ff3366;
+  border: 1px solid #ff3366;
+  animation: pulseLive 1.5s infinite;
+}
+@keyframes pulseLive {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* --- TAB 5: SMART CALCULATOR --- */
+.calc-wrapper {
+  max-width: 320px;
+  margin: 0 auto;
+  background: rgba(6, 11, 19, 0.95);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: var(--radius-md);
+  padding: 1.1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+.calc-screen {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  text-align: right;
+  margin-bottom: 1rem;
+}
+.calc-history {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  min-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.calc-display {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  word-break: break-all;
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+.calc-btn {
+  height: 48px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.calc-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.calc-btn:active {
+  transform: scale(0.94);
+}
+.calc-btn.op {
+  color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.08);
+}
+.calc-btn.func {
+  color: var(--neon-green);
+  background: rgba(0, 255, 157, 0.08);
+}
+.calc-btn.equal {
+  background: var(--neon-cyan);
+  color: #04070d;
+  font-weight: 800;
+}
+
+/* --- TAB 6: LUNAR CALENDAR --- */
+.lunar-hero-card {
+  background: linear-gradient(135deg, rgba(112, 0, 255, 0.12) 0%, rgba(0, 255, 157, 0.1) 100%);
+  border: 1px solid rgba(112, 0, 255, 0.35);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.lunar-big-day {
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--neon-cyan);
+  line-height: 1;
+  margin: 0.35rem 0;
+}
+.lunar-canchi-badge {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+.lunar-meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+@media (max-width: 500px) {
+  .lunar-meta-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- TAB 7: UNIT & CURRENCY CONVERTER --- */
+.converter-card {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+.converter-dual-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+@media (max-width: 540px) {
+  .converter-dual-row {
+    grid-template-columns: 1fr;
+  }
+}
+.converter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.converter-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-glass);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  outline: none;
+}
+.converter-input:focus {
+  border-color: var(--neon-cyan);
+}
+.converter-select {
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: rgba(13, 24, 41, 0.8);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  outline: none;
+}
+.converter-swap-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--neon-cyan);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+/* --- TAB 8: WORLD CLOCK --- */
+.world-clock-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (max-width: 520px) {
+  .world-clock-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.world-clock-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.clock-city-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.clock-offset {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+.clock-time-display {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  text-align: right;
+}
+.clock-date-display {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
 @media (max-width: 740px) {
   .bento-dashboard {
     grid-template-columns: 1fr;
