@@ -18,7 +18,7 @@
   <style>
     @keyframes tit-border-scan {
       0% { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: -160; }
+      100% { stroke-dashoffset: -146.832; }
     }
     @keyframes tit-radar-pulse {
       0% {
@@ -64,8 +64,8 @@
       stroke: url(#tit-neon);
       stroke-width: 1.8;
       stroke-linecap: round;
-      stroke-dasharray: 32 128;
-      animation: tit-border-scan 4.5s linear infinite;
+      stroke-dasharray: 32 114.832;
+      animation: tit-border-scan 4s linear infinite;
     }
     .tit-wave-1 {
       fill: none;
@@ -88,8 +88,8 @@
   <!-- Cyber Badge Outer Frame -->
   <rect x="1.5" y="1.5" width="41" height="41" rx="10" class="tit-frame-base"/>
   
-  <!-- Cyber Light Scanning Perimeter Beam -->
-  <rect x="1.5" y="1.5" width="41" height="41" rx="10" class="tit-frame-scan"/>
+  <!-- Cyber Light Scanning Perimeter Beam (Seamless 100% continuous loop) -->
+  <rect x="1.5" y="1.5" width="41" height="41" rx="10" pathLength="146.832" class="tit-frame-scan"/>
 
   <!-- Letters Group: Smooth, Soft Rounded T - i - T -->
   <g class="tit-letters">
