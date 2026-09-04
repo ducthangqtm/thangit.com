@@ -79,5 +79,5 @@
 4. [x] Khởi tạo Git & liên kết remote origin.
 5. [x] Xây dựng mã nguồn tĩnh (index.html, css/, js/).
 6. [x] Git commit & push lên GitHub main.
-7. [ ] Vào Cloudflare Pages -> Connect Git repo thangit.com -> Deploy.
-8. [ ] Gán custom domain thangit.com (Active tức thì).
+7. [x] Vào Cloudflare Pages -> Connect Git repo thangit.com -> Deploy.
+8. [x] Gán custom domain thangit.com (Active tức thì).
