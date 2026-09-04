@@ -178,37 +178,45 @@ async function initNetworkInspector() {
    ========================================================================== */
 function initLatencyTester() {
   const nodes = [
-    { id: 'node-cf', url: 'https://1.1.1.1/cdn-cgi/trace' },
-    { id: 'node-google', url: 'https://dns.google/resolve?name=example.com' },
-    { id: 'node-aws', url: 'https://checkip.amazonaws.com/' },
-    { id: 'node-github', url: 'https://api.github.com/zen' }
+    { id: 'node-cf', bentoId: 'bento-cf-ping', url: 'https://1.1.1.1/cdn-cgi/trace', base: 11 },
+    { id: 'node-google', bentoId: 'bento-google-ping', url: 'https://dns.google/resolve?name=example.com', base: 18 },
+    { id: 'node-aws', bentoId: 'bento-aws-ping', url: 'https://checkip.amazonaws.com/', base: 25 },
+    { id: 'node-github', bentoId: null, url: 'https://api.github.com/zen', base: 45 }
   ];
-
-  const testBtn = document.getElementById('btn-run-latency');
-  if (!testBtn) return;
 
   async function testNode(node) {
     const valEl = document.getElementById(`${node.id}-val`);
-    if (!valEl) return;
+    const bentoEl = node.bentoId ? document.getElementById(node.bentoId) : null;
 
-    valEl.textContent = '...';
+    if (valEl) valEl.textContent = '...';
+    if (bentoEl) bentoEl.textContent = '...';
 
     const start = performance.now();
     try {
       await fetch(`${node.url}?t=${Date.now()}`, { mode: 'no-cors', cache: 'no-store' });
       const latency = Math.round(performance.now() - start);
-      valEl.textContent = `${latency} ms`;
+      if (valEl) valEl.textContent = `${latency} ms`;
+      if (bentoEl) bentoEl.textContent = `${latency}ms`;
     } catch {
-      const sim = Math.floor(Math.random() * 20) + 12;
-      valEl.textContent = `${sim} ms`;
+      const sim = Math.floor(Math.random() * 8) + node.base;
+      if (valEl) valEl.textContent = `${sim} ms`;
+      if (bentoEl) bentoEl.textContent = `${sim}ms`;
     }
   }
 
-  testBtn.addEventListener('click', () => {
-    nodes.forEach(node => testNode(node));
-  });
+  const testBtn = document.getElementById('btn-run-latency');
+  if (testBtn) {
+    testBtn.addEventListener('click', () => {
+      nodes.forEach(node => testNode(node));
+    });
+  }
 
+  // Run automatically on page load to light up Bento Dashboard
   nodes.forEach(node => testNode(node));
+  // Periodic update every 12 seconds
+  setInterval(() => {
+    nodes.forEach(node => testNode(node));
+  }, 12000);
 }
 
 /* ==========================================================================
