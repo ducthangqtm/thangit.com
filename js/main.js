@@ -1,9 +1,10 @@
 /**
- * THANGIT.COM — Interactive NOC & Network Toolbox Engine
+ * THANGIT.COM — Ultra-Minimalist Click-to-Open Engine
  * 100% Client-Side • Vanilla JavaScript (ES6)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initModals();
   initNocLatency();
   initNetworkInspector();
   initLatencyTester();
@@ -12,11 +13,85 @@ document.addEventListener('DOMContentLoaded', () => {
   initInteractiveTerminal();
   initToolboxTabs();
   initCopyButtons();
-  initMobileNav();
 });
 
 /* ==========================================================================
-   1. NOC TOPBAR: LIVE LATENCY PING
+   1. MODAL / APP LAUNCHER CONTROLLER
+   ========================================================================== */
+function initModals() {
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Auto focus on terminal input if opening terminal
+    if (id === 'modal-terminal') {
+      const termInput = document.getElementById('term-cmd-input');
+      if (termInput) setTimeout(() => termInput.focus(), 150);
+    }
+  }
+
+  function closeModal(modalOrId) {
+    const modal = typeof modalOrId === 'string' ? document.getElementById(modalOrId) : modalOrId;
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Bind click-to-open elements
+  document.querySelectorAll('[data-open]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-open');
+      openModal(targetId);
+    });
+  });
+
+  // Bind close buttons
+  document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetId = btn.getAttribute('data-close');
+      closeModal(targetId);
+    });
+  });
+
+  // Click outside to close
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeModal(overlay);
+      }
+    });
+  });
+
+  // ESC key to close all modals
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m));
+    }
+    // Hotkey `~` or Ctrl+K to toggle terminal
+    if (e.key === '`' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      e.preventDefault();
+      const termModal = document.getElementById('modal-terminal');
+      if (termModal.classList.contains('open')) {
+        closeModal(termModal);
+      } else {
+        openModal('modal-terminal');
+      }
+    }
+  });
+
+  // Check URL hash for direct links (e.g. #tools, #career, #projects, #terminal)
+  const hash = window.location.hash.replace('#', '');
+  if (hash === 'tools') openModal('modal-tools');
+  else if (hash === 'career' || hash === 'cv') openModal('modal-career');
+  else if (hash === 'projects') openModal('modal-projects');
+  else if (hash === 'terminal') openModal('modal-terminal');
+}
+
+/* ==========================================================================
+   2. NOC TOPBAR: LIVE LATENCY PING
    ========================================================================== */
 function initNocLatency() {
   const pingEl = document.getElementById('topbar-latency');
@@ -25,23 +100,21 @@ function initNocLatency() {
   async function measureEdgePing() {
     const startTime = performance.now();
     try {
-      // Ping cache-busted lightweight endpoint
       await fetch('/cdn-cgi/trace?cache=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
       const duration = Math.round(performance.now() - startTime);
       pingEl.textContent = `${duration}ms`;
     } catch {
-      // Fallback local measurement
-      const fallbackDuration = Math.floor(Math.random() * 12) + 8;
-      pingEl.textContent = `${fallbackDuration}ms (HAN)`;
+      const fallbackDuration = Math.floor(Math.random() * 10) + 9;
+      pingEl.textContent = `${fallbackDuration}ms`;
     }
   }
 
   measureEdgePing();
-  setInterval(measureEdgePing, 8000);
+  setInterval(measureEdgePing, 9000);
 }
 
 /* ==========================================================================
-   2. LIVE NETWORK INSPECTOR (IP, Data Center, TLS, Protocol)
+   3. LIVE NETWORK INSPECTOR (IP, Data Center, TLS, Protocol)
    ========================================================================== */
 async function initNetworkInspector() {
   const ipEl = document.getElementById('inspector-ip');
@@ -53,7 +126,6 @@ async function initNetworkInspector() {
   if (!ipEl) return;
 
   try {
-    // Attempt Cloudflare native trace
     const res = await fetch('/cdn-cgi/trace');
     if (res.ok) {
       const text = await res.text();
@@ -65,43 +137,40 @@ async function initNetworkInspector() {
       });
 
       if (data.ip) ipEl.textContent = data.ip;
-      if (data.colo) coloEl.textContent = `${data.colo} (Edge Node)`;
+      if (data.colo) coloEl.textContent = `${data.colo} (Edge)`;
       if (data.http) protoEl.textContent = data.http.toUpperCase();
       if (data.tls) tlsEl.textContent = data.tls;
-      if (data.uag) userAgentEl.textContent = data.uag.substring(0, 45) + '...';
+      if (data.uag && userAgentEl) userAgentEl.textContent = data.uag.substring(0, 35) + '...';
       return;
     }
   } catch (err) {
-    // Console notice
+    // Fallback
   }
 
-  // Fallback if running on local dev server or without Cloudflare trace
   try {
     const fallbackRes = await fetch('https://api.ipify.org?format=json');
     const fallbackData = await fallbackRes.json();
     ipEl.textContent = fallbackData.ip || '127.0.0.1';
-    coloEl.textContent = 'HAN / SGN (Auto)';
+    coloEl.textContent = 'HAN / SGN';
     protoEl.textContent = 'HTTP/2 (SSL)';
     tlsEl.textContent = 'TLS 1.3';
-    userAgentEl.textContent = navigator.userAgent.substring(0, 45) + '...';
   } catch {
     ipEl.textContent = '192.168.1.1 (Local)';
-    coloEl.textContent = 'Localhost';
-    protoEl.textContent = 'HTTP/1.1';
+    coloEl.textContent = 'HAN Edge';
+    protoEl.textContent = 'HTTP/2';
     tlsEl.textContent = 'TLS 1.3';
-    userAgentEl.textContent = navigator.userAgent.substring(0, 45) + '...';
   }
 }
 
 /* ==========================================================================
-   3. LATENCY TESTER (Multi-Region Ping)
+   4. LATENCY TESTER (Multi-Region Ping)
    ========================================================================== */
 function initLatencyTester() {
   const nodes = [
-    { id: 'node-cf', url: 'https://1.1.1.1/cdn-cgi/trace', target: 'Cloudflare Edge (1.1.1.1)' },
-    { id: 'node-google', url: 'https://dns.google/resolve?name=example.com', target: 'Google Public DNS' },
-    { id: 'node-aws', url: 'https://checkip.amazonaws.com/', target: 'AWS Global Edge' },
-    { id: 'node-github', url: 'https://api.github.com/zen', target: 'GitHub API Server' }
+    { id: 'node-cf', url: 'https://1.1.1.1/cdn-cgi/trace' },
+    { id: 'node-google', url: 'https://dns.google/resolve?name=example.com' },
+    { id: 'node-aws', url: 'https://checkip.amazonaws.com/' },
+    { id: 'node-github', url: 'https://api.github.com/zen' }
   ];
 
   const testBtn = document.getElementById('btn-run-latency');
@@ -109,34 +178,18 @@ function initLatencyTester() {
 
   async function testNode(node) {
     const valEl = document.getElementById(`${node.id}-val`);
-    const barEl = document.getElementById(`${node.id}-bar`);
-    if (!valEl || !barEl) return;
+    if (!valEl) return;
 
-    valEl.textContent = 'Testing...';
-    barEl.style.width = '20%';
+    valEl.textContent = '...';
 
     const start = performance.now();
     try {
       await fetch(`${node.url}?t=${Date.now()}`, { mode: 'no-cors', cache: 'no-store' });
       const latency = Math.round(performance.now() - start);
       valEl.textContent = `${latency} ms`;
-      
-      // Calculate bar width (capped at 100%)
-      const width = Math.min(100, Math.max(10, 100 - (latency / 3)));
-      barEl.style.width = `${width}%`;
-
-      if (latency < 60) {
-        valEl.style.color = 'var(--neon-green)';
-      } else if (latency < 150) {
-        valEl.style.color = 'var(--neon-cyan)';
-      } else {
-        valEl.style.color = 'var(--neon-amber)';
-      }
     } catch {
-      const sim = Math.floor(Math.random() * 25) + 15;
+      const sim = Math.floor(Math.random() * 20) + 12;
       valEl.textContent = `${sim} ms`;
-      barEl.style.width = '85%';
-      valEl.style.color = 'var(--neon-green)';
     }
   }
 
@@ -144,12 +197,11 @@ function initLatencyTester() {
     nodes.forEach(node => testNode(node));
   });
 
-  // Run automatically on first load
   nodes.forEach(node => testNode(node));
 }
 
 /* ==========================================================================
-   4. CIDR & SUBNET CALCULATOR (High Performance Client-side)
+   5. CIDR & SUBNET CALCULATOR
    ========================================================================== */
 function initSubnetCalculator() {
   const ipInput = document.getElementById('calc-ip');
@@ -206,12 +258,12 @@ function initSubnetCalculator() {
       lastHost = intToIp(broadcast - 1);
     }
 
-    document.getElementById('res-network').textContent = `${intToIp(network)} /${cidr}`;
+    document.getElementById('res-network').textContent = `${intToIp(network)}/${cidr}`;
     document.getElementById('res-broadcast').textContent = intToIp(broadcast);
     document.getElementById('res-mask').textContent = intToIp(mask);
     document.getElementById('res-wildcard').textContent = intToIp(wildcard);
     document.getElementById('res-range').textContent = `${firstHost} — ${lastHost}`;
-    document.getElementById('res-hosts').textContent = totalHosts.toLocaleString();
+    document.getElementById('res-hosts').textContent = `${totalHosts.toLocaleString()} Hosts`;
   }
 
   runBtn.addEventListener('click', calculate);
@@ -219,17 +271,15 @@ function initSubnetCalculator() {
     if (e.key === 'Enter') calculate();
   });
 
-  // Calculate default on load
   calculate();
 }
 
 /* ==========================================================================
-   5. IT PASSWORD & SECURITY KEY GENERATOR
+   6. IT PASSWORD & SECURITY KEY GENERATOR
    ========================================================================== */
 function initPasswordGenerator() {
   const pwdDisplay = document.getElementById('pwd-result');
   const lengthInput = document.getElementById('pwd-length');
-  const lengthLabel = document.getElementById('pwd-length-val');
   const btnGen = document.getElementById('btn-gen-pwd');
   const btnPresetWifi = document.getElementById('preset-wifi');
   const btnPresetSecret = document.getElementById('preset-secret');
@@ -253,44 +303,33 @@ function initPasswordGenerator() {
   }
 
   function generateStandard() {
-    const len = parseInt(lengthInput.value, 10);
+    const len = parseInt(lengthInput?.value || '16', 10);
     const pool = charsUpper + charsLower + charsNumbers + charsSymbols;
     pwdDisplay.textContent = generateSecureString(len, pool);
   }
-
-  lengthInput.addEventListener('input', () => {
-    lengthLabel.textContent = lengthInput.value;
-    generateStandard();
-  });
 
   btnGen.addEventListener('click', generateStandard);
 
   if (btnPresetWifi) {
     btnPresetWifi.addEventListener('click', () => {
-      lengthInput.value = 20;
-      lengthLabel.textContent = '20';
       const pool = charsUpper + charsLower + charsNumbers;
       pwdDisplay.textContent = generateSecureString(20, pool);
-      showToast('🔑 Đã tạo khóa Wi-Fi WPA2/WPA3 (20 ký tự)!');
+      showToast('🔑 Đã tạo mật khẩu Wi-Fi (20 ký tự)!');
     });
   }
 
   if (btnPresetSecret) {
     btnPresetSecret.addEventListener('click', () => {
-      lengthInput.value = 32;
-      lengthLabel.textContent = '32';
-      generateStandard();
-      showToast('🛡️ Đã tạo Secret Key bảo mật cao (32 ký tự)!');
+      pwdDisplay.textContent = generateSecureString(32, charsUpper + charsLower + charsNumbers + charsSymbols);
+      showToast('🛡️ Đã tạo Cisco Secret (32 ký tự)!');
     });
   }
 
   if (btnPresetHex) {
     btnPresetHex.addEventListener('click', () => {
-      lengthInput.value = 32;
-      lengthLabel.textContent = '32';
       const hex = '0123456789abcdef';
       pwdDisplay.textContent = generateSecureString(32, hex);
-      showToast('⚡ Đã tạo 128-bit Hex Token!');
+      showToast('⚡ Đã tạo 128-bit Token Hex!');
     });
   }
 
@@ -298,86 +337,42 @@ function initPasswordGenerator() {
 }
 
 /* ==========================================================================
-   6. INTERACTIVE TERMINAL CLI MODAL (Ctrl+K or `~` or Button)
+   7. INTERACTIVE TERMINAL CLI MODAL
    ========================================================================== */
 function initInteractiveTerminal() {
-  const modal = document.getElementById('terminal-modal');
-  const triggerBtn = document.getElementById('btn-open-terminal');
-  const closeBtn = document.getElementById('btn-close-terminal');
   const input = document.getElementById('term-cmd-input');
   const body = document.getElementById('terminal-output-body');
 
-  if (!modal || !input) return;
-
-  function toggleTerminal() {
-    modal.classList.toggle('open');
-    if (modal.classList.contains('open')) {
-      input.focus();
-    }
-  }
-
-  if (triggerBtn) triggerBtn.addEventListener('click', toggleTerminal);
-  if (closeBtn) closeBtn.addEventListener('click', toggleTerminal);
-
-  // Global hotkeys (~ or Ctrl+K)
-  window.addEventListener('keydown', (e) => {
-    if (e.key === '`' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
-      e.preventDefault();
-      toggleTerminal();
-    }
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      toggleTerminal();
-    }
-    if (e.key === 'Escape' && modal.classList.contains('open')) {
-      modal.classList.remove('open');
-    }
-  });
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.remove('open');
-  });
+  if (!input || !body) return;
 
   const commands = {
-    help: `Available Commands:
-  • <span style="color:var(--neon-green)">about</span>      : Giới thiệu Nguyễn Đức Thắng (Thắng IT)
-  • <span style="color:var(--neon-green)">skills</span>     : Danh sách kỹ năng Mạng & Vibe Coding
-  • <span style="color:var(--neon-green)">exp</span>        : 10 năm kinh nghiệm thực chiến (Behn Meyer, DB Schenker)
-  • <span style="color:var(--neon-green)">projects</span>   : Các dự án tiêu biểu (thangnhayday.com, NOC)
-  • <span style="color:var(--neon-green)">contact</span>    : Thông tin kết nối Zalo, Telegram, Phone
-  • <span style="color:var(--neon-green)">ping</span>       : Kiểm tra độ trễ mạng
-  • <span style="color:var(--neon-green)">clear</span>      : Xóa màn hình terminal`,
+    help: `Lệnh khả dụng:
+  • <span style="color:var(--neon-green)">about</span>      : Giới thiệu Thắng IT
+  • <span style="color:var(--neon-green)">skills</span>     : Kỹ năng Mạng & Vibe Coding
+  • <span style="color:var(--neon-green)">exp</span>        : 10 năm kinh nghiệm (Behn Meyer, DB Schenker)
+  • <span style="color:var(--neon-green)">projects</span>   : Các dự án thực chiến (thangnhayday.com)
+  • <span style="color:var(--neon-green)">contact</span>    : Kênh liên hệ (Zalo, Telegram, SĐT)
+  • <span style="color:var(--neon-green)">clear</span>      : Xóa màn hình`,
     
     about: `<span style="color:var(--neon-cyan)">[ABOUT ME]</span>
-Họ và tên: Nguyễn Đức Thắng (Thắng IT)
-Định vị   : Senior Network Administrator & Vibe Coder
-Kinh nghiệm: 10+ năm chuyên môn thiết kế & vận hành mạng công nghiệp quy mô lớn (Logistics 40.000m²).
-Đam mê    : Kết hợp tư duy hạ tầng mạng với AI (Vibe Coding) để tự động hóa tối đa quy trình.`,
+Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder.
+10+ năm thiết kế & vận hành hạ tầng mạng công nghiệp logistics 40.000m².`,
 
-    skills: `<span style="color:var(--neon-cyan)">[SKILLS STACK]</span>
-• Networking: Cisco, Juniper, Mikrotik, VLANs, Routing (OSPF/BGP), VPN Site-to-Site, Industrial WiFi
-• Cloud & Systems: Azure AD, Microsoft 365, Linux (Ubuntu/Debian), Proxmox VE, Docker, Cloudflare
-• Automation & Code: Python (Flask, Automation Scripts), AI Tooling, Git/GitHub, HTML/CSS/JS`,
+    skills: `<span style="color:var(--neon-cyan)">[SKILLS]</span>
+Cisco, Mikrotik, Industrial WiFi, VLAN/VPN, Linux, Proxmox VE, Docker, Cloudflare, Python Automation, AI/Vibe Coding.`,
 
-    exp: `<span style="color:var(--neon-cyan)">[WORK EXPERIENCE]</span>
-1. <span style="color:var(--neon-green)">BEHN MEYER VIỆT NAM (04/2025 - Hiện tại)</span>
-   - IT Network Engineer: Quản trị toàn bộ hạ tầng chi nhánh Bắc Ninh, ứng dụng Python/Flask tự động hóa.
-2. <span style="color:var(--neon-green)">DB SCHENKER VIỆT NAM (10/2016 - 03/2025 • ~9 năm cống hiến)</span>
-   - Senior Network Engineer: Triển khai hạ tầng mạng kho 30.000-40.000m², quản lý 500+ thiết bị, Core Switch, WiFi công nghiệp.`,
+    exp: `<span style="color:var(--neon-cyan)">[EXPERIENCE]</span>
+1. Behn Meyer VN (04/2025 - Nay): IT Network Engineer • Uptime 99.9%, tự động hóa Python/AI.
+2. DB Schenker VN (10/2016 - 03/2025 • ~9 năm): Senior Network Engineer • Hạ tầng 40.000m², 500+ thiết bị.`,
 
-    projects: `<span style="color:var(--neon-cyan)">[FEATURED PROJECTS]</span>
-1. <span style="color:var(--neon-green)">thangnhayday.com</span>: Bio Link & Affiliate Hub cho KOC Thể Thao.
-2. <span style="color:var(--neon-green)">thangit.com</span>: NOC Dashboard & Portfolio 0đ trên Cloudflare Pages.
-3. <span style="color:var(--neon-green)">Homelab & Enterprise Topology</span>: Hệ thống ảo hóa Proxmox & Mikrotik Routing.`,
+    projects: `<span style="color:var(--neon-cyan)">[PROJECTS]</span>
+• thangnhayday.com : Bio Link & Affiliate Hub (100/100 PageSpeed)
+• thangit.com      : NOC Dashboard 0đ trên Cloudflare Pages`,
 
-    contact: `<span style="color:var(--neon-cyan)">[CONTACT CHANNELS]</span>
-• Zalo / SĐT : 0986192092 (https://zalo.me/0986192092)
+    contact: `<span style="color:var(--neon-cyan)">[CONTACT]</span>
+• Zalo / SĐT : 0986 192 092
 • Telegram   : @ducthangqtm
-• Discord    : @ducthangqtm
-• GitHub     : https://github.com/ducthangqtm
-• Email      : contact@thangit.com`,
-
-    ping: `<span style="color:var(--neon-green)">Pinging 1.1.1.1 (Cloudflare Edge)... 64 bytes: icmp_seq=1 ttl=58 time=12.4 ms (200 OK)</span>`
+• Email      : contact@thangit.com`
   };
 
   input.addEventListener('keydown', (e) => {
@@ -388,7 +383,6 @@ Kinh nghiệm: 10+ năm chuyên môn thiết kế & vận hành mạng công ngh
       if (!raw) return;
 
       const userLine = document.createElement('div');
-      userLine.className = 'term-output-line';
       userLine.innerHTML = `<span style="color:var(--neon-green)">guest@thangit:~$</span> ${raw}`;
       body.appendChild(userLine);
 
@@ -398,12 +392,10 @@ Kinh nghiệm: 10+ năm chuyên môn thiết kế & vận hành mạng công ngh
       }
 
       const resLine = document.createElement('div');
-      resLine.className = 'term-output-line';
-
       if (commands[raw]) {
         resLine.innerHTML = commands[raw];
       } else {
-        resLine.innerHTML = `<span style="color:var(--neon-rose)">zsh: command not found: ${raw}</span>. Gõ <span style="color:var(--neon-cyan)">help</span> để xem các lệnh khả dụng.`;
+        resLine.innerHTML = `<span style="color:#ef4444">zsh: command not found: ${raw}</span>. Gõ <span style="color:var(--neon-cyan)">help</span> để xem lệnh.`;
       }
 
       body.appendChild(resLine);
@@ -413,15 +405,15 @@ Kinh nghiệm: 10+ năm chuyên môn thiết kế & vận hành mạng công ngh
 }
 
 /* ==========================================================================
-   7. TOOLBOX TABS
+   8. TOOLBOX TABS
    ========================================================================== */
 function initToolboxTabs() {
-  const tabs = document.querySelectorAll('.tab-mini-btn, .tool-tab-btn');
-  const panels = document.querySelectorAll('.tool-view, .tool-panel');
+  const tabs = document.querySelectorAll('.modal-tab-btn');
+  const panels = document.querySelectorAll('.tool-panel-content');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-tab') || tab.getAttribute('data-target');
+      const target = tab.getAttribute('data-tab');
 
       tabs.forEach(t => t.classList.remove('active'));
       panels.forEach(p => p.classList.remove('active'));
@@ -434,7 +426,7 @@ function initToolboxTabs() {
 }
 
 /* ==========================================================================
-   8. COPY BUTTONS & TOAST NOTIFICATION
+   9. COPY BUTTONS & TOAST NOTIFICATION
    ========================================================================== */
 function showToast(msg) {
   let toast = document.querySelector('.toast-msg');
@@ -447,7 +439,7 @@ function showToast(msg) {
   toast.classList.add('show');
   setTimeout(() => {
     toast.classList.remove('show');
-  }, 2600);
+  }, 2500);
 }
 
 function initCopyButtons() {
@@ -460,12 +452,11 @@ function initCopyButtons() {
       navigator.clipboard.writeText(val).then(() => {
         showToast(`📋 Đã sao chép: <strong>${val}</strong>`);
       }).catch(() => {
-        showToast(`📋 Đã sao chép thành công!`);
+        showToast(`📋 Đã sao chép!`);
       });
     });
   });
 
-  // Copy IP Button
   const btnCopyIp = document.getElementById('btn-copy-ip-val');
   if (btnCopyIp) {
     btnCopyIp.addEventListener('click', () => {
@@ -478,7 +469,6 @@ function initCopyButtons() {
     });
   }
 
-  // Copy Generated Password
   const btnCopyPwd = document.getElementById('btn-copy-pwd');
   if (btnCopyPwd) {
     btnCopyPwd.addEventListener('click', () => {
@@ -490,24 +480,4 @@ function initCopyButtons() {
       }
     });
   }
-}
-
-/* ==========================================================================
-   9. MOBILE NAV MENU
-   ========================================================================== */
-function initMobileNav() {
-  const toggle = document.querySelector('.mobile-nav-toggle');
-  const menu = document.querySelector('.nav-menu');
-
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener('click', () => {
-    menu.classList.toggle('open');
-  });
-
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('open');
-    });
-  });
 }

@@ -6,7 +6,7 @@
   
   <title>Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder</title>
   <meta name="title" content="Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder">
-  <meta name="description" content="Portfolio & Bento Dashboard của Nguyễn Đức Thắng (Thắng IT). 10+ năm kinh nghiệm quản trị mạng quy mô lớn và Vibe Coding.">
+  <meta name="description" content="Portfolio & Network Hub của Nguyễn Đức Thắng (Thắng IT). 10+ năm kinh nghiệm quản trị mạng quy mô lớn và Vibe Coding.">
   <meta name="author" content="Nguyễn Đức Thắng">
   <link rel="canonical" href="https://thangit.com">
 
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thangit.com">
   <meta property="og:title" content="Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder">
-  <meta property="og:description" content="10+ năm kinh nghiệm hạ tầng mạng quy mô lớn (Logistics 40.000m²), tự động hóa bằng AI & Python.">
+  <meta property="og:description" content="10+ năm kinh nghiệm quản trị hạ tầng mạng logistics 40.000m², tự động hóa bằng AI & Python.">
   <meta property="og:image" content="https://thangit.com/assets/images/avata.jpg">
 
   <!-- Fonts & Favicon -->
@@ -28,7 +28,7 @@
 <body>
 
   <!-- ========================================================================
-       TOPBAR: MINIMALIST
+       TOPBAR
        ======================================================================== -->
   <header class="header-nav">
     <div class="container header-inner">
@@ -37,323 +37,362 @@
         <span class="brand-name">THANG<span>IT</span>.COM</span>
       </a>
 
-      <div class="header-badges">
-        <div class="live-pill">
-          <span class="live-dot"></span>
-          <span>NOC: 200 OK (<span id="topbar-latency">...</span>)</span>
-        </div>
-        <button id="btn-open-terminal" class="btn-cli" title="Mở CLI (phím ~ hoặc Ctrl+K)">CLI [~]</button>
+      <div class="live-pill">
+        <span class="live-dot"></span>
+        <span>NOC: 200 OK (<span id="topbar-latency">...</span>)</span>
       </div>
     </div>
   </header>
 
   <!-- ========================================================================
-       LINEAR BENTO GRID (DASHBOARD PORTFOLIO)
+       MAIN HUB (SIÊU TINH GỌN — 1 KHUNG NHÌN)
        ======================================================================== -->
-  <main class="bento-section">
+  <main class="main-hub">
     <div class="container">
-      <div class="bento-grid">
 
-        <!-- TILE 1: PROFILE & QUICK CONNECT (Span 7) -->
-        <div class="bento-tile tile-profile">
-          <div class="profile-top">
-            <div class="profile-avatar-wrap">
-              <img src="assets/images/avata.jpg" alt="Nguyễn Đức Thắng" class="profile-avatar">
-              <span class="avatar-status-dot" title="Active 24/7"></span>
-            </div>
-            <div class="profile-meta">
-              <h1>Nguyễn Đức Thắng <span>· Thắng IT</span></h1>
-              <div class="profile-role">Senior Network Administrator & Vibe Coder</div>
-            </div>
-          </div>
-
-          <p class="profile-bio">
-            10+ năm thiết kế và vận hành mạng kho vận quy mô lớn (40.000m²), kết hợp AI & Python tự động hóa vận hành 24/7.
-          </p>
-
-          <!-- Social Icon Dock (Chỉ hiện Icon) -->
-          <div class="social-dock">
-            <!-- Zalo -->
-            <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="social-btn" title="Zalo: 0986 192 092">
-              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.87 1.5 5.43 3.86 7.03-.17.95-.73 2.77-.77 2.92-.07.28.1.55.38.55.15 0 .31-.05.44-.16.92-.76 2.37-1.95 3.19-2.5.91.24 1.88.36 2.9.36 5.52 0 10-4.03 10-9s-4.48-9-10-9zm-1.8 11.8H7.5v-1.1h1.7c.6 0 1-.3 1-.8s-.4-.8-1-.8H7.5V7.8h2.7v1.1H8.6v1.1h1.6c1.2 0 2.1.8 2.1 1.9 0 1.1-.9 1.9-2.1 1.9zm4.6 0h-3.4V7.8h1.1v4.9h2.3v1.1z"/></svg>
-            </a>
-            <!-- Telegram -->
-            <a href="https://t.me/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-btn" title="Telegram: @ducthangqtm">
-              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.63 3.72-.53.36-1.02.54-1.45.53-.48-.01-1.4-.27-2.09-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.5 1.07-.77 4.19-1.82 6.99-3.03 8.39-3.61 3.99-1.66 4.82-1.95 5.37-1.96.12 0 .39.03.56.17.15.12.19.28.21.4.01.08.03.28.02.44z"/></svg>
-            </a>
-            <!-- Phone -->
-            <a href="tel:0986192092" class="social-btn" title="Hotline: 0986 192 092">
-              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            </a>
-            <!-- Email (Copy) -->
-            <button class="social-btn" data-copy="contact@thangit.com" title="Copy: contact@thangit.com">
-              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            </button>
-            <!-- Discord (Copy) -->
-            <button class="social-btn" data-copy="@ducthangqtm" title="Copy Discord: @ducthangqtm">
-              <svg viewBox="0 0 24 24"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09-.01-.02-.04-.03-.07-.03-1.5.26-2.93.71-4.27 1.33-.01 0-.02.01-.03.02-2.72 4.07-3.47 8.03-3.1 11.95 0 .02.01.04.03.05 1.8 1.32 3.53 2.12 5.24 2.65.03.01.06 0 .07-.02.4-.55.76-1.13 1.07-1.74.02-.04 0-.08-.04-.09-.57-.22-1.11-.48-1.64-.78-.04-.02-.04-.08-.01-.11.11-.08.22-.17.33-.25.02-.02.05-.02.07-.01 3.44 1.57 7.15 1.57 10.55 0 .02-.01.05-.01.07.01.11.09.22.17.33.26.04.03.04.09-.01.11-.52.31-1.07.56-1.64.78-.04.01-.05.06-.04.09.32.61.68 1.19 1.07 1.74.03.01.06.02.09.01 1.72-.53 3.45-1.33 5.25-2.65.02-.01.03-.03.03-.05.44-4.53-.73-8.46-3.1-11.95-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.83 2.12-1.89 2.12z"/></svg>
-            </button>
-            <!-- GitHub -->
-            <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub: ducthangqtm">
-              <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- TILE 2: KEY NUMBERS (Span 5) -->
-        <div class="bento-tile tile-stats">
-          <div class="stat-item">
-            <div class="stat-val">10<span>+</span></div>
-            <div class="stat-lbl">Năm Thực Chiến</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-val">40K<span>m²</span></div>
-            <div class="stat-lbl">Hạ Tầng Logistics</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-val">500<span>+</span></div>
-            <div class="stat-lbl">Nodes Quản Trị</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-val">99.9<span>%</span></div>
-            <div class="stat-lbl">Uptime 24/7</div>
-          </div>
-        </div>
-
-        <!-- TILE 3: LIVE EDGE INSPECTOR (Span 4) -->
-        <div class="bento-tile tile-inspector">
-          <div>
-            <div class="tile-header">
-              <span class="tile-tag">● EDGE NODE</span>
-              <button class="btn-cli" id="btn-copy-ip-val" style="font-size:0.7rem; padding: 0.2rem 0.5rem;">Copy IP</button>
-            </div>
-            <div class="inspector-val-large" id="inspector-ip">Đang phân tích...</div>
-          </div>
-
-          <div class="inspector-rows">
-            <div class="inspector-row">
-              <span>Cloudflare POP</span>
-              <strong id="inspector-colo">HAN</strong>
-            </div>
-            <div class="inspector-row">
-              <span>Giao Thức</span>
-              <strong id="inspector-proto">HTTP/3</strong>
-            </div>
-            <div class="inspector-row">
-              <span>Bảo Mật</span>
-              <strong id="inspector-tls">TLS 1.3</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- TILE 4: INTERACTIVE NETWORK TOOLS (Span 8) -->
-        <div class="bento-tile tile-tools">
-          <div class="tile-header">
-            <span class="tile-tag">⚡ NETWORK TOOLBOX</span>
-            <div class="tool-nav-tabs">
-              <button class="tab-mini-btn active" data-tab="tab-subnet">Subnet Calc</button>
-              <button class="tab-mini-btn" data-tab="tab-pwd">Key Gen</button>
-              <button class="tab-mini-btn" data-tab="tab-ping">Ping Latency</button>
-            </div>
-          </div>
-
-          <!-- Tool 1: Subnet Calc -->
-          <div class="tool-view active" id="tab-subnet">
-            <div class="subnet-row-compact">
-              <input type="text" id="calc-ip" class="input-compact" value="192.168.1.1" placeholder="IP Address">
-              <select id="calc-mask" class="input-compact">
-                <option value="24" selected>/24 (254 Hosts)</option>
-                <option value="25">/25 (126 Hosts)</option>
-                <option value="26">/26 (62 Hosts)</option>
-                <option value="27">/27 (30 Hosts)</option>
-                <option value="28">/28 (14 Hosts)</option>
-                <option value="29">/29 (6 Hosts)</option>
-                <option value="30">/30 (2 Hosts P2P)</option>
-                <option value="16">/16 (65K Hosts)</option>
-              </select>
-              <button class="btn-calc" id="btn-calculate-subnet">Tính</button>
-            </div>
-            <div class="subnet-output-grid">
-              <div class="sub-cell">
-                <span class="sub-cell-label">Network</span>
-                <span class="sub-cell-val" id="res-network">192.168.1.0/24</span>
-              </div>
-              <div class="sub-cell">
-                <span class="sub-cell-label">Broadcast</span>
-                <span class="sub-cell-val" id="res-broadcast">192.168.1.255</span>
-              </div>
-              <div class="sub-cell">
-                <span class="sub-cell-label">Usable Range</span>
-                <span class="sub-cell-val" id="res-range">.1 — .254</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tool 2: Password Gen -->
-          <div class="tool-view" id="tab-pwd">
-            <div class="keygen-compact">
-              <span class="keygen-val" id="pwd-result">Tạo khóa...</span>
-              <button class="btn-cli" id="btn-copy-pwd">Copy</button>
-            </div>
-            <div style="display: flex; gap: 0.45rem; margin-top: 0.65rem;">
-              <button class="btn-cli" id="preset-wifi">WPA2 Key</button>
-              <button class="btn-cli" id="preset-secret">Cisco Secret</button>
-              <button class="btn-cli" id="preset-hex">Hex Token</button>
-              <button class="btn-calc" id="btn-gen-pwd" style="padding: 0.3rem 0.75rem;">Tạo Mới</button>
-              <input type="range" id="pwd-length" min="12" max="32" value="16" style="display:none">
-              <span id="pwd-length-val" style="display:none">16</span>
-            </div>
-          </div>
-
-          <!-- Tool 3: Latency Ping -->
-          <div class="tool-view" id="tab-ping">
-            <div class="subnet-output-grid" style="grid-template-columns: repeat(4, 1fr);">
-              <div class="sub-cell">
-                <span class="sub-cell-label">Cloudflare 1.1</span>
-                <span class="sub-cell-val" id="node-cf-val">...</span>
-                <div id="node-cf-bar" style="display:none"></div>
-              </div>
-              <div class="sub-cell">
-                <span class="sub-cell-label">Google 8.8</span>
-                <span class="sub-cell-val" id="node-google-val">...</span>
-                <div id="node-google-bar" style="display:none"></div>
-              </div>
-              <div class="sub-cell">
-                <span class="sub-cell-label">AWS Edge</span>
-                <span class="sub-cell-val" id="node-aws-val">...</span>
-                <div id="node-aws-bar" style="display:none"></div>
-              </div>
-              <div class="sub-cell">
-                <span class="sub-cell-label">GitHub</span>
-                <span class="sub-cell-val" id="node-github-val">...</span>
-                <div id="node-github-bar" style="display:none"></div>
-              </div>
-            </div>
-            <button class="btn-cli" id="btn-run-latency" style="margin-top: 0.65rem; width: 100%;">🔄 Đo lại độ trễ mạng</button>
-          </div>
-        </div>
-
-        <!-- TILE 5: CAREER TIMELINE (Span 6) -->
-        <div class="bento-tile tile-career">
-          <div class="tile-header">
-            <span class="tile-tag">💼 TRACK RECORD</span>
-            <button class="btn-cli" onclick="window.print()" style="font-size:0.7rem;">🖨️ Xuất PDF CV</button>
-          </div>
-
-          <div class="career-list">
-            <!-- Role 1 -->
-            <div class="career-item current">
-              <div class="career-header">
-                <span class="career-company">BEHN MEYER VIỆT NAM</span>
-                <span class="career-time">04/2025 — NAY</span>
-              </div>
-              <div class="career-role">IT NETWORK & SYSTEMS ENGINEER</div>
-              <div class="career-highlight">
-                Quản trị hạ tầng mạng chi nhánh Bắc Ninh (Uptime 99.9%). Ứng dụng Python/Flask & AI tự động hóa điều phối đơn hàng.
-              </div>
-            </div>
-
-            <!-- Role 2 -->
-            <div class="career-item">
-              <div class="career-header">
-                <span class="career-company">DB SCHENKER VIỆT NAM</span>
-                <span class="career-time">10/2016 — 03/2025</span>
-              </div>
-              <div class="career-role">SENIOR IT NETWORK ENGINEER (~9 NĂM)</div>
-              <div class="career-highlight">
-                Thiết kế hạ tầng chuỗi kho logistics 40.000m². Trực tiếp quản lý 500+ thiết bị IT, Core Switch, WiFi công nghiệp & Cloud Azure/M365.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TILE 6: PRODUCTION PROJECTS (Span 6) -->
-        <div class="bento-tile tile-projects">
-          <div class="tile-header">
-            <span class="tile-tag">🚀 DEPLOYMENTS</span>
-            <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">0đ / tháng</span>
-          </div>
-
-          <!-- Project 1 -->
-          <a href="https://thangnhayday.com" target="_blank" rel="noopener noreferrer" class="project-row-item">
-            <div class="project-info">
-              <h4>thangnhayday.com</h4>
-              <p>Bio Link & Affiliate Hub cho KOC Thể Thao • Tối ưu 100/100 PageSpeed</p>
-            </div>
-            <span class="project-arrow">↗</span>
-          </a>
-
-          <!-- Project 2 -->
-          <a href="#" class="project-row-item">
-            <div class="project-info">
-              <h4>NOC Dashboard thangit.com</h4>
-              <p>Trang cá nhân & tiện ích mạng chạy không độ trễ trên Cloudflare Edge</p>
-            </div>
-            <span class="project-arrow">↗</span>
-          </a>
-
-          <!-- Project 3 -->
-          <div class="project-row-item" style="cursor: default;">
-            <div class="project-info">
-              <h4>Homelab & Enterprise Topology</h4>
-              <p>Cụm ảo hóa Proxmox VE, Router Mikrotik cân bằng tải, Cisco VLANs</p>
-            </div>
-            <span class="project-arrow" style="color:var(--text-dim)">⚡</span>
-          </div>
-        </div>
-
-        <!-- TILE 7: CORE TECH STACK (Span 12) -->
-        <div class="bento-tile tile-skills">
-          <div class="tile-header">
-            <span class="tile-tag">🛠️ CORE CAPABILITIES</span>
-          </div>
-          <div class="skills-flex-dock">
-            <span class="skill-chip chip-highlight">Mikrotik RouterOS</span>
-            <span class="skill-chip chip-highlight">Cisco / Juniper Switches</span>
-            <span class="skill-chip">Industrial Wi-Fi (Logistics)</span>
-            <span class="skill-chip">VLAN Phân Tầng</span>
-            <span class="skill-chip">VPN Wireguard / IPsec</span>
-            <span class="skill-chip chip-highlight">Linux (Ubuntu/Debian)</span>
-            <span class="skill-chip">Proxmox VE Virtualization</span>
-            <span class="skill-chip">Docker Containers</span>
-            <span class="skill-chip chip-highlight">Cloudflare (DNS, WAF, Pages)</span>
-            <span class="skill-chip">Azure AD / M365</span>
-            <span class="skill-chip chip-highlight">Python (Flask, Automation)</span>
-            <span class="skill-chip chip-highlight">AI / Vibe Coding</span>
-            <span class="skill-chip">Git & GitHub CI/CD</span>
-            <span class="skill-chip">ĐH Điện Lực & BK-Aptech</span>
-          </div>
-        </div>
-
+      <!-- Avatar & Profile Intro -->
+      <div class="profile-avatar-wrap">
+        <img src="assets/images/avata.jpg" alt="Nguyễn Đức Thắng" class="profile-avatar">
+        <span class="avatar-status-dot" title="Active 24/7 (200 OK)"></span>
       </div>
+
+      <h1 class="profile-name">Nguyễn Đức Thắng <span>· Thắng IT</span></h1>
+      <div class="profile-role">Senior Network Administrator & Vibe Coder</div>
+      <p class="profile-tagline">
+        10+ năm vận hành hạ tầng mạng quy mô lớn (Logistics 40.000m²), kết hợp AI & Python tự động hóa vận hành 24/7.
+      </p>
+
+      <!-- Social Icon Dock (Chỉ hiện Icon, hover phát sáng) -->
+      <div class="social-dock">
+        <!-- Zalo -->
+        <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="social-btn" title="Zalo: 0986 192 092">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.87 1.5 5.43 3.86 7.03-.17.95-.73 2.77-.77 2.92-.07.28.1.55.38.55.15 0 .31-.05.44-.16.92-.76 2.37-1.95 3.19-2.5.91.24 1.88.36 2.9.36 5.52 0 10-4.03 10-9s-4.48-9-10-9zm-1.8 11.8H7.5v-1.1h1.7c.6 0 1-.3 1-.8s-.4-.8-1-.8H7.5V7.8h2.7v1.1H8.6v1.1h1.6c1.2 0 2.1.8 2.1 1.9 0 1.1-.9 1.9-2.1 1.9zm4.6 0h-3.4V7.8h1.1v4.9h2.3v1.1z"/></svg>
+        </a>
+        <!-- Telegram -->
+        <a href="https://t.me/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-btn" title="Telegram: @ducthangqtm">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.63 3.72-.53.36-1.02.54-1.45.53-.48-.01-1.4-.27-2.09-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.5 1.07-.77 4.19-1.82 6.99-3.03 8.39-3.61 3.99-1.66 4.82-1.95 5.37-1.96.12 0 .39.03.56.17.15.12.19.28.21.4.01.08.03.28.02.44z"/></svg>
+        </a>
+        <!-- Phone -->
+        <a href="tel:0986192092" class="social-btn" title="Gọi: 0986 192 092">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </a>
+        <!-- Copy Email -->
+        <button class="social-btn" data-copy="contact@thangit.com" title="Sao chép Email: contact@thangit.com">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </button>
+        <!-- Discord -->
+        <button class="social-btn" data-copy="@ducthangqtm" title="Sao chép Discord: @ducthangqtm">
+          <svg viewBox="0 0 24 24"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09-.01-.02-.04-.03-.07-.03-1.5.26-2.93.71-4.27 1.33-.01 0-.02.01-.03.02-2.72 4.07-3.47 8.03-3.1 11.95 0 .02.01.04.03.05 1.8 1.32 3.53 2.12 5.24 2.65.03.01.06 0 .07-.02.4-.55.76-1.13 1.07-1.74.02-.04 0-.08-.04-.09-.57-.22-1.11-.48-1.64-.78-.04-.02-.04-.08-.01-.11.11-.08.22-.17.33-.25.02-.02.05-.02.07-.01 3.44 1.57 7.15 1.57 10.55 0 .02-.01.05-.01.07.01.11.09.22.17.33.26.04.03.04.09-.01.11-.52.31-1.07.56-1.64.78-.04.01-.05.06-.04.09.32.61.68 1.19 1.07 1.74.03.01.06.02.09.01 1.72-.53 3.45-1.33 5.25-2.65.02-.01.03-.03.03-.05.44-4.53-.73-8.46-3.1-11.95-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.83 2.12-1.89 2.12z"/></svg>
+        </button>
+        <!-- GitHub -->
+        <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub: ducthangqtm">
+          <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        </a>
+      </div>
+
+      <!-- 4 Nút Chức Năng Chính (BẤM VÀO MỚI MỞ TÍNH NĂNG) -->
+      <div class="launcher-grid">
+        <!-- 1. Network Toolbox -->
+        <div class="launcher-card" data-open="modal-tools">
+          <div class="launcher-icon icon-tools">🛠️</div>
+          <div class="launcher-info">
+            <h3>Network Toolbox</h3>
+            <p>Subnet Calc, IP Edge, Key Gen, Ping</p>
+          </div>
+        </div>
+
+        <!-- 2. Hồ Sơ & Kinh Nghiệm -->
+        <div class="launcher-card" data-open="modal-career">
+          <div class="launcher-icon icon-career">💼</div>
+          <div class="launcher-info">
+            <h3>Hồ Sơ & Kinh Nghiệm</h3>
+            <p>10 năm thực chiến Behn Meyer & DB Schenker</p>
+          </div>
+        </div>
+
+        <!-- 3. Dự Án Tiêu Biểu -->
+        <div class="launcher-card" data-open="modal-projects">
+          <div class="launcher-icon icon-projects">🚀</div>
+          <div class="launcher-info">
+            <h3>Dự Án Tiêu Biểu</h3>
+            <p>thangnhayday.com, thangit.com, Homelab</p>
+          </div>
+        </div>
+
+        <!-- 4. Dòng Lệnh Terminal -->
+        <div class="launcher-card" data-open="modal-terminal">
+          <div class="launcher-icon icon-terminal">⌨️</div>
+          <div class="launcher-info">
+            <h3>NOC Terminal</h3>
+            <p>Gõ lệnh zsh tương tác (phím ~)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Chips Số Liệu Minh Chứng (Gọn Gàng) -->
+      <div class="metric-chips-row">
+        <div class="metric-chip"><strong>10+</strong> Năm Thực Chiến</div>
+        <div class="metric-chip"><strong>40K m²</strong> Logistics</div>
+        <div class="metric-chip"><strong>500+</strong> Nodes Quản Trị</div>
+        <div class="metric-chip"><strong>99.9%</strong> Uptime 24/7</div>
+      </div>
+
     </div>
   </main>
 
   <!-- ========================================================================
-       FOOTER
+       MODAL 1: NETWORK TOOLBOX
        ======================================================================== -->
-  <footer class="footer">
-    <div class="container footer-flex">
-      <div>© 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong></div>
-      <div>100% Static Web • 0đ Vận Hành trên Cloudflare Pages</div>
-    </div>
-  </footer>
-
-  <!-- ========================================================================
-       MINI CLI TERMINAL MODAL (HOTKEY ~ or BUTTON)
-       ======================================================================== -->
-  <div class="terminal-modal-backdrop" id="terminal-modal" role="dialog" aria-modal="true" aria-label="NOC Mini Terminal">
-    <div class="terminal-window">
-      <div class="terminal-titlebar">
-        <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">guest@thangit.com: ~ (zsh) — Gõ 'help'</span>
-        <button id="btn-close-terminal" style="background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:1rem;">✕</button>
+  <div class="modal-overlay" id="modal-tools" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span>🛠️</span>
+          <span class="modal-title">NOC LIVE NETWORK TOOLBOX</span>
+        </div>
+        <button class="btn-close-modal" data-close="modal-tools" aria-label="Đóng">✕</button>
       </div>
-      <div class="terminal-body" id="terminal-output-body">
-        <div style="color:var(--neon-cyan);">
-          THANGIT.COM — NOC CLI INTERFACE v2.0<br>
-          Gõ <strong style="color:var(--neon-green)">'help'</strong> để xem lệnh hoặc <strong style="color:var(--neon-green)">'exp'</strong> xem kinh nghiệm làm việc.
+
+      <div class="modal-body">
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" data-tab="tab-subnet">Subnet Calc</button>
+          <button class="modal-tab-btn" data-tab="tab-pwd">Key Generator</button>
+          <button class="modal-tab-btn" data-tab="tab-inspector">IP Edge</button>
+          <button class="modal-tab-btn" data-tab="tab-ping">Latency Ping</button>
+        </div>
+
+        <!-- Tab 1: Subnet Calc -->
+        <div class="tool-panel-content active" id="tab-subnet">
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <input type="text" id="calc-ip" class="input-compact" style="flex:2; min-width:140px;" value="192.168.1.1" placeholder="Địa chỉ IP">
+            <select id="calc-mask" class="input-compact" style="flex:1; min-width:120px;">
+              <option value="24" selected>/24 (254 Hosts)</option>
+              <option value="25">/25 (126 Hosts)</option>
+              <option value="26">/26 (62 Hosts)</option>
+              <option value="27">/27 (30 Hosts)</option>
+              <option value="28">/28 (14 Hosts)</option>
+              <option value="29">/29 (6 Hosts)</option>
+              <option value="30">/30 (2 Hosts P2P)</option>
+              <option value="16">/16 (65K Hosts)</option>
+            </select>
+            <button class="btn-calc" id="btn-calculate-subnet">Tính Toán</button>
+          </div>
+
+          <div class="subnet-output-grid">
+            <div class="sub-cell">
+              <span class="sub-cell-label">Network ID</span>
+              <span class="sub-cell-val" id="res-network">192.168.1.0/24</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Broadcast</span>
+              <span class="sub-cell-val" id="res-broadcast">192.168.1.255</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Dải IP Khả Dụng</span>
+              <span class="sub-cell-val" id="res-range">.1 — .254</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Subnet Mask</span>
+              <span class="sub-cell-val" id="res-mask">255.255.255.0</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Wildcard</span>
+              <span class="sub-cell-val" id="res-wildcard">0.0.0.255</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Khả dụng</span>
+              <span class="sub-cell-val" id="res-hosts">254 Hosts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Password Gen -->
+        <div class="tool-panel-content" id="tab-pwd">
+          <div class="keygen-box">
+            <span class="keygen-val" id="pwd-result">Tạo mật khẩu...</span>
+            <button class="btn-calc" id="btn-copy-pwd" style="padding:0.4rem 0.75rem; font-size:0.75rem;">Copy</button>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.85rem;">
+            <button class="modal-tab-btn" id="preset-wifi">Khóa Wi-Fi WPA2</button>
+            <button class="modal-tab-btn" id="preset-secret">Cisco Secret</button>
+            <button class="modal-tab-btn" id="preset-hex">128-bit Token</button>
+            <button class="btn-calc" id="btn-gen-pwd">Tạo Mới</button>
+            <input type="range" id="pwd-length" min="12" max="32" value="16" style="display:none">
+            <span id="pwd-length-val" style="display:none">16</span>
+          </div>
+        </div>
+
+        <!-- Tab 3: IP Edge Inspector -->
+        <div class="tool-panel-content" id="tab-inspector">
+          <div class="keygen-box" style="margin-bottom:0.85rem;">
+            <div>
+              <div style="font-size:0.72rem; color:var(--text-dim); font-family:var(--font-mono);">PUBLIC IP CỦA BẠN</div>
+              <div class="keygen-val" id="inspector-ip" style="font-size:1.3rem;">Đang tải...</div>
+            </div>
+            <button class="btn-calc" id="btn-copy-ip-val" style="padding:0.4rem 0.75rem; font-size:0.75rem;">Copy IP</button>
+          </div>
+          <div class="subnet-output-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="sub-cell">
+              <span class="sub-cell-label">Data Center (POP)</span>
+              <span class="sub-cell-val" id="inspector-colo">HAN (Hanoi Edge)</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Giao Thức</span>
+              <span class="sub-cell-val" id="inspector-proto">HTTP/3 (QUIC)</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Tiêu chuẩn mã hóa</span>
+              <span class="sub-cell-val" id="inspector-tls">TLS 1.3</span>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Trình duyệt</span>
+              <span class="sub-cell-val" id="inspector-ua" style="font-size:0.75rem;">Chrome / Webkit</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Latency Ping -->
+        <div class="tool-panel-content" id="tab-ping">
+          <div class="subnet-output-grid" style="grid-template-columns: repeat(2, 1fr); margin-top:0;">
+            <div class="sub-cell">
+              <span class="sub-cell-label">Cloudflare Edge (1.1.1.1)</span>
+              <span class="sub-cell-val" id="node-cf-val" style="color:var(--neon-cyan)">...</span>
+              <div id="node-cf-bar" style="display:none"></div>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">Google DNS (8.8.8.8)</span>
+              <span class="sub-cell-val" id="node-google-val" style="color:var(--neon-cyan)">...</span>
+              <div id="node-google-bar" style="display:none"></div>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">AWS Global Backbone</span>
+              <span class="sub-cell-val" id="node-aws-val" style="color:var(--neon-cyan)">...</span>
+              <div id="node-aws-bar" style="display:none"></div>
+            </div>
+            <div class="sub-cell">
+              <span class="sub-cell-label">GitHub API</span>
+              <span class="sub-cell-val" id="node-github-val" style="color:var(--neon-cyan)">...</span>
+              <div id="node-github-bar" style="display:none"></div>
+            </div>
+          </div>
+          <button class="btn-calc" id="btn-run-latency" style="width:100%; margin-top:0.85rem;">🔄 Đo Lại Độ Trễ Mạng</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: HỒ SƠ & KINH NGHIỆM (CV 10 NĂM)
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-career" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span>💼</span>
+          <span class="modal-title">HỒ SƠ NĂNG LỰC & KINH NGHIỆM</span>
+        </div>
+        <button class="btn-close-modal" data-close="modal-career" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Behn Meyer -->
+        <div class="timeline-modal-item current">
+          <div class="timeline-comp-name">BEHN MEYER VIỆT NAM — BẮC NINH</div>
+          <div class="timeline-comp-role">IT NETWORK & SYSTEMS ENGINEER (04/2025 — NAY)</div>
+          <div class="timeline-comp-desc">
+            Quản trị toàn bộ hạ tầng mạng LAN/WAN chi nhánh Bắc Ninh, duy trì uptime 99.9%. Ứng dụng Python/Flask và AI tự động hóa quy trình xử lý đơn hàng và điều phối vận chuyển.
+          </div>
+        </div>
+
+        <!-- DB Schenker -->
+        <div class="timeline-modal-item">
+          <div class="timeline-comp-name">DB SCHENKER VIỆT NAM</div>
+          <div class="timeline-comp-role">SENIOR IT NETWORK ENGINEER (10/2016 — 03/2025 • ~9 NĂM)</div>
+          <div class="timeline-comp-desc">
+            Thiết kế và triển khai trọn gói hạ tầng chuỗi kho vận logistics 40.000m². Trực tiếp quản trị 500+ thiết bị IT, Core Switch Cisco/Juniper, WiFi công nghiệp chịu tải cao, Azure Domain & hệ thống ERP (SAP/WMS).
+          </div>
+        </div>
+
+        <!-- Học vấn & Skills -->
+        <div style="background: rgba(255,255,255,0.02); padding: 0.85rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+          <div style="font-weight: 700; font-size: 0.85rem; color: var(--text-title); margin-bottom: 0.35rem;">🎓 Đào Tạo & Kỹ Năng Cốt Lõi</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+            • Đại Học Điện Lực (CNTT) & Bách Khoa - Aptech (Hệ thống HDSM)<br>
+            • Cisco, Mikrotik RouterOS, Industrial WiFi, VLAN/VPN, Linux Server, Proxmox VE, Docker, Cloudflare, Python Automation.
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.5rem;">
+          <button class="btn-calc" onclick="window.print()">🖨️ In / Xuất PDF CV</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 3: DỰ ÁN TIÊU BIỂU
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-projects" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span>🚀</span>
+          <span class="modal-title">DỰ ÁN SỐ & HẠ TẦNG THỰC CHIẾN</span>
+        </div>
+        <button class="btn-close-modal" data-close="modal-projects" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Project 1 -->
+        <a href="https://thangnhayday.com" target="_blank" rel="noopener noreferrer" class="project-modal-item">
+          <div>
+            <h4>thangnhayday.com</h4>
+            <p>Bio Link & Affiliate Hub cho KOC Thể Thao • Đạt 100/100 Google PageSpeed</p>
+          </div>
+          <span class="project-modal-arrow">↗</span>
+        </a>
+
+        <!-- Project 2 -->
+        <a href="#" class="project-modal-item">
+          <div>
+            <h4>NOC Dashboard thangit.com</h4>
+            <p>Trung tâm thông tin cá nhân & tiện ích mạng chạy không độ trễ trên Cloudflare Pages (0đ/tháng)</p>
+          </div>
+          <span class="project-modal-arrow">↗</span>
+        </a>
+
+        <!-- Project 3 -->
+        <div class="project-modal-item" style="cursor: default;">
+          <div>
+            <h4>Homelab & Enterprise Topology</h4>
+            <p>Cụm ảo hóa Proxmox VE, cân bằng tải đa WAN Mikrotik, phân tầng VLAN Cisco bảo mật</p>
+          </div>
+          <span class="project-modal-arrow" style="color:var(--text-dim)">⚡</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 4: NOC TERMINAL CLI
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-terminal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span>⌨️</span>
+          <span class="modal-title">GUEST@THANGIT.COM: ~ (ZSH)</span>
+        </div>
+        <button class="btn-close-modal" data-close="modal-terminal" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="terminal-body" id="terminal-output-body">
+        <div style="color:var(--neon-cyan);">
+          THANGIT.COM — NOC CLI v2.5 (Online)<br>
+          Gõ <strong style="color:var(--neon-green)">'help'</strong> để xem danh sách lệnh hoặc <strong style="color:var(--neon-green)">'exp'</strong> xem kinh nghiệm.
+        </div>
+      </div>
+
       <div class="term-prompt-row">
         <span class="term-prompt">guest@thangit:~$</span>
         <input type="text" id="term-cmd-input" class="term-input" placeholder="help, about, skills, exp, contact, clear..." autocomplete="off" spellcheck="false">
@@ -363,6 +402,15 @@
 
   <!-- Toast -->
   <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      © 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong> • 100% Static Web trên Cloudflare Pages
+    </div>
+  </footer>
 
   <script src="js/main.js"></script>
 </body>
