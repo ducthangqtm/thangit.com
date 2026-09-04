@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initInteractiveTerminal();
   initToolboxTabs();
   initCopyButtons();
-  initAnimatedFavicon();
 });
 
 /* ==========================================================================
