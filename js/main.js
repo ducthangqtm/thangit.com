@@ -416,12 +416,12 @@ Kinh nghiệm: 10+ năm chuyên môn thiết kế & vận hành mạng công ngh
    7. TOOLBOX TABS
    ========================================================================== */
 function initToolboxTabs() {
-  const tabs = document.querySelectorAll('.tool-tab-btn');
-  const panels = document.querySelectorAll('.tool-panel');
+  const tabs = document.querySelectorAll('.tab-mini-btn, .tool-tab-btn');
+  const panels = document.querySelectorAll('.tool-view, .tool-panel');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-target');
+      const target = tab.getAttribute('data-tab') || tab.getAttribute('data-target');
 
       tabs.forEach(t => t.classList.remove('active'));
       panels.forEach(p => p.classList.remove('active'));
