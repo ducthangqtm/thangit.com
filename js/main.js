@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initInteractiveTerminal();
   initToolboxTabs();
   initCopyButtons();
+  initAnimatedFavicon();
 });
 
 /* ==========================================================================
@@ -505,5 +506,140 @@ function initCopyButtons() {
       }
     });
   }
+}
+
+/* ==========================================================================
+   10. SMOOTH RADAR PING ANIMATED FAVICON (Zero-Jitter, Anchored Base)
+   ========================================================================== */
+function initAnimatedFavicon() {
+  let faviconLink = document.querySelector('link[rel="icon"]');
+  if (!faviconLink) {
+    faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    document.head.appendChild(faviconLink);
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 32;
+  canvas.height = 32;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  function drawRoundedRect(c, x, y, w, h, r) {
+    c.beginPath();
+    if (c.roundRect) {
+      c.roundRect(x, y, w, h, r);
+    } else {
+      c.moveTo(x + r, y);
+      c.lineTo(x + w - r, y);
+      c.quadraticCurveTo(x + w, y, x + w, y + r);
+      c.lineTo(x + w, y + h - r);
+      c.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      c.lineTo(x + r, y + h);
+      c.quadraticCurveTo(x, y + h, x, y + h - r);
+      c.lineTo(x, y + r);
+      c.quadraticCurveTo(x, y, x + r, y);
+    }
+  }
+
+  let step = 0;
+  let animTimer = null;
+  const totalSteps = 24; // Smooth 24-frame cycle (~1.8s per pulse)
+
+  function renderFavicon() {
+    ctx.clearRect(0, 0, 32, 32);
+
+    // 1. Anchored Badge Background (Completely static - zero flicker)
+    drawRoundedRect(ctx, 1, 1, 30, 30, 7);
+    ctx.fillStyle = '#070c16';
+    ctx.fill();
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
+    ctx.stroke();
+
+    // 2. Smooth Radar Wave expanding from antenna beacon (x=16, y=8.5)
+    const progress = (step % totalSteps) / totalSteps;
+    const waveRadius = 2 + progress * 7;
+    const waveAlpha = Math.sin(progress * Math.PI); // Smooth 0 -> 1 -> 0 fade curve
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(16, 8.5, waveRadius, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(0, 255, 157, ${(waveAlpha * 0.8).toFixed(2)})`;
+    ctx.lineWidth = 1.1;
+    ctx.stroke();
+    ctx.restore();
+
+    // 3. Center 'i' Antenna Beacon Dot (Pulsing network activity LED)
+    const ledGlow = (Math.sin(progress * Math.PI * 2) + 1) / 2;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(16, 8.5, 2, 0, Math.PI * 2);
+    ctx.fillStyle = ledGlow > 0.4 ? '#00ff9d' : '#00f0ff';
+    ctx.shadowColor = '#00ff9d';
+    ctx.shadowBlur = 4;
+    ctx.fill();
+    ctx.restore();
+
+    // 4. Letters "T - i - T" (Anchored, rounded, sharp - never moves)
+    ctx.save();
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = 2.6;
+
+    const grad = ctx.createLinearGradient(4, 0, 28, 0);
+    grad.addColorStop(0, '#00f0ff');
+    grad.addColorStop(0.5, '#00ff9d');
+    grad.addColorStop(1, '#00f0ff');
+    ctx.strokeStyle = grad;
+
+    // Left T
+    ctx.beginPath();
+    ctx.moveTo(5, 11);
+    ctx.lineTo(12, 11);
+    ctx.moveTo(8.5, 11);
+    ctx.lineTo(8.5, 22);
+    ctx.stroke();
+
+    // Center i stem
+    ctx.beginPath();
+    ctx.moveTo(16, 13.5);
+    ctx.lineTo(16, 22);
+    ctx.strokeStyle = '#00f0ff';
+    ctx.stroke();
+
+    // Right T
+    ctx.beginPath();
+    ctx.moveTo(20, 11);
+    ctx.lineTo(27, 11);
+    ctx.moveTo(23.5, 11);
+    ctx.lineTo(23.5, 22);
+    ctx.strokeStyle = grad;
+    ctx.stroke();
+    ctx.restore();
+
+    faviconLink.href = canvas.toDataURL('image/png');
+    step++;
+  }
+
+  function start() {
+    if (!animTimer) {
+      animTimer = setInterval(renderFavicon, 75); // ~13 fps: fluid, gentle pulse, low CPU
+    }
+  }
+
+  function stop() {
+    if (animTimer) {
+      clearInterval(animTimer);
+      animTimer = null;
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else start();
+  });
+
+  start();
 }
 
