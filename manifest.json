@@ -1,13 +1,17 @@
 {
+  "id": "/?source=pwa",
   "name": "TiT — Nguyễn Đức Thắng",
   "short_name": "TiT",
   "description": "Portfolio & Network Hub của Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder",
-  "start_url": "/",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay"],
   "orientation": "portrait",
   "background_color": "#04070d",
-  "theme_color": "#00f0ff",
+  "theme_color": "#04070d",
+  "lang": "vi",
+  "categories": ["utilities", "portfolio"],
   "icons": [
     {
       "src": "/assets/images/icon-192.png",

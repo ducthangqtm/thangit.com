@@ -14,7 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initToolboxTabs();
   initCopyButtons();
   initAnimatedFavicon();
+  initServiceWorker();
 });
+
+function initServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+}
 
 /* ==========================================================================
    1. MODAL / APP LAUNCHER CONTROLLER
