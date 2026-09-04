@@ -41,12 +41,21 @@
 </head>
 <body>
 
+  <!-- Pull to Refresh Visual Indicator for Mobile / PWA -->
+  <div id="pwa-pull-indicator" class="pwa-pull-indicator" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <polyline points="1 20 1 14 7 14"></polyline>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+    </svg>
+  </div>
+
   <!-- ========================================================================
        TOPBAR
        ======================================================================== -->
   <header class="header-nav">
     <div class="container header-inner">
-      <a href="#" class="brand-link" aria-label="Thắng IT">
+      <a href="#" class="brand-link" id="brand-link" aria-label="Thắng IT — Nhấn để làm mới trang">
         <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="TiT Logo">
           <defs>
             <linearGradient id="tit-bg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -108,9 +117,18 @@
         <span class="brand-name">THANG<span>IT</span>.COM</span>
       </a>
 
-      <div class="live-pill">
-        <span class="live-dot"></span>
-        <span>NOC: 200 OK (<span id="topbar-latency">...</span>)</span>
+      <div class="topbar-actions">
+        <div class="live-pill">
+          <span class="live-dot"></span>
+          <span>NOC: 200 OK (<span id="topbar-latency">...</span>)</span>
+        </div>
+        <button id="btn-pwa-refresh" class="btn-header-refresh" title="Làm mới trang / Reload" aria-label="Làm mới">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
@@ -552,6 +570,12 @@
     </div>
   </div>
 
+  <!-- PWA Live Update Toast -->
+  <div id="pwa-update-toast" class="pwa-update-toast" aria-live="polite">
+    <span>🚀 Đã có phiên bản mới!</span>
+    <button id="btn-pwa-update" class="btn-pwa-update">Làm mới</button>
+  </div>
+
   <!-- Toast -->
   <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
 
@@ -564,6 +588,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260904_3"></script>
+  <script src="js/main.js?v=20260904_5"></script>
 </body>
 </html>

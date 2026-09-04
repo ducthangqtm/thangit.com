@@ -15,14 +15,137 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyButtons();
   initAnimatedFavicon();
   initServiceWorker();
+  initPullToRefresh();
 });
 
 function initServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
+  if (!('serviceWorker' in navigator)) return;
+
+  const updateToast = document.getElementById('pwa-update-toast');
+  const updateBtn = document.getElementById('btn-pwa-update');
+  let newWorker = null;
+
+  navigator.serviceWorker.register('/sw.js').then((reg) => {
+    // Check if new update is found
+    reg.addEventListener('updatefound', () => {
+      newWorker = reg.installing;
+      if (newWorker) {
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // New version ready
+            if (updateToast) updateToast.classList.add('show');
+          }
+        });
+      }
+    });
+  }).catch(() => {});
+
+  if (updateBtn) {
+    updateBtn.addEventListener('click', () => {
+      if (newWorker) {
+        newWorker.postMessage({ type: 'SKIP_WAITING' });
+      }
+      setTimeout(() => {
+        window.location.reload();
+      }, 200);
     });
   }
+
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!refreshing) {
+      refreshing = true;
+      window.location.reload();
+    }
+  });
+}
+
+function initPullToRefresh() {
+  const indicator = document.getElementById('pwa-pull-indicator');
+  const refreshBtn = document.getElementById('btn-pwa-refresh');
+  const brandLink = document.getElementById('brand-link');
+
+  function triggerReload() {
+    if (indicator) {
+      indicator.classList.add('refreshing');
+      indicator.style.transform = 'translateX(-50%) translateY(20px)';
+      indicator.classList.add('visible');
+    }
+    if (refreshBtn) {
+      refreshBtn.classList.add('spinning');
+    }
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
+  }
+
+  // Header Refresh button
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      triggerReload();
+    });
+  }
+
+  // Brand Logo click reloads if already at top
+  if (brandLink) {
+    brandLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.scrollY < 20) {
+        triggerReload();
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Mobile Touch Pull-to-Refresh Gesture
+  let startY = 0;
+  let currentY = 0;
+  let isPulling = false;
+  const PULL_THRESHOLD = 75;
+
+  window.addEventListener('touchstart', (e) => {
+    if (window.scrollY <= 0 && e.touches.length === 1) {
+      startY = e.touches[0].clientY;
+      isPulling = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isPulling || window.scrollY > 0) {
+      isPulling = false;
+      return;
+    }
+    currentY = e.touches[0].clientY;
+    const diff = currentY - startY;
+    if (diff > 10) {
+      const pullDist = Math.min(diff * 0.45, 95);
+      if (indicator) {
+        indicator.classList.add('visible');
+        indicator.style.transform = `translateX(-50%) translateY(${pullDist - 35}px)`;
+        const rot = (pullDist / PULL_THRESHOLD) * 360;
+        const iconSvg = indicator.querySelector('svg');
+        if (iconSvg) iconSvg.style.transform = `rotate(${rot}deg)`;
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (!isPulling) return;
+    isPulling = false;
+    const diff = currentY - startY;
+    if (diff >= PULL_THRESHOLD && window.scrollY <= 0) {
+      triggerReload();
+    } else {
+      if (indicator) {
+        indicator.style.transform = 'translateX(-50%) translateY(-90px)';
+        indicator.classList.remove('visible');
+      }
+    }
+    startY = 0;
+    currentY = 0;
+  }, { passive: true });
 }
 
 /* ==========================================================================
