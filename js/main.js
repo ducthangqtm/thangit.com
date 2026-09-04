@@ -16,7 +16,68 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnimatedFavicon();
   initServiceWorker();
   initPullToRefresh();
+  initPWAInstallPrompt();
 });
+
+function initPWAInstallPrompt() {
+  let deferredPrompt = null;
+  const btnTopbar = document.getElementById('btn-topbar-install');
+  const btnBanner = document.getElementById('btn-banner-install');
+  const banner = document.getElementById('pwa-install-banner');
+
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  if (isStandalone) {
+    if (banner) banner.style.display = 'none';
+    if (btnTopbar) btnTopbar.style.display = 'none';
+    return;
+  }
+
+  // Listen for native install prompt (Chrome / Android / Edge)
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (banner) banner.style.display = 'flex';
+    if (btnTopbar) btnTopbar.style.display = 'inline-flex';
+  });
+
+  window.addEventListener('appinstalled', () => {
+    deferredPrompt = null;
+    if (banner) banner.style.display = 'none';
+    if (btnTopbar) btnTopbar.style.display = 'none';
+    const toast = document.getElementById('global-toast');
+    if (toast) {
+      toast.textContent = '🎉 Đã ghim App TiT ra màn hình thành công!';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+  });
+
+  async function handleInstallClick(e) {
+    if (e) e.preventDefault();
+
+    if (deferredPrompt) {
+      // Android / Chrome native 1-click install prompt
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        if (banner) banner.style.display = 'none';
+        if (btnTopbar) btnTopbar.style.display = 'none';
+      }
+      deferredPrompt = null;
+    } else {
+      // iOS Safari or browser where prompt not directly available: show visual guide modal
+      const modal = document.getElementById('modal-ios-install');
+      if (modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  }
+
+  if (btnTopbar) btnTopbar.addEventListener('click', handleInstallClick);
+  if (btnBanner) btnBanner.addEventListener('click', handleInstallClick);
+}
 
 function initServiceWorker() {
   if (!('serviceWorker' in navigator)) return;

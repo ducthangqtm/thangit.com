@@ -118,6 +118,14 @@
       </a>
 
       <div class="topbar-actions">
+        <button id="btn-topbar-install" class="btn-topbar-install" title="Cài đặt App TiT ra màn hình chính" aria-label="Cài đặt App TiT">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Ghim App</span>
+        </button>
         <div class="live-pill">
           <span class="live-dot"></span>
           <span>NOC: 200 OK (<span id="topbar-latency">...</span>)</span>
@@ -191,6 +199,25 @@
           <span class="edge-node-value" id="home-visitor-node">HAN Edge</span>
           <button class="btn-quick-copy" id="btn-copy-home-ip" title="Sao chép IP nhanh">📋 Copy</button>
         </div>
+      </div>
+
+      <!-- PWA 1-Click Install Banner (Automatically hidden once installed in standalone mode) -->
+      <div id="pwa-install-banner" class="pwa-install-banner">
+        <div class="pwa-banner-left">
+          <img src="assets/images/apple-touch-icon.png" alt="TiT App Icon" class="pwa-banner-icon">
+          <div class="pwa-banner-text">
+            <strong>Cài đặt App TiT <span class="pwa-banner-badge">PWA</span></strong>
+            <span>Ghim ra màn hình chính • Mở 1-chạm không tốn tab</span>
+          </div>
+        </div>
+        <button id="btn-banner-install" class="btn-banner-install" title="Ghim App TiT ra màn hình">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Ghim ra màn hình
+        </button>
       </div>
 
       <!-- Cyber Bento Dashboard (2x2 Grid with Real-time Content Previews) -->
@@ -312,6 +339,48 @@
   <!-- ========================================================================
        MODALS / CLICK-TO-OPEN APPS
        ========================================================================= -->
+
+  <!-- MODAL: HƯỚNG DẪN GHIM APP (CHO IPHONE & TRÌNH DUYỆT KHÁC) -->
+  <div class="modal-overlay" id="modal-ios-install" role="dialog" aria-modal="true">
+    <div class="modal-window" style="max-width: 460px;">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span>📲</span>
+          <span class="modal-title">CÀI ĐẶT APP TIT RA MÀN HÌNH</span>
+        </div>
+        <button class="btn-close-modal" data-close="modal-ios-install" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 1.25rem;">
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+          Để mở ứng dụng 1-chạm toàn màn hình và không tốn thêm tab trình duyệt, hãy làm theo 3 bước sau:
+        </p>
+
+        <div class="ios-step-list">
+          <div class="ios-step-item">
+            <div class="ios-step-num">1</div>
+            <div class="ios-step-desc">
+              Nhấn nút <strong>Chia sẻ</strong> (icon <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; display: inline;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg> thanh dưới Safari iPhone, hoặc menu <strong>⋮</strong> trên Android).
+            </div>
+          </div>
+          <div class="ios-step-item">
+            <div class="ios-step-num">2</div>
+            <div class="ios-step-desc">
+              Cuộn menu xuống và chọn dòng <strong>"Thêm vào MH chính"</strong> (Add to Home Screen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; display: inline;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>).
+            </div>
+          </div>
+          <div class="ios-step-item">
+            <div class="ios-step-num">3</div>
+            <div class="ios-step-desc">
+              Nhấn <strong>"Thêm" (Add)</strong> ở góc trên bên phải màn hình để hoàn tất!
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-calc" style="width: 100%; margin-top: 0.75rem; padding: 0.65rem;" data-close="modal-ios-install">Đã hiểu & Đóng</button>
+      </div>
+    </div>
+  </div>
 
   <!-- 1. MODAL: NETWORK TOOLBOX -->
   <div class="modal-overlay" id="modal-tools" role="dialog" aria-modal="true">
