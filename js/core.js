@@ -9,8 +9,63 @@ document.addEventListener('DOMContentLoaded', () => {
   initServiceWorker();
   initPullToRefresh();
   initPWAInstallPrompt();
-  initVisitorBadge();
+  initAvatarProfileToggle();
 });
+
+/* ==========================================================================
+   INTERACTIVE AVATAR & PERSONAL INFO TOGGLE
+   ========================================================================== */
+function initAvatarProfileToggle() {
+  const defaultView = document.getElementById('profile-hero-default');
+  const expandedView = document.getElementById('profile-hero-expanded');
+  const btnExpand = document.getElementById('btn-avatar-expand');
+  const btnClose = document.getElementById('btn-close-expanded');
+  const btnCollapse = document.getElementById('btn-avatar-collapse');
+
+  if (!btnExpand || !expandedView || !defaultView) return;
+
+  function openProfile() {
+    defaultView.style.display = 'none';
+    expandedView.style.display = 'block';
+  }
+
+  function closeProfile() {
+    expandedView.style.display = 'none';
+    defaultView.style.display = 'block';
+  }
+
+  btnExpand.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openProfile();
+  });
+
+  btnExpand.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openProfile();
+    }
+  });
+
+  if (btnClose) {
+    btnClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeProfile();
+    });
+  }
+
+  if (btnCollapse) {
+    btnCollapse.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeProfile();
+    });
+    btnCollapse.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        closeProfile();
+      }
+    });
+  }
+}
 
 /* ==========================================================================
    VISITOR EDGE & IP BADGE (HOMEPAGE)
