@@ -113,7 +113,29 @@ thangit.com/
 
 ---
 
-## 5. Ý Tưởng & Hướng Phát Triển Tiếp Theo (Roadmap)
+## 5. Cấu Trúc Hero & Social Dock Mới Nhất (Cập nhật 05/09/2026)
+1. **Tiêu đề & Tên:** Hiển thị **Nguyễn Đức Thắng** (đã lược bỏ hậu tố `· Thắng IT` ở tiêu đề theo yêu cầu).
+2. **Avatar tương tác (Interactive Profile Card):**
+   - Click vào Avatar sẽ trượt Avatar sang trái (phóng to) và mở card kính mờ bên phải:
+     - Họ & Tên: **Nguyễn Đức Thắng**
+     - Ngày sinh: **12/09/1992**
+     - Địa chỉ: **12 Thịnh Liên - Phù Đổng - Hà Nội**
+     - SĐT: `0986 192 092` (kèm nút copy nhanh và gọi)
+     - Email: `ducthangqtm@gmail.com` (kèm nút copy nhanh)
+     - Tình trạng: **Đã kết hôn**
+     - Giới thiệu tóm tắt: *10+ năm vận hành hạ tầng mạng quy mô lớn (Logistics 40.000m²), kết hợp AI & Python tự động hóa vận hành 24/7.*
+3. **Thanh Dock Mạng Xã Hội (Unified Social Action Bar):**
+   - Đã gỡ bỏ nút Gọi điện và nút Email khỏi thanh dock (chỉ giữ ở card thông tin).
+   - Chỉ hiển thị 4 icon chuẩn thương hiệu:
+     - **Zalo**: Text thương hiệu màu xanh Zalo (`#2b7fff`), mở `zalo.me/0986192092`.
+     - **Telegram**: Nền tròn xanh trời (`#2AABEE`) máy bay giấy trắng, mở `t.me/ducthangqtm`.
+     - **Discord**: Icon Clyde màu tím Blurple (`#5865F2`), mở trực tiếp `discord.com/users/ducthangqtm` sang tab mới, đồng thời tự động copy username `ducthangqtm` kèm toast.
+     - **GitHub**: Icon Octocat trắng, mở `github.com/ducthangqtm`.
+4. **PWA Cache:** Service Worker hiện tại là `tit-hub-v9`, script/style version `?v=20260905_10`.
+
+---
+
+## 6. Ý Tưởng & Hướng Phát Triển Tiếp Theo (Roadmap)
 - [ ] **Giá Vàng & Nhiên Liệu:**
   - Tích hợp thêm tab xem Giá Vàng (SJC, PNJ, Vàng 9999) và Giá Xăng Dầu (RON 95, E5, Dầu DO) nếu tìm thấy nguồn API hoặc RSS feed mở ổn định.
 - [ ] **Âm Thanh Tương Tác (Haptic & Cyber SFX):**
@@ -124,3 +146,4 @@ thangit.com/
   - Xem kết quả xổ số Miền Bắc, Miền Trung, Miền Nam theo ngày.
 - [ ] **Thêm Widget Đếm Ngược Sự Kiện (Event Countdown):**
   - Đếm ngược đến Tết Nguyên Đán, World Cup, các ngày lễ lớn.
+
