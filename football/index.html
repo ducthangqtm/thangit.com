@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lịch & Tỉ Số Bóng Đá Trực Tiếp — Thắng IT</title>
+  <meta name="description" content="Xem lịch thi đấu, kết quả và tỉ số bóng đá trực tiếp theo giờ Việt Nam (GMT+7) cho 5 giải đấu hàng đầu: Ngoại Hạng Anh (EPL), Cúp C1 (UCL), La Liga, Serie A, Bundesliga qua ESPN API.">
+  <meta name="keywords" content="ti so bong da, lich thi dau bong da hom nay, ket qua epl cup c1 la liga, xem ti so truc tiep, thang it football">
+  <meta name="author" content="Nguyễn Đức Thắng">
+  <link rel="canonical" href="https://thangit.com/football/">
+
+  <meta property="og:title" content="Lịch & Tỉ Số Bóng Đá Trực Tiếp — Thắng IT">
+  <meta property="og:description" content="Lịch thi đấu & tỉ số bóng đá trực tiếp 5 giải đấu lớn nhất Châu Âu theo giờ Việt Nam.">
+  <meta property="og:image" content="https://thangit.com/assets/images/apple-touch-icon.png">
+  <meta property="og:url" content="https://thangit.com/football/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css?v=20260905_4">
+</head>
+<body>
+  <div id="pwa-pull-indicator" class="pwa-pull-indicator" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <polyline points="1 20 1 14 7 14"></polyline>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+    </svg>
+  </div>
+
+  <header class="header-nav">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Về Trang chủ">
+        <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="TiT Logo">
+          <defs>
+            <linearGradient id="tit-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0b1320"/>
+              <stop offset="100%" stop-color="#04070d"/>
+            </linearGradient>
+            <linearGradient id="tit-neon" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="50%" stop-color="#7000ff"/>
+              <stop offset="100%" stop-color="#ff007b"/>
+            </linearGradient>
+          </defs>
+          <rect x="1.5" y="1.5" width="41" height="41" rx="10" fill="url(#tit-bg)" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1.5"/>
+          <g>
+            <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="22" cy="23.5" r="1.2" fill="#ffffff"/>
+            <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <circle cx="22" cy="12" r="2.3" fill="#00f0ff"/>
+        </svg>
+        <span class="brand-name">THANG<span>IT</span>.COM</span>
+      </a>
+
+      <div class="topbar-actions">
+        <a href="/" class="ios-back-btn" title="Quay lại Trang chủ">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Trang chủ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-hub">
+    <div class="container hub-center-wrapper">
+      <div class="ios-app-view-container active" style="display:block;">
+        <nav class="ios-app-navbar">
+          <a href="/" class="ios-back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <span>Trang chủ</span>
+          </a>
+          <div class="ios-nav-center">
+            <span class="ios-nav-icon">⚽</span>
+            <span>Bóng Đá Trực Tiếp</span>
+          </div>
+          <div class="ios-nav-right"></div>
+        </nav>
+
+        <div class="ios-app-screen active">
+          <div style="max-width:600px; margin:0 auto 1.5rem auto;">
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem;">
+              <button class="subnet-preset-btn active" data-league="eng.1">Ngoại Hạng Anh</button>
+              <button class="subnet-preset-btn" data-league="uefa.champions">Cúp C1 (UCL)</button>
+              <button class="subnet-preset-btn" data-league="esp.1">La Liga</button>
+              <button class="subnet-preset-btn" data-league="ita.1">Serie A</button>
+              <button class="subnet-preset-btn" data-league="ger.1">Bundesliga</button>
+            </div>
+
+            <div id="football-matches-list" style="display:flex; flex-direction:column; gap:0.75rem;">
+              <div style="text-align:center; padding:2rem; color:var(--text-dim);">Đang tải dữ liệu lịch đấu...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong> • 100% Static Web trên Cloudflare Pages
+    </div>
+  </footer>
+
+  <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
+  <script src="/js/core.js?v=20260905_4"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const leagueBtns = document.querySelectorAll('[data-league]');
+      const container = document.getElementById('football-matches-list');
+
+      let currentLeague = 'eng.1';
+
+      async function fetchFootball(league) {
+        container.innerHTML = '<div style="text-align:center; padding:2rem; color:var(--text-dim);">Đang tải lịch thi đấu ESPN...</div>';
+
+        try {
+          const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${league}/scoreboard`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error();
+          const data = await res.json();
+          const events = data.events || [];
+
+          if (events.length === 0) {
+            container.innerHTML = '<div style="text-align:center; padding:2rem; color:var(--text-muted);">Không có trận đấu nào hôm nay trong giải này.</div>';
+            return;
+          }
+
+          container.innerHTML = events.slice(0, 10).map(ev => {
+            const comp = ev.competitions && ev.competitions[0];
+            if (!comp) return '';
+
+            const home = comp.competitors.find(c => c.homeAway === 'home') || comp.competitors[0];
+            const away = comp.competitors.find(c => c.homeAway === 'away') || comp.competitors[1];
+            const status = comp.status;
+            const state = status.type.state;
+
+            let centerHtml = '';
+            if (state === 'in') {
+              centerHtml = `
+                <div style="font-family:var(--font-mono); font-size:1.3rem; font-weight:800; color:var(--neon-cyan);">${home.score || 0} - ${away.score || 0}</div>
+                <span class="badge-pill" style="color:var(--neon-green); border-color:var(--neon-green); font-size:0.65rem;">● LIVE ${status.displayClock || ''}</span>
+              `;
+            } else if (state === 'post') {
+              centerHtml = `
+                <div style="font-family:var(--font-mono); font-size:1.3rem; font-weight:800; color:var(--text-title);">${home.score || 0} - ${away.score || 0}</div>
+                <span class="badge-pill" style="font-size:0.65rem; color:var(--text-dim);">FT (Hết giờ)</span>
+              `;
+            } else {
+              const matchDate = new Date(comp.date);
+              const timeStr = matchDate.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Ho_Chi_Minh' });
+              const dateStr = matchDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', timeZone: 'Asia/Ho_Chi_Minh' });
+              centerHtml = `
+                <div style="font-family:var(--font-mono); font-size:1.1rem; font-weight:800; color:var(--neon-green);">${timeStr}</div>
+                <span style="font-size:0.75rem; color:var(--text-dim);">${dateStr}</span>
+              `;
+            }
+
+            const homeLogo = home.team.logo || '/favicon.svg';
+            const awayLogo = away.team.logo || '/favicon.svg';
+
+            return `
+              <div class="port-item-card" style="align-items:center; justify-content:space-between; padding:0.85rem 1rem;">
+                <div style="display:flex; align-items:center; gap:0.6rem; flex:1;">
+                  <img src="${homeLogo}" alt="${home.team.displayName}" style="width:28px; height:28px; object-fit:contain;" onerror="this.style.opacity=0.3;">
+                  <strong style="font-size:0.85rem; color:var(--text-title);">${home.team.shortDisplayName || home.team.displayName}</strong>
+                </div>
+                <div style="text-align:center; min-width:90px;">
+                  ${centerHtml}
+                </div>
+                <div style="display:flex; align-items:center; gap:0.6rem; flex:1; justify-content:flex-end;">
+                  <strong style="font-size:0.85rem; color:var(--text-title); text-align:right;">${away.team.shortDisplayName || away.team.displayName}</strong>
+                  <img src="${awayLogo}" alt="${away.team.displayName}" style="width:28px; height:28px; object-fit:contain;" onerror="this.style.opacity=0.3;">
+                </div>
+              </div>
+            `;
+          }).join('');
+        } catch {
+          container.innerHTML = '<div style="text-align:center; padding:2rem; color:var(--text-dim);">Không thể tải dữ liệu bóng đá ESPN. Vui lòng thử lại sau!</div>';
+        }
+      }
+
+      leagueBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          leagueBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentLeague = btn.getAttribute('data-league');
+          fetchFootball(currentLeague);
+        });
+      });
+
+      fetchFootball(currentLeague);
+    });
+  </script>
+</body>
+</html>

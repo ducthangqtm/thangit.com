@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tra Cứu DNS Lookup DoH (Cloudflare 1.1.1.1) — Thắng IT</title>
+  <meta name="description" content="Tra cứu bản ghi DNS trực tuyến bảo mật qua giao thức DNS-over-HTTPS của Cloudflare (1.1.1.1). Hỗ trợ tra cứu bản ghi A, AAAA, CNAME, MX, TXT, NS, SOA.">
+  <meta name="keywords" content="dns lookup, tra cuu dns, cloudflare doh, ban ghi dns, mx record, txt spf, thang it">
+  <meta name="author" content="Nguyễn Đức Thắng">
+  <link rel="canonical" href="https://thangit.com/dns/">
+
+  <meta property="og:title" content="Tra Cứu DNS Lookup DoH (Cloudflare 1.1.1.1) — Thắng IT">
+  <meta property="og:description" content="Tra cứu bản ghi DNS trực tuyến bảo mật qua Cloudflare 1.1.1.1 DoH, không cần server trung gian.">
+  <meta property="og:image" content="https://thangit.com/assets/images/apple-touch-icon.png">
+  <meta property="og:url" content="https://thangit.com/dns/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css?v=20260905_4">
+</head>
+<body>
+  <div id="pwa-pull-indicator" class="pwa-pull-indicator" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <polyline points="1 20 1 14 7 14"></polyline>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+    </svg>
+  </div>
+
+  <header class="header-nav">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Về Trang chủ">
+        <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="TiT Logo">
+          <defs>
+            <linearGradient id="tit-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0b1320"/>
+              <stop offset="100%" stop-color="#04070d"/>
+            </linearGradient>
+            <linearGradient id="tit-neon" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="50%" stop-color="#7000ff"/>
+              <stop offset="100%" stop-color="#ff007b"/>
+            </linearGradient>
+          </defs>
+          <rect x="1.5" y="1.5" width="41" height="41" rx="10" fill="url(#tit-bg)" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1.5"/>
+          <g>
+            <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="22" cy="23.5" r="1.2" fill="#ffffff"/>
+            <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <circle cx="22" cy="12" r="2.3" fill="#00f0ff"/>
+        </svg>
+        <span class="brand-name">THANG<span>IT</span>.COM</span>
+      </a>
+
+      <div class="topbar-actions">
+        <a href="/" class="ios-back-btn" title="Quay lại Trang chủ">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Trang chủ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-hub">
+    <div class="container hub-center-wrapper">
+      <div class="ios-app-view-container active" style="display:block;">
+        <nav class="ios-app-navbar">
+          <a href="/" class="ios-back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <span>Trang chủ</span>
+          </a>
+          <div class="ios-nav-center">
+            <span class="ios-nav-icon">🌐</span>
+            <span>DNS Lookup (Cloudflare DoH)</span>
+          </div>
+          <div class="ios-nav-right"></div>
+        </nav>
+
+        <div class="ios-app-screen active">
+          <div class="subnet-control-card">
+            <div class="dns-input-box">
+              <input type="text" id="dns-domain-input" class="input-compact" style="flex:1;" value="thangit.com" placeholder="Nhập tên miền (vd: thangit.com, google.com)">
+              <button class="btn-calc" id="btn-dns-lookup">🔍 Tra Cứu DNS</button>
+            </div>
+            <div class="dns-type-selector">
+              <button class="dns-type-btn active" data-dns-type="A">A (IPv4)</button>
+              <button class="dns-type-btn" data-dns-type="AAAA">AAAA (IPv6)</button>
+              <button class="dns-type-btn" data-dns-type="CNAME">CNAME</button>
+              <button class="dns-type-btn" data-dns-type="MX">MX (Mail)</button>
+              <button class="dns-type-btn" data-dns-type="TXT">TXT / SPF</button>
+              <button class="dns-type-btn" data-dns-type="NS">NS (NameServer)</button>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-dim); margin-top:0.4rem;">
+              🚀 Truy vấn bảo mật thời gian thực qua <strong>Cloudflare 1.1.1.1 DNS over HTTPS (DoH)</strong>.
+            </div>
+          </div>
+
+          <div class="dns-table-wrap">
+            <table class="dns-results-table">
+              <thead>
+                <tr>
+                  <th>Tên Miền</th>
+                  <th>Loại</th>
+                  <th>TTL</th>
+                  <th>Dữ Liệu Bản Ghi (Answer)</th>
+                  <th>Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody id="dns-results-tbody">
+                <tr>
+                  <td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-dim);">
+                    Bấm <strong>Tra Cứu DNS</strong> để truy vấn bản ghi trực tiếp.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong> • 100% Static Web trên Cloudflare Pages
+    </div>
+  </footer>
+
+  <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
+  <script src="/js/core.js?v=20260905_4"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const domainInput = document.getElementById('dns-domain-input');
+      const lookupBtn = document.getElementById('btn-dns-lookup');
+      const typeBtns = document.querySelectorAll('.dns-type-btn');
+      const tbody = document.getElementById('dns-results-tbody');
+
+      let currentType = 'A';
+
+      typeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          typeBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentType = btn.getAttribute('data-dns-type');
+          performLookup();
+        });
+      });
+
+      async function performLookup() {
+        if (!domainInput || !tbody) return;
+        let domain = domainInput.value.trim();
+        if (!domain) domain = 'thangit.com';
+        domain = domain.replace(/^https?:\/\//i, '').replace(/\/.*$/, '');
+
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--neon-cyan);">Đang truy vấn Cloudflare 1.1.1.1 DoH cho <strong>${domain}</strong> (${currentType})...</td></tr>`;
+
+        try {
+          const url = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${currentType}`;
+          const res = await fetch(url, {
+            headers: { 'Accept': 'application/dns-json' }
+          });
+          const data = await res.json();
+
+          if (!data.Answer || data.Answer.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-dim);">Không tìm thấy bản ghi <strong>${currentType}</strong> cho tên miền này (Status: ${data.Status || 0}).</td></tr>`;
+            return;
+          }
+
+          const typeMap = { 1: 'A', 28: 'AAAA', 5: 'CNAME', 15: 'MX', 16: 'TXT', 2: 'NS', 6: 'SOA' };
+
+          tbody.innerHTML = data.Answer.map(ans => {
+            const typeName = typeMap[ans.type] || ans.type;
+            const cleanData = (ans.data || '').replace(/"/g, '');
+            return `
+              <tr>
+                <td style="color:var(--text-title); font-weight:600;">${ans.name}</td>
+                <td><span class="badge-pill" style="background:rgba(0,255,157,0.12); color:var(--neon-green); font-size:0.7rem;">${typeName}</span></td>
+                <td style="color:var(--text-dim);">${ans.TTL}s</td>
+                <td style="color:var(--neon-cyan); word-break:break-all;"><strong>${cleanData}</strong></td>
+                <td><button class="btn-calc" style="padding:0.25rem 0.55rem; font-size:0.7rem;" onclick="navigator.clipboard.writeText('${cleanData}'); showToast('📋 Đã sao chép bản ghi!');">Copy</button></td>
+              </tr>
+            `;
+          }).join('');
+        } catch (err) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:#ff4757;">Lỗi truy vấn DNS: ${err.message}. Kiểm tra kết nối mạng!</td></tr>`;
+        }
+      }
+
+      if (lookupBtn) lookupBtn.addEventListener('click', (e) => { e.preventDefault(); performLookup(); });
+      if (domainInput) domainInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); performLookup(); } });
+
+      performLookup();
+    });
+  </script>
+</body>
+</html>

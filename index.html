@@ -232,16 +232,16 @@
         <div class="action-bar-divider"></div>
 
         <!-- Live Visitor IP Badge -->
-        <div class="visitor-edge-badge-compact" data-app="app-telemetry" role="button" tabindex="0" title="Bấm để mở NOC Telemetry & Ping">
+        <a href="/telemetry/" class="visitor-edge-badge-compact" style="text-decoration:none;" title="Bấm để mở NOC Telemetry & Ping">
           <span class="edge-live-dot"></span>
           <strong class="edge-ip-value" id="home-visitor-ip">Đang phân tích...</strong>
           <span class="edge-sep">•</span>
           <span class="edge-node-value" id="home-visitor-node">HAN Edge</span>
           <button class="btn-quick-copy" id="btn-copy-home-ip" title="Sao chép IP nhanh">📋 Copy</button>
-        </div>
+        </a>
       </div>
 
-      <!-- iOS Springboard App Launcher (Zero Popup • Native App Grid) -->
+      <!-- iOS Springboard App Launcher (Multi-Page Navigation Grid) -->
       <section id="springboard-view" class="ios-springboard">
         <!-- Category 1: IT & Network Tools -->
         <div class="ios-section-header">
@@ -255,58 +255,58 @@
 
         <div class="ios-app-grid">
           <!-- App 1: Subnet CIDR -->
-          <button class="ios-app-item" data-app="app-subnet" aria-label="Mở Subnet & CIDR Calculator">
+          <a href="/subnet/" class="ios-app-item" aria-label="Mở Subnet & CIDR Calculator">
             <div class="ios-app-icon icon-grad-subnet">🧮</div>
             <span class="ios-app-label">Subnet CIDR</span>
-          </button>
+          </a>
 
           <!-- App 2: DNS Lookup DoH -->
-          <button class="ios-app-item" data-app="app-dns" aria-label="Mở DNS Lookup DoH">
+          <a href="/dns/" class="ios-app-item" aria-label="Mở DNS Lookup DoH">
             <div class="ios-app-icon icon-grad-dns">🌐</div>
             <span class="ios-app-label">DNS Lookup</span>
-          </button>
+          </a>
 
           <!-- App 3: Wi-Fi QR -->
-          <button class="ios-app-item" data-app="app-wifi-qr" aria-label="Mở Wi-Fi QR 1-Chạm">
+          <a href="/wifi-qr/" class="ios-app-item" aria-label="Mở Wi-Fi QR 1-Chạm">
             <div class="ios-app-icon icon-grad-wifi">📶</div>
             <span class="ios-app-label">Wi-Fi QR</span>
-          </button>
+          </a>
 
           <!-- App 4: Port Lookup -->
-          <button class="ios-app-item" data-app="app-ports" aria-label="Mở Tra Cứu Cổng Mạng">
+          <a href="/ports/" class="ios-app-item" aria-label="Mở Tra Cứu Cổng Mạng">
             <div class="ios-app-icon icon-grad-ports">🔌</div>
             <span class="ios-app-label">Tra Cứu Port</span>
-          </button>
+          </a>
 
           <!-- App 5: Key & Password Generator -->
-          <button class="ios-app-item" data-app="app-password" aria-label="Mở Sinh Mật Khẩu IT">
+          <a href="/password/" class="ios-app-item" aria-label="Mở Sinh Mật Khẩu IT">
             <div class="ios-app-icon icon-grad-password">🔐</div>
             <span class="ios-app-label">Mật Khẩu IT</span>
-          </button>
+          </a>
 
           <!-- App 6: Live NOC Telemetry & Ping -->
-          <button class="ios-app-item" data-app="app-telemetry" aria-label="Mở Giám Sát Ping & Edge IP">
+          <a href="/telemetry/" class="ios-app-item" aria-label="Mở Giám Sát Ping & Edge IP">
             <div class="ios-app-icon icon-grad-telemetry">⚡</div>
             <span class="ios-app-label">NOC Ping</span>
-          </button>
+          </a>
 
           <!-- App 7: Terminal CLI -->
-          <button class="ios-app-item" data-app="app-terminal" aria-label="Mở NOC Terminal zsh">
+          <a href="/terminal/" class="ios-app-item" aria-label="Mở NOC Terminal zsh">
             <div class="ios-app-icon icon-grad-terminal">⌨️</div>
             <span class="ios-app-label">Terminal CLI</span>
-          </button>
+          </a>
 
           <!-- App 8: 10 Năm Quản Trị CV -->
-          <button class="ios-app-item" data-app="app-career" aria-label="Mở Hồ Sơ Năng Lực 10 Năm">
+          <a href="/cv/" class="ios-app-item" aria-label="Mở Hồ Sơ Năng Lực 10 Năm">
             <div class="ios-app-icon icon-grad-career">💼</div>
             <span class="ios-app-label">Hồ Sơ CV</span>
-          </button>
+          </a>
 
           <!-- App 9: Dự Án Tiêu Biểu -->
-          <button class="ios-app-item" data-app="app-projects" aria-label="Mở Danh Sách Dự Án">
+          <a href="/projects/" class="ios-app-item" aria-label="Mở Danh Sách Dự Án">
             <div class="ios-app-icon icon-grad-projects">🚀</div>
             <span class="ios-app-label">Dự Án Số</span>
-          </button>
+          </a>
         </div>
 
         <!-- Category 2: Daily Pocket Tools -->
@@ -321,52 +321,52 @@
 
         <div class="ios-app-grid">
           <!-- App 10: VietQR Studio -->
-          <button class="ios-app-item" data-app="app-vietqr" aria-label="Mở VietQR Bank Studio">
+          <a href="/vietqr/" class="ios-app-item" aria-label="Mở VietQR Bank Studio">
             <div class="ios-app-icon icon-grad-vietqr">🏦</div>
             <span class="ios-app-label">VietQR Bank</span>
-          </button>
+          </a>
 
           <!-- App 11: Máy Tính Cyber -->
-          <button class="ios-app-item" data-app="app-calc" aria-label="Mở Máy Tính Cyber">
+          <a href="/calc/" class="ios-app-item" aria-label="Mở Máy Tính Cyber">
             <div class="ios-app-icon icon-grad-calc">🧮</div>
             <span class="ios-app-label">Máy Tính</span>
-          </button>
+          </a>
 
           <!-- App 12: Lịch Âm Vạn Niên -->
-          <button class="ios-app-item" data-app="app-lunar" aria-label="Mở Lịch Âm Vạn Niên">
+          <a href="/lunar/" class="ios-app-item" aria-label="Mở Lịch Âm Vạn Niên">
             <div class="ios-app-icon icon-grad-lunar">📅</div>
             <span class="ios-app-label">Lịch Âm</span>
-          </button>
+          </a>
 
           <!-- App 13: Thời Tiết -->
-          <button class="ios-app-item" data-app="app-weather" aria-label="Mở Thời Tiết Trực Tiếp">
+          <a href="/weather/" class="ios-app-item" aria-label="Mở Thời Tiết Trực Tiếp">
             <div class="ios-app-icon icon-grad-weather">🌤️</div>
             <span class="ios-app-label">Thời Tiết</span>
-          </button>
+          </a>
 
           <!-- App 14: Đổi Đơn Vị & Tỷ Giá -->
-          <button class="ios-app-item" data-app="app-converter" aria-label="Mở Đổi Đơn Vị & Ngoại Tệ">
+          <a href="/converter/" class="ios-app-item" aria-label="Mở Đổi Đơn Vị & Ngoại Tệ">
             <div class="ios-app-icon icon-grad-converter">⚖️</div>
             <span class="ios-app-label">Đổi Đơn Vị</span>
-          </button>
+          </a>
 
           <!-- App 15: Giờ Quốc Tế -->
-          <button class="ios-app-item" data-app="app-world" aria-label="Mở Giờ Quốc Tế">
+          <a href="/world/" class="ios-app-item" aria-label="Mở Giờ Quốc Tế">
             <div class="ios-app-icon icon-grad-world">🌍</div>
             <span class="ios-app-label">Giờ Quốc Tế</span>
-          </button>
+          </a>
 
           <!-- App 16: Giá Coin Binance -->
-          <button class="ios-app-item" data-app="app-crypto" aria-label="Mở Bảng Giá Coin">
+          <a href="/crypto/" class="ios-app-item" aria-label="Mở Bảng Giá Coin">
             <div class="ios-app-icon icon-grad-crypto">🪙</div>
             <span class="ios-app-label">Giá Coin</span>
-          </button>
+          </a>
 
           <!-- App 17: Bóng Đá Trực Tiếp -->
-          <button class="ios-app-item" data-app="app-football" aria-label="Mở Lịch & Tỉ Số Bóng Đá">
+          <a href="/football/" class="ios-app-item" aria-label="Mở Lịch & Tỉ Số Bóng Đá">
             <div class="ios-app-icon icon-grad-football">⚽</div>
             <span class="ios-app-label">Bóng Đá</span>
-          </button>
+          </a>
         </div>
       </section>
 
@@ -377,635 +377,6 @@
         <div class="metric-chip"><strong>500+</strong> Nodes Quản Trị</div>
         <div class="metric-chip"><strong>99.9%</strong> Uptime 24/7</div>
       </div>
-      </div>
-
-      <!-- iOS Full-Width App View Container (In-Page, Zero Popup) -->
-      <section id="ios-app-container" class="ios-app-view-container">
-        <!-- Sticky iOS Navbar -->
-        <nav class="ios-app-navbar">
-          <button id="ios-back-btn" class="ios-back-btn" aria-label="Quay lại Màn hình chính">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-            <span>Trang chủ</span>
-          </button>
-          <div class="ios-nav-center">
-            <span id="ios-nav-icon" class="ios-nav-icon">⚡</span>
-            <span id="ios-nav-title">Ứng Dụng</span>
-          </div>
-          <div class="ios-nav-right">
-            <button id="ios-nav-action-btn" class="ios-nav-action-btn" style="display:none;">Làm mới</button>
-          </div>
-        </nav>
-
-        <!-- SCREEN 1: SUBNET & CIDR CALCULATOR -->
-        <div class="ios-app-screen" id="screen-app-subnet">
-          <div class="subnet-control-card">
-            <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;">
-              <input type="text" id="calc-ip" class="input-compact" style="flex:2; min-width:140px;" value="192.168.1.1" placeholder="Địa chỉ IPv4 (vd: 192.168.1.1)">
-              <button class="btn-calc" id="btn-calculate-subnet">⚡ Tính Toán</button>
-            </div>
-            <div class="subnet-slider-row">
-              <label for="calc-cidr-slider" style="font-size:0.75rem; color:var(--text-dim); font-family:var(--font-mono);">PREFIX / CIDR:</label>
-              <input type="range" id="calc-cidr-slider" min="1" max="32" value="24">
-              <span class="subnet-cidr-badge" id="calc-cidr-val">/24</span>
-            </div>
-            <div class="subnet-pills-row">
-              <button class="subnet-preset-btn active" data-cidr="24">/24 (254)</button>
-              <button class="subnet-preset-btn" data-cidr="25">/25 (126)</button>
-              <button class="subnet-preset-btn" data-cidr="26">/26 (62)</button>
-              <button class="subnet-preset-btn" data-cidr="27">/27 (30)</button>
-              <button class="subnet-preset-btn" data-cidr="28">/28 (14)</button>
-              <button class="subnet-preset-btn" data-cidr="29">/29 (6)</button>
-              <button class="subnet-preset-btn" data-cidr="30">/30 (P2P)</button>
-              <button class="subnet-preset-btn" data-cidr="16">/16 (65K)</button>
-              <button class="subnet-preset-btn" data-cidr="8">/8 (16M)</button>
-            </div>
-          </div>
-
-          <div class="subnet-result-hero">
-            <div class="subnet-card-mini">
-              <span class="label">Network ID</span>
-              <span class="value highlight" id="res-network">192.168.1.0/24</span>
-            </div>
-            <div class="subnet-card-mini">
-              <span class="label">Broadcast Address</span>
-              <span class="value highlight" id="res-broadcast">192.168.1.255</span>
-            </div>
-            <div class="subnet-card-mini">
-              <span class="label">Dải IP Khả Dụng</span>
-              <span class="value green" id="res-range">192.168.1.1 — 192.168.1.254</span>
-            </div>
-            <div class="subnet-card-mini">
-              <span class="label">Subnet Mask</span>
-              <span class="value" id="res-mask">255.255.255.0</span>
-            </div>
-            <div class="subnet-card-mini">
-              <span class="label">Wildcard Mask</span>
-              <span class="value" id="res-wildcard">0.0.0.255</span>
-            </div>
-            <div class="subnet-card-mini">
-              <span class="label">Số Host Khả Dụng</span>
-              <span class="value green" id="res-hosts">254 Khả Dụng (256 Tổng)</span>
-            </div>
-            <div class="subnet-card-mini">
-              <span class="label">Lớp Mạng & Phân Loại</span>
-              <span class="value" id="res-class">Lớp C • Private (RFC 1918)</span>
-            </div>
-            <div class="subnet-card-mini">
-              <span class="label">Netmask Dạng Nhị Phân</span>
-              <span class="value" id="res-binary" style="font-size:0.75rem;">11111111.11111111.11111111.00000000</span>
-            </div>
-          </div>
-
-          <div style="display:flex; justify-content:flex-end;">
-            <button class="btn-calc" id="btn-copy-subnet-report">📋 Sao Chép Báo Cáo Subnet</button>
-          </div>
-        </div>
-
-        <!-- SCREEN 2: DNS LOOKUP (CLOUDFLARE DOH) -->
-        <div class="ios-app-screen" id="screen-app-dns">
-          <div class="subnet-control-card">
-            <div class="dns-input-box">
-              <input type="text" id="dns-domain-input" class="input-compact" style="flex:1;" value="thangit.com" placeholder="Nhập tên miền (vd: thangit.com, google.com)">
-              <button class="btn-calc" id="btn-dns-lookup">🔍 Tra Cứu DNS</button>
-            </div>
-            <div class="dns-type-selector">
-              <button class="dns-type-btn active" data-dns-type="A">A (IPv4)</button>
-              <button class="dns-type-btn" data-dns-type="AAAA">AAAA (IPv6)</button>
-              <button class="dns-type-btn" data-dns-type="CNAME">CNAME</button>
-              <button class="dns-type-btn" data-dns-type="MX">MX (Mail)</button>
-              <button class="dns-type-btn" data-dns-type="TXT">TXT / SPF</button>
-              <button class="dns-type-btn" data-dns-type="NS">NS (NameServer)</button>
-            </div>
-            <div style="font-size:0.72rem; color:var(--text-dim);">
-              🚀 Truy vấn bảo mật thời gian thực qua <strong>Cloudflare 1.1.1.1 DNS over HTTPS (DoH)</strong>.
-            </div>
-          </div>
-
-          <div id="dns-results-box" style="overflow-x:auto;">
-            <table class="dns-results-table">
-              <thead>
-                <tr>
-                  <th>Tên Miền (Name)</th>
-                  <th>Loại (Type)</th>
-                  <th>TTL</th>
-                  <th>Dữ Liệu Bản Ghi (Record Data / IP)</th>
-                  <th>Thao Tác</th>
-                </tr>
-              </thead>
-              <tbody id="dns-results-tbody">
-                <tr>
-                  <td colspan="5" style="text-align:center; color:var(--text-dim); padding:1.5rem;">Nhấn "Tra Cứu DNS" để bắt đầu truy vấn bản ghi...</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- SCREEN 3: WI-FI QR STUDIO -->
-        <div class="ios-app-screen" id="screen-app-wifi-qr">
-          <div class="qr-studio-layout">
-            <div class="qr-form-group">
-              <div style="margin-bottom:0.65rem;">
-                <label style="font-size:0.75rem; color:var(--text-dim);">TÊN MẠNG WI-FI (SSID)</label>
-                <input type="text" id="wifi-qr-ssid" class="input-compact" value="THANGIT_5G" placeholder="Tên mạng Wi-Fi">
-              </div>
-              <div style="margin-bottom:0.65rem;">
-                <label style="font-size:0.75rem; color:var(--text-dim);">MẬT KHẨU WI-FI</label>
-                <input type="text" id="wifi-qr-pass" class="input-compact" value="ThangIT@2026" placeholder="Mật khẩu (để trống nếu không có)">
-              </div>
-              <div style="margin-bottom:0.65rem;">
-                <label style="font-size:0.75rem; color:var(--text-dim);">LOẠI BẢO MẬT</label>
-                <select id="wifi-qr-type" class="input-compact">
-                  <option value="WPA" selected>WPA / WPA2 / WPA3 (Mặc định)</option>
-                  <option value="WEP">WEP (Mạng cũ)</option>
-                  <option value="nopass">Không mật khẩu (Mạng mở)</option>
-                </select>
-              </div>
-              <div style="margin-bottom:1rem; display:flex; align-items:center; gap:0.4rem;">
-                <input type="checkbox" id="wifi-qr-hidden">
-                <label for="wifi-qr-hidden" style="font-size:0.78rem; color:var(--text-body); cursor:pointer;">Mạng Wi-Fi ẩn (Hidden SSID)</label>
-              </div>
-              <div style="display:flex; gap:0.5rem;">
-                <button class="btn-calc" id="btn-gen-wifi-qr" style="flex:1;">⚡ Tạo Mã QR Wi-Fi</button>
-              </div>
-            </div>
-            <div class="qr-preview-box">
-              <canvas id="wifi-qr-canvas" class="qr-display-canvas"></canvas>
-              <div class="qr-action-buttons">
-                <button class="btn-calc" id="btn-download-wifi-qr">📥 Tải Ảnh PNG</button>
-                <button class="btn-calc" id="btn-copy-wifi-str" style="background:rgba(255,255,255,0.06); border-color:var(--border-subtle);">📋 Sao Chép Cấu Hình</button>
-              </div>
-              <div style="font-size:0.7rem; color:var(--text-dim); text-align:center;">Khách quét camera điện thoại là tự động kết nối Wi-Fi ngay.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 4: PORT & PROTOCOL CHEAT SHEET -->
-        <div class="ios-app-screen" id="screen-app-ports">
-          <div class="port-search-bar">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="port-search-input" placeholder="Tìm kiếm nhanh port (vd: 80, 443, 22, SSH, Mikrotik, RDP, DNS...)" autocomplete="off">
-          </div>
-          <div class="port-category-pills">
-            <button class="port-cat-btn active" data-port-cat="all">Tất Cả</button>
-            <button class="port-cat-btn" data-port-cat="web">Web & Proxy</button>
-            <button class="port-cat-btn" data-port-cat="admin">SSH & Quản Trị</button>
-            <button class="port-cat-btn" data-port-cat="core">Core & Routing</button>
-            <button class="port-cat-btn" data-port-cat="vpn">VPN & Security</button>
-            <button class="port-cat-btn" data-port-cat="db">Cơ Sở Dữ Liệu</button>
-            <button class="port-cat-btn" data-port-cat="mail">Mail & Thoại (SIP)</button>
-          </div>
-          <div class="port-list-container" id="port-list-grid">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-
-        <!-- SCREEN 5: PASSWORD & KEY GENERATOR -->
-        <div class="ios-app-screen" id="screen-app-password">
-          <div class="keygen-box">
-            <span class="keygen-val" id="pwd-result-app">Đang tạo mật khẩu an toàn...</span>
-            <button class="btn-calc" id="btn-copy-pwd-app">📋 Copy Mật Khẩu</button>
-          </div>
-          <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin:1rem 0;">
-            <button class="modal-tab-btn" id="preset-wifi-app">Khóa Wi-Fi WPA2</button>
-            <button class="modal-tab-btn" id="preset-secret-app">Cisco Secret</button>
-            <button class="modal-tab-btn" id="preset-hex-app">128-bit Token Hex</button>
-            <button class="btn-calc" id="btn-gen-pwd-app">🔄 Tạo Mới Ngẫu Nhiên</button>
-          </div>
-          <div class="subnet-slider-row" style="margin-top:1.25rem;">
-            <label for="pwd-len-slider" style="font-size:0.75rem; color:var(--text-dim); font-family:var(--font-mono);">ĐỘ DÀI KÝ TỰ:</label>
-            <input type="range" id="pwd-len-slider" min="12" max="48" value="20">
-            <span class="subnet-cidr-badge" id="pwd-len-badge">20</span>
-          </div>
-        </div>
-
-        <!-- SCREEN 6: NOC TELEMETRY & LATENCY PING -->
-        <div class="ios-app-screen" id="screen-app-telemetry">
-          <div class="keygen-box" style="margin-bottom:1rem;">
-            <div>
-              <div style="font-size:0.72rem; color:var(--text-dim); font-family:var(--font-mono);">PUBLIC IP CỦA BẠN</div>
-              <div class="keygen-val" id="telemetry-ip" style="font-size:1.3rem;">Đang phân tích...</div>
-            </div>
-            <button class="btn-calc" id="btn-copy-telemetry-ip">📋 Copy IP</button>
-          </div>
-          <div class="subnet-output-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom:1.25rem;">
-            <div class="sub-cell">
-              <span class="sub-cell-label">Cloudflare POP Node</span>
-              <span class="sub-cell-val" id="telemetry-colo">HAN (Hanoi Edge)</span>
-            </div>
-            <div class="sub-cell">
-              <span class="sub-cell-label">Giao Thức Mạng</span>
-              <span class="sub-cell-val" id="telemetry-proto">HTTP/3 (QUIC)</span>
-            </div>
-            <div class="sub-cell">
-              <span class="sub-cell-label">Mã Hóa Đường Truyền</span>
-              <span class="sub-cell-val" id="telemetry-tls">TLS 1.3 256-bit</span>
-            </div>
-            <div class="sub-cell">
-              <span class="sub-cell-label">Trình Duyệt & Thiết Bị</span>
-              <span class="sub-cell-val" id="telemetry-ua" style="font-size:0.75rem;">Webkit Browser</span>
-            </div>
-          </div>
-          <div style="font-weight:700; font-size:0.85rem; color:var(--text-title); margin-bottom:0.5rem;">⚡ ĐO ĐỘ TRỄ REAL-TIME (LATENCY PING)</div>
-          <div class="subnet-output-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="sub-cell">
-              <span class="sub-cell-label">Cloudflare (1.1.1.1)</span>
-              <span class="sub-cell-val" id="ping-cf-val" style="color:var(--neon-cyan)">...</span>
-            </div>
-            <div class="sub-cell">
-              <span class="sub-cell-label">Google DNS (8.8.8.8)</span>
-              <span class="sub-cell-val" id="ping-google-val" style="color:var(--neon-cyan)">...</span>
-            </div>
-            <div class="sub-cell">
-              <span class="sub-cell-label">AWS Edge (Amazon)</span>
-              <span class="sub-cell-val" id="ping-aws-val" style="color:var(--neon-cyan)">...</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 7: NOC TERMINAL ZSH -->
-        <div class="ios-app-screen" id="screen-app-terminal">
-          <div class="terminal-body" id="app-terminal-output" style="min-height:280px; max-height:420px; overflow-y:auto;">
-            <div style="color:var(--neon-cyan);">
-              THANGIT.COM — NOC CLI v2.5 (Online)<br>
-              Gõ <strong style="color:var(--neon-green)">'help'</strong> để xem danh sách lệnh hoặc <strong style="color:var(--neon-green)">'exp'</strong> xem kinh nghiệm.
-            </div>
-          </div>
-          <div class="term-prompt-row" style="margin-top:0.75rem;">
-            <span class="term-prompt">guest@thangit:~$</span>
-            <input type="text" id="app-term-cmd-input" class="term-input" placeholder="help, about, skills, exp, contact, clear..." autocomplete="off" spellcheck="false">
-          </div>
-        </div>
-
-        <!-- SCREEN 8: CAREER TIMELINE -->
-        <div class="ios-app-screen" id="screen-app-career">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-            <div style="font-weight:700; color:var(--text-title); font-size:1rem;">HỒ SƠ NĂNG LỰC & KINH NGHIỆM</div>
-            <button class="btn-calc" onclick="window.print()">🖨️ Xuất PDF CV</button>
-          </div>
-          <div class="career-timeline">
-            <div class="timeline-item">
-              <div class="timeline-dot current"></div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <div>
-                    <h4 class="company-name">Behn Meyer Việt Nam</h4>
-                    <span class="job-title">IT Lead Bắc Ninh (Phụ trách Hạ tầng & Tự động hóa)</span>
-                  </div>
-                  <span class="timeline-badge current">2025 - Hiện tại</span>
-                </div>
-                <p class="timeline-desc">
-                  Chỉ huy toàn diện hạ tầng IT nhà máy Bắc Ninh: Quy hoạch cụm ảo hóa Proxmox VE High-Availability, mạng lõi Cisco & tường lửa Fortinet. Xây dựng AI/Python pipeline tự động hóa báo cáo và giảm 60% thời gian xử lý sự cố.
-                </p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <div>
-                    <h4 class="company-name">DB Schenker Việt Nam</h4>
-                    <span class="job-title">Senior Network & Systems Administrator</span>
-                  </div>
-                  <span class="timeline-badge">2016 - 2025 (~9 năm)</span>
-                </div>
-                <p class="timeline-desc">
-                  Vận hành hạ tầng CNTT cụm tổng kho Logistics 40.000m² tại KCN VSIP 1, quản trị hơn 500 nodes thiết bị, 150+ camera an ninh và hệ thống Wi-Fi công nghiệp chịu tải cao. Uptime trung bình duy trì 99.9%.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div style="background:rgba(255,255,255,0.02); padding:0.85rem; border-radius:8px; border:1px solid var(--border-subtle); margin-top:1rem;">
-            <div style="font-weight:700; font-size:0.85rem; color:var(--text-title); margin-bottom:0.35rem;">🎓 Đào Tạo & Kỹ Năng Cốt Lõi</div>
-            <div style="font-size:0.8rem; color:var(--text-muted); line-height:1.5;">
-              • Đại Học Điện Lực (CNTT) & Bách Khoa - Aptech (Hệ thống HDSM)<br>
-              • Cisco, Mikrotik RouterOS, Industrial WiFi, VLAN/VPN, Linux Server, Proxmox VE, Docker, Cloudflare, Python Automation.
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 9: FEATURED PROJECTS -->
-        <div class="ios-app-screen" id="screen-app-projects">
-          <div style="display:flex; flex-direction:column; gap:0.75rem;">
-            <a href="https://thangnhayday.com" target="_blank" rel="noopener noreferrer" class="project-modal-item">
-              <div>
-                <h4>thangnhayday.com</h4>
-                <p>Bio Link & Affiliate Hub cho KOC Thể Thao • Đạt 100/100 Google PageSpeed • Chạy trên Cloudflare Pages</p>
-              </div>
-              <span class="project-modal-arrow">↗</span>
-            </a>
-            <a href="https://thangit.com" target="_blank" rel="noopener noreferrer" class="project-modal-item">
-              <div>
-                <h4>thangit.com (TiT Super App)</h4>
-                <p>Trung tâm thông tin cá nhân, NOC Dashboard & Tiện ích PWA không độ trễ trên Cloudflare Pages (0đ/tháng)</p>
-              </div>
-              <span class="project-modal-arrow">↗</span>
-            </a>
-            <div class="project-modal-item" style="cursor:default;">
-              <div>
-                <h4>Homelab & Enterprise Topology</h4>
-                <p>Cụm ảo hóa Proxmox VE, cân bằng tải đa WAN Mikrotik, phân tầng VLAN Cisco bảo mật cao</p>
-              </div>
-              <span class="project-modal-arrow" style="color:var(--text-dim)">⚡</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 10: VIETQR STUDIO -->
-        <div class="ios-app-screen" id="screen-app-vietqr">
-          <div class="qr-studio-layout">
-            <div class="qr-form-group">
-              <div style="margin-bottom:0.5rem;">
-                <label style="font-size:0.75rem; color:var(--text-dim);">NGÂN HÀNG THỤ HƯỞNG</label>
-                <select id="qr-bank-select" class="input-compact">
-                  <option value="mb" selected>MB Bank (Quân Đội)</option>
-                  <option value="vcb">Vietcombank</option>
-                  <option value="tcb">Techcombank</option>
-                  <option value="bidv">BIDV</option>
-                  <option value="vpb">VPBank</option>
-                  <option value="acb">ACB</option>
-                  <option value="tpb">TPBank</option>
-                  <option value="icb">VietinBank</option>
-                  <option value="ocb">OCB</option>
-                  <option value="shb">SHB</option>
-                  <option value="hdb">HDBank</option>
-                  <option value="msb">MSB</option>
-                  <option value="stb">Sacombank</option>
-                  <option value="vab">VietABank</option>
-                  <option value="bab">BacABank</option>
-                  <option value="lpbank">LPBank</option>
-                  <option value="seab">SeABank</option>
-                  <option value="vccb">BVBank</option>
-                  <option value="cake">CAKE by VPBank</option>
-                  <option value="timoplus">Timo</option>
-                </select>
-              </div>
-              <div style="margin-bottom:0.5rem;">
-                <label style="font-size:0.75rem; color:var(--text-dim);">SỐ TÀI KHOẢN</label>
-                <input type="text" id="qr-bank-acc" class="input-compact" value="0986192092" placeholder="Nhập số tài khoản">
-              </div>
-              <div style="margin-bottom:0.5rem;">
-                <label style="font-size:0.75rem; color:var(--text-dim);">SỐ TIỀN (VNĐ - TÙY CHỌN)</label>
-                <input type="number" id="qr-bank-amount" class="input-compact" placeholder="VD: 100000">
-              </div>
-              <div style="margin-bottom:0.75rem;">
-                <label style="font-size:0.75rem; color:var(--text-dim);">NỘI DUNG CHUYỂN KHOẢN</label>
-                <input type="text" id="qr-bank-desc" class="input-compact" value="Thanh toan TiT" placeholder="VD: Ung ho Thang IT">
-              </div>
-              <button class="btn-calc" id="btn-generate-qr" style="width:100%;">⚡ Tạo Mã VietQR Chuẩn</button>
-            </div>
-            <div class="qr-preview-box">
-              <canvas id="qr-canvas" class="qr-display-canvas"></canvas>
-              <div class="qr-action-buttons">
-                <button class="btn-calc" id="btn-download-qr">📥 Tải Ảnh PNG</button>
-                <button class="btn-calc" id="btn-copy-qr-text" style="background:rgba(255,255,255,0.06); border-color:var(--border-subtle);">📋 Copy Link VietQR</button>
-              </div>
-              <div style="font-size:0.7rem; color:var(--text-dim); text-align:center;">Hỗ trợ quét trên tất cả ứng dụng ngân hàng tại Việt Nam.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 11: CYBER CALCULATOR -->
-        <div class="ios-app-screen" id="screen-app-calc">
-          <div class="calc-cyber">
-            <div class="calc-screen">
-              <div class="calc-prev-expr" id="calc-history"></div>
-              <div class="calc-current-val" id="calc-display">0</div>
-            </div>
-            <div class="calc-grid">
-              <button class="calc-key calc-op" data-key="clear">AC</button>
-              <button class="calc-key calc-op" data-key="del">⌫</button>
-              <button class="calc-key calc-op" data-key="percent">%</button>
-              <button class="calc-key calc-op" data-key="/">÷</button>
-              <button class="calc-key calc-num" data-key="7">7</button>
-              <button class="calc-key calc-num" data-key="8">8</button>
-              <button class="calc-key calc-num" data-key="9">9</button>
-              <button class="calc-key calc-op" data-key="*">×</button>
-              <button class="calc-key calc-num" data-key="4">4</button>
-              <button class="calc-key calc-num" data-key="5">5</button>
-              <button class="calc-key calc-num" data-key="6">6</button>
-              <button class="calc-key calc-op" data-key="-">−</button>
-              <button class="calc-key calc-num" data-key="1">1</button>
-              <button class="calc-key calc-num" data-key="2">2</button>
-              <button class="calc-key calc-num" data-key="3">3</button>
-              <button class="calc-key calc-op" data-key="+">+</button>
-              <button class="calc-key calc-num" data-key="0" style="grid-column: span 2;">0</button>
-              <button class="calc-key calc-num" data-key=".">.</button>
-              <button class="calc-key calc-eq" data-key="=">=</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 12: LỊCH ÂM VẠN NIÊN -->
-        <div class="ios-app-screen" id="screen-app-lunar">
-          <div class="lunar-box">
-            <div class="lunar-header">
-              <button class="btn-calc" id="btn-lunar-prev" style="padding:0.35rem 0.75rem;">‹ Tháng trước</button>
-              <div class="lunar-month-title" id="lunar-month-label" style="font-weight:800; font-size:1.1rem; color:var(--text-title);">Tháng ...</div>
-              <button class="btn-calc" id="btn-lunar-next" style="padding:0.35rem 0.75rem;">Tháng sau ›</button>
-            </div>
-            <div class="lunar-calendar-grid" id="lunar-calendar-body"></div>
-            <div class="lunar-day-detail-card" id="lunar-today-details" style="margin-top:1.1rem;">
-              <div class="detail-row">
-                <span class="detail-label">Ngày Dương / Âm:</span>
-                <strong class="detail-val highlight" id="lunar-detail-solar-lunar">...</strong>
-              </div>
-              <div class="detail-row">
-                <span class="detail-label">Năm - Tháng - Ngày:</span>
-                <span class="detail-val" id="lunar-detail-canchi">...</span>
-              </div>
-              <div class="detail-row">
-                <span class="detail-label">Tiết Khí Hiện Tại:</span>
-                <span class="detail-val" id="lunar-detail-solar-term">...</span>
-              </div>
-              <div class="detail-row">
-                <span class="detail-label">Giờ Hoàng Đạo:</span>
-                <span class="detail-val" id="lunar-detail-zodiac-hours" style="color:var(--neon-green)">...</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 13: THỜI TIẾT TRỰC TIẾP -->
-        <div class="ios-app-screen" id="screen-app-weather">
-          <div class="weather-box">
-            <div class="weather-city-selector">
-              <button class="weather-city-btn active" data-city="hanoi">Hà Nội</button>
-              <button class="weather-city-btn" data-city="hcm">TP.HCM</button>
-              <button class="weather-city-btn" data-city="danang">Đà Nẵng</button>
-              <button class="weather-city-btn" data-city="haiphong">Hải Phòng</button>
-              <button class="weather-city-btn" data-city="cantho">Cần Thơ</button>
-              <button class="weather-city-btn" data-city="dalat">Đà Lạt</button>
-              <button class="weather-city-btn" id="btn-weather-gps" title="Định vị theo GPS hiện tại">📍 Vị Trí Tôi</button>
-            </div>
-            <div class="weather-current-card">
-              <div class="weather-main-info">
-                <div class="weather-icon-big" id="weather-icon">🌤️</div>
-                <div>
-                  <div class="weather-temp-big" id="weather-temp">--°C</div>
-                  <div class="weather-desc" id="weather-condition">Đang cập nhật thời tiết...</div>
-                  <div class="weather-city-name" id="weather-city-title">Hà Nội, Việt Nam</div>
-                </div>
-              </div>
-              <div class="weather-stats-grid">
-                <div class="weather-stat-item">
-                  <span class="stat-label">Độ Ẩm</span>
-                  <span class="stat-val" id="weather-humidity">--%</span>
-                </div>
-                <div class="weather-stat-item">
-                  <span class="stat-label">Tốc Độ Gió</span>
-                  <span class="stat-val" id="weather-wind">-- km/h</span>
-                </div>
-                <div class="weather-stat-item">
-                  <span class="stat-label">Độ Che Phủ Mây</span>
-                  <span class="stat-val" id="weather-cloud">--%</span>
-                </div>
-                <div class="weather-stat-item">
-                  <span class="stat-label">Cảm Giác Như</span>
-                  <span class="stat-val" id="weather-apparent">--°C</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 14: ĐỔI ĐƠN VỊ & NGOẠI TỆ -->
-        <div class="ios-app-screen" id="screen-app-converter">
-          <div class="converter-box">
-            <div class="converter-types-nav">
-              <button class="conv-type-btn active" data-conv-type="currency">💵 Ngoại Tệ</button>
-              <button class="conv-type-btn" data-conv-type="data">💾 Dung Lượng IT</button>
-              <button class="conv-type-btn" data-conv-type="speed">🚀 Tốc Độ Mạng</button>
-            </div>
-            <div class="conv-subpanel active" id="conv-sub-currency">
-              <div class="conv-inputs-row">
-                <div class="conv-input-group">
-                  <label>Số tiền</label>
-                  <input type="number" id="conv-curr-amount" value="100" class="input-compact">
-                  <select id="conv-curr-from" class="input-compact" style="margin-top:0.4rem;">
-                    <option value="USD" selected>USD — Đô la Mỹ</option>
-                    <option value="VND">VND — Đồng Việt Nam</option>
-                    <option value="EUR">EUR — Euro</option>
-                    <option value="JPY">JPY — Yên Nhật</option>
-                    <option value="GBP">GBP — Bảng Anh</option>
-                    <option value="CNY">CNY — Nhân dân tệ</option>
-                  </select>
-                </div>
-                <div class="conv-swap-btn" id="btn-curr-swap">⇄</div>
-                <div class="conv-input-group">
-                  <label>Kết quả chuyển đổi</label>
-                  <div class="conv-result-val" id="conv-curr-result">...</div>
-                  <select id="conv-curr-to" class="input-compact" style="margin-top:0.4rem;">
-                    <option value="VND" selected>VND — Đồng Việt Nam</option>
-                    <option value="USD">USD — Đô la Mỹ</option>
-                    <option value="EUR">EUR — Euro</option>
-                    <option value="JPY">JPY — Yên Nhật</option>
-                    <option value="GBP">GBP — Bảng Anh</option>
-                    <option value="CNY">CNY — Nhân dân tệ</option>
-                  </select>
-                </div>
-              </div>
-              <div style="font-size:0.7rem; color:var(--text-dim); margin-top:0.75rem; text-align:right;">* Tỷ giá tham khảo thời gian thực qua Open Exchange Rates.</div>
-            </div>
-            <div class="conv-subpanel" id="conv-sub-data" style="display:none;">
-              <div class="conv-inputs-row">
-                <div class="conv-input-group">
-                  <label>Giá trị</label>
-                  <input type="number" id="conv-data-amount" value="1024" class="input-compact">
-                  <select id="conv-data-from" class="input-compact" style="margin-top:0.4rem;">
-                    <option value="MB" selected>Megabyte (MB)</option>
-                    <option value="GB">Gigabyte (GB)</option>
-                    <option value="TB">Terabyte (TB)</option>
-                    <option value="KB">Kilobyte (KB)</option>
-                    <option value="B">Byte (B)</option>
-                  </select>
-                </div>
-                <div class="conv-swap-btn" id="btn-data-swap">⇄</div>
-                <div class="conv-input-group">
-                  <label>Quy đổi sang</label>
-                  <div class="conv-result-val" id="conv-data-result">1 GB</div>
-                  <select id="conv-data-to" class="input-compact" style="margin-top:0.4rem;">
-                    <option value="GB" selected>Gigabyte (GB)</option>
-                    <option value="TB">Terabyte (TB)</option>
-                    <option value="MB">Megabyte (MB)</option>
-                    <option value="KB">Kilobyte (KB)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="conv-subpanel" id="conv-sub-speed" style="display:none;">
-              <div class="conv-inputs-row">
-                <div class="conv-input-group">
-                  <label>Tốc độ băng thông</label>
-                  <input type="number" id="conv-speed-amount" value="100" class="input-compact">
-                  <select id="conv-speed-from" class="input-compact" style="margin-top:0.4rem;">
-                    <option value="Mbps" selected>Megabits/giây (Mbps)</option>
-                    <option value="MBs">MegaBytes/giây (MB/s)</option>
-                    <option value="Gbps">Gigabits/giây (Gbps)</option>
-                    <option value="Kbps">Kilobits/giây (Kbps)</option>
-                  </select>
-                </div>
-                <div class="conv-swap-btn" id="btn-speed-swap">⇄</div>
-                <div class="conv-input-group">
-                  <label>Tốc độ tải thực tế</label>
-                  <div class="conv-result-val" id="conv-speed-result">12.5 MB/s</div>
-                  <select id="conv-speed-to" class="input-compact" style="margin-top:0.4rem;">
-                    <option value="MBs" selected>MegaBytes/giây (MB/s)</option>
-                    <option value="Mbps">Megabits/giây (Mbps)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 15: GIỜ QUỐC TẾ -->
-        <div class="ios-app-screen" id="screen-app-world">
-          <div class="world-clock-grid" id="world-clocks-container">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-
-        <!-- SCREEN 16: GIÁ COIN BINANCE -->
-        <div class="ios-app-screen" id="screen-app-crypto">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-            <span style="font-size:0.78rem; color:var(--text-dim);">Dữ liệu thời gian thực qua <strong>Binance Public API</strong></span>
-            <button class="btn-calc" id="btn-refresh-crypto" style="padding:0.35rem 0.65rem; font-size:0.75rem;">🔄 Làm mới</button>
-          </div>
-          <div style="overflow-x:auto;">
-            <table class="crypto-table">
-              <thead>
-                <tr>
-                  <th>Tài Sản</th>
-                  <th>Giá (USD)</th>
-                  <th>Ước Tính (VNĐ)</th>
-                  <th>Biến Động 24h</th>
-                </tr>
-              </thead>
-              <tbody id="crypto-table-tbody">
-                <tr><td colspan="4" style="text-align:center; padding:1.5rem; color:var(--text-dim);">Đang tải bảng giá từ Binance...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- SCREEN 17: BÓNG ĐÁ TRỰC TIẾP -->
-        <div class="ios-app-screen" id="screen-app-football">
-          <div class="football-league-selector">
-            <button class="football-league-btn active" data-league="eng.1">Ngoại Hạng Anh (EPL)</button>
-            <button class="football-league-btn" data-league="uefa.champions">Cúp C1 (UCL)</button>
-            <button class="football-league-btn" data-league="esp.1">La Liga</button>
-            <button class="football-league-btn" data-league="ita.1">Serie A</button>
-            <button class="football-league-btn" data-league="ger.1">Bundesliga</button>
-          </div>
-          <div class="football-matches-list" id="football-matches-container">
-            <div style="text-align:center; padding:2rem; color:var(--text-dim);">Đang tải lịch thi đấu từ ESPN Scoreboard...</div>
-          </div>
-        </div>
-      </section>
-
     </div>
   </main>
 
@@ -1073,8 +444,6 @@
     </div>
   </footer>
 
-  <script src="js/lunar.js?v=20260905_4"></script>
-  <script src="js/qrcode.min.js?v=20260905_4"></script>
-  <script src="js/main.js?v=20260905_4"></script>
+  <script src="js/core.js?v=20260905_5"></script>
 </body>
 </html>

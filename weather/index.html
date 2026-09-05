@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Thời Tiết Trực Tiếp & Dự Báo Nhiệt Độ — Thắng IT</title>
+  <meta name="description" content="Xem thời tiết trực tiếp các thành phố lớn (Hà Nội, TP.HCM, Đà Nẵng, Hải Phòng...) kèm định vị GPS tự động. Cập nhật nhiệt độ, độ ẩm, gió, chỉ số UV và xác suất mưa.">
+  <meta name="keywords" content="thoi tiet hom nay, du bao thoi tiet, nhiet do ha noi tphcm, xem chi so uv do am, thang it weather">
+  <meta name="author" content="Nguyễn Đức Thắng">
+  <link rel="canonical" href="https://thangit.com/weather/">
+
+  <meta property="og:title" content="Thời Tiết Trực Tiếp & Dự Báo Nhiệt Độ — Thắng IT">
+  <meta property="og:description" content="Thời tiết trực tiếp thời gian thực, định vị GPS tự động qua Open-Meteo.">
+  <meta property="og:image" content="https://thangit.com/assets/images/apple-touch-icon.png">
+  <meta property="og:url" content="https://thangit.com/weather/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css?v=20260905_4">
+</head>
+<body>
+  <div id="pwa-pull-indicator" class="pwa-pull-indicator" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <polyline points="1 20 1 14 7 14"></polyline>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+    </svg>
+  </div>
+
+  <header class="header-nav">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Về Trang chủ">
+        <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="TiT Logo">
+          <defs>
+            <linearGradient id="tit-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0b1320"/>
+              <stop offset="100%" stop-color="#04070d"/>
+            </linearGradient>
+            <linearGradient id="tit-neon" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="50%" stop-color="#7000ff"/>
+              <stop offset="100%" stop-color="#ff007b"/>
+            </linearGradient>
+          </defs>
+          <rect x="1.5" y="1.5" width="41" height="41" rx="10" fill="url(#tit-bg)" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1.5"/>
+          <g>
+            <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="22" cy="23.5" r="1.2" fill="#ffffff"/>
+            <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <circle cx="22" cy="12" r="2.3" fill="#00f0ff"/>
+        </svg>
+        <span class="brand-name">THANG<span>IT</span>.COM</span>
+      </a>
+
+      <div class="topbar-actions">
+        <a href="/" class="ios-back-btn" title="Quay lại Trang chủ">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Trang chủ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-hub">
+    <div class="container hub-center-wrapper">
+      <div class="ios-app-view-container active" style="display:block;">
+        <nav class="ios-app-navbar">
+          <a href="/" class="ios-back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <span>Trang chủ</span>
+          </a>
+          <div class="ios-nav-center">
+            <span class="ios-nav-icon">🌤️</span>
+            <span>Thời Tiết Trực Tiếp</span>
+          </div>
+          <div class="ios-nav-right"></div>
+        </nav>
+
+        <div class="ios-app-screen active">
+          <div class="weather-box" style="max-width:540px; margin:0 auto 1.5rem auto;">
+            <div class="weather-city-selector" style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem;">
+              <button class="subnet-preset-btn active" data-city="hanoi">Hà Nội</button>
+              <button class="subnet-preset-btn" data-city="hcm">TP.HCM</button>
+              <button class="subnet-preset-btn" data-city="danang">Đà Nẵng</button>
+              <button class="subnet-preset-btn" data-city="haiphong">Hải Phòng</button>
+              <button class="subnet-preset-btn" data-city="cantho">Cần Thơ</button>
+              <button class="subnet-preset-btn" data-city="dalat">Đà Lạt</button>
+              <button class="subnet-preset-btn" id="btn-weather-gps" style="color:var(--neon-cyan); border-color:rgba(0,240,255,0.4);">📍 Vị Trí Tôi</button>
+            </div>
+
+            <div class="weather-current-card" style="padding:1.5rem; background:rgba(255,255,255,0.025); border-radius:12px; border:1px solid var(--border-subtle); margin-bottom:1rem;">
+              <div style="display:flex; align-items:center; gap:1.25rem; margin-bottom:1.25rem;">
+                <div id="weather-icon" style="font-size:3.5rem;">🌤️</div>
+                <div>
+                  <div id="weather-temp" style="font-size:2.8rem; font-weight:800; color:var(--text-title); font-family:var(--font-mono); line-height:1;">--°C</div>
+                  <div id="weather-condition" style="font-size:1rem; color:var(--neon-cyan); font-weight:600; margin-top:0.25rem;">Đang tải...</div>
+                  <div id="weather-city-title" style="font-size:0.85rem; color:var(--text-muted); margin-top:0.15rem;">Hà Nội, Việt Nam</div>
+                </div>
+              </div>
+
+              <div class="subnet-output-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="sub-cell">
+                  <span class="sub-cell-label">Độ Ẩm</span>
+                  <span class="sub-cell-val" id="weather-humidity">--%</span>
+                </div>
+                <div class="sub-cell">
+                  <span class="sub-cell-label">Tốc Độ Gió</span>
+                  <span class="sub-cell-val" id="weather-wind">-- km/h</span>
+                </div>
+                <div class="sub-cell">
+                  <span class="sub-cell-label">Chỉ Số UV</span>
+                  <span class="sub-cell-val" id="weather-uv">--</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong> • 100% Static Web trên Cloudflare Pages
+    </div>
+  </footer>
+
+  <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
+  <script src="/js/core.js?v=20260905_4"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cityBtns = document.querySelectorAll('[data-city]');
+      const geoBtn = document.getElementById('btn-weather-gps');
+
+      const CITIES = {
+        hanoi: { lat: 21.0285, lon: 105.8542, name: 'Hà Nội' },
+        hcm: { lat: 10.8231, lon: 106.6297, name: 'TP. Hồ Chí Minh' },
+        danang: { lat: 16.0544, lon: 108.2022, name: 'Đà Nẵng' },
+        haiphong: { lat: 20.8449, lon: 106.6881, name: 'Hải Phòng' },
+        cantho: { lat: 10.0452, lon: 105.7469, name: 'Cần Thơ' },
+        dalat: { lat: 11.9404, lon: 108.4583, name: 'Đà Lạt' }
+      };
+
+      const WMO_MAP = {
+        0: { text: 'Trời quang đãng', icon: '☀️' },
+        1: { text: 'Chủ yếu quang đãng', icon: '🌤️' },
+        2: { text: 'Mây rải rác', icon: '⛅' },
+        3: { text: 'Trời nhiều mây', icon: '☁️' },
+        45: { text: 'Có sương mù', icon: '🌫️' },
+        48: { text: 'Sương mù dày', icon: '🌫️' },
+        51: { text: 'Mưa phùn nhẹ', icon: '🌦️' },
+        53: { text: 'Mưa phùn vừa', icon: '🌦️' },
+        55: { text: 'Mưa phùn nặng hạt', icon: '🌧️' },
+        61: { text: 'Mưa rào nhẹ', icon: '🌦️' },
+        63: { text: 'Mưa vừa', icon: '🌧️' },
+        65: { text: 'Mưa to', icon: '🌧️' },
+        80: { text: 'Mưa rào ngắt quãng', icon: '🌦️' },
+        81: { text: 'Mưa rào nặng hạt', icon: '🌧️' },
+        95: { text: 'Có dông sét', icon: '⛈️' }
+      };
+
+      async function fetchWeather(lat, lon, cityName) {
+        try {
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=uv_index_max,precipitation_probability_max&timezone=Asia%2FBangkok`;
+          const res = await fetch(url);
+          if (!res.ok) return;
+          const data = await res.json();
+          const cur = data.current;
+          const daily = data.daily;
+
+          const code = cur.weather_code || 0;
+          const wInfo = WMO_MAP[code] || { text: 'Trời mát mẻ', icon: '🌤️' };
+
+          document.getElementById('weather-city-title').textContent = `${cityName}, Việt Nam`;
+          document.getElementById('weather-temp').textContent = `${Math.round(cur.temperature_2m)}°C`;
+          document.getElementById('weather-condition').textContent = wInfo.text;
+          document.getElementById('weather-icon').textContent = wInfo.icon;
+          document.getElementById('weather-humidity').textContent = `${cur.relative_humidity_2m}%`;
+          document.getElementById('weather-wind').textContent = `${cur.wind_speed_10m} km/h`;
+
+          const uvVal = daily && daily.uv_index_max ? daily.uv_index_max[0] : 4;
+          document.getElementById('weather-uv').textContent = uvVal > 7 ? `${uvVal} (Rất Cao)` : (uvVal > 4 ? `${uvVal} (Trung Bình)` : `${uvVal} (Thấp)`);
+        } catch (e) {
+          console.warn('Weather fetch error:', e);
+        }
+      }
+
+      cityBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          cityBtns.forEach(b => b.classList.remove('active'));
+          if (geoBtn) geoBtn.classList.remove('active');
+          btn.classList.add('active');
+
+          const cKey = btn.getAttribute('data-city');
+          const target = CITIES[cKey];
+          if (target) fetchWeather(target.lat, target.lon, target.name);
+        });
+      });
+
+      if (geoBtn) {
+        geoBtn.addEventListener('click', () => {
+          if (navigator.geolocation) {
+            geoBtn.textContent = '📍 Đang lấy GPS...';
+            navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                cityBtns.forEach(b => b.classList.remove('active'));
+                geoBtn.classList.add('active');
+                geoBtn.textContent = '📍 Vị Trí Tôi';
+                fetchWeather(pos.coords.latitude, pos.coords.longitude, 'Vị Trí Của Bạn');
+              },
+              () => {
+                geoBtn.textContent = '📍 GPS Bị Chặn';
+                setTimeout(() => { geoBtn.textContent = '📍 Vị Trí Tôi'; }, 2000);
+              }
+            );
+          }
+        });
+      }
+
+      fetchWeather(CITIES.hanoi.lat, CITIES.hanoi.lon, CITIES.hanoi.name);
+    });
+  </script>
+</body>
+</html>
