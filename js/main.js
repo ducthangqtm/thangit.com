@@ -227,6 +227,7 @@ function initPullToRefresh() {
 function initAppRouter() {
   const springboard = document.getElementById('springboard-view');
   const appContainer = document.getElementById('ios-app-container');
+  const homeWrapper = document.getElementById('home-screen-wrapper');
   const backBtn = document.getElementById('ios-back-btn');
   const navTitle = document.getElementById('ios-nav-title');
   const navIcon = document.getElementById('ios-nav-icon');
@@ -266,9 +267,10 @@ function initAppRouter() {
     if (navTitle) navTitle.textContent = meta.title;
     if (navIcon) navIcon.textContent = meta.icon;
 
+    if (homeWrapper) homeWrapper.classList.add('hidden');
     springboard.classList.add('hidden');
     appContainer.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
     if (updateHistory) {
       window.location.hash = `app=${appId.replace('app-', '')}`;
@@ -302,6 +304,8 @@ function initAppRouter() {
     appContainer.classList.remove('active');
     document.querySelectorAll('.ios-app-screen').forEach(s => s.classList.remove('active'));
     springboard.classList.remove('hidden');
+    if (homeWrapper) homeWrapper.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
     if (updateHistory && window.location.hash.startsWith('#app=')) {
       history.pushState('', document.title, window.location.pathname + window.location.search);
