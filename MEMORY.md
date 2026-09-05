@@ -14,7 +14,7 @@
    - Không cơ sở dữ liệu (No Database), không backend server phụ thuộc, bảo mật tuyệt đối, kháng DDoS qua Cloudflare CDN toàn cầu.
 2. **Kiến Trúc Giao Diện: iOS Springboard App Grid (Zero Modal Popup):**
    - **Thay thế hoàn toàn Modal Popup nổi:** Thay vì bật modal chèn lên nhau gây cảm giác "tả phế lù", toàn bộ 17 ứng dụng được thiết kế dạng **Icon ứng dụng chuẩn iOS Squircle** (bo cong siêu mượt 22.5%, ánh gương phản chiếu, hiệu ứng chạm haptic).
-   - **In-Page Full App Transition:** Chạm vào icon sẽ trượt mượt mà vào màn hình ứng dụng toàn trang (`#ios-app-container`), có thanh Header chuẩn iOS dính trên cùng với nút `< Quay lại`.
+   - **In-Page Full App Transition:** Chạm vào icon sẽ ẩn toàn bộ khối Home (Avatar, profile, dock mạng xã hội, visitor IP và 4 chip số liệu), mở trực tiếp màn hình ứng dụng toàn trang (`#ios-app-container`) với thanh Header chuẩn iOS dính trên cùng và nút `< Trang chủ`. Nhấn quay lại sẽ phục hồi toàn bộ Home Screen nguyên vẹn.
    - **URL Hash Routing:** Điều hướng qua hash (`#app=subnet`, `#app=dns`, `#app=wifi-qr`, `#app=ports`...) giúp hỗ trợ nút Back trình duyệt và thao tác vuốt cạnh trái trên điện thoại mà không cần tải lại trang.
 3. **Phân Định 2 Danh Mục Rõ Ràng:**
    - 🛠️ **Hạ Tầng & Công Cụ IT (Network Suite):** Bộ công cụ chuyên sâu cho SysAdmin/Network Engineer.
