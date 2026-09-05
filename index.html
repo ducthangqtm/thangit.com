@@ -79,7 +79,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=20260905_10">
+  <link rel="stylesheet" href="css/style.css?v=20260905_11">
 </head>
 <body>
 
@@ -208,13 +208,22 @@
             <div class="profile-expanded-card">
               <button class="btn-close-expanded" id="btn-close-expanded" title="Thu gọn thông tin" aria-label="Đóng">✕</button>
               
-              <!-- Cột Trái: Avatar phóng to & trượt sang trái -->
-              <div class="expanded-avatar-col" id="btn-avatar-collapse" role="button" tabindex="0" title="Chạm để thu gọn">
-                <div class="expanded-avatar-wrap">
+              <!-- Cột Trái: Avatar phóng to & trượt sang trái kèm nút Hồ Sơ CV -->
+              <div class="expanded-avatar-col">
+                <div class="expanded-avatar-wrap" id="btn-avatar-collapse" role="button" tabindex="0" title="Chạm để thu gọn">
                   <img src="assets/images/avata.jpg" alt="Nguyễn Đức Thắng" class="expanded-avatar-img">
                   <span class="avatar-status-dot-large" title="Active 24/7 (200 OK)"></span>
                 </div>
-                <span class="avatar-collapse-hint">✕ Thu gọn</span>
+                <a href="/cv/" class="btn-cv-expanded" title="Xem chi tiết Hồ sơ & Lộ trình 10 năm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                  </svg>
+                  <span>Hồ Sơ CV</span>
+                </a>
+                <span class="avatar-collapse-hint" id="btn-avatar-collapse-hint" role="button" tabindex="0">✕ Thu gọn</span>
               </div>
 
               <!-- Cột Phải: Thông tin cá nhân chi tiết -->
@@ -251,10 +260,6 @@
                       <button class="btn-copy-chip" data-copy="ducthangqtm@gmail.com" title="Sao chép Email">📋 Copy</button>
                     </strong>
                   </div>
-                  <div class="info-item">
-                    <span class="info-label"><span class="info-icon">💍</span> Tình trạng:</span>
-                    <strong class="info-value status-badge-married">Đã kết hôn</strong>
-                  </div>
                 </div>
 
                 <div class="expanded-bio-callout">
@@ -270,18 +275,18 @@
         <!-- Unified Social Action Bar (4 Standard Brand Buttons: Zalo, Tele, Disco, Git) -->
         <div class="unified-action-bar">
           <div class="social-dock-compact">
-            <!-- 1. Zalo (Chữ xanh Zalo như Hình 1) -->
+            <!-- 1. Zalo (Chữ xanh Zalo) -->
             <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="social-btn btn-zalo" title="Zalo: 0986 192 092" aria-label="Zalo">
               <span class="zalo-brand-text">Zalo</span>
             </a>
-            <!-- 2. Telegram (Tròn xanh máy bay trắng như Hình 1) -->
+            <!-- 2. Telegram (Tròn xanh máy bay trắng) -->
             <a href="https://t.me/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-btn btn-tele" title="Telegram: @ducthangqtm" aria-label="Telegram">
               <svg viewBox="0 0 32 32" width="28" height="28">
                 <circle cx="16" cy="16" r="16" fill="#2AABEE"/>
                 <path d="M22.5 9.5l-13.8 5.3c-.9.4-.9 1 0 1.2l3.5 1.1 8.2-5.2c.4-.2.7-.1.4.1l-6.6 6v.1l-.2 3.6c.4 0 .5-.2.7-.4l1.7-1.7 3.6 2.6c.7.4 1.1.2 1.3-.6l2.3-11c.2-1-.4-1.4-1.1-1z" fill="#ffffff"/>
               </svg>
             </a>
-            <!-- 3. Discord (Clyde màu tím như Hình 1 - Mở trực tiếp Discord) -->
+            <!-- 3. Discord (Clyde màu tím) -->
             <a href="https://discord.com/users/ducthangqtm" id="btn-discord-link" target="_blank" rel="noopener noreferrer" class="social-btn btn-disco" title="Discord: ducthangqtm" aria-label="Discord">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="#5865F2">
                 <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
@@ -296,141 +301,148 @@
           </div>
         </div>
 
+      <!-- Springboard Category Filter Tabs -->
+      <div class="springboard-filter-tabs" id="springboard-filter-tabs" role="tablist" aria-label="Bộ lọc ứng dụng">
+        <button class="filter-tab-btn active" data-category="all" role="tab" aria-selected="true">
+          <span>⚡ Tất cả</span>
+          <span class="tab-badge">15</span>
+        </button>
+        <button class="filter-tab-btn" data-category="network" role="tab" aria-selected="false">
+          <span>🛠️ Hạ Tầng IT</span>
+          <span class="tab-badge">9</span>
+        </button>
+        <button class="filter-tab-btn" data-category="pocket" role="tab" aria-selected="false">
+          <span>☕ Tiện Ích</span>
+          <span class="tab-badge">6</span>
+        </button>
+      </div>
+
       <!-- iOS Springboard App Launcher (Multi-Page Navigation Grid) -->
       <section id="springboard-view" class="ios-springboard">
         <!-- Category 1: IT & Network Tools -->
-        <div class="ios-section-header">
-          <div class="ios-section-title">
-            <span>🛠️</span>
-            <span>Hạ Tầng & Công Cụ IT</span>
-            <span class="badge-pill">Network Suite</span>
+        <div class="ios-category-group" data-category-group="network">
+          <div class="ios-section-header">
+            <div class="ios-section-title">
+              <span>🛠️</span>
+              <span>Hạ Tầng & Công Cụ IT</span>
+              <span class="badge-pill">Network Suite</span>
+            </div>
+            <span class="ios-section-subtitle">Chuyên sâu SysAdmin</span>
           </div>
-          <span class="ios-section-subtitle">Chuyên sâu SysAdmin</span>
-        </div>
 
-        <div class="ios-app-grid">
-          <!-- App 1: Subnet CIDR -->
-          <a href="/subnet/" class="ios-app-item" aria-label="Mở Subnet & CIDR Calculator">
-            <div class="ios-app-icon icon-grad-subnet">🧮</div>
-            <span class="ios-app-label">Subnet CIDR</span>
-          </a>
+          <div class="ios-app-grid">
+            <!-- App 1: Subnet CIDR -->
+            <a href="/subnet/" class="ios-app-item" aria-label="Mở Subnet & CIDR Calculator">
+              <div class="ios-app-icon icon-grad-subnet">🧮</div>
+              <span class="ios-app-label">Subnet CIDR</span>
+            </a>
 
-          <!-- App 2: DNS Lookup DoH -->
-          <a href="/dns/" class="ios-app-item" aria-label="Mở DNS Lookup DoH">
-            <div class="ios-app-icon icon-grad-dns">🌐</div>
-            <span class="ios-app-label">DNS Lookup</span>
-          </a>
+            <!-- App 2: DNS Lookup DoH -->
+            <a href="/dns/" class="ios-app-item" aria-label="Mở DNS Lookup DoH">
+              <div class="ios-app-icon icon-grad-dns">🌐</div>
+              <span class="ios-app-label">DNS Lookup</span>
+            </a>
 
-          <!-- App 3: Wi-Fi QR -->
-          <a href="/wifi-qr/" class="ios-app-item" aria-label="Mở Wi-Fi QR 1-Chạm">
-            <div class="ios-app-icon icon-grad-wifi">📶</div>
-            <span class="ios-app-label">Wi-Fi QR</span>
-          </a>
+            <!-- App 3: Wi-Fi QR -->
+            <a href="/wifi-qr/" class="ios-app-item" aria-label="Mở Wi-Fi QR 1-Chạm">
+              <div class="ios-app-icon icon-grad-wifi">📶</div>
+              <span class="ios-app-label">Wi-Fi QR</span>
+            </a>
 
-          <!-- App 4: Port Lookup -->
-          <a href="/ports/" class="ios-app-item" aria-label="Mở Tra Cứu Cổng Mạng">
-            <div class="ios-app-icon icon-grad-ports">🔌</div>
-            <span class="ios-app-label">Tra Cứu Port</span>
-          </a>
+            <!-- App 4: Port Lookup -->
+            <a href="/ports/" class="ios-app-item" aria-label="Mở Tra Cứu Cổng Mạng">
+              <div class="ios-app-icon icon-grad-ports">🔌</div>
+              <span class="ios-app-label">Tra Cứu Port</span>
+            </a>
 
-          <!-- App 5: Key & Password Generator -->
-          <a href="/password/" class="ios-app-item" aria-label="Mở Sinh Mật Khẩu IT">
-            <div class="ios-app-icon icon-grad-password">🔐</div>
-            <span class="ios-app-label">Mật Khẩu IT</span>
-          </a>
+            <!-- App 5: Key & Password Generator -->
+            <a href="/password/" class="ios-app-item" aria-label="Mở Sinh Mật Khẩu IT">
+              <div class="ios-app-icon icon-grad-password">🔐</div>
+              <span class="ios-app-label">Mật Khẩu IT</span>
+            </a>
 
-          <!-- App 6: Live NOC Telemetry & Ping -->
-          <a href="/telemetry/" class="ios-app-item" aria-label="Mở Giám Sát Ping & Edge IP">
-            <div class="ios-app-icon icon-grad-telemetry">⚡</div>
-            <span class="ios-app-label">NOC Ping</span>
-          </a>
+            <!-- App 6: Live NOC Telemetry & Ping -->
+            <a href="/telemetry/" class="ios-app-item" aria-label="Mở Giám Sát Ping & Edge IP">
+              <div class="ios-app-icon icon-grad-telemetry">⚡</div>
+              <span class="ios-app-label">NOC Ping</span>
+            </a>
 
-          <!-- App 7: Terminal CLI -->
-          <a href="/terminal/" class="ios-app-item" aria-label="Mở NOC Terminal zsh">
-            <div class="ios-app-icon icon-grad-terminal">⌨️</div>
-            <span class="ios-app-label">Terminal CLI</span>
-          </a>
+            <!-- App 7: Terminal CLI -->
+            <a href="/terminal/" class="ios-app-item" aria-label="Mở NOC Terminal zsh">
+              <div class="ios-app-icon icon-grad-terminal">⌨️</div>
+              <span class="ios-app-label">Terminal CLI</span>
+            </a>
 
-          <!-- App 8: 10 Năm Quản Trị CV -->
-          <a href="/cv/" class="ios-app-item" aria-label="Mở Hồ Sơ Năng Lực 10 Năm">
-            <div class="ios-app-icon icon-grad-career">💼</div>
-            <span class="ios-app-label">Hồ Sơ CV</span>
-          </a>
+            <!-- App 8: 10 Năm Quản Trị CV -->
+            <a href="/cv/" class="ios-app-item" aria-label="Mở Hồ Sơ Năng Lực 10 Năm">
+              <div class="ios-app-icon icon-grad-career">💼</div>
+              <span class="ios-app-label">Hồ Sơ CV</span>
+            </a>
 
-          <!-- App 9: Dự Án Tiêu Biểu -->
-          <a href="/projects/" class="ios-app-item" aria-label="Mở Danh Sách Dự Án">
-            <div class="ios-app-icon icon-grad-projects">🚀</div>
-            <span class="ios-app-label">Dự Án Số</span>
-          </a>
+            <!-- App 9: Dự Án Tiêu Biểu -->
+            <a href="/projects/" class="ios-app-item" aria-label="Mở Danh Sách Dự Án">
+              <div class="ios-app-icon icon-grad-projects">🚀</div>
+              <span class="ios-app-label">Dự Án Số</span>
+            </a>
+          </div>
         </div>
 
         <!-- Category 2: Daily Pocket Tools -->
-        <div class="ios-section-header">
-          <div class="ios-section-title">
-            <span>☕</span>
-            <span>Tiện Ích Bỏ Túi Thường Ngày</span>
-            <span class="badge-pill">Pocket Tools</span>
+        <div class="ios-category-group" data-category-group="pocket">
+          <div class="ios-section-header">
+            <div class="ios-section-title">
+              <span>☕</span>
+              <span>Tiện Ích Bỏ Túi Thường Ngày</span>
+              <span class="badge-pill">Pocket Tools</span>
+            </div>
+            <span class="ios-section-subtitle">Hữu dụng hàng ngày</span>
           </div>
-          <span class="ios-section-subtitle">Hữu dụng hàng ngày</span>
-        </div>
 
-        <div class="ios-app-grid">
-          <!-- App 10: VietQR Studio -->
-          <a href="/vietqr/" class="ios-app-item" aria-label="Mở VietQR Bank Studio">
-            <div class="ios-app-icon icon-grad-vietqr">🏦</div>
-            <span class="ios-app-label">VietQR Bank</span>
-          </a>
+          <div class="ios-app-grid">
+            <!-- App 10: VietQR Studio -->
+            <a href="/vietqr/" class="ios-app-item" aria-label="Mở VietQR Bank Studio">
+              <div class="ios-app-icon icon-grad-vietqr">🏦</div>
+              <span class="ios-app-label">VietQR Bank</span>
+            </a>
 
-          <!-- App 11: Máy Tính Cyber -->
-          <a href="/calc/" class="ios-app-item" aria-label="Mở Máy Tính Cyber">
-            <div class="ios-app-icon icon-grad-calc">🧮</div>
-            <span class="ios-app-label">Máy Tính</span>
-          </a>
+            <!-- App 11: Máy Tính Cyber -->
+            <a href="/calc/" class="ios-app-item" aria-label="Mở Máy Tính Cyber">
+              <div class="ios-app-icon icon-grad-calc">🧮</div>
+              <span class="ios-app-label">Máy Tính</span>
+            </a>
 
-          <!-- App 12: Lịch Âm Vạn Niên -->
-          <a href="/lunar/" class="ios-app-item" aria-label="Mở Lịch Âm Vạn Niên">
-            <div class="ios-app-icon icon-grad-lunar">📅</div>
-            <span class="ios-app-label">Lịch Âm</span>
-          </a>
+            <!-- App 12: Lịch Âm Vạn Niên -->
+            <a href="/lunar/" class="ios-app-item" aria-label="Mở Lịch Âm Vạn Niên">
+              <div class="ios-app-icon icon-grad-lunar">📅</div>
+              <span class="ios-app-label">Lịch Âm</span>
+            </a>
 
-          <!-- App 13: Thời Tiết -->
-          <a href="/weather/" class="ios-app-item" aria-label="Mở Thời Tiết Trực Tiếp">
-            <div class="ios-app-icon icon-grad-weather">🌤️</div>
-            <span class="ios-app-label">Thời Tiết</span>
-          </a>
+            <!-- App 13: Thời Tiết -->
+            <a href="/weather/" class="ios-app-item" aria-label="Mở Thời Tiết Trực Tiếp">
+              <div class="ios-app-icon icon-grad-weather">🌤️</div>
+              <span class="ios-app-label">Thời Tiết</span>
+            </a>
 
-          <!-- App 14: Đổi Đơn Vị & Tỷ Giá -->
-          <a href="/converter/" class="ios-app-item" aria-label="Mở Đổi Đơn Vị & Ngoại Tệ">
-            <div class="ios-app-icon icon-grad-converter">⚖️</div>
-            <span class="ios-app-label">Đổi Đơn Vị</span>
-          </a>
+            <!-- App 14: Đổi Đơn Vị & Tỷ Giá -->
+            <a href="/converter/" class="ios-app-item" aria-label="Mở Đổi Đơn Vị & Ngoại Tệ">
+              <div class="ios-app-icon icon-grad-converter">⚖️</div>
+              <span class="ios-app-label">Đổi Đơn Vị</span>
+            </a>
 
-          <!-- App 15: Giờ Quốc Tế -->
-          <a href="/world/" class="ios-app-item" aria-label="Mở Giờ Quốc Tế">
-            <div class="ios-app-icon icon-grad-world">🌍</div>
-            <span class="ios-app-label">Giờ Quốc Tế</span>
-          </a>
-
-          <!-- App 16: Giá Coin Binance -->
-          <a href="/crypto/" class="ios-app-item" aria-label="Mở Bảng Giá Coin">
-            <div class="ios-app-icon icon-grad-crypto">🪙</div>
-            <span class="ios-app-label">Giá Coin</span>
-          </a>
-
-          <!-- App 17: Bóng Đá Trực Tiếp -->
-          <a href="/football/" class="ios-app-item" aria-label="Mở Lịch & Tỉ Số Bóng Đá">
-            <div class="ios-app-icon icon-grad-football">⚽</div>
-            <span class="ios-app-label">Bóng Đá</span>
-          </a>
+            <!-- App 15: Giờ Quốc Tế -->
+            <a href="/world/" class="ios-app-item" aria-label="Mở Giờ Quốc Tế">
+              <div class="ios-app-icon icon-grad-world">🌍</div>
+              <span class="ios-app-label">Giờ Quốc Tế</span>
+            </a>
+          </div>
         </div>
       </section>
 
-      <!-- 4 Chips Số Liệu Minh Chứng (Gọn Gàng) -->
+      <!-- 3 Chips Số Liệu Minh Chứng (Gọn Gàng & Cân Đối 1 Hàng) -->
       <div class="metric-chips-row">
         <div class="metric-chip"><strong>10+</strong> Năm Thực Chiến</div>
         <div class="metric-chip"><strong>40K m²</strong> Logistics</div>
         <div class="metric-chip"><strong>500+</strong> Nodes Quản Trị</div>
-        <div class="metric-chip"><strong>99.9%</strong> Uptime 24/7</div>
       </div>
     </div>
   </main>
@@ -499,6 +511,6 @@
     </div>
   </footer>
 
-  <script src="js/core.js?v=20260905_10"></script>
+  <script src="js/core.js?v=20260905_11"></script>
 </body>
 </html>

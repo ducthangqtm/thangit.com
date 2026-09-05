@@ -21,13 +21,13 @@
 3. **Phân Định 2 Danh Mục Rõ Ràng:**
    - 🛠️ **Hạ Tầng & Công Cụ IT (Network Suite):** Bộ công cụ chuyên sâu cho SysAdmin/Network Engineer.
    - ☕ **Tiện Ích Bỏ Túi Thường Ngày (Pocket Tools):** Bộ tiện ích thiết thực cho cuộc sống hàng ngày.
-4. **PWA Multi-Page Engine (Cache v4):**
-   - Hoạt động mượt mà cả offline lẫn online qua Service Worker `tit-hub-v4`.
-   - Lưu cache toàn bộ 17 trang công cụ con và tài nguyên dùng chung trong `js/core.js`.
+4. **PWA Multi-Page Engine (Cache v10):**
+   - Hoạt động mượt mà cả offline lẫn online qua Service Worker `tit-hub-v10`.
+   - Lưu cache toàn bộ 15 trang công cụ con và tài nguyên dùng chung trong `js/core.js`.
 
 ---
 
-## 2. Hệ Thống 17 Ứng Dụng (Standalone Multi-Page URLs)
+## 2. Hệ Thống 15 Ứng Dụng (Standalone Multi-Page URLs)
 
 ### A. 🛠️ Hạ Tầng & Công Cụ IT (Network Suite - 9 Apps)
 | STT | Ứng Dụng | URL / Thư mục | Công Nghệ / Nguồn | Tính Năng & Điểm Nhấn |
@@ -42,7 +42,7 @@
 | 8 | **Hồ Sơ CV** | `/cv/` | Timeline Component | Trình bày 10 năm kinh nghiệm quản trị hệ thống, hạ tầng logistics 40,000m², 500+ nodes, nút In / Xuất PDF. |
 | 9 | **Dự Án Số** | `/projects/` | Showcase Grid | Danh mục các dự án số tiêu biểu, hệ thống đã triển khai thực tế. |
 
-### B. ☕ Tiện Ích Bỏ Túi Thường Ngày (Pocket Tools - 8 Apps)
+### B. ☕ Tiện Ích Bỏ Túi Thường Ngày (Pocket Tools - 6 Apps)
 | STT | Ứng Dụng | URL / Thư mục | Công Nghệ / Nguồn | Tính Năng Chính |
 | :--- | :--- | :--- | :--- | :--- |
 | 10 | **VietQR Bank** | `/vietqr/` | VietQR API + QR Engine | Tạo QR thanh toán nhanh cho 40+ ngân hàng VN kèm số tiền & nội dung. Tải ảnh & copy link. |
@@ -51,8 +51,6 @@
 | 13 | **Thời Tiết** | `/weather/` | Open-Meteo REST API | Dự báo 6 tỉnh thành + GPS tự động, nhiệt độ, độ ẩm, gió, UV, mưa. |
 | 14 | **Đổi Đơn Vị** | `/converter/` | ExchangeRate API + Math | Tỷ giá ngoại tệ, Dung lượng IT (Bytes ↔ TB), Tốc độ mạng (Mbps ↔ MB/s). |
 | 15 | **Giờ Quốc Tế** | `/world/` | Javascript `Intl` | 8 múi giờ toàn cầu cập nhật từng giây, biểu tượng Ngày/Đêm. |
-| 16 | **Giá Coin** | `/crypto/` | Binance Public API v3 | Bảng giá Top 10 coin (BTC, ETH, SOL, BNB...), giá USD, biến động 24h. |
-| 17 | **Bóng Đá** | `/football/` | ESPN Scoreboard API | Lịch thi đấu và tỉ số trực tiếp 5 giải hàng đầu (EPL, C1, La Liga, Serie A, Bundesliga). |
 
 ---
 
@@ -81,15 +79,13 @@ thangit.com/
 ├── weather/index.html    # Thời tiết thời gian thực (/weather/)
 ├── converter/index.html  # Chuyển đổi ngoại tệ & đơn vị IT (/converter/)
 ├── world/index.html      # Đồng hồ 8 múi giờ quốc tế (/world/)
-├── crypto/index.html     # Bảng giá Crypto thời gian thực Binance (/crypto/)
-├── football/index.html   # Lịch & Tỉ số trực tiếp bóng đá ESPN (/football/)
 ├── assets/images/        # Icon PWA, avatar, apple-touch-icon
 ├── manifest.json         # Cấu hình PWA (Name: "Nguyễn Đức Thắng (Thắng IT)", Short: "TiT")
-├── sw.js                 # Service Worker (Cache v4: tit-hub-v4)
+├── sw.js                 # Service Worker (Cache v10: tit-hub-v10)
 ├── favicon.svg           # Vector favicon thương hiệu TiT
 ├── _headers              # Cấu hình header Cloudflare Pages
 ├── robots.txt            # Chỉ mục Search Engine
-├── sitemap.xml           # Sơ đồ trang web (gồm cả 17 trang công cụ)
+├── sitemap.xml           # Sơ đồ trang web (gồm 15 trang công cụ)
 └── MEMORY.md             # File ghi nhớ dự án (tài liệu này)
 ```
 
@@ -100,8 +96,8 @@ thangit.com/
    - Chỉ sử dụng các API công khai **100% miễn phí, không yêu cầu API Key bí mật, hỗ trợ CORS mở** để người dùng truy cập trực tiếp từ trình duyệt mà không cần backend proxy.
 2. **Quy tắc PWA & Cache:**
    - Khi chỉnh sửa file JS hoặc CSS, nếu muốn người dùng nhận bản cập nhật ngay lập tức:
-     - Tăng query version trong `index.html` (ví dụ `?v=20260904_7`).
-     - Tăng `CACHE_NAME` trong `sw.js` (ví dụ `tit-hub-v3`).
+     - Tăng query version trong `index.html` (ví dụ `?v=20260905_11`).
+     - Tăng `CACHE_NAME` trong `sw.js` (ví dụ `tit-hub-v10`).
 3. **Quy tắc Deploy:**
    - Mọi thay đổi sau khi kiểm tra xong (`node -c js/file.js`) được commit và push vào nhánh `main`:
      ```bash
@@ -113,25 +109,21 @@ thangit.com/
 
 ---
 
-## 5. Cấu Trúc Hero & Social Dock Mới Nhất (Cập nhật 05/09/2026)
-1. **Tiêu đề & Tên:** Hiển thị **Nguyễn Đức Thắng** (đã lược bỏ hậu tố `· Thắng IT` ở tiêu đề theo yêu cầu).
-2. **Avatar tương tác (Interactive Profile Card):**
+## 5. Cấu Trúc Hero, Profile & Springboard Mới Nhất (Cập nhật 05/09/2026)
+1. **Tiêu đề & Tên:** Hiển thị **Nguyễn Đức Thắng**.
+2. **Avatar tương tác & Nút Hồ Sơ CV (Interactive Profile Card):**
    - Click vào Avatar sẽ trượt Avatar sang trái (phóng to) và mở card kính mờ bên phải:
-     - Họ & Tên: **Nguyễn Đức Thắng**
-     - Ngày sinh: **12/09/1992**
-     - Địa chỉ: **12 Thịnh Liên - Phù Đổng - Hà Nội**
-     - SĐT: `0986 192 092` (kèm nút copy nhanh và gọi)
-     - Email: `ducthangqtm@gmail.com` (kèm nút copy nhanh)
-     - Tình trạng: **Đã kết hôn**
-     - Giới thiệu tóm tắt: *10+ năm vận hành hạ tầng mạng quy mô lớn (Logistics 40.000m²), kết hợp AI & Python tự động hóa vận hành 24/7.*
-3. **Thanh Dock Mạng Xã Hội (Unified Social Action Bar):**
-   - Đã gỡ bỏ nút Gọi điện và nút Email khỏi thanh dock (chỉ giữ ở card thông tin).
-   - Chỉ hiển thị 4 icon chuẩn thương hiệu:
-     - **Zalo**: Text thương hiệu màu xanh Zalo (`#2b7fff`), mở `zalo.me/0986192092`.
-     - **Telegram**: Nền tròn xanh trời (`#2AABEE`) máy bay giấy trắng, mở `t.me/ducthangqtm`.
-     - **Discord**: Icon Clyde màu tím Blurple (`#5865F2`), mở trực tiếp `discord.com/users/ducthangqtm` sang tab mới, đồng thời tự động copy username `ducthangqtm` kèm toast.
-     - **GitHub**: Icon Octocat trắng, mở `github.com/ducthangqtm`.
-4. **PWA Cache:** Service Worker hiện tại là `tit-hub-v9`, script/style version `?v=20260905_10`.
+     - Cột trái: Avatar phóng to, nút **📄 Hồ Sơ CV** (chuyển hướng trực tiếp sang `/cv/`), nút **✕ Thu gọn**.
+     - Cột phải: Họ & Tên, Ngày sinh, Địa chỉ, SĐT (copy + tel), Email (copy + mailto), Bio tóm tắt 10+ năm kinh nghiệm (đã bỏ tình trạng hôn nhân).
+3. **Bộ Lọc Phân Loại Springboard (Filter Tabs):**
+   - ⚡ **Tất cả (15)**
+   - 🛠️ **Hạ Tầng IT (9)**
+   - ☕ **Tiện Ích (6)**
+4. **Hàng 3 Chip Số Liệu (Metric Chips Row):**
+   - Hiển thị cân đối, đối xứng 1 hàng: `10+ Năm Thực Chiến` • `40K m² Logistics` • `500+ Nodes Quản Trị` (đã bỏ chip lẻ 99.9% Uptime).
+5. **Thanh Dock Mạng Xã Hội (Unified Social Action Bar):**
+   - 4 icon chuẩn thương hiệu: **Zalo**, **Telegram**, **Discord**, **GitHub**.
+6. **PWA Cache:** Service Worker hiện tại là `tit-hub-v10`, script/style version `?v=20260905_11`.
 
 ---
 

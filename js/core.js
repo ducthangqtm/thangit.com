@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPullToRefresh();
   initPWAInstallPrompt();
   initAvatarProfileToggle();
+  initSpringboardFilter();
 });
 
 /* ==========================================================================
@@ -21,6 +22,7 @@ function initAvatarProfileToggle() {
   const btnExpand = document.getElementById('btn-avatar-expand');
   const btnClose = document.getElementById('btn-close-expanded');
   const btnCollapse = document.getElementById('btn-avatar-collapse');
+  const btnCollapseHint = document.getElementById('btn-avatar-collapse-hint');
 
   if (!btnExpand || !expandedView || !defaultView) return;
 
@@ -65,6 +67,52 @@ function initAvatarProfileToggle() {
       }
     });
   }
+
+  if (btnCollapseHint) {
+    btnCollapseHint.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeProfile();
+    });
+    btnCollapseHint.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        closeProfile();
+      }
+    });
+  }
+}
+
+/* ==========================================================================
+   SPRINGBOARD CATEGORY FILTER TABS
+   ========================================================================== */
+function initSpringboardFilter() {
+  const tabContainer = document.getElementById('springboard-filter-tabs');
+  if (!tabContainer) return;
+
+  const buttons = tabContainer.querySelectorAll('.filter-tab-btn');
+  const categoryGroups = document.querySelectorAll('.ios-category-group');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const selectedCategory = btn.getAttribute('data-category');
+
+      buttons.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      categoryGroups.forEach((group) => {
+        const groupCategory = group.getAttribute('data-category-group');
+        if (selectedCategory === 'all' || groupCategory === selectedCategory) {
+          group.classList.remove('hidden-category');
+        } else {
+          group.classList.add('hidden-category');
+        }
+      });
+    });
+  });
 }
 
 /* ==========================================================================
