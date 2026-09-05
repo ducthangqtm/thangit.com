@@ -1869,3 +1869,616 @@ body::before {
   .bento-card { padding: 1.15rem 1.05rem; }
   .subnet-output-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ==========================================================================
+   IOS SPRINGBOARD & APP LAUNCHER SYSTEM (ZERO POPUP • 100% NATIVE APP UX)
+   ========================================================================== */
+
+/* 1. Springboard Main Wrapper */
+.ios-springboard {
+  width: 100%;
+  margin-top: 1.25rem;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.ios-springboard.hidden {
+  display: none;
+}
+
+/* 2. Section Header */
+.ios-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.6rem 0 0.9rem 0;
+  padding: 0 0.25rem;
+}
+
+.ios-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-title);
+}
+
+.ios-section-title span.badge-pill {
+  font-size: 0.68rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.ios-section-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+/* 3. iOS App Grid */
+.ios-app-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem 0.75rem;
+  padding: 0.35rem 0.15rem;
+}
+
+@media (min-width: 620px) {
+  .ios-app-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.4rem 1rem;
+  }
+}
+
+@media (min-width: 780px) {
+  .ios-app-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1.5rem 1.15rem;
+  }
+}
+
+/* 4. Individual App Icon Button */
+.ios-app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  padding: 0.25rem 0.15rem;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: transform 0.14s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ios-app-item:hover .ios-app-icon {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55), 0 0 16px rgba(0, 240, 255, 0.35);
+}
+
+.ios-app-item:active {
+  transform: scale(0.92);
+}
+
+.ios-app-item:active .ios-app-icon {
+  transform: scale(0.94);
+  filter: brightness(0.9);
+}
+
+/* 5. Squircle App Icon (Apple Squircle Aesthetics) */
+.ios-app-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 22.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.65rem;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 380px) {
+  .ios-app-icon {
+    width: 54px;
+    height: 54px;
+    font-size: 1.5rem;
+  }
+}
+
+.ios-app-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-radius: 22.5% 22.5% 45% 45% / 22.5% 22.5% 15% 15%;
+  pointer-events: none;
+}
+
+.ios-app-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  min-width: 17px;
+  height: 17px;
+  line-height: 17px;
+  border-radius: 9px;
+  text-align: center;
+  padding: 0 4px;
+  box-shadow: 0 2px 6px rgba(255, 59, 48, 0.6);
+  border: 1.5px solid #04070d;
+  z-index: 2;
+}
+
+.ios-app-label {
+  margin-top: 0.45rem;
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--text-title);
+  text-align: center;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  max-width: 72px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Icon Gradient Themes */
+.icon-grad-subnet    { background: linear-gradient(135deg, #00c6ff, #0072ff); color: #fff; }
+.icon-grad-dns       { background: linear-gradient(135deg, #00f260, #0575e6); color: #fff; }
+.icon-grad-wifi      { background: linear-gradient(135deg, #f857a6, #ff5858); color: #fff; }
+.icon-grad-ports     { background: linear-gradient(135deg, #f7971e, #ffd200); color: #fff; }
+.icon-grad-password  { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; }
+.icon-grad-telemetry { background: linear-gradient(135deg, #4e54c8, #8f94fb); color: #fff; }
+.icon-grad-terminal  { background: linear-gradient(135deg, #1e293b, #0f172a); color: var(--neon-green); border-color: rgba(0, 255, 157, 0.35); }
+.icon-grad-career    { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+.icon-grad-projects  { background: linear-gradient(135deg, #ff0844, #ffb199); color: #fff; }
+
+.icon-grad-vietqr    { background: linear-gradient(135deg, #0ba360, #3cba92); color: #fff; }
+.icon-grad-calc      { background: linear-gradient(135deg, #ff9900, #ff5e62); color: #fff; }
+.icon-grad-lunar     { background: linear-gradient(135deg, #eb3349, #f45c43); color: #fff; }
+.icon-grad-weather   { background: linear-gradient(135deg, #2193b0, #6dd5ed); color: #fff; }
+.icon-grad-converter { background: linear-gradient(135deg, #8e2de2, #4a00e0); color: #fff; }
+.icon-grad-world     { background: linear-gradient(135deg, #00b4db, #0083b0); color: #fff; }
+.icon-grad-crypto    { background: linear-gradient(135deg, #f7931a, #f3ba2f); color: #fff; }
+.icon-grad-football  { background: linear-gradient(135deg, #00b09b, #96c93d); color: #fff; }
+
+/* ==========================================================================
+   IN-PAGE FULL APP VIEW CONTAINER (ZERO POPUP)
+   ========================================================================== */
+.ios-app-view-container {
+  display: none;
+  width: 100%;
+  animation: iosViewSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ios-app-view-container.active {
+  display: block;
+}
+
+@keyframes iosViewSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ios-app-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: rgba(6, 8, 13, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ios-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  color: var(--neon-cyan);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.42rem 0.85rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.ios-back-btn:hover {
+  background: rgba(0, 240, 255, 0.18);
+  border-color: var(--neon-cyan);
+  transform: translateX(-2px);
+}
+
+.ios-back-btn:active {
+  transform: scale(0.95);
+}
+
+.ios-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-title);
+}
+
+.ios-nav-icon {
+  font-size: 1.15rem;
+}
+
+.ios-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ios-nav-action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ios-nav-action-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ios-app-screen {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+  margin-bottom: 2.5rem;
+}
+
+.ios-app-screen.active {
+  display: block;
+  animation: fadeInAppScreen 0.2s ease-out;
+}
+
+@keyframes fadeInAppScreen {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   NEW IT TOOL SCREEN STYLES (SUBNET, DNS, PORTS)
+   ========================================================================== */
+
+.subnet-control-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  margin-bottom: 1.25rem;
+}
+
+.subnet-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.85rem;
+}
+
+.subnet-slider-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--neon-cyan);
+  cursor: pointer;
+}
+
+.subnet-cidr-badge {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  min-width: 48px;
+  text-align: right;
+}
+
+.subnet-pills-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+}
+
+.subnet-preset-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.subnet-preset-btn:hover, .subnet-preset-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--neon-cyan);
+  border-color: rgba(0, 240, 255, 0.4);
+}
+
+.subnet-result-hero {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 600px) {
+  .subnet-result-hero {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.subnet-card-mini {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.subnet-card-mini .label {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.subnet-card-mini .value {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-title);
+  word-break: break-all;
+}
+
+.subnet-card-mini .value.highlight {
+  color: var(--neon-cyan);
+}
+
+.subnet-card-mini .value.green {
+  color: var(--neon-green);
+}
+
+/* DNS Lookup Full App */
+.dns-input-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.dns-type-selector {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.15rem;
+}
+
+.dns-type-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dns-type-btn:hover, .dns-type-btn.active {
+  background: rgba(0, 255, 157, 0.15);
+  color: var(--neon-green);
+  border-color: rgba(0, 255, 157, 0.45);
+}
+
+.dns-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin-top: 0.5rem;
+}
+
+.dns-results-table th {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dns-results-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--text-title);
+  vertical-align: middle;
+}
+
+.dns-results-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Port Lookup Cheat Sheet */
+.port-search-bar {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.port-search-bar input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem 0.75rem 2.4rem;
+  color: var(--text-title);
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.port-search-bar input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.port-search-bar .search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.port-category-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.15rem;
+}
+
+.port-cat-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.port-cat-btn:hover, .port-cat-btn.active {
+  background: rgba(247, 151, 30, 0.15);
+  color: #ffa502;
+  border-color: rgba(247, 151, 30, 0.45);
+}
+
+.port-list-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .port-list-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.port-item-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  transition: border-color var(--transition-fast);
+}
+
+.port-item-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.port-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  min-width: 48px;
+  text-align: center;
+}
+
+.port-info {
+  flex: 1;
+}
+
+.port-service {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-title);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.port-proto {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.port-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+  line-height: 1.35;
+}
+

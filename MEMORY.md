@@ -1,6 +1,6 @@
 # THANGIT.COM (TiT) — PROJECT MEMORY
 
-> **Cập nhật lần cuối:** 04/09/2026  
+> **Cập nhật lần cuối:** 05/09/2026  
 > **Chủ sở hữu:** Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder  
 > **Tên Ứng Dụng (PWA):** **TiT** (TiT Pocket Super App & NOC Portfolio)  
 > **Domain Trực Tiếp:** [thangit.com](https://thangit.com)  
@@ -12,48 +12,45 @@
 ## 1. Kiến Trúc & Triết Lý Phát Triển
 1. **100% Static & Zero Server Cost:**
    - Không cơ sở dữ liệu (No Database), không backend server phụ thuộc, bảo mật tuyệt đối, kháng DDoS qua Cloudflare CDN toàn cầu.
-2. **Ngôn Ngữ & Thư Viện:**
-   - **HTML5 Semantic:** Đầy đủ thẻ SEO, OpenGraph, Twitter Cards, PWA Manifest.
-   - **Vanilla CSS (No Tailwind):** Thiết kế giao diện Obsidian Dark Cyber, Glassmorphism, Neon Glow, Grid Bento và Flexbox đáp ứng hoàn hảo trên cả Mobile & Desktop.
-   - **Modern Vanilla ES6+ JS:** Không dùng framework nặng nề (React/Vue), code dạng Module hàm gọn gàng, tải trang dưới 0.3s.
-3. **PWA Standalone Engine:**
+2. **Kiến Trúc Giao Diện: iOS Springboard App Grid (Zero Modal Popup):**
+   - **Thay thế hoàn toàn Modal Popup nổi:** Thay vì bật modal chèn lên nhau gây cảm giác "tả phế lù", toàn bộ 17 ứng dụng được thiết kế dạng **Icon ứng dụng chuẩn iOS Squircle** (bo cong siêu mượt 22.5%, ánh gương phản chiếu, hiệu ứng chạm haptic).
+   - **In-Page Full App Transition:** Chạm vào icon sẽ trượt mượt mà vào màn hình ứng dụng toàn trang (`#ios-app-container`), có thanh Header chuẩn iOS dính trên cùng với nút `< Quay lại`.
+   - **URL Hash Routing:** Điều hướng qua hash (`#app=subnet`, `#app=dns`, `#app=wifi-qr`, `#app=ports`...) giúp hỗ trợ nút Back trình duyệt và thao tác vuốt cạnh trái trên điện thoại mà không cần tải lại trang.
+3. **Phân Định 2 Danh Mục Rõ Ràng:**
+   - 🛠️ **Hạ Tầng & Công Cụ IT (Network Suite):** Bộ công cụ chuyên sâu cho SysAdmin/Network Engineer.
+   - ☕ **Tiện Ích Bỏ Túi Thường Ngày (Pocket Tools):** Bộ tiện ích thiết thực cho cuộc sống hàng ngày.
+4. **PWA Standalone Engine (Cache v3):**
    - Hoạt động như Native App khi được ghim ra Màn hình chính (Home Screen) trên iOS & Android.
-   - Mở app trong cửa sổ độc lập (không có thanh địa chỉ trình duyệt).
-   - Tích hợp modal hướng dẫn cài đặt 1-chạm thông minh (`#modal-pwa-guide`).
-   - Service Worker (`sw.js`) cache toàn bộ tài nguyên cốt lõi với Network-First strategy, hỗ trợ offline cho các công cụ tính toán/lịch âm/QR.
+   - Mở app trong cửa sổ độc lập không có thanh URL. Service Worker (`tit-hub-v3`) cache offline.
 
 ---
 
-## 2. Hệ Thống Tính Năng Đã Triển Khai
+## 2. Hệ Thống 17 Ứng Dụng (iOS App Launcher)
 
-### A. Trang Chủ & Dashboard NOC
-- **Header NOC Bar:**
-  - Logo TiT hoạt họa viền Neon mềm mại, kích thước cân đối với text brand.
-  - Đèn LED trạng thái `SYSTEM STATUS: ONLINE (200 OK)` nhấp nháy xanh lá.
-  - Đo độ trễ thời gian thực (**Live Latency Ping**) tới Edge Cloudflare.
-  - Visitor IP Badge: Tự động phát hiện IP công cộng và POP Cloudflare (HAN - Hanoi).
-  - Nút **"Cài App TiT"**: Tự động mở hướng dẫn ghim ra màn hình chính theo từng hệ điều hành (Safari iOS / Chrome Android).
-- **Hero Profile:**
-  - Nhận diện Thắng IT, Avatar bo tròn ánh kim cyber.
-  - Trình bày định vị: Senior Network Administrator & Vibe Coder.
-- **Bento Grid 5 Cards:**
-  - **Card 1 (Mạng & Hạ tầng):** Mikrotik, Cisco, VLAN, VPN, Firewall, Homelab.
-  - **Card 2 (Hệ thống & Cloud):** Linux, Windows Server, Docker, Proxmox, Cloudflare.
-  - **Card 3 (Vibe Coding):** AI Workflow, Tự động hóa sản phẩm số thực chiến.
-  - **Card 4 (Network Toolbox):** IP Inspector, Latency Tester, Bộ tạo mật khẩu IT ngẫu nhiên độ an toàn cao.
-  - **Card 5 (TiT Pocket Super App):** Kho Tiện Ích Đa Năng Bỏ Túi với chip preview thời tiết & giá Bitcoin cập nhật liên tục.
-
-### B. Kho 8 Tiện Ích Bỏ Túi (`#modal-pocket-tools`)
-| STT | Tên Tiện Ích | ID Tab | Nguồn API / Thuật Toán | Tính Năng Chính |
+### A. 🛠️ Hạ Tầng & Công Cụ IT (Network Suite - 9 Apps)
+| STT | Ứng Dụng | App ID | Công Nghệ / Nguồn | Tính Năng & Điểm Nhấn |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | **Tạo QR Đa Năng** | `tab-p-qr` | VietQR (`img.vietqr.io`) + Client Engine (`qrcode.min.js`) | Tạo QR VietQR cho 40+ ngân hàng VN (kèm số tiền & nội dung chuyển khoản); QR Wi-Fi 1-chạm; URL; vCard danh bạ cá nhân; Text tùy biến. Có nút Tải ảnh PNG & Copy vào Clipboard. |
-| 2 | **Thời Tiết & Nhiệt Độ** | `tab-p-weather` | Open-Meteo REST API (Free, CORS ok) | Thời tiết 6 thành phố lớn (Hà Nội, TP.HCM, Đà Nẵng, Hải Phòng, Cần Thơ, Đà Lạt) + Nút định vị GPS tự động. Hiển thị nhiệt độ, độ ẩm, gió, mây, biểu tượng thời tiết. |
-| 3 | **Giá Coin Trực Tiếp** | `tab-p-crypto` | Binance Public API v3 (`api.binance.com`) | Bảng giá Top 10 coin: BTC, ETH, SOL, BNB, XRP, DOGE, ADA, SUI, NEAR, PEPE. Giá USD, quy đổi ước tính VNĐ, % biến động 24h, High/Low. |
-| 4 | **Bóng Đá Trực Tiếp** | `tab-p-football` | ESPN Scoreboard API (`site.api.espn.com`) | Lịch thi đấu, tỉ số trực tiếp và logo CLB theo giờ Việt Nam (GMT+7) cho 5 giải: Ngoại Hạng Anh (EPL), Cúp C1 (UCL), La Liga, Serie A, Bundesliga. |
-| 5 | **Máy Tính Cyber** | `tab-p-calc` | In-browser Engine (JS) | Bàn phím Cyber Neon với đầy đủ phép tính: `+ - × ÷ % ± ⌫ =`. Tính toán tức thì, thao tác mượt mà trên mobile. |
-| 6 | **Lịch Âm Vạn Niên** | `tab-p-lunar` | Thuật toán Hồ Ngọc Đức (`js/lunar.js`) | 100% Offline: Tính chuẩn xác ngày Âm lịch theo kinh tuyến GMT+7, Can Chi Năm - Tháng - Ngày, Giờ Hoàng Đạo/Hắc Đạo trong ngày và 24 Tiết Khí. |
-| 7 | **Đổi Đơn Vị & Ngoại Tệ** | `tab-p-converter` | ExchangeRate API (`open.er-api.com`) + Static Table | Tỷ giá hối đoái ngoại tệ (USD, VND, EUR, JPY, GBP, CNY...) + Dung lượng IT (Bytes ↔ PB) + Tốc độ mạng (Mbps ↔ MB/s) + Chiều dài, Khối lượng, Nhiệt độ. |
-| 8 | **Đồng Hồ Giờ Quốc Tế** | `tab-p-world` | Javascript `Intl.DateTimeFormat` | Hiển thị 8 múi giờ toàn cầu (Hà Nội, Tokyo, London, New York, San Francisco, Paris, Sydney, Dubai) kèm ticking từng giây, icon Ngày/Đêm (☀️/🌙) và độ lệch giờ so với Việt Nam. |
+| 1 | **Subnet CIDR** | `app-subnet` | Client-side Bitwise Math | Tính toán Subnet /1 đến /32, Subnet Mask, Wildcard, Network/Broadcast IP, Dải Host khả dụng, Binary Mask, Phân lớp IP & Copy báo cáo cấu hình 1-chạm. |
+| 2 | **DNS Lookup DoH** | `app-dns` | Cloudflare DoH REST API (`1.1.1.1`) | Tra cứu bản ghi DNS trực tiếp qua HTTPS: A, AAAA, CNAME, MX, TXT, NS với TTL, Answer, và Copy nhanh. |
+| 3 | **Wi-Fi QR** | `app-wifi-qr` | `qrcode.min.js` | Tạo mã QR kết nối Wi-Fi 1-chạm chuẩn WPA/WPA2/WPA3 (hỗ trợ mạng ẩn). Nút Tải PNG & Copy cấu hình text. |
+| 4 | **Tra Cứu Port** | `app-ports` | Local Enterprise Port Registry | Bảng tra cứu & lọc 39 cổng dịch vụ mạng phổ biến (Web, Mail, Remote, Database, VPN, Monitoring) kèm protocol TCP/UDP. |
+| 5 | **Mật Khẩu IT** | `app-password` | Web Crypto API (Entropy cao) | Sinh mật khẩu mạnh cho Root/Switch/DB/Wi-Fi với thanh trượt độ dài và phân loại ký tự. |
+| 6 | **NOC Ping** | `app-telemetry` | Cloudflare CDN Trace (`/cdn-cgi/trace`) | Giám sát độ trễ Ping thực tế tới Edge CDN, bóc tách IP công cộng, Node POP, Giao thức HTTP, TLS cipher, SNI. |
+| 7 | **Terminal CLI** | `app-terminal` | In-browser Linux Emulator | Bàn gõ CLI phong cách zsh, hỗ trợ phím nóng `~`, các lệnh `help`, `whoami`, `skills`, `projects`, `ping`, `clear`. |
+| 8 | **Hồ Sơ CV** | `app-career` | Timeline Component | Trình bày 10 năm kinh nghiệm quản trị hệ thống, hạ tầng logistics 40,000m², 500+ nodes. |
+| 9 | **Dự Án Số** | `app-projects` | Showcase Grid | Danh mục các dự án số tiêu biểu, hệ thống đã triển khai thực tế. |
+
+### B. ☕ Tiện Ích Bỏ Túi Thường Ngày (Pocket Tools - 8 Apps)
+| STT | Ứng Dụng | App ID | Công Nghệ / Nguồn | Tính Năng Chính |
+| :--- | :--- | :--- | :--- | :--- |
+| 10 | **VietQR Bank** | `app-vietqr` | VietQR API + QR Engine | Tạo QR thanh toán nhanh cho 40+ ngân hàng VN kèm số tiền & nội dung. Tải ảnh & copy. |
+| 11 | **Máy Tính** | `app-calc` | In-browser Math Engine | Bàn phím Cyber Neon với phép tính nhanh, mượt trên mobile. |
+| 12 | **Lịch Âm** | `app-lunar` | Thuật toán Hồ Ngọc Đức | 100% Offline: Lịch vạn niên, Can Chi, Hoàng Đạo, Tiết Khí GMT+7. |
+| 13 | **Thời Tiết** | `app-weather` | Open-Meteo REST API | Dự báo 6 tỉnh thành + GPS tự động, nhiệt độ, độ ẩm, gió, UV, mưa. |
+| 14 | **Đổi Đơn Vị** | `app-converter` | ExchangeRate API + Math | Tỷ giá ngoại tệ, Dung lượng IT (Bytes ↔ PB), Tốc độ mạng (Mbps ↔ MB/s), Đơn vị đo. |
+| 15 | **Giờ Quốc Tế** | `app-world` | Javascript `Intl` | 8 múi giờ toàn cầu cập nhật từng giây, biểu tượng Ngày/Đêm. |
+| 16 | **Giá Coin** | `app-crypto` | Binance Public API v3 | Bảng giá Top 10 coin (BTC, ETH, SOL, BNB...), giá USD, biến động 24h. |
+| 17 | **Bóng Đá** | `app-football` | ESPN Scoreboard API | Lịch thi đấu và tỉ số trực tiếp 5 giải hàng đầu (EPL, C1, La Liga, Serie A, Bundesliga). |
 
 ---
 

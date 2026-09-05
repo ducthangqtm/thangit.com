@@ -4,14 +4,15 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initModals();
-  initNocLatency();
+  initAppRouter();
   initNetworkInspector();
   initLatencyTester();
   initSubnetCalculator();
+  initDnsLookup();
+  initWifiQr();
+  initPortLookup();
   initPasswordGenerator();
   initInteractiveTerminal();
-  initToolboxTabs();
   initCopyButtons();
   initAnimatedFavicon();
   initServiceWorker();
@@ -78,6 +79,16 @@ function initPWAInstallPrompt() {
 
   if (btnTopbar) btnTopbar.addEventListener('click', handleInstallClick);
   if (btnBanner) btnBanner.addEventListener('click', handleInstallClick);
+
+  const installModal = document.getElementById('modal-ios-install');
+  if (installModal) {
+    installModal.querySelectorAll('[data-close="modal-ios-install"], .modal-backdrop').forEach(el => {
+      el.addEventListener('click', () => {
+        installModal.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 }
 
 function initServiceWorker() {
@@ -211,78 +222,385 @@ function initPullToRefresh() {
 }
 
 /* ==========================================================================
-   1. MODAL / APP LAUNCHER CONTROLLER
+   1. IOS APP ROUTER & VIEW CONTROLLER (ZERO POPUP • 100% NATIVE FEEL)
    ========================================================================== */
-function initModals() {
-  function openModal(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
+function initAppRouter() {
+  const springboard = document.getElementById('springboard-view');
+  const appContainer = document.getElementById('ios-app-container');
+  const backBtn = document.getElementById('ios-back-btn');
+  const navTitle = document.getElementById('ios-nav-title');
+  const navIcon = document.getElementById('ios-nav-icon');
 
-    // Auto focus on terminal input if opening terminal
-    if (id === 'modal-terminal') {
-      const termInput = document.getElementById('term-cmd-input');
-      if (termInput) setTimeout(() => termInput.focus(), 150);
+  const appMeta = {
+    'app-subnet':    { title: 'Subnet & CIDR Calculator', icon: '🧮' },
+    'app-dns':       { title: 'DNS Lookup (Cloudflare DoH)', icon: '🌐' },
+    'app-wifi-qr':   { title: 'Tạo QR Wi-Fi 1-Chạm', icon: '📶' },
+    'app-ports':     { title: 'Tra Cứu Cổng Mạng & Port', icon: '🔌' },
+    'app-password':  { title: 'Sinh Mật Khẩu IT & Key', icon: '🔐' },
+    'app-telemetry': { title: 'NOC Telemetry & Ping', icon: '⚡' },
+    'app-terminal':  { title: 'NOC Terminal CLI (zsh)', icon: '⌨️' },
+    'app-career':    { title: 'Hồ Sơ Năng Lực 10 Năm', icon: '💼' },
+    'app-projects':  { title: 'Dự Án Số & Hạ Tầng', icon: '🚀' },
+    'app-vietqr':    { title: 'VietQR Bank Studio', icon: '🏦' },
+    'app-calc':      { title: 'Máy Tính Cyber', icon: '🧮' },
+    'app-lunar':     { title: 'Lịch Âm Vạn Niên', icon: '📅' },
+    'app-weather':   { title: 'Thời Tiết Trực Tiếp', icon: '🌤️' },
+    'app-converter': { title: 'Đổi Đơn Vị & Ngoại Tệ', icon: '⚖️' },
+    'app-world':     { title: 'Đồng Hồ Giờ Quốc Tế', icon: '🌍' },
+    'app-crypto':    { title: 'Bảng Giá Coin Binance', icon: '🪙' },
+    'app-football':  { title: 'Bóng Đá Trực Tiếp', icon: '⚽' }
+  };
+
+  function openApp(appId, updateHistory = true) {
+    const screen = document.getElementById(`screen-${appId}`);
+    if (!screen || !appContainer || !springboard) return;
+
+    if ('vibrate' in navigator) {
+      try { navigator.vibrate(12); } catch {}
     }
-  }
 
-  function closeModal(modalOrId) {
-    const modal = typeof modalOrId === 'string' ? document.getElementById(modalOrId) : modalOrId;
-    if (!modal) return;
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+    document.querySelectorAll('.ios-app-screen').forEach(s => s.classList.remove('active'));
+    screen.classList.add('active');
 
-  // Bind click-to-open elements
-  document.querySelectorAll('[data-open]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-open');
-      openModal(targetId);
-    });
-  });
+    const meta = appMeta[appId] || { title: 'Ứng Dụng', icon: '⚡' };
+    if (navTitle) navTitle.textContent = meta.title;
+    if (navIcon) navIcon.textContent = meta.icon;
 
-  // Bind close buttons
-  document.querySelectorAll('[data-close]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const targetId = btn.getAttribute('data-close');
-      closeModal(targetId);
-    });
-  });
+    springboard.classList.add('hidden');
+    appContainer.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Click outside to close
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        closeModal(overlay);
+    if (updateHistory) {
+      window.location.hash = `app=${appId.replace('app-', '')}`;
+    }
+
+    // Lifecycle triggers
+    if (appId === 'app-subnet') {
+      const calcBtn = document.getElementById('btn-calculate-subnet');
+      if (calcBtn) calcBtn.click();
+    } else if (appId === 'app-dns') {
+      const input = document.getElementById('dns-domain-input');
+      if (input && !input.dataset.loaded) {
+        input.dataset.loaded = 'true';
+        const dnsBtn = document.getElementById('btn-dns-lookup');
+        if (dnsBtn) dnsBtn.click();
       }
+    } else if (appId === 'app-wifi-qr') {
+      const wifiBtn = document.getElementById('btn-gen-wifi-qr');
+      if (wifiBtn) wifiBtn.click();
+    } else if (appId === 'app-vietqr') {
+      const genBtn = document.getElementById('btn-generate-qr');
+      if (genBtn) genBtn.click();
+    } else if (appId === 'app-terminal') {
+      const input = document.getElementById('app-term-cmd-input');
+      if (input) setTimeout(() => input.focus(), 150);
+    }
+  }
+
+  function closeApp(updateHistory = true) {
+    if (!appContainer || !springboard) return;
+    appContainer.classList.remove('active');
+    document.querySelectorAll('.ios-app-screen').forEach(s => s.classList.remove('active'));
+    springboard.classList.remove('hidden');
+
+    if (updateHistory && window.location.hash.startsWith('#app=')) {
+      history.pushState('', document.title, window.location.pathname + window.location.search);
+    }
+  }
+
+  document.querySelectorAll('[data-app]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const appId = btn.getAttribute('data-app');
+      openApp(appId);
     });
   });
 
-  // ESC key to close all modals
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m));
+  const ipBadge = document.getElementById('home-visitor-ip')?.parentElement;
+  if (ipBadge) {
+    ipBadge.style.cursor = 'pointer';
+    ipBadge.addEventListener('click', () => openApp('app-telemetry'));
+  }
+
+  if (backBtn) {
+    backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeApp();
+    });
+  }
+
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash.startsWith('app=')) {
+      const name = hash.replace('app=', '');
+      openApp(`app-${name}`, false);
+    } else {
+      closeApp(false);
     }
-    // Hotkey `~` or Ctrl+K to toggle terminal
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && appContainer && appContainer.classList.contains('active')) {
+      closeApp();
+    }
     if (e.key === '`' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
       e.preventDefault();
-      const termModal = document.getElementById('modal-terminal');
-      if (termModal.classList.contains('open')) {
-        closeModal(termModal);
+      if (appContainer && appContainer.classList.contains('active')) {
+        closeApp();
       } else {
-        openModal('modal-terminal');
+        openApp('app-terminal');
       }
     }
   });
 
-  // Check URL hash for direct links (e.g. #tools, #career, #projects, #terminal)
-  const hash = window.location.hash.replace('#', '');
-  if (hash === 'tools') openModal('modal-tools');
-  else if (hash === 'career' || hash === 'cv') openModal('modal-career');
-  else if (hash === 'projects') openModal('modal-projects');
-  else if (hash === 'terminal') openModal('modal-terminal');
+  // Check initial URL hash
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash.startsWith('app=')) {
+    const name = initialHash.replace('app=', '');
+    openApp(`app-${name}`, false);
+  } else if (['tools', 'telemetry'].includes(initialHash)) {
+    openApp('app-telemetry');
+  } else if (['career', 'cv'].includes(initialHash)) {
+    openApp('app-career');
+  } else if (['projects'].includes(initialHash)) {
+    openApp('app-projects');
+  } else if (['terminal'].includes(initialHash)) {
+    openApp('app-terminal');
+  }
+}
+
+/* ==========================================================================
+   MODULE: DNS LOOKUP VIA CLOUDFLARE 1.1.1.1 DOH
+   ========================================================================== */
+function initDnsLookup() {
+  const domainInput = document.getElementById('dns-domain-input');
+  const typeBtns = document.querySelectorAll('[data-dns-type]');
+  const lookupBtn = document.getElementById('btn-dns-lookup');
+  const tbody = document.getElementById('dns-results-tbody');
+
+  let currentType = 'A';
+
+  typeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      typeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentType = btn.getAttribute('data-dns-type');
+      performLookup();
+    });
+  });
+
+  async function performLookup() {
+    if (!domainInput || !tbody) return;
+    let domain = domainInput.value.trim();
+    if (!domain) domain = 'thangit.com';
+    domain = domain.replace(/^https?:\/\//i, '').replace(/\/.*$/, '');
+
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--neon-cyan);">Đang truy vấn Cloudflare 1.1.1.1 DoH cho <strong>${domain}</strong> (${currentType})...</td></tr>`;
+
+    try {
+      const url = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${currentType}`;
+      const res = await fetch(url, {
+        headers: { 'Accept': 'application/dns-json' }
+      });
+      const data = await res.json();
+
+      if (!data.Answer || data.Answer.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-dim);">Không tìm thấy bản ghi <strong>${currentType}</strong> cho tên miền này (Status: ${data.Status || 0}).</td></tr>`;
+        return;
+      }
+
+      const typeMap = { 1: 'A', 28: 'AAAA', 5: 'CNAME', 15: 'MX', 16: 'TXT', 2: 'NS', 6: 'SOA' };
+
+      tbody.innerHTML = data.Answer.map(ans => {
+        const typeName = typeMap[ans.type] || ans.type;
+        const cleanData = (ans.data || '').replace(/"/g, '');
+        return `
+          <tr>
+            <td style="color:var(--text-title); font-weight:600;">${ans.name}</td>
+            <td><span class="badge-pill" style="background:rgba(0,255,157,0.12); color:var(--neon-green); font-size:0.7rem;">${typeName}</span></td>
+            <td style="color:var(--text-dim);">${ans.TTL}s</td>
+            <td style="color:var(--neon-cyan); word-break:break-all;"><strong>${cleanData}</strong></td>
+            <td><button class="btn-calc" style="padding:0.25rem 0.55rem; font-size:0.7rem;" onclick="navigator.clipboard.writeText('${cleanData}'); showToast('📋 Đã sao chép bản ghi!');">Copy</button></td>
+          </tr>
+        `;
+      }).join('');
+    } catch (err) {
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:#ff4757;">Lỗi truy vấn DNS: ${err.message}. Kiểm tra kết nối mạng!</td></tr>`;
+    }
+  }
+
+  if (lookupBtn) {
+    lookupBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      performLookup();
+    });
+  }
+
+  if (domainInput) {
+    domainInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        performLookup();
+      }
+    });
+  }
+}
+
+/* ==========================================================================
+   MODULE: WI-FI QR STUDIO
+   ========================================================================== */
+function initWifiQr() {
+  const ssidInput = document.getElementById('wifi-qr-ssid');
+  const passInput = document.getElementById('wifi-qr-pass');
+  const typeSelect = document.getElementById('wifi-qr-type');
+  const hiddenCheckbox = document.getElementById('wifi-qr-hidden');
+  const canvas = document.getElementById('wifi-qr-canvas');
+  const btnGen = document.getElementById('btn-gen-wifi-qr');
+  const btnDownload = document.getElementById('btn-download-wifi-qr');
+  const btnCopy = document.getElementById('btn-copy-wifi-str');
+
+  function generateWifiQR() {
+    const ssid = ssidInput?.value.trim() || 'THANGIT_WIFI';
+    const pass = passInput?.value || '';
+    const type = typeSelect?.value || 'WPA';
+    const hidden = hiddenCheckbox?.checked ? 'true' : 'false';
+
+    const wifiString = `WIFI:S:${ssid};T:${type};P:${pass};H:${hidden};;`;
+
+    if (window.TiTQR && canvas) {
+      window.TiTQR.render(canvas, { text: wifiString, size: 260 });
+    }
+    return wifiString;
+  }
+
+  if (btnGen) {
+    btnGen.addEventListener('click', (e) => {
+      e.preventDefault();
+      generateWifiQR();
+      showToast('⚡ Đã tạo mã QR Wi-Fi thành công!');
+    });
+  }
+
+  if (btnDownload && canvas) {
+    btnDownload.addEventListener('click', (e) => {
+      e.preventDefault();
+      const link = document.createElement('a');
+      link.download = `wifi-qr-${(ssidInput?.value || 'thangit').toLowerCase().replace(/\s+/g, '_')}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('📥 Đã tải ảnh mã QR Wi-Fi!');
+    });
+  }
+
+  if (btnCopy) {
+    btnCopy.addEventListener('click', (e) => {
+      e.preventDefault();
+      const wifiString = generateWifiQR();
+      navigator.clipboard.writeText(wifiString);
+      showToast('📋 Đã sao chép chuỗi kết nối Wi-Fi!');
+    });
+  }
+}
+
+/* ==========================================================================
+   MODULE: PORT & PROTOCOL CHEAT SHEET
+   ========================================================================== */
+function initPortLookup() {
+  const portsData = [
+    { port: 20, proto: 'TCP', service: 'FTP Data', cat: 'core', desc: 'Truyền dữ liệu tệp tin giao thức FTP' },
+    { port: 21, proto: 'TCP', service: 'FTP Control', cat: 'core', desc: 'Kênh điều khiển lệnh máy chủ FTP' },
+    { port: 22, proto: 'TCP', service: 'SSH / SFTP', cat: 'admin', desc: 'Secure Shell & truyền tệp bảo mật Linux/Router' },
+    { port: 23, proto: 'TCP', service: 'Telnet', cat: 'admin', desc: 'Dòng lệnh không mã hóa (Legacy, khuyến cáo tắt)' },
+    { port: 25, proto: 'TCP', service: 'SMTP', cat: 'mail', desc: 'Gửi thư điện tử giữa các Mail Server' },
+    { port: 53, proto: 'UDP/TCP', service: 'DNS', cat: 'core', desc: 'Phân giải tên miền internet (Domain Name System)' },
+    { port: 67, proto: 'UDP', service: 'DHCP Server', cat: 'core', desc: 'Cấp phát địa chỉ IP tự động từ Router/Server' },
+    { port: 68, proto: 'UDP', service: 'DHCP Client', cat: 'core', desc: 'Nhận địa chỉ IP tự động trên máy trạm' },
+    { port: 69, proto: 'UDP', service: 'TFTP', cat: 'core', desc: 'Nạp firmware & sao lưu cấu hình Cisco/Mikrotik' },
+    { port: 80, proto: 'TCP', service: 'HTTP', cat: 'web', desc: 'Giao thức web không mã hóa tiêu chuẩn' },
+    { port: 110, proto: 'TCP', service: 'POP3', cat: 'mail', desc: 'Nhận thư điện tử từ máy chủ về máy khách' },
+    { port: 123, proto: 'UDP', service: 'NTP', cat: 'core', desc: 'Đồng bộ thời gian chuẩn mạng (Network Time Protocol)' },
+    { port: 143, proto: 'TCP', service: 'IMAP', cat: 'mail', desc: 'Đọc và đồng bộ thư điện tử đa thiết bị' },
+    { port: 161, proto: 'UDP', service: 'SNMP', cat: 'admin', desc: 'Giám sát thiết bị mạng Router/Switch (Zabbix, PRTG)' },
+    { port: 162, proto: 'UDP', service: 'SNMP Trap', cat: 'admin', desc: 'Nhận cảnh báo tự động từ thiết bị mạng' },
+    { port: 179, proto: 'TCP', service: 'BGP', cat: 'core', desc: 'Định tuyến biên Border Gateway Protocol giữa các ISP' },
+    { port: 443, proto: 'TCP/UDP', service: 'HTTPS / QUIC', cat: 'web', desc: 'Duyệt web bảo mật TLS/SSL và HTTP/3' },
+    { port: 445, proto: 'TCP', service: 'SMB / CIFS', cat: 'core', desc: 'Chia sẻ tệp tin và máy in Windows / Samba NAS' },
+    { port: 465, proto: 'TCP', service: 'SMTPS', cat: 'mail', desc: 'Gửi email mã hóa qua SSL/TLS' },
+    { port: 500, proto: 'UDP', service: 'IPsec IKE', cat: 'vpn', desc: 'Thiết lập đường hầm VPN IPsec trao đổi khóa IKE' },
+    { port: 587, proto: 'TCP', service: 'SMTP Submission', cat: 'mail', desc: 'Gửi thư khách chuẩn hiện đại có xác thực STARTTLS' },
+    { port: 993, proto: 'TCP', service: 'IMAPS', cat: 'mail', desc: 'Đồng bộ email bảo mật qua SSL/TLS' },
+    { port: 995, proto: 'TCP', service: 'POP3S', cat: 'mail', desc: 'Nhận email bảo mật qua SSL/TLS' },
+    { port: 1194, proto: 'UDP/TCP', service: 'OpenVPN', cat: 'vpn', desc: 'Cổng VPN nguồn mở phổ biến nhất cho doanh nghiệp' },
+    { port: 1433, proto: 'TCP', service: 'MS SQL Server', cat: 'db', desc: 'Cơ sở dữ liệu Microsoft SQL Server' },
+    { port: 1521, proto: 'TCP', service: 'Oracle DB', cat: 'db', desc: 'Cơ sở dữ liệu doanh nghiệp Oracle Database' },
+    { port: 2049, proto: 'TCP/UDP', service: 'NFS', cat: 'core', desc: 'Hệ thống tệp mạng Network File System Linux/Proxmox' },
+    { port: 3306, proto: 'TCP', service: 'MySQL / MariaDB', cat: 'db', desc: 'Hệ quản trị cơ sở dữ liệu web phổ biến nhất' },
+    { port: 3389, proto: 'TCP/UDP', service: 'RDP', cat: 'admin', desc: 'Remote Desktop Protocol điều khiển máy Windows' },
+    { port: 4500, proto: 'UDP', service: 'IPsec NAT-T', cat: 'vpn', desc: 'Đường hầm VPN IPsec vượt qua tường lửa NAT Traversal' },
+    { port: 5060, proto: 'UDP/TCP', service: 'SIP (VoIP)', cat: 'mail', desc: 'Tổng đài điện thoại thoại IP (Asterisk, FreePBX)' },
+    { port: 5432, proto: 'TCP', service: 'PostgreSQL', cat: 'db', desc: 'Cơ sở dữ liệu quan hệ mã nguồn mở mạnh mẽ' },
+    { port: 5900, proto: 'TCP', service: 'VNC', cat: 'admin', desc: 'Điều khiển màn hình từ xa Virtual Network Computing' },
+    { port: 6379, proto: 'TCP', service: 'Redis', cat: 'db', desc: 'Bộ nhớ đệm In-memory data store tốc độ cao' },
+    { port: 8080, proto: 'TCP', service: 'HTTP Alt / Proxy', cat: 'web', desc: 'Cổng chạy thử nghiệm web app hoặc proxy nội bộ' },
+    { port: 8291, proto: 'TCP', service: 'Mikrotik Winbox', cat: 'admin', desc: 'Cổng phần mềm quản trị RouterOS Mikrotik độc quyền' },
+    { port: 8443, proto: 'TCP', service: 'HTTPS Alternate', cat: 'web', desc: 'Cổng web bảo mật phụ, thường dùng cho UniFi, cPanel' },
+    { port: 27017, proto: 'TCP', service: 'MongoDB', cat: 'db', desc: 'Cơ sở dữ liệu NoSQL dạng tài liệu JSON' },
+    { port: 51820, proto: 'UDP', service: 'WireGuard VPN', cat: 'vpn', desc: 'Giao thức VPN thế hệ mới tốc độ siêu nhanh & bảo mật' }
+  ];
+
+  const grid = document.getElementById('port-list-grid');
+  const searchInput = document.getElementById('port-search-input');
+  const catBtns = document.querySelectorAll('[data-port-cat]');
+
+  let currentCat = 'all';
+
+  function renderPorts() {
+    if (!grid) return;
+    const q = searchInput?.value.toLowerCase().trim() || '';
+
+    const filtered = portsData.filter(item => {
+      const matchCat = currentCat === 'all' || item.cat === currentCat;
+      const matchText = !q || 
+        item.port.toString().includes(q) ||
+        item.service.toLowerCase().includes(q) ||
+        item.proto.toLowerCase().includes(q) ||
+        item.desc.toLowerCase().includes(q);
+      return matchCat && matchText;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:2rem; color:var(--text-dim);">Không tìm thấy cổng mạng phù hợp.</div>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(p => `
+      <div class="port-item-card">
+        <div class="port-badge">${p.port}</div>
+        <div class="port-info">
+          <div class="port-service">
+            <span>${p.service}</span>
+            <span class="port-proto">${p.proto}</span>
+          </div>
+          <div class="port-desc">${p.desc}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', renderPorts);
+  }
+
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat = btn.getAttribute('data-port-cat');
+      renderPorts();
+    });
+  });
+
+  renderPorts();
 }
 
 /* ==========================================================================

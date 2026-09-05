@@ -1,5 +1,5 @@
 // THANGIT.COM — PWA Service Worker (Stand-alone App Mode Engine)
-const CACHE_NAME = 'tit-hub-v2';
+const CACHE_NAME = 'tit-hub-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
