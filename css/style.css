@@ -72,9 +72,6 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 16px 14px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -286,17 +283,13 @@ body {
 .profile-bio {
   font-size: 0.88rem;
   color: #94a3b8;
-  line-height: 1.55;
+  line-height: 1.5;
   width: 100%;
   max-width: 360px;
   height: 64px;
-  min-height: 64px;
-  max-height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   margin: 8px auto 0;
+  text-align: center;
+  display: block;
   overflow: hidden;
 }
 
