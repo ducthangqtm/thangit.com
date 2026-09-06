@@ -1,0 +1,76 @@
+{
+  "categories": [
+    {
+      "id": "all",
+      "name": "⚡ Tất Cả"
+    },
+    {
+      "id": "network",
+      "name": "📶 Mạng & Wi-Fi"
+    },
+    {
+      "id": "workspace",
+      "name": "🖥️ Góc Setup"
+    },
+    {
+      "id": "accessories",
+      "name": "🔌 Phụ Kiện IT"
+    }
+  ],
+  "items": [
+    {
+      "id": "item-1",
+      "title": "Router Wi-Fi 6 AX3000 Gigabit Băng Tần Kép",
+      "category": "network",
+      "badge": "Khuyên Dùng",
+      "price": "680.000đ",
+      "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80",
+      "url": "https://shope.ee/thangit"
+    },
+    {
+      "id": "item-2",
+      "title": "Switch Gigabit 8 Cổng Kim Loại Fanless",
+      "category": "network",
+      "badge": "Bền Bỉ",
+      "price": "390.000đ",
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&auto=format&fit=crop&q=80",
+      "url": "https://shope.ee/thangit"
+    },
+    {
+      "id": "item-3",
+      "title": "Bàn Phím Cơ Không Dây 3 Chế Độ Hot-swap",
+      "category": "workspace",
+      "badge": "Best Seller",
+      "price": "850.000đ",
+      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&auto=format&fit=crop&q=80",
+      "url": "https://shope.ee/thangit"
+    },
+    {
+      "id": "item-4",
+      "title": "Chuột Công Thái Học Ergonomic Wireless Silent",
+      "category": "workspace",
+      "badge": "Chống Mỏi",
+      "price": "420.000đ",
+      "image": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&auto=format&fit=crop&q=80",
+      "url": "https://shope.ee/thangit"
+    },
+    {
+      "id": "item-5",
+      "title": "Hub Type-C 8 in 1 4K HDMI + 100W PD + Gigabit LAN",
+      "category": "accessories",
+      "badge": "SysAdmin Cần",
+      "price": "450.000đ",
+      "image": "https://images.unsplash.com/photo-1625842268584-8f3296236761?w=400&auto=format&fit=crop&q=80",
+      "url": "https://shope.ee/thangit"
+    },
+    {
+      "id": "item-6",
+      "title": "Cáp Mạng Cat7 Ugreen Bấm Sẵn Đúc Kim Loại 10Gbps",
+      "category": "accessories",
+      "badge": "Chuẩn 10G",
+      "price": "85.000đ",
+      "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80",
+      "url": "https://shope.ee/thangit"
+    }
+  ]
+}

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tiện Ích Bỏ Túi Thường Ngày (6-in-1) — Thắng IT</title>
+  <meta name="description" content="Bộ tiện ích bỏ túi thiết thực tích hợp 6-trong-1: VietQR Bank Studio, Máy tính Cyber, Lịch Âm vạn niên Hồ Ngọc Đức, Dự báo thời tiết, Đổi ngoại tệ & dung lượng, Giờ thế giới. 100% Client-side.">
+  <meta name="keywords" content="tien ich thangit, pocket tools, vietqr studio napas, may tinh online, lich am van nien ho ngoc duc, thoi tiet open meteo, doi ty gia ngoai te, gio quoc te">
+  <meta name="author" content="Nguyễn Đức Thắng">
+  <link rel="canonical" href="https://thangit.com/tienich.html">
+
+  <!-- IndieWeb / Entity Verification -->
+  <link rel="me" href="https://thangnd.io.vn">
+  <link rel="me" href="https://thangnhayday.com">
+  <link rel="me" href="https://github.com/ducthangqtm">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tiện Ích Bỏ Túi Thường Ngày (6-in-1) — Thắng IT">
+  <meta property="og:description" content="6 tiện ích bỏ túi giải quyết nhanh nhu cầu sinh hoạt và công việc thường nhật: VietQR, Máy tính, Lịch Âm, Thời tiết, Đổi tiền tệ, Giờ thế giới.">
+  <meta property="og:image" content="https://thangit.com/apple-touch-icon.png">
+  <meta property="og:url" content="https://thangit.com/tienich.html">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css?v=20260906_3">
+
+  <style>
+    /* Pocket Tools Navigation Tabs */
+    .suite-nav-wrapper {
+      position: sticky;
+      top: 60px;
+      z-index: 40;
+      background: rgba(11, 19, 32, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .suite-tabs-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 2px 12px;
+    }
+    .suite-tabs-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .suite-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(22, 28, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .suite-tab-btn:hover {
+      background: rgba(30, 38, 52, 0.95);
+      color: #fff;
+      border-color: rgba(255, 184, 0, 0.3);
+    }
+    .suite-tab-btn.active {
+      background: rgba(255, 184, 0, 0.12);
+      border-color: #ffb800;
+      color: #ffb800;
+      box-shadow: 0 0 12px rgba(255, 184, 0, 0.25);
+    }
+    .suite-tool-pane {
+      display: none;
+      animation: fadeInPane 0.3s ease;
+    }
+    .suite-tool-pane.active {
+      display: block;
+    }
+    @keyframes fadeInPane {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .tool-header-box {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .tool-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: rgba(255, 184, 0, 0.12);
+      border: 1px solid rgba(255, 184, 0, 0.35);
+      color: #ffb800;
+      margin-bottom: 8px;
+    }
+    .tool-title-main {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .tool-desc-sub {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div id="pwa-pull-indicator" class="pwa-pull-indicator" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <polyline points="1 20 1 14 7 14"></polyline>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+    </svg>
+  </div>
+
+  <header class="header-nav">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Về Trang chủ">
+        <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="TiT Logo">
+          <defs>
+            <linearGradient id="tit-bg-tools" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0b1320"/>
+              <stop offset="100%" stop-color="#04070d"/>
+            </linearGradient>
+            <linearGradient id="tit-neon-tools" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="50%" stop-color="#7000ff"/>
+              <stop offset="100%" stop-color="#ff007b"/>
+            </linearGradient>
+          </defs>
+          <rect x="1.5" y="1.5" width="41" height="41" rx="10" fill="url(#tit-bg-tools)" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1.5"/>
+          <g>
+            <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon-tools)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="22" cy="23.5" r="1.2" fill="#ffffff"/>
+            <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon-tools)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <circle cx="22" cy="12" r="2.3" fill="#00f0ff"/>
+        </svg>
+        <span class="brand-name">THANG<span>IT</span>.COM</span>
+      </a>
+
+      <div class="topbar-actions">
+        <a href="/" class="ios-back-btn" title="Quay lại Trang chủ">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Trang chủ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Tool Switcher Tabs -->
+  <div class="suite-nav-wrapper">
+    <div class="container">
+      <div class="suite-tabs-scroll" id="tools-tabs-bar">
+        <button class="suite-tab-btn active" data-tab="vietqr">🏦 VietQR Studio</button>
+        <button class="suite-tab-btn" data-tab="calc">🔢 Máy Tính Cyber</button>
+        <button class="suite-tab-btn" data-tab="lunar">📅 Lịch Vạn Niên</button>
+        <button class="suite-tab-btn" data-tab="weather">⛅ Dự Báo Thời Tiết</button>
+        <button class="suite-tab-btn" data-tab="converter">💱 Đổi Tỷ Giá & Đơn Vị</button>
+        <button class="suite-tab-btn" data-tab="world">🌍 Giờ Quốc Tế</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-hub">
+    <div class="container hub-center-wrapper" style="max-width: 860px;">
+
+      <!-- ===================================================================
+           PANE 1: VIETQR BANK STUDIO
+           =================================================================== -->
+      <section class="suite-tool-pane active" id="pane-vietqr">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">NAPAS 247 FAST PAYMENT</span>
+          <h1 class="tool-title-main">VietQR Bank Studio — Tạo QR Chuyển Khoản</h1>
+          <p class="tool-desc-sub">Tạo mã QR nhận tiền chuẩn NAPAS 247 cho hơn 40 ngân hàng tại Việt Nam kèm số tiền và nội dung chuyển khoản.</p>
+        </div>
+
+        <div class="ios-card app-tool-card">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: flex-start;">
+            <div class="vietqr-form-fields">
+              <div class="input-group" style="margin-bottom:12px;">
+                <label for="qr-bank-select" class="input-label">Ngân Hàng Thụ Hưởng</label>
+                <select id="qr-bank-select" class="cyber-select">
+                  <option value="mb">MB Bank (Ngân hàng Quân Đội)</option>
+                  <option value="vcb">Vietcombank (Ngoại Thương VN)</option>
+                  <option value="tcb">Techcombank (Kỹ Thương VN)</option>
+                  <option value="vpb">VPBank (Việt Nam Thịnh Vượng)</option>
+                  <option value="acb">ACB (Á Châu)</option>
+                  <option value="bidv">BIDV (Đầu Tư & Phát Triển)</option>
+                  <option value="icb">VietinBank (Công Thương VN)</option>
+                  <option value="tpb">TPBank (Tiên Phong)</option>
+                  <option value="stb">Sacombank (Sài Gòn Thương Tín)</option>
+                  <option value="hdb">HDBank (Phát Triển TP.HCM)</option>
+                  <option value="vba">Agribank (Nông Nghiệp)</option>
+                  <option value="msb">MSB (Hàng Hải)</option>
+                  <option value="shb">SHB (Sài Gòn - Hà Nội)</option>
+                  <option value="ocb">OCB (Phương Đông)</option>
+                </select>
+              </div>
+
+              <div class="input-group" style="margin-bottom:12px;">
+                <label for="qr-bank-acc" class="input-label">Số Tài Khoản</label>
+                <input type="text" id="qr-bank-acc" class="cyber-input" value="0986192092" placeholder="Nhập số tài khoản nhận tiền">
+              </div>
+
+              <div class="input-group" style="margin-bottom:12px;">
+                <label for="qr-bank-amount" class="input-label">Số Tiền (VNĐ - Tùy chọn)</label>
+                <input type="number" id="qr-bank-amount" class="cyber-input" placeholder="Ví dụ: 100000 (để trống nếu tự nhập)">
+              </div>
+
+              <div class="input-group" style="margin-bottom:16px;">
+                <label for="qr-bank-desc" class="input-label">Nội Dung Chuyển Khoản (Tùy chọn)</label>
+                <input type="text" id="qr-bank-desc" class="cyber-input" value="ThangIT Chuyen Khoan" placeholder="Nội dung giao dịch">
+              </div>
+
+              <button type="button" id="btn-generate-qr" class="cyber-btn cyber-btn-primary" style="width:100%;">
+                <span>⚡ Cập Nhật Mã VietQR</span>
+              </button>
+            </div>
+
+            <div class="vietqr-preview-box" style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; background:rgba(4,7,13,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:16px;">
+              <img id="qr-bank-img" src="https://img.vietqr.io/image/mb-0986192092-compact2.png?amount=&addInfo=ThangIT%20Chuyen%20Khoan" alt="Mã VietQR" style="max-width:240px; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.5); background:#fff; padding:6px;">
+              
+              <div style="display:flex; gap:10px; margin-top:14px; width:100%; justify-content:center;">
+                <button type="button" id="btn-download-qr" class="cyber-btn cyber-btn-secondary" style="font-size:0.85rem; padding:8px 14px;">
+                  <span>💾 Tải Ảnh QR</span>
+                </button>
+                <button type="button" id="btn-copy-acc" class="cyber-btn cyber-btn-secondary" style="font-size:0.85rem; padding:8px 14px;">
+                  <span>📋 Sao Chép STK</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 2: MÁY TÍNH CYBER (CALCULATOR)
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-calc">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">PRECISION CALCULATOR</span>
+          <h2 class="tool-title-main">Máy Tính Cyber Đa Năng</h2>
+          <p class="tool-desc-sub">Bàn tính bỏ túi giải quyết nhanh các phép tính toán học, phần trăm và số học với phản hồi xúc giác rung mượt mà.</p>
+        </div>
+
+        <div class="ios-card app-tool-card" style="max-width:380px; margin:0 auto; padding:18px;">
+          <!-- Screen -->
+          <div class="calc-screen-box" style="background:rgba(0,0,0,0.65); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:16px; margin-bottom:16px; text-align:right;">
+            <div id="calc-history" style="font-size:0.8rem; color:var(--text-dim); min-height:18px; margin-bottom:4px;"></div>
+            <div id="calc-display" style="font-size:2.2rem; font-weight:700; color:#fff; font-family:monospace; word-break:break-all; line-height:1;">0</div>
+          </div>
+
+          <!-- Keypad Grid -->
+          <div class="calc-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
+            <button class="calc-key op-key" data-key="clear" style="background:rgba(239,68,68,0.2); color:#ef4444; border:1px solid rgba(239,68,68,0.4); border-radius:12px; height:52px; font-size:1.1rem; font-weight:bold; cursor:pointer;">AC</button>
+            <button class="calc-key op-key" data-key="backspace" style="background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.1); border-radius:12px; height:52px; font-size:1.1rem; cursor:pointer;">⌫</button>
+            <button class="calc-key op-key" data-key="percent" style="background:rgba(255,255,255,0.06); color:#ffb800; border:1px solid rgba(255,255,255,0.1); border-radius:12px; height:52px; font-size:1.1rem; cursor:pointer;">%</button>
+            <button class="calc-key op-key" data-key="/" style="background:rgba(255,184,0,0.18); color:#ffb800; border:1px solid rgba(255,184,0,0.4); border-radius:12px; height:52px; font-size:1.3rem; cursor:pointer;">÷</button>
+
+            <button class="calc-key num-key" data-key="7" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">7</button>
+            <button class="calc-key num-key" data-key="8" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">8</button>
+            <button class="calc-key num-key" data-key="9" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">9</button>
+            <button class="calc-key op-key" data-key="*" style="background:rgba(255,184,0,0.18); color:#ffb800; border:1px solid rgba(255,184,0,0.4); border-radius:12px; height:52px; font-size:1.3rem; cursor:pointer;">×</button>
+
+            <button class="calc-key num-key" data-key="4" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">4</button>
+            <button class="calc-key num-key" data-key="5" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">5</button>
+            <button class="calc-key num-key" data-key="6" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">6</button>
+            <button class="calc-key op-key" data-key="-" style="background:rgba(255,184,0,0.18); color:#ffb800; border:1px solid rgba(255,184,0,0.4); border-radius:12px; height:52px; font-size:1.3rem; cursor:pointer;">−</button>
+
+            <button class="calc-key num-key" data-key="1" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">1</button>
+            <button class="calc-key num-key" data-key="2" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">2</button>
+            <button class="calc-key num-key" data-key="3" style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">3</button>
+            <button class="calc-key op-key" data-key="+" style="background:rgba(255,184,0,0.18); color:#ffb800; border:1px solid rgba(255,184,0,0.4); border-radius:12px; height:52px; font-size:1.3rem; cursor:pointer;">+</button>
+
+            <button class="calc-key num-key" data-key="0" style="grid-column: span 2; background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.25rem; cursor:pointer;">0</button>
+            <button class="calc-key num-key" data-key="." style="background:rgba(22,28,38,0.9); color:#fff; border:1px solid rgba(255,255,255,0.08); border-radius:12px; height:52px; font-size:1.3rem; cursor:pointer;">.</button>
+            <button class="calc-key op-key" data-key="=" style="background:linear-gradient(135deg, #ffb800, #f59e0b); color:#000; border:none; border-radius:12px; height:52px; font-size:1.4rem; font-weight:bold; cursor:pointer; box-shadow:0 4px 12px rgba(245,158,11,0.35);">=</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 3: LỊCH VẠN NIÊN ÂM DƯƠNG
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-lunar">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">HỒ NGỌC ĐỨC ALGORITHM</span>
+          <h2 class="tool-title-main">Lịch Vạn Niên & Âm Lịch Việt Nam</h2>
+          <p class="tool-desc-sub">Tra cứu lịch âm dương chuẩn xác, giờ hoàng đạo/hắc đạo, can chi ngày tháng năm 100% Client-side.</p>
+        </div>
+
+        <div class="ios-card app-tool-card" style="max-width:540px; margin:0 auto;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <input type="date" id="lunar-date-picker" class="cyber-input" style="width:auto; padding:6px 12px;">
+            <button type="button" id="btn-lunar-today" class="cyber-btn cyber-btn-secondary" style="font-size:0.82rem; padding:6px 12px;">
+              <span>📅 Hôm Nay</span>
+            </button>
+          </div>
+
+          <!-- Lunar Date Card -->
+          <div style="background:rgba(255,184,0,0.08); border:1px solid rgba(255,184,0,0.3); border-radius:16px; padding:20px; text-align:center; margin-bottom:16px;">
+            <div id="lunar-solar-header" style="font-size:0.95rem; color:var(--text-dim); margin-bottom:6px;">Chủ Nhật, ngày 06/09/2026 (Dương lịch)</div>
+            <div id="lunar-day-display" style="font-size:3.6rem; font-weight:900; color:#ffb800; line-height:1; margin:8px 0;">26</div>
+            <div id="lunar-month-year-display" style="font-size:1.1rem; color:#fff; font-weight:700;">Tháng 7 • Năm Bính Ngọ (Âm lịch)</div>
+            <div id="lunar-canchi-day" style="font-size:0.9rem; color:var(--neon-cyan); margin-top:6px;">Ngày Giáp Thân, Tháng Bính Thân</div>
+          </div>
+
+          <!-- Metadata -->
+          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;">
+            <div style="background:rgba(22,28,38,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:12px; text-align:center;">
+              <span style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:2px;">Trực / Hoàng Đạo</span>
+              <strong id="lunar-status-text" style="color:var(--neon-green); font-size:0.9rem;">Thanh Long Hoàng Đạo</strong>
+            </div>
+            <div style="background:rgba(22,28,38,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:12px; text-align:center;">
+              <span style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:2px;">Tiết Khí</span>
+              <strong id="lunar-tietkhi-text" style="color:#fff; font-size:0.9rem;">Bạch Lộ (Nắng dịu)</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 4: DỰ BÁO THỜI TIẾT
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-weather">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">OPEN-METEO FORECAST API</span>
+          <h2 class="tool-title-main">Dự Báo Thời Tiết Việt Nam</h2>
+          <p class="tool-desc-sub">Nhiệt độ, độ ẩm, sức gió và dự báo 7 ngày tại các tỉnh thành hoặc định vị GPS theo thời gian thực.</p>
+        </div>
+
+        <div class="ios-card app-tool-card" style="max-width:620px; margin:0 auto;">
+          <div class="city-selector-bar" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+            <button type="button" class="weather-city-btn active" data-city="hanoi">Hà Nội</button>
+            <button type="button" class="weather-city-btn" data-city="hcm">TP. Hồ Chí Minh</button>
+            <button type="button" class="weather-city-btn" data-city="danang">Đà Nẵng</button>
+            <button type="button" class="weather-city-btn" data-city="haiphong">Hải Phòng</button>
+            <button type="button" class="weather-city-btn" data-city="cantho">Cần Thơ</button>
+            <button type="button" class="weather-city-btn" data-city="dalat">Đà Lạt</button>
+            <button type="button" id="btn-weather-gps" class="weather-city-btn" style="border-color:var(--neon-cyan); color:var(--neon-cyan);">📍 Vị Trí Của Tôi</button>
+          </div>
+
+          <!-- Current Weather Card -->
+          <div style="background:rgba(0,104,255,0.1); border:1px solid rgba(0,104,255,0.3); border-radius:18px; padding:20px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <div>
+              <h3 id="weather-city-name" style="font-size:1.3rem; color:#fff; margin-bottom:4px;">Hà Nội</h3>
+              <div id="weather-condition-text" style="color:var(--text-dim); font-size:0.9rem;">Trời quang mây tạnh</div>
+              <div style="display:flex; gap:14px; margin-top:8px; font-size:0.82rem; color:var(--text-dim);">
+                <span>Độ ẩm: <strong id="weather-humidity" style="color:#fff;">65%</strong></span>
+                <span>Gió: <strong id="weather-wind" style="color:#fff;">12 km/h</strong></span>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <span id="weather-icon-symbol" style="font-size:2.8rem; display:block; line-height:1;">☀️</span>
+              <span id="weather-temp-now" style="font-size:2.4rem; font-weight:800; color:#fff; line-height:1.1;">29°C</span>
+            </div>
+          </div>
+
+          <!-- 5-Day Mini Forecast -->
+          <div id="weather-daily-forecast" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(80px, 1fr)); gap:8px;">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 5: ĐỔI TỶ GIÁ & ĐƠN VỊ
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-converter">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">MULTI-UNIT CONVERSION</span>
+          <h2 class="tool-title-main">Quy Đổi Tỷ Giá Ngoại Tệ & Đơn Vị IT</h2>
+          <p class="tool-desc-sub">Chuyển đổi tức thì tiền tệ phổ biến (USD, EUR, JPY, VND) và đơn vị dung lượng lưu trữ IT (Byte, KB, MB, GB, TB).</p>
+        </div>
+
+        <div class="ios-card app-tool-card" style="max-width:540px; margin:0 auto;">
+          <div class="input-group" style="margin-bottom:14px;">
+            <label for="conv-cat-select" class="input-label">Danh Mục Chuyển Đổi</label>
+            <select id="conv-cat-select" class="cyber-select">
+              <option value="currency">💱 Ngoại Tệ (USD, VND, EUR, JPY, GBP, CNY...)</option>
+              <option value="data">💾 Dung Lượng Bộ Nhớ (Byte, KB, MB, GB, TB, PB)</option>
+              <option value="speed">⚡ Tốc Độ Mạng (Mbps, MB/s, Gbps)</option>
+            </select>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:center; margin-bottom:14px;">
+            <div>
+              <label class="input-label" style="font-size:0.75rem;">Từ Đơn Vị</label>
+              <select id="conv-unit-1" class="cyber-select" style="margin-bottom:8px;"></select>
+              <input type="number" id="conv-val-1" class="cyber-input" value="100">
+            </div>
+
+            <div style="padding-top:20px;">
+              <button type="button" id="btn-conv-swap" class="cyber-btn cyber-btn-secondary" style="padding:10px; border-radius:50%;" title="Đảo ngược">
+                🔄
+              </button>
+            </div>
+
+            <div>
+              <label class="input-label" style="font-size:0.75rem;">Sang Đơn Vị</label>
+              <select id="conv-unit-2" class="cyber-select" style="margin-bottom:8px;"></select>
+              <input type="text" id="conv-val-2" class="cyber-input font-mono" readonly style="color:var(--neon-cyan); font-weight:bold;">
+            </div>
+          </div>
+
+          <div style="text-align:center; font-size:0.8rem; color:var(--text-dim);">
+            Tỷ giá được quy chuẩn tham khảo theo thị trường tự do và ngân hàng thương mại.
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 6: GIỜ QUỐC TẾ (WORLD CLOCK)
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-world">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">SYNCHRONIZED REAL-TIME CLOCKS</span>
+          <h2 class="tool-title-main">Đồng Hồ Thế Giới & Múi Giờ Quốc Tế</h2>
+          <p class="tool-desc-sub">Theo dõi giờ làm việc của các trung tâm tài chính và công nghệ toàn cầu theo thời gian thực.</p>
+        </div>
+
+        <div class="ios-card app-tool-card">
+          <div class="world-clocks-grid" id="world-clock-container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="app-footer" style="margin-top: 3rem; text-align: center; padding: 2rem 1rem; border-top: 1px solid var(--border-color); color: var(--text-dim); font-size: 0.85rem;">
+    <p>© 2026 <strong>Thắng IT</strong> (Nguyễn Đức Thắng) • Tiện ích bỏ túi thường ngày gọn nhẹ, không quảng cáo</p>
+    <p style="margin-top: 6px;">
+      <a href="/" style="color: #ffb800; text-decoration: none;">Trang Chủ</a> • 
+      <a href="/it.html" style="color: #ffb800; text-decoration: none;">IT Tools (Network Suite)</a> • 
+      <a href="https://thangnd.io.vn" target="_blank" rel="noopener me" style="color: var(--text-dim); text-decoration: none;">thangnd.io.vn</a> • 
+      <a href="https://thangnhayday.com" target="_blank" rel="noopener me" style="color: var(--text-dim); text-decoration: none;">thangnhayday.com</a>
+    </p>
+  </footer>
+
+  <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
+
+  <!-- Lunar Algorithm Library -->
+  <script src="/js/lunar.js"></script>
+  <!-- Core Common Utilities -->
+  <script src="/js/core.js?v=20260906_3"></script>
+
+  <!-- Interactive Pocket Tools Engine (All 6 Tools Logic) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Tab Switcher Logic with URL Hash Support
+      const tabBtns = document.querySelectorAll('#tools-tabs-bar .suite-tab-btn');
+      const toolPanes = document.querySelectorAll('.suite-tool-pane');
+
+      function switchTab(tabId) {
+        tabBtns.forEach(btn => {
+          if (btn.getAttribute('data-tab') === tabId) {
+            btn.classList.add('active');
+            btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        toolPanes.forEach(pane => {
+          if (pane.id === `pane-${tabId}`) {
+            pane.classList.add('active');
+          } else {
+            pane.classList.remove('active');
+          }
+        });
+
+        window.location.hash = tabId;
+      }
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tabId = btn.getAttribute('data-tab');
+          switchTab(tabId);
+        });
+      });
+
+      const currentHash = window.location.hash.replace('#', '');
+      if (currentHash && document.getElementById(`pane-${currentHash}`)) {
+        switchTab(currentHash);
+      }
+
+      // =================================================================
+      // TOOL 1: VIETQR STUDIO
+      // =================================================================
+      const qrBankSelect = document.getElementById('qr-bank-select');
+      const qrBankAcc = document.getElementById('qr-bank-acc');
+      const qrBankAmount = document.getElementById('qr-bank-amount');
+      const qrBankDesc = document.getElementById('qr-bank-desc');
+      const btnGenQr = document.getElementById('btn-generate-qr');
+      const btnDlQr = document.getElementById('btn-download-qr');
+      const btnCopyAcc = document.getElementById('btn-copy-acc');
+      const qrImg = document.getElementById('qr-bank-img');
+
+      function getVietQrUrl() {
+        const bank = qrBankSelect ? qrBankSelect.value : 'mb';
+        const acc = (qrBankAcc.value || '').trim() || '0986192092';
+        const amount = (qrBankAmount.value || '').trim();
+        const desc = encodeURIComponent((qrBankDesc.value || '').trim() || 'Thanh toan');
+        return `https://img.vietqr.io/image/${bank}-${acc}-compact2.png?amount=${amount}&addInfo=${desc}`;
+      }
+
+      function updateQr() {
+        if (!qrImg) return;
+        qrImg.src = getVietQrUrl();
+        showToast('⚡ Đã cập nhật mã VietQR!');
+      }
+
+      if (btnGenQr) btnGenQr.addEventListener('click', updateQr);
+      if (btnDlQr) {
+        btnDlQr.addEventListener('click', async () => {
+          const url = getVietQrUrl();
+          try {
+            const res = await fetch(url);
+            const blob = await res.blob();
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `VietQR_${qrBankSelect.value}_${qrBankAcc.value}.png`;
+            a.click();
+            showToast('💾 Đã tải ảnh VietQR!');
+          } catch {
+            window.open(url, '_blank');
+          }
+        });
+      }
+      if (btnCopyAcc) {
+        btnCopyAcc.addEventListener('click', () => {
+          const acc = (qrBankAcc.value || '').trim();
+          navigator.clipboard.writeText(acc).then(() => {
+            showToast(`📋 Đã sao chép STK: <strong>${acc}</strong>`);
+          });
+        });
+      }
+
+      // =================================================================
+      // TOOL 2: CYBER CALCULATOR
+      // =================================================================
+      const calcDisplay = document.getElementById('calc-display');
+      const calcHistory = document.getElementById('calc-history');
+      let curVal = '0';
+      let prevVal = null;
+      let currOp = null;
+      let resetDisplay = false;
+
+      function updateCalcScreen() {
+        if (calcDisplay) calcDisplay.textContent = curVal;
+      }
+
+      function doCompute(a, b, op) {
+        a = parseFloat(a);
+        b = parseFloat(b);
+        if (op === '+') return a + b;
+        if (op === '-') return a - b;
+        if (op === '*') return a * b;
+        if (op === '/') return b !== 0 ? a / b : 'Lỗi';
+        if (op === 'percent') return (a * b) / 100;
+        return b;
+      }
+
+      document.querySelectorAll('.calc-key').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-key');
+          if ('vibrate' in navigator) {
+            try { navigator.vibrate(8); } catch {}
+          }
+
+          if (key >= '0' && key <= '9') {
+            if (curVal === '0' || resetDisplay) {
+              curVal = key;
+              resetDisplay = false;
+            } else {
+              curVal += key;
+            }
+            updateCalcScreen();
+          } else if (key === '.') {
+            if (resetDisplay) {
+              curVal = '0.';
+              resetDisplay = false;
+            } else if (!curVal.includes('.')) {
+              curVal += '.';
+            }
+            updateCalcScreen();
+          } else if (key === 'clear') {
+            curVal = '0';
+            prevVal = null;
+            currOp = null;
+            if (calcHistory) calcHistory.textContent = '';
+            updateCalcScreen();
+          } else if (key === 'backspace') {
+            if (curVal.length > 1) {
+              curVal = curVal.slice(0, -1);
+            } else {
+              curVal = '0';
+            }
+            updateCalcScreen();
+          } else if (['+', '-', '*', '/', 'percent'].includes(key)) {
+            if (prevVal !== null && currOp !== null && !resetDisplay) {
+              curVal = String(doCompute(prevVal, curVal, currOp));
+              updateCalcScreen();
+            }
+            prevVal = curVal;
+            currOp = key;
+            resetDisplay = true;
+            if (calcHistory) {
+              const symbolMap = { '+': '+', '-': '−', '*': '×', '/': '÷', 'percent': '%' };
+              calcHistory.textContent = `${prevVal} ${symbolMap[key]}`;
+            }
+          } else if (key === '=') {
+            if (prevVal !== null && currOp !== null) {
+              const res = doCompute(prevVal, curVal, currOp);
+              if (calcHistory) calcHistory.textContent = `${prevVal} ${currOp} ${curVal} =`;
+              curVal = String(res);
+              prevVal = null;
+              currOp = null;
+              resetDisplay = true;
+              updateCalcScreen();
+            }
+          }
+        });
+      });
+
+      // =================================================================
+      // TOOL 3: LỊCH VẠN NIÊN ÂM DƯƠNG
+      // =================================================================
+      const datePicker = document.getElementById('lunar-date-picker');
+      const btnToday = document.getElementById('btn-lunar-today');
+      const solarHeader = document.getElementById('lunar-solar-header');
+      const lunarDayDisplay = document.getElementById('lunar-day-display');
+      const lunarMonthYearDisplay = document.getElementById('lunar-month-year-display');
+      const lunarCanChiDay = document.getElementById('lunar-canchi-day');
+      const hoangDaoStatus = document.getElementById('lunar-status-text');
+      const tietKhiText = document.getElementById('lunar-tietkhi-text');
+
+      function updateLunar(dateObj) {
+        if (!window.VietLunar) return;
+
+        const d = dateObj.getDate();
+        const m = dateObj.getMonth() + 1;
+        const y = dateObj.getFullYear();
+
+        const lunar = window.VietLunar.convertSolar2Lunar(d, m, y, 7);
+        const canChiYear = window.VietLunar.getCanChiYear(lunar.year);
+        const canChiMonth = window.VietLunar.getCanChiMonth(lunar.month, lunar.year);
+        const canChiDay = window.VietLunar.getCanChiDay(lunar.jd);
+        const status = window.VietLunar.getHoangDaoStatus(lunar.jd, 'Dần');
+        const tietKhi = window.VietLunar.getTietKhi(lunar.jd);
+
+        const DAYS_VN = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+        const dayOfWeek = DAYS_VN[dateObj.getDay()];
+
+        if (solarHeader) solarHeader.textContent = `${dayOfWeek}, ngày ${d < 10 ? '0' + d : d}/${m < 10 ? '0' + m : m}/${y} (Dương lịch)`;
+        if (lunarDayDisplay) lunarDayDisplay.textContent = `${lunar.day}`;
+        if (lunarMonthYearDisplay) lunarMonthYearDisplay.textContent = `Tháng ${lunar.month}${lunar.isLeap ? ' (Nhuận)' : ''} • Năm ${canChiYear} (Âm lịch)`;
+        if (lunarCanChiDay) lunarCanChiDay.textContent = `Ngày ${canChiDay}, Tháng ${canChiMonth}`;
+        if (hoangDaoStatus) hoangDaoStatus.textContent = status;
+        if (tietKhiText) tietKhiText.textContent = tietKhi;
+
+        if (datePicker) {
+          const yyyy = y;
+          const mm = m < 10 ? '0' + m : m;
+          const dd = d < 10 ? '0' + d : d;
+          datePicker.value = `${yyyy}-${mm}-${dd}`;
+        }
+      }
+
+      if (datePicker) {
+        datePicker.addEventListener('change', () => {
+          if (datePicker.value) {
+            const parts = datePicker.value.split('-');
+            const d = new Date(parts[0], parts[1] - 1, parts[2]);
+            updateLunar(d);
+          }
+        });
+      }
+      if (btnToday) {
+        btnToday.addEventListener('click', () => {
+          updateLunar(new Date());
+        });
+      }
+      updateLunar(new Date());
+
+      // =================================================================
+      // TOOL 4: DỰ BÁO THỜI TIẾT OPEN-METEO
+      // =================================================================
+      const cityBtns = document.querySelectorAll('.weather-city-btn[data-city]');
+      const gpsBtn = document.getElementById('btn-weather-gps');
+
+      const CITIES = {
+        hanoi: { lat: 21.0285, lon: 105.8542, name: 'Hà Nội' },
+        hcm: { lat: 10.8231, lon: 106.6297, name: 'TP. Hồ Chí Minh' },
+        danang: { lat: 16.0544, lon: 108.2022, name: 'Đà Nẵng' },
+        haiphong: { lat: 20.8449, lon: 106.6881, name: 'Hải Phòng' },
+        cantho: { lat: 10.0452, lon: 105.7469, name: 'Cần Thơ' },
+        dalat: { lat: 11.9404, lon: 108.4583, name: 'Đà Lạt' }
+      };
+
+      const WMO_MAP = {
+        0: { text: 'Trời quang đãng', icon: '☀️' },
+        1: { text: 'Chủ yếu quang đãng', icon: '🌤️' },
+        2: { text: 'Mây rải rác', icon: '⛅' },
+        3: { text: 'Trời nhiều mây', icon: '☁️' },
+        45: { text: 'Có sương mù', icon: '🌫️' },
+        51: { text: 'Mưa phùn nhẹ', icon: '🌦️' },
+        61: { text: 'Mưa rào nhẹ', icon: '🌧️' },
+        63: { text: 'Mưa vừa', icon: '🌧️' },
+        65: { text: 'Mưa to', icon: '⛈️' },
+        95: { text: 'Có dông sét', icon: '⚡' }
+      };
+
+      async function fetchWeather(lat, lon, cityName) {
+        try {
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Asia%2FBangkok`;
+          const res = await fetch(url);
+          if (!res.ok) return;
+          const data = await res.json();
+          const cur = data.current;
+
+          document.getElementById('weather-city-name').textContent = cityName;
+          document.getElementById('weather-temp-now').textContent = `${Math.round(cur.temperature_2m)}°C`;
+          document.getElementById('weather-humidity').textContent = `${cur.relative_humidity_2m}%`;
+          document.getElementById('weather-wind').textContent = `${Math.round(cur.wind_speed_10m)} km/h`;
+
+          const info = WMO_MAP[cur.weather_code] || { text: 'Quang mây', icon: '🌤️' };
+          document.getElementById('weather-condition-text').textContent = info.text;
+          document.getElementById('weather-icon-symbol').textContent = info.icon;
+
+          // 5-day daily forecast
+          const dailyContainer = document.getElementById('weather-daily-forecast');
+          if (dailyContainer && data.daily && data.daily.time) {
+            dailyContainer.innerHTML = data.daily.time.slice(0, 5).map((t, idx) => {
+              const dObj = new Date(t);
+              const dayStr = idx === 0 ? 'H.Nay' : `T.${dObj.getDay() === 0 ? 'CN' : dObj.getDay() + 1}`;
+              const wInfo = WMO_MAP[data.daily.weather_code[idx]] || { icon: '🌤️' };
+              const maxT = Math.round(data.daily.temperature_2m_max[idx]);
+              const minT = Math.round(data.daily.temperature_2m_min[idx]);
+              return `
+                <div style="background:rgba(22,28,38,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 6px; text-align:center;">
+                  <span style="font-size:0.75rem; color:var(--text-dim); display:block;">${dayStr}</span>
+                  <span style="font-size:1.3rem; display:block; margin:4px 0;">${wInfo.icon}</span>
+                  <span style="font-size:0.8rem; font-weight:bold; color:#fff;">${maxT}°</span>
+                  <span style="font-size:0.75rem; color:var(--text-dim);">${minT}°</span>
+                </div>
+              `;
+            }).join('');
+          }
+        } catch {}
+      }
+
+      cityBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          cityBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cityKey = btn.getAttribute('data-city');
+          const c = CITIES[cityKey];
+          if (c) fetchWeather(c.lat, c.lon, c.name);
+        });
+      });
+
+      if (gpsBtn) {
+        gpsBtn.addEventListener('click', () => {
+          if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+              fetchWeather(pos.coords.latitude, pos.coords.longitude, 'Vị Trí Của Bạn');
+              showToast('📍 Đã lấy tọa độ GPS thành công!');
+            }, () => {
+              showToast('⚠️ Không thể lấy tọa độ GPS.');
+            });
+          }
+        });
+      }
+      fetchWeather(21.0285, 105.8542, 'Hà Nội');
+
+      // =================================================================
+      // TOOL 5: MULTI-UNIT CONVERTER
+      // =================================================================
+      const catSelect = document.getElementById('conv-cat-select');
+      const unit1 = document.getElementById('conv-unit-1');
+      const unit2 = document.getElementById('conv-unit-2');
+      const val1 = document.getElementById('conv-val-1');
+      const val2 = document.getElementById('conv-val-2');
+      const btnSwap = document.getElementById('btn-conv-swap');
+
+      const CATEGORIES = {
+        currency: {
+          units: {
+            USD: { name: 'USD — Đô la Mỹ', factor: 1 },
+            VND: { name: 'VND — Việt Nam Đồng', factor: 26000 },
+            EUR: { name: 'EUR — Euro Châu Âu', factor: 0.86 },
+            JPY: { name: 'JPY — Yên Nhật', factor: 156 },
+            GBP: { name: 'GBP — Bảng Anh', factor: 0.74 },
+            CNY: { name: 'CNY — Nhân dân tệ', factor: 6.73 },
+            KRW: { name: 'KRW — Won Hàn Quốc', factor: 1356 },
+            SGD: { name: 'SGD — Đô la Singapore', factor: 1.26 }
+          }
+        },
+        data: {
+          units: {
+            B: { name: 'Byte (B)', factor: 1 },
+            KB: { name: 'Kilobyte (KB)', factor: 1024 },
+            MB: { name: 'Megabyte (MB)', factor: 1048576 },
+            GB: { name: 'Gigabyte (GB)', factor: 1073741824 },
+            TB: { name: 'Terabyte (TB)', factor: 1099511627776 },
+            PB: { name: 'Petabyte (PB)', factor: 1125899906842624 }
+          }
+        },
+        speed: {
+          units: {
+            Mbps: { name: 'Mbps (Băng thông mạng)', factor: 1 },
+            MBs: { name: 'MB/s (Tốc độ tải thực tế)', factor: 8 },
+            Kbps: { name: 'Kbps', factor: 0.001 },
+            Gbps: { name: 'Gbps (Cổng quang/LAN)', factor: 1000 }
+          }
+        }
+      };
+
+      function populateUnits() {
+        const cat = CATEGORIES[catSelect.value];
+        unit1.innerHTML = Object.keys(cat.units).map(u => `<option value="${u}">${cat.units[u].name}</option>`).join('');
+        unit2.innerHTML = Object.keys(cat.units).map(u => `<option value="${u}">${cat.units[u].name}</option>`).join('');
+        if (catSelect.value === 'currency') {
+          unit1.value = 'USD';
+          unit2.value = 'VND';
+        } else if (catSelect.value === 'data') {
+          unit1.value = 'GB';
+          unit2.value = 'MB';
+        }
+        convertUnits();
+      }
+
+      function convertUnits() {
+        const cat = CATEGORIES[catSelect.value];
+        const u1 = cat.units[unit1.value];
+        const u2 = cat.units[unit2.value];
+        const v1 = parseFloat(val1.value) || 0;
+
+        let result = 0;
+        if (catSelect.value === 'currency') {
+          const usdVal = v1 / u1.factor;
+          result = usdVal * u2.factor;
+          val2.value = result.toLocaleString('vi-VN', { maximumFractionDigits: 2 });
+        } else {
+          const baseBytes = v1 * u1.factor;
+          result = baseBytes / u2.factor;
+          val2.value = Number(result.toFixed(4)).toString();
+        }
+      }
+
+      if (catSelect) catSelect.addEventListener('change', populateUnits);
+      if (unit1) unit1.addEventListener('change', convertUnits);
+      if (unit2) unit2.addEventListener('change', convertUnits);
+      if (val1) val1.addEventListener('input', convertUnits);
+      if (btnSwap) {
+        btnSwap.addEventListener('click', () => {
+          const tmp = unit1.value;
+          unit1.value = unit2.value;
+          unit2.value = tmp;
+          convertUnits();
+        });
+      }
+      populateUnits();
+
+      // =================================================================
+      // TOOL 6: GIỜ QUỐC TẾ (WORLD CLOCK)
+      // =================================================================
+      const clockContainer = document.getElementById('world-clock-container');
+      const WORLD_CITIES = [
+        { city: 'Hà Nội / TP.HCM', country: '🇻🇳 Việt Nam', tz: 'Asia/Ho_Chi_Minh' },
+        { city: 'Tokyo', country: '🇯🇵 Nhật Bản', tz: 'Asia/Tokyo' },
+        { city: 'Singapore', country: '🇸🇬 Singapore', tz: 'Asia/Singapore' },
+        { city: 'London', country: '🇬🇧 Vương Quốc Anh', tz: 'Europe/London' },
+        { city: 'Frankfurt / Paris', country: '🇩🇪 Đức / Pháp', tz: 'Europe/Berlin' },
+        { city: 'New York', country: '🇺🇸 Mỹ (EST)', tz: 'America/New_York' },
+        { city: 'San Francisco', country: '🇺🇸 Silicon Valley', tz: 'America/Los_Angeles' },
+        { city: 'Sydney', country: '🇦🇺 Úc (AEST)', tz: 'Australia/Sydney' }
+      ];
+
+      function renderClocks() {
+        if (!clockContainer) return;
+        const now = new Date();
+        clockContainer.innerHTML = WORLD_CITIES.map(c => {
+          const timeStr = new Intl.DateTimeFormat('vi-VN', {
+            timeZone: c.tz,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          }).format(now);
+
+          const dateStr = new Intl.DateTimeFormat('vi-VN', {
+            timeZone: c.tz,
+            weekday: 'short',
+            day: '2-digit',
+            month: '2-digit'
+          }).format(now);
+
+          return `
+            <div style="background:rgba(22,28,38,0.75); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:14px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong style="color:#fff; font-size:0.95rem; display:block;">${c.city}</strong>
+                <span style="font-size:0.75rem; color:var(--text-dim);">${c.country} • ${dateStr}</span>
+              </div>
+              <div style="text-align:right;">
+                <span class="font-mono" style="font-size:1.25rem; font-weight:bold; color:var(--neon-cyan);">${timeStr}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      renderClocks();
+      setInterval(renderClocks, 1000);
+    });
+  </script>
+</body>
+</html>

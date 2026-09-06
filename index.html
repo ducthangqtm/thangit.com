@@ -2,11 +2,12 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   
   <title>Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder</title>
   <meta name="title" content="Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder">
-  <meta name="description" content="Portfolio & Network Hub của Nguyễn Đức Thắng (Thắng IT). 10+ năm kinh nghiệm quản trị mạng quy mô lớn và Vibe Coding.">
+  <meta name="description" content="Portfolio, Bộ công cụ IT & Tiện ích thường ngày của Nguyễn Đức Thắng (Thắng IT). 10+ năm kinh nghiệm quản trị mạng quy mô lớn và Vibe Coding.">
+  <meta name="keywords" content="thắng it, thang it, thangit, nguyễn đức thắng, senior network administrator, vibe coder, subnet calculator, dns lookup doh, wifi qr, vietqr, lich van nien">
   <meta name="author" content="Nguyễn Đức Thắng">
   <link rel="canonical" href="https://thangit.com">
 
@@ -16,31 +17,32 @@
   <link rel="me" href="https://github.com/ducthangqtm">
 
   <!-- Open Graph -->
+  <meta property="og:site_name" content="Thắng IT">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thangit.com">
   <meta property="og:title" content="Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder">
   <meta property="og:description" content="10+ năm kinh nghiệm quản trị hạ tầng mạng logistics 40.000m², tự động hóa bằng AI & Python.">
   <meta property="og:image" content="https://thangit.com/assets/images/avata.jpg">
 
-  <!-- Mobile App / PWA Pinning (Homescreen Shortcut) -->
-  <meta name="application-name" content="TiT">
-  <meta name="apple-mobile-web-app-title" content="TiT">
+  <!-- Mobile App / PWA Pinning -->
+  <meta name="application-name" content="Thắng IT">
+  <meta name="apple-mobile-web-app-title" content="Thắng IT">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#04070d">
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="/manifest.json">
 
-  <!-- Icons & Apple Touch Icon -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20260904_4">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260906_3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <!-- Fonts & Stylesheet -->
+  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css?v=20260906_3">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -63,6 +65,18 @@
         "inLanguage": "vi-VN"
       },
       {
+        "@type": "ProfilePage",
+        "@id": "https://thangit.com/#profilepage",
+        "url": "https://thangit.com",
+        "name": "Nguyễn Đức Thắng (Thắng IT) | Bio & Tools Hub",
+        "isPartOf": {
+          "@id": "https://thangit.com/#website"
+        },
+        "mainEntity": {
+          "@id": "https://thangit.com/#person"
+        }
+      },
+      {
         "@type": "Person",
         "@id": "https://thangit.com/#person",
         "name": "Nguyễn Đức Thắng",
@@ -75,7 +89,7 @@
           "https://thangnhayday.com",
           "https://github.com/ducthangqtm",
           "https://t.me/ducthangqtm",
-          "https://zalo.me/0986192092"
+          "https://zalo.me/0969671676"
         ],
         "knowsAbout": [
           "Network Administration",
@@ -88,373 +102,434 @@
           "Python Automation",
           "Vibe Coding"
         ]
-      },
-      {
-        "@type": "WebApplication",
-        "@id": "https://thangit.com/#webapp",
-        "name": "TiT — Network & Pocket Super App",
-        "url": "https://thangit.com",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "All",
-        "browserRequirements": "Requires JavaScript. Requires HTML5."
       }
     ]
   }
   </script>
-
-  <link rel="stylesheet" href="css/style.css?v=20260906_2">
 </head>
 <body>
+  <!-- Ambient background glow effects -->
+  <div class="glow-bg glow-1"></div>
+  <div class="glow-bg glow-2"></div>
 
-  <!-- Pull to Refresh Visual Indicator for Mobile / PWA -->
-  <div id="pwa-pull-indicator" class="pwa-pull-indicator" aria-hidden="true">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="23 4 23 10 17 10"></polyline>
-      <polyline points="1 20 1 14 7 14"></polyline>
-      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-    </svg>
-  </div>
+  <!-- Main Mobile-first App Container (max-width: 480px, strictly matching thangnhayday.com) -->
+  <main class="app-container">
 
-  <!-- ========================================================================
-       TOPBAR
-       ======================================================================== -->
-  <header class="header-nav">
-    <div class="container header-inner">
-      <a href="#" class="brand-link" id="brand-link" aria-label="Thắng IT — Nhấn để làm mới trang">
-        <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="TiT Logo">
-          <defs>
-            <linearGradient id="tit-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#0b1320"/>
-              <stop offset="100%" stop-color="#04070d"/>
-            </linearGradient>
-            <linearGradient id="tit-neon" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#00f0ff"/>
-              <stop offset="50%" stop-color="#00ff9d"/>
-              <stop offset="100%" stop-color="#00f0ff"/>
-            </linearGradient>
-            <filter id="tit-glow" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="1.8" result="blur"/>
-              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-            </filter>
-            <style>
-              @keyframes tit-border-scan { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -146.832; } }
-              @keyframes tit-radar-pulse { 0% { r: 2px; opacity: 0.95; stroke-width: 1.4px; } 60% { opacity: 0.35; } 100% { r: 9.5px; opacity: 0; stroke-width: 0.3px; } }
-              @keyframes tit-beacon-core { 0%, 100% { fill: #00ff9d; filter: drop-shadow(0 0 3px #00ff9d); } 50% { fill: #00f0ff; filter: drop-shadow(0 0 6px #00f0ff); } }
-              @keyframes tit-packet-flow { 0% { cy: 18.5px; opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { cy: 29px; opacity: 0; } }
-              @keyframes tit-letters-glow { 0%, 100% { filter: drop-shadow(0 0 1px rgba(0, 240, 255, 0.4)); } 50% { filter: drop-shadow(0 0 4px rgba(0, 255, 157, 0.7)); } }
-              .tit-frame-base { fill: url(#tit-bg); stroke: rgba(0, 240, 255, 0.22); stroke-width: 1.2; }
-              .tit-frame-scan { fill: none; stroke: url(#tit-neon); stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 32 114.832; animation: tit-border-scan 4s linear infinite; }
-              .tit-wave-1 { fill: none; stroke: #00ff9d; animation: tit-radar-pulse 2.2s cubic-bezier(0.1, 0.7, 0.3, 1) infinite; }
-              .tit-wave-2 { fill: none; stroke: #00f0ff; animation: tit-radar-pulse 2.2s cubic-bezier(0.1, 0.7, 0.3, 1) infinite 1.1s; }
-              .tit-beacon { animation: tit-beacon-core 2.2s ease-in-out infinite; }
-              .tit-packet { fill: #ffffff; animation: tit-packet-flow 1.8s ease-in-out infinite; }
-              .tit-letters { animation: tit-letters-glow 3.5s ease-in-out infinite; }
-            </style>
-          </defs>
+    <!-- Top Action Bar -->
+    <header class="top-nav">
+      <div class="badge-status">
+        <span class="pulse-dot"></span>
+        <span>Đang hoạt động</span>
+      </div>
+      <div class="nav-actions">
+        <button id="btn-share" class="icon-btn" aria-label="Chia sẻ trang" title="Chia sẻ">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
 
-          <!-- Cyber Badge Outer Frame -->
-          <rect x="1.5" y="1.5" width="41" height="41" rx="10" class="tit-frame-base"/>
-          
-          <!-- Cyber Light Scanning Perimeter Beam (Seamless 100% continuous loop) -->
-          <rect x="1.5" y="1.5" width="41" height="41" rx="10" pathLength="146.832" class="tit-frame-scan"/>
+    <!-- Profile Header Section -->
+    <section class="profile-section">
+      <div class="avatar-wrapper">
+        <div class="avatar-ring"></div>
+        <img src="/assets/images/avata.jpg" alt="Ảnh đại diện Nguyễn Đức Thắng" class="avatar-img" width="96" height="96" loading="eager">
+        <div class="avatar-badge" title="Vibe Coder">⚡</div>
+      </div>
 
-          <!-- Letters Group: Smooth, Soft Rounded T - i - T -->
-          <g class="tit-letters">
-            <!-- Left T: Rounded top bar and stem -->
-            <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-            
-            <!-- Center i: Soft Stem -->
-            <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
-            <!-- Data packet pulse flowing down stem -->
-            <circle cx="22" cy="23.5" r="1.2" class="tit-packet"/>
+      <div class="profile-info">
+        <h1 class="profile-name">
+          Nguyễn Đức Thắng
+          <span class="verified-badge" title="Tài khoản chính thức">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </span>
+        </h1>
+        <p class="profile-handle">@thangit • Senior Network Administrator</p>
+        <p class="profile-bio">
+          Quản trị hệ thống & Mạng máy tính quy mô lớn • Chia sẻ công cụ IT, tiện ích bỏ túi & đồ công nghệ hữu ích 🚀
+        </p>
+      </div>
 
-            <!-- Right T: Rounded top bar and stem -->
-            <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
+      <!-- 4 Squircle Social Buttons: Zalo -> Telegram -> Discord -> GitHub -->
+      <nav class="social-bar" aria-label="Mạng xã hội">
+        <!-- 1. Zalo -->
+        <a href="https://zalo.me/0969671676" target="_blank" rel="noopener noreferrer" class="social-icon-btn zalo" aria-label="Zalo Thắng IT" title="Zalo: 0969671676">
+          <span class="zalo-text-badge">Zalo</span>
+        </a>
 
-          <!-- Center i: Radar Transmission Waves (Expanding from antenna beacon) -->
-          <circle cx="22" cy="12" r="2" class="tit-wave-1"/>
-          <circle cx="22" cy="12" r="2" class="tit-wave-2"/>
+        <!-- 2. Telegram -->
+        <a href="https://t.me/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-icon-btn telegram" aria-label="Telegram Thắng IT" title="Telegram: @ducthangqtm">
+          <i class="fab fa-telegram"></i>
+        </a>
 
-          <!-- Center i: Antenna Beacon Dot -->
-          <circle cx="22" cy="12" r="2.3" class="tit-beacon"/>
-        </svg>
-        <span class="brand-name">THANG<span>IT</span>.COM</span>
+        <!-- 3. Discord -->
+        <a href="https://discordapp.com/users/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-icon-btn discord" aria-label="Discord Thắng IT" title="Discord: ducthangqtm" id="btn-discord-action">
+          <i class="fab fa-discord"></i>
+        </a>
+
+        <!-- 4. GitHub -->
+        <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-icon-btn github" aria-label="GitHub Thắng IT" title="GitHub: ducthangqtm">
+          <i class="fab fa-github"></i>
+        </a>
+      </nav>
+    </section>
+
+    <!-- SECTION: 3 CATEGORY TABS (IT Tools, Tiện Ích, Đồ Công Nghệ) -->
+    <nav class="category-tabs-wrap" id="home-tabs-nav" aria-label="Phân loại danh mục">
+      <button type="button" class="tab-pill-btn active" data-target="tab-it">
+        <span>🛠️ IT Tools</span>
+      </button>
+      <button type="button" class="tab-pill-btn" data-target="tab-tienich">
+        <span>☕ Tiện Ích</span>
+      </button>
+      <button type="button" class="tab-pill-btn" data-target="tab-aff">
+        <span>⚡ Đồ Công Nghệ</span>
+      </button>
+    </nav>
+
+    <!-- ===================================================================
+         TAB 1: IT TOOLS (Links to it.html anchors)
+         =================================================================== -->
+    <section class="home-tab-content active" id="tab-it" style="display:flex; flex-direction:column; gap:10px;">
+      <a href="/it.html" style="text-decoration:none; display:flex; align-items:center; justify-content:space-between; background:rgba(0,240,255,0.08); border:1px solid rgba(0,240,255,0.25); border-radius:14px; padding:10px 14px; color:var(--neon-cyan); font-size:0.82rem; font-weight:700;">
+        <span>👉 Mở bộ 9 công cụ IT (Network Suite) tập trung</span>
+        <span>it.html ↗</span>
       </a>
 
-      <div class="topbar-actions">
-        <button id="btn-topbar-install" class="btn-topbar-install" title="Cài đặt App TiT ra màn hình chính" aria-label="Cài đặt App TiT">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>Ghim App</span>
-        </button>
-        <button id="btn-pwa-refresh" class="btn-header-refresh" title="Làm mới trang / Reload" aria-label="Làm mới">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 4 23 10 17 10"></polyline>
-            <polyline points="1 20 1 14 7 14"></polyline>
-            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-          </svg>
-        </button>
+      <!-- 9 IT Cards -->
+      <a href="/it.html#subnet" class="category-app-card">
+        <div class="category-card-icon icon-grad-subnet">🧮</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Subnet CIDR</h3>
+            <span class="category-card-tag">Bitwise /1 - /32</span>
+          </div>
+          <p class="category-card-desc">Tính dải IP, Network, Broadcast, Wildcard mask và host khả dụng.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/it.html#dns" class="category-app-card">
+        <div class="category-card-icon icon-grad-dns">🌐</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">DNS Lookup DoH</h3>
+            <span class="category-card-tag">Cloudflare 1.1.1.1</span>
+          </div>
+          <p class="category-card-desc">Tra cứu trực tiếp bản ghi A, AAAA, CNAME, MX, TXT, NS bảo mật.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/it.html#wifi" class="category-app-card">
+        <div class="category-card-icon icon-grad-wifi">📶</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Wi-Fi QR Code</h3>
+            <span class="category-card-tag">WPA2 / WPA3</span>
+          </div>
+          <p class="category-card-desc">Tạo mã QR quét kết nối Wi-Fi tức thì kèm xuất ảnh PNG.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/it.html#ports" class="category-app-card">
+        <div class="category-card-icon icon-grad-ports">🔌</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Tra Cứu Port Mạng</h3>
+            <span class="category-card-tag">39 Ports Chuẩn</span>
+          </div>
+          <p class="category-card-desc">Tra nhanh cổng TCP/UDP dịch vụ Web, DB, SSH, VPN, Mail.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/it.html#password" class="category-app-card">
+        <div class="category-card-icon icon-grad-password">🔐</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Sinh Mật Khẩu IT</h3>
+            <span class="category-card-tag">Web Crypto API</span>
+          </div>
+          <p class="category-card-desc">Mật khẩu an toàn cao cho Root, Router, Switch và Database.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/it.html#telemetry" class="category-app-card">
+        <div class="category-card-icon icon-grad-telemetry">📡</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">NOC Ping & Telemetry</h3>
+            <span class="category-card-tag">Cloud Edge Trace</span>
+          </div>
+          <p class="category-card-desc">Kiểm tra IP công khai, độ trễ RTT tới các trung tâm dữ liệu.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/it.html#terminal" class="category-app-card">
+        <div class="category-card-icon icon-grad-terminal">💻</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Web Terminal CLI</h3>
+            <span class="category-card-tag">Interactive Shell</span>
+          </div>
+          <p class="category-card-desc">Dòng lệnh tương tác khám phá thông tin kỹ sư và hạ tầng.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/it.html#cv" class="category-app-card">
+        <div class="category-card-icon icon-grad-cv">💼</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Hồ Sơ CV Kỹ Sư</h3>
+            <span class="category-card-tag">Senior SysAdmin</span>
+          </div>
+          <p class="category-card-desc">Kinh nghiệm vận hành hạ tầng mạng 40.000m² Logistics & Cisco/Mikrotik.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/it.html#projects" class="category-app-card">
+        <div class="category-card-icon icon-grad-projects">🚀</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Dự Án Số Tiêu Biểu</h3>
+            <span class="category-card-tag">Digital Portfolio</span>
+          </div>
+          <p class="category-card-desc">Hệ sinh thái web app, bot cảnh báo NOC và tự động hóa.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+    </section>
+
+    <!-- ===================================================================
+         TAB 2: TIỆN ÍCH BỎ TÚI (Links to tienich.html anchors)
+         =================================================================== -->
+    <section class="home-tab-content" id="tab-tienich" style="display:none; flex-direction:column; gap:10px;">
+      <a href="/tienich.html" style="text-decoration:none; display:flex; align-items:center; justify-content:space-between; background:rgba(255,184,0,0.08); border:1px solid rgba(255,184,0,0.25); border-radius:14px; padding:10px 14px; color:#ffb800; font-size:0.82rem; font-weight:700;">
+        <span>👉 Mở bộ 6 tiện ích bỏ túi tập trung</span>
+        <span>tienich.html ↗</span>
+      </a>
+
+      <!-- 6 Basic Cards -->
+      <a href="/tienich.html#vietqr" class="category-app-card">
+        <div class="category-card-icon icon-grad-vietqr">🏦</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">VietQR Bank Studio</h3>
+            <span class="category-card-tag" style="border-color:rgba(0,240,255,0.3); color:var(--neon-cyan);">40+ Ngân Hàng</span>
+          </div>
+          <p class="category-card-desc">Tạo mã QR chuyển khoản nhanh chuẩn NAPAS 247 kèm số tiền.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/tienich.html#calc" class="category-app-card">
+        <div class="category-card-icon icon-grad-calc">🔢</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Máy Tính Cyber</h3>
+            <span class="category-card-tag" style="border-color:rgba(255,184,0,0.3); color:#ffb800;">Haptic Feedback</span>
+          </div>
+          <p class="category-card-desc">Bàn tính bỏ túi giải quyết nhanh các phép tính toán học thường nhật.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/tienich.html#lunar" class="category-app-card">
+        <div class="category-card-icon icon-grad-lunar">📅</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Lịch Vạn Niên & Âm Lịch</h3>
+            <span class="category-card-tag" style="border-color:rgba(16,185,129,0.3); color:var(--neon-green);">Hồ Ngọc Đức Math</span>
+          </div>
+          <p class="category-card-desc">Tra ngày hoàng đạo, can chi ngày tháng năm và tiết khí chuẩn xác.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/tienich.html#weather" class="category-app-card">
+        <div class="category-card-icon icon-grad-weather">⛅</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Dự Báo Thời Tiết</h3>
+            <span class="category-card-tag" style="border-color:rgba(0,104,255,0.3); color:#38bdf8;">Open-Meteo API</span>
+          </div>
+          <p class="category-card-desc">Nhiệt độ, độ ẩm và dự báo 7 ngày tại Việt Nam hoặc vị trí GPS.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/tienich.html#converter" class="category-app-card">
+        <div class="category-card-icon icon-grad-converter">💱</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Đổi Ngoại Tệ & Đơn Vị IT</h3>
+            <span class="category-card-tag" style="border-color:rgba(244,63,94,0.3); color:#fb7185;">Tỷ Giá Tức Thì</span>
+          </div>
+          <p class="category-card-desc">Chuyển đổi tiền tệ phổ biến và dung lượng lưu trữ Byte/KB/MB/GB.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+
+      <a href="/tienich.html#world" class="category-app-card">
+        <div class="category-card-icon icon-grad-world">🌍</div>
+        <div class="category-card-info">
+          <div class="category-card-top">
+            <h3 class="category-card-name">Giờ Quốc Tế Thế Giới</h3>
+            <span class="category-card-tag" style="border-color:rgba(168,85,247,0.3); color:#c084fc;">8 Trung Tâm Lớn</span>
+          </div>
+          <p class="category-card-desc">Đồng hồ nhảy giây trực tiếp Hà Nội, Tokyo, London, New York, Sydney.</p>
+        </div>
+        <span class="category-card-arrow">↗</span>
+      </a>
+    </section>
+
+    <!-- ===================================================================
+         TAB 3: ĐỒ CÔNG NGHỆ (Affiliate Products from data/products.json)
+         =================================================================== -->
+    <section class="home-tab-content" id="tab-aff" style="display:none; flex-direction:column; gap:14px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0 4px;">
+        <span style="font-size:0.8rem; color:var(--text-dim);">Đồ công nghệ chọn lọc dành cho SysAdmin & Dân IT</span>
+        <a href="/admin.html" style="font-size:0.75rem; color:var(--neon-cyan); text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+          <i class="fas fa-cog"></i> Quản lý link
+        </a>
       </div>
-    </div>
-  </header>
 
-  <!-- ========================================================================
-       MAIN HUB (SIÊU TINH GỌN — 1 KHUNG NHÌN)
-       ======================================================================== -->
-  <main class="main-hub">
-    <div class="container hub-center-wrapper">
-
-      <!-- Home Screen View: Avatar, Profile Intro, Action Bar, App Grid & Metric Chips -->
-      <div id="home-screen-wrapper" class="home-screen-wrapper">
-        
-        <!-- Hero Section: Default vs Expanded Interactive State -->
-        <div class="profile-hero-section" id="profile-hero-section">
-          
-          <!-- STATE A: DEFAULT / COMPACT HERO -->
-          <div class="profile-hero-default" id="profile-hero-default">
-            <div class="profile-avatar-wrap" id="btn-avatar-expand" role="button" tabindex="0" title="Chạm để xem thông tin chi tiết" aria-label="Chạm vào ảnh đại diện để xem thông tin cá nhân">
-              <img src="assets/images/avata.jpg" alt="Nguyễn Đức Thắng" class="profile-avatar">
-              <span class="avatar-status-dot" title="Active 24/7 (200 OK)"></span>
-              <span class="avatar-tap-hint">Chạm xem info ✨</span>
-            </div>
-
-            <h1 class="profile-name">Nguyễn Đức Thắng</h1>
-            <div class="profile-role">Senior Network Administrator & Vibe Coder</div>
-          </div>
-
-          <!-- STATE B: EXPANDED PERSONAL INFO CARD (Khi bấm vào Avatar) -->
-          <div class="profile-hero-expanded" id="profile-hero-expanded" style="display: none;">
-            <div class="profile-expanded-card">
-              <button class="btn-close-expanded" id="btn-close-expanded" title="Thu gọn thông tin" aria-label="Đóng">✕</button>
-              
-              <!-- Cột Trái: Avatar phóng to & trượt sang trái kèm nút Hồ Sơ CV -->
-              <div class="expanded-avatar-col">
-                <div class="expanded-avatar-wrap" id="btn-avatar-collapse" role="button" tabindex="0" title="Chạm để thu gọn">
-                  <img src="assets/images/avata.jpg" alt="Nguyễn Đức Thắng" class="expanded-avatar-img">
-                  <span class="avatar-status-dot-large" title="Active 24/7 (200 OK)"></span>
-                </div>
-                <a href="/cv/" class="btn-cv-expanded" title="Xem chi tiết Hồ sơ & Lộ trình 10 năm">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                  </svg>
-                  <span>Hồ Sơ CV</span>
-                </a>
-                <span class="avatar-collapse-hint" id="btn-avatar-collapse-hint" role="button" tabindex="0">✕ Thu gọn</span>
-              </div>
-
-              <!-- Cột Phải: Thông tin cá nhân chi tiết -->
-              <div class="expanded-info-col">
-                <div class="expanded-card-header">
-                  <span class="expanded-card-tag">THÔNG TIN CÁ NHÂN</span>
-                  <span class="expanded-status-badge">ONLINE 24/7</span>
-                </div>
-
-                <div class="expanded-info-list">
-                  <div class="info-item">
-                    <span class="info-label"><span class="info-icon">👤</span> Họ & Tên:</span>
-                    <strong class="info-value text-accent">Nguyễn Đức Thắng</strong>
-                  </div>
-                  <div class="info-item">
-                    <span class="info-label"><span class="info-icon">🎂</span> Ngày sinh:</span>
-                    <strong class="info-value">12/09/1992</strong>
-                  </div>
-                  <div class="info-item">
-                    <span class="info-label"><span class="info-icon">📍</span> Địa chỉ:</span>
-                    <strong class="info-value">12 Thịnh Liên - Phù Đổng - Hà Nội</strong>
-                  </div>
-                  <div class="info-item">
-                    <span class="info-label"><span class="info-icon">📞</span> SĐT:</span>
-                    <strong class="info-value">
-                      <a href="tel:0986192092" class="phone-link">0986 192 092</a>
-                      <button class="btn-copy-chip" data-copy="0986192092" title="Sao chép số điện thoại">📋 Copy</button>
-                    </strong>
-                  </div>
-                  <div class="info-item">
-                    <span class="info-label"><span class="info-icon">✉️</span> Email:</span>
-                    <strong class="info-value">
-                      <a href="mailto:ducthangqtm@gmail.com" class="phone-link">ducthangqtm@gmail.com</a>
-                      <button class="btn-copy-chip" data-copy="ducthangqtm@gmail.com" title="Sao chép Email">📋 Copy</button>
-                    </strong>
-                  </div>
-                  <div class="info-item">
-                    <span class="info-label"><span class="info-icon">🌐</span> Định danh:</span>
-                    <strong class="info-value">
-                      <a href="https://thangnd.io.vn" target="_blank" rel="me" class="phone-link">thangnd.io.vn</a>
-                      <button class="btn-copy-chip" data-copy="https://thangnd.io.vn" title="Sao chép cổng định danh">📋 Copy</button>
-                    </strong>
-                  </div>
-                </div>
-
-                <div class="expanded-bio-callout">
-                  <span class="bio-icon">⚡</span>
-                  <span>10+ năm vận hành hạ tầng mạng quy mô lớn (Logistics 40.000m²), kết hợp AI & Python tự động hóa vận hành 24/7.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Unified Social Action Bar (4 Standard Brand Buttons: Zalo, Tele, Disco, Git) -->
-        <div class="unified-action-bar">
-          <div class="social-dock-compact">
-            <!-- 1. Zalo (Chữ xanh Zalo) -->
-            <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="social-btn btn-zalo" title="Zalo: 0986 192 092" aria-label="Zalo">
-              <span class="zalo-brand-text">Zalo</span>
-            </a>
-            <!-- 2. Telegram (Tròn xanh máy bay trắng) -->
-            <a href="https://t.me/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-btn btn-tele" title="Telegram: @ducthangqtm" aria-label="Telegram">
-              <svg viewBox="0 0 32 32" width="28" height="28">
-                <circle cx="16" cy="16" r="16" fill="#2AABEE"/>
-                <path d="M22.5 9.5l-13.8 5.3c-.9.4-.9 1 0 1.2l3.5 1.1 8.2-5.2c.4-.2.7-.1.4.1l-6.6 6v.1l-.2 3.6c.4 0 .5-.2.7-.4l1.7-1.7 3.6 2.6c.7.4 1.1.2 1.3-.6l2.3-11c.2-1-.4-1.4-1.1-1z" fill="#ffffff"/>
-              </svg>
-            </a>
-            <!-- 3. Discord (Clyde màu tím) -->
-            <a href="https://discord.com/users/ducthangqtm" id="btn-discord-link" target="_blank" rel="noopener noreferrer" class="social-btn btn-disco" title="Discord: ducthangqtm" aria-label="Discord">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="#5865F2">
-                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-              </svg>
-            </a>
-            <!-- 4. GitHub -->
-            <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-btn btn-git" title="GitHub: ducthangqtm" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#ffffff">
-                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- 2-Column Bento Hub Cards (Clean & Focused Navigation) -->
-        <div class="hub-bento-grid">
-          
-          <!-- Cổng 1: IT Tools & Network Suite -->
-          <a href="/it/" class="hub-bento-card" aria-label="Mở Hạ Tầng & Công Cụ IT">
-            <div class="hub-bento-header">
-              <span class="hub-bento-badge">🛠️ NETWORK SUITE • 9 APPS</span>
-              <div class="hub-bento-arrow">↗</div>
-            </div>
-            <h2 class="hub-bento-title">Hạ Tầng & Công Cụ IT</h2>
-            <p class="hub-bento-desc">Bộ công cụ chuyên sâu cho SysAdmin: Subnet CIDR, DNS Lookup DoH, Wi-Fi QR, Port Registry, Password Generator, NOC Ping, Terminal CLI, CV & Dự Án.</p>
-            <div class="hub-bento-preview-row">
-              <span class="hub-mini-icon" title="Subnet CIDR">🧮</span>
-              <span class="hub-mini-icon" title="DNS Lookup">🌐</span>
-              <span class="hub-mini-icon" title="Wi-Fi QR">📶</span>
-              <span class="hub-mini-icon" title="Tra Cứu Port">🔌</span>
-              <span class="hub-mini-icon" title="Mật Khẩu IT">🔐</span>
-              <span class="hub-mini-icon" title="NOC Ping">⚡</span>
-              <span class="hub-mini-icon" title="Terminal">⌨️</span>
-              <span class="hub-mini-icon" title="Hồ Sơ CV">💼</span>
-              <span class="hub-mini-icon" title="Dự Án Số">🚀</span>
-            </div>
-            <div class="hub-bento-action">
-              <span>Khám phá 9 công cụ IT</span>
-              <span>→</span>
-            </div>
-          </a>
-
-          <!-- Cổng 2: Basic & Pocket Tools -->
-          <a href="/tools/" class="hub-bento-card card-pocket" aria-label="Mở Tiện Ích Bỏ Túi Thường Ngày">
-            <div class="hub-bento-header">
-              <span class="hub-bento-badge">☕ POCKET TOOLS • 6 APPS</span>
-              <div class="hub-bento-arrow">↗</div>
-            </div>
-            <h2 class="hub-bento-title">Tiện Ích Bỏ Túi</h2>
-            <p class="hub-bento-desc">Bộ tiện ích thiết thực cho cuộc sống thường ngày: VietQR Bank 40+ ngân hàng, Máy tính Cyber, Lịch âm vạn niên, Dự báo thời tiết, Đổi ngoại tệ, Giờ quốc tế.</p>
-            <div class="hub-bento-preview-row">
-              <span class="hub-mini-icon" title="VietQR Bank">🏦</span>
-              <span class="hub-mini-icon" title="Máy Tính">🧮</span>
-              <span class="hub-mini-icon" title="Lịch Âm">📅</span>
-              <span class="hub-mini-icon" title="Thời Tiết">🌤️</span>
-              <span class="hub-mini-icon" title="Đổi Ngoại Tệ">⚖️</span>
-              <span class="hub-mini-icon" title="Giờ Quốc Tế">🌍</span>
-            </div>
-            <div class="hub-bento-action">
-              <span>Mở 6 tiện ích bỏ túi</span>
-              <span>→</span>
-            </div>
-          </a>
-
-        </div>
+      <div class="products-grid" id="home-products-grid">
+        <!-- Rendered dynamically from data/products.json -->
       </div>
-    </div>
+    </section>
+
+    <!-- Footer Section with Entity SEO Sync Links -->
+    <footer style="margin-top: 1.5rem; text-align: center; padding: 1.5rem 0 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; color: var(--text-dim); display: flex; flex-direction: column; gap: 8px;">
+      <div>
+        © 2026 <strong>Thắng IT</strong> (Nguyễn Đức Thắng) • Built with Pride in Vietnam
+      </div>
+      <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <a href="https://thangnd.io.vn" target="_blank" rel="noopener me" style="color: var(--neon-cyan); text-decoration: none;">thangnd.io.vn</a>
+        <a href="https://thangnhayday.com" target="_blank" rel="noopener me" style="color: var(--neon-cyan); text-decoration: none;">thangnhayday.com</a>
+        <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener me" style="color: var(--text-dim); text-decoration: none;">GitHub</a>
+      </div>
+    </footer>
+
   </main>
 
-  <!-- ========================================================================
-       MODALS / CLICK-TO-OPEN APPS
-       ========================================================================= -->
-
-  <!-- MODAL: HƯỚNG DẪN GHIM APP (CHO IPHONE & TRÌNH DUYỆT KHÁC) -->
-  <div class="modal-overlay" id="modal-ios-install" role="dialog" aria-modal="true">
-    <div class="modal-window" style="max-width: 460px;">
-      <div class="modal-header">
-        <div class="modal-header-left">
-          <span>📲</span>
-          <span class="modal-title">CÀI ĐẶT APP TIT RA MÀN HÌNH</span>
-        </div>
-        <button class="btn-close-modal" data-close="modal-ios-install" aria-label="Đóng">✕</button>
-      </div>
-
-      <div class="modal-body" style="padding: 1.25rem;">
-        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-          Để mở ứng dụng 1-chạm toàn màn hình và không tốn thêm tab trình duyệt, hãy làm theo 3 bước sau:
-        </p>
-
-        <div class="ios-step-list">
-          <div class="ios-step-item">
-            <div class="ios-step-num">1</div>
-            <div class="ios-step-desc">
-              Nhấn nút <strong>Chia sẻ</strong> (icon <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; display: inline;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg> thanh dưới Safari iPhone, hoặc menu <strong>⋮</strong> trên Android).
-            </div>
-          </div>
-          <div class="ios-step-item">
-            <div class="ios-step-num">2</div>
-            <div class="ios-step-desc">
-              Cuộn menu xuống và chọn dòng <strong>"Thêm vào MH chính"</strong> (Add to Home Screen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; display: inline;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>).
-            </div>
-          </div>
-          <div class="ios-step-item">
-            <div class="ios-step-num">3</div>
-            <div class="ios-step-desc">
-              Nhấn <strong>"Thêm" (Add)</strong> ở góc trên bên phải màn hình để hoàn tất!
-            </div>
-          </div>
-        </div>
-
-        <button class="btn-calc" style="width: 100%; margin-top: 0.75rem; padding: 0.65rem;" data-close="modal-ios-install">Đã hiểu & Đóng</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PWA Live Update Toast -->
-  <div id="pwa-update-toast" class="pwa-update-toast" aria-live="polite">
-    <span>🚀 Đã có phiên bản mới!</span>
-    <button id="btn-pwa-update" class="btn-pwa-update">Làm mới</button>
-  </div>
-
-  <!-- Toast -->
   <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
 
-  <!-- ========================================================================
-       FOOTER
-       ======================================================================== -->
-  <footer class="footer">
-    <div class="container">
-      <p class="footer-identity-link">
-        Phát triển bởi <a href="https://thangnd.io.vn" target="_blank" rel="me">Thắng ND</a> • Cổng định danh cá nhân
-      </p>
-      <p class="footer-copyright">
-        © 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong> • 100% Static Web trên Cloudflare Pages
-      </p>
-    </div>
-  </footer>
+  <script src="/js/core.js?v=20260906_3"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Tab switching between IT Tools, Tiện Ích, Đồ Công Nghệ
+      const tabBtns = document.querySelectorAll('#home-tabs-nav .tab-pill-btn');
+      const tabContents = {
+        'tab-it': document.getElementById('tab-it'),
+        'tab-tienich': document.getElementById('tab-tienich'),
+        'tab-aff': document.getElementById('tab-aff')
+      };
 
-  <script src="js/core.js?v=20260906_1"></script>
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const targetId = btn.getAttribute('data-target');
+          Object.keys(tabContents).forEach(key => {
+            if (key === targetId) {
+              tabContents[key].style.display = 'flex';
+            } else {
+              tabContents[key].style.display = 'none';
+            }
+          });
+
+          if (targetId === 'tab-aff') {
+            loadAffiliateProducts();
+          }
+        });
+      });
+
+      // 2. Share button
+      const btnShare = document.getElementById('btn-share');
+      if (btnShare) {
+        btnShare.addEventListener('click', async () => {
+          if (navigator.share) {
+            try {
+              await navigator.share({
+                title: 'Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator',
+                text: 'Khám phá bộ công cụ IT, tiện ích bỏ túi và đồ công nghệ của Thắng IT:',
+                url: window.location.href
+              });
+            } catch {}
+          } else {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+              showToast('📋 Đã sao chép liên kết trang!');
+            });
+          }
+        });
+      }
+
+      // 3. Discord button copy alert
+      const btnDiscord = document.getElementById('btn-discord-action');
+      if (btnDiscord) {
+        btnDiscord.addEventListener('click', (e) => {
+          navigator.clipboard.writeText('ducthangqtm').catch(() => {});
+          showToast('🚀 Đang mở Discord & đã sao chép username: <strong>ducthangqtm</strong>');
+        });
+      }
+
+      // 4. Load Affiliate Products
+      let productsLoaded = false;
+      async function loadAffiliateProducts() {
+        if (productsLoaded) return;
+        const grid = document.getElementById('home-products-grid');
+        if (!grid) return;
+
+        try {
+          const res = await fetch('/data/products.json?v=' + Date.now());
+          if (!res.ok) throw new Error();
+          const data = await res.json();
+          const items = data.items || [];
+
+          if (!items.length) {
+            grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:2rem; color:var(--text-dim);">Chưa có sản phẩm nào.</div>`;
+            return;
+          }
+
+          grid.innerHTML = items.map(item => `
+            <div class="product-card">
+              <div class="card-media">
+                ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
+                <img src="${item.image}" alt="${item.title}" class="product-img" loading="lazy">
+              </div>
+              <div class="card-body">
+                <div>
+                  <h4 class="product-name">${item.title}</h4>
+                  <div class="product-price">${item.price || 'Giá ưu đãi'}</div>
+                </div>
+                <a href="${item.url}" target="_blank" rel="noopener sponsored" class="btn-aff">
+                  <span>Mua Ngay ↗</span>
+                </a>
+              </div>
+            </div>
+          `).join('');
+
+          productsLoaded = true;
+        } catch {
+          grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:1.5rem; color:var(--neon-rose);">Không thể tải dữ liệu sản phẩm.</div>`;
+        }
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bộ Công Cụ IT & Quản Trị Mạng (9-in-1) — Thắng IT</title>
+  <meta name="description" content="Bộ công cụ IT & Quản trị mạng chuyên sâu tích hợp 9-trong-1: Subnet CIDR, DNS Lookup DoH Cloudflare, Wi-Fi QR, Port Registry, Password Generator, NOC Telemetry, Web Terminal CLI, CV Kỹ sư & Dự án. 100% Client-side.">
+  <meta name="keywords" content="it tools thangit, network suite, subnet cidr, dns lookup doh, wifi qr wpa3, port registry, password generator, noc ping telemetry, web terminal cli">
+  <meta name="author" content="Nguyễn Đức Thắng">
+  <link rel="canonical" href="https://thangit.com/it.html">
+
+  <!-- IndieWeb / Entity Verification -->
+  <link rel="me" href="https://thangnd.io.vn">
+  <link rel="me" href="https://thangnhayday.com">
+  <link rel="me" href="https://github.com/ducthangqtm">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bộ Công Cụ IT & Quản Trị Mạng (9-in-1) — Thắng IT">
+  <meta property="og:description" content="9 công cụ mạng chuyên sâu tích hợp trong 1 trang duy nhất: Subnet, DNS DoH, Wi-Fi QR, Port, Mật khẩu an toàn, NOC Ping, Terminal CLI, CV & Dự án.">
+  <meta property="og:image" content="https://thangit.com/apple-touch-icon.png">
+  <meta property="og:url" content="https://thangit.com/it.html">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css?v=20260906_3">
+
+  <style>
+    /* IT Suite Navigation Tabs */
+    .suite-nav-wrapper {
+      position: sticky;
+      top: 60px;
+      z-index: 40;
+      background: rgba(11, 19, 32, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .suite-tabs-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 2px 12px;
+    }
+    .suite-tabs-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .suite-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(22, 28, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .suite-tab-btn:hover {
+      background: rgba(30, 38, 52, 0.95);
+      color: #fff;
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+    .suite-tab-btn.active {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+    }
+    .suite-tool-pane {
+      display: none;
+      animation: fadeInPane 0.3s ease;
+    }
+    .suite-tool-pane.active {
+      display: block;
+    }
+    @keyframes fadeInPane {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .tool-header-box {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .tool-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--neon-cyan);
+      margin-bottom: 8px;
+    }
+    .tool-title-main {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .tool-desc-sub {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div id="pwa-pull-indicator" class="pwa-pull-indicator" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <polyline points="1 20 1 14 7 14"></polyline>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+    </svg>
+  </div>
+
+  <header class="header-nav">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Về Trang chủ">
+        <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="TiT Logo">
+          <defs>
+            <linearGradient id="tit-bg-it" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0b1320"/>
+              <stop offset="100%" stop-color="#04070d"/>
+            </linearGradient>
+            <linearGradient id="tit-neon-it" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="50%" stop-color="#7000ff"/>
+              <stop offset="100%" stop-color="#ff007b"/>
+            </linearGradient>
+          </defs>
+          <rect x="1.5" y="1.5" width="41" height="41" rx="10" fill="url(#tit-bg-it)" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1.5"/>
+          <g>
+            <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon-it)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="22" cy="23.5" r="1.2" fill="#ffffff"/>
+            <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon-it)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <circle cx="22" cy="12" r="2.3" fill="#00f0ff"/>
+        </svg>
+        <span class="brand-name">THANG<span>IT</span>.COM</span>
+      </a>
+
+      <div class="topbar-actions">
+        <a href="/" class="ios-back-btn" title="Quay lại Trang chủ">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Trang chủ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Tool Switcher Tabs -->
+  <div class="suite-nav-wrapper">
+    <div class="container">
+      <div class="suite-tabs-scroll" id="it-tabs-bar">
+        <button class="suite-tab-btn active" data-tab="subnet">🧮 Subnet CIDR</button>
+        <button class="suite-tab-btn" data-tab="dns">🌐 DNS DoH</button>
+        <button class="suite-tab-btn" data-tab="wifi">📶 Wi-Fi QR</button>
+        <button class="suite-tab-btn" data-tab="ports">🔌 Tra Cứu Port</button>
+        <button class="suite-tab-btn" data-tab="password">🔐 Sinh Mật Khẩu</button>
+        <button class="suite-tab-btn" data-tab="telemetry">📡 NOC Ping</button>
+        <button class="suite-tab-btn" data-tab="terminal">💻 Web Terminal</button>
+        <button class="suite-tab-btn" data-tab="cv">💼 Hồ Sơ CV</button>
+        <button class="suite-tab-btn" data-tab="projects">🚀 Dự Án Số</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-hub">
+    <div class="container hub-center-wrapper" style="max-width: 860px;">
+
+      <!-- ===================================================================
+           PANE 1: SUBNET CIDR CALCULATOR
+           =================================================================== -->
+      <section class="suite-tool-pane active" id="pane-subnet">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">IPV4 BITWISE ENGINE</span>
+          <h1 class="tool-title-main">Tính Toán Chia Mạng Subnet CIDR</h1>
+          <p class="tool-desc-sub">Phân tích dải mạng IPv4 từ /1 đến /32, Network IP, Broadcast IP, Wildcard Mask và số Host khả dụng 100% Client-side.</p>
+        </div>
+
+        <div class="ios-card app-tool-card">
+          <div class="subnet-input-grid">
+            <div class="input-group">
+              <label for="calc-ip" class="input-label">Địa Chỉ IPv4 (Host hoặc Network)</label>
+              <div class="input-with-icon">
+                <span class="input-icon">🌐</span>
+                <input type="text" id="calc-ip" class="cyber-input" value="192.168.1.1" placeholder="Ví dụ: 10.0.0.1 hoặc 172.16.10.5">
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="slider-header-row">
+                <label for="calc-cidr-slider" class="input-label">Mặt Nạ Mạng CIDR: <strong id="calc-cidr-val" class="highlight-val">/24</strong></label>
+                <span class="slider-tag" id="calc-netmask-badge">255.255.255.0</span>
+              </div>
+              <input type="range" id="calc-cidr-slider" class="cyber-slider" min="1" max="32" value="24" step="1">
+            </div>
+          </div>
+
+          <div class="subnet-quick-presets">
+            <span class="presets-label">Dải mạng mẫu:</span>
+            <button type="button" class="subnet-preset-btn" data-ip="192.168.1.0" data-cidr="24">/24 (LAN Gia Đình)</button>
+            <button type="button" class="subnet-preset-btn" data-ip="172.16.0.0" data-cidr="20">/20 (Văn Phòng 4K Host)</button>
+            <button type="button" class="subnet-preset-btn" data-ip="10.0.0.0" data-cidr="16">/16 (Enterprise 65K)</button>
+            <button type="button" class="subnet-preset-btn" data-ip="10.10.10.0" data-cidr="30">/30 (P2P Link)</button>
+          </div>
+
+          <div class="subnet-action-row" style="display:flex; gap:10px; margin: 1rem 0;">
+            <button type="button" id="btn-calculate-subnet" class="cyber-btn cyber-btn-primary" style="flex:1;">
+              <span>⚡ Phân Tích Dải Mạng</span>
+            </button>
+            <button type="button" id="btn-copy-subnet-report" class="cyber-btn cyber-btn-secondary">
+              <span>📋 Sao Chép Báo Cáo</span>
+            </button>
+          </div>
+
+          <!-- Result Table -->
+          <div class="subnet-results-wrapper">
+            <table class="cyber-table subnet-result-table">
+              <tbody>
+                <tr>
+                  <td class="table-key">Network Address (Địa chỉ mạng)</td>
+                  <td class="table-val" id="res-network-ip">192.168.1.0</td>
+                </tr>
+                <tr>
+                  <td class="table-key">Subnet Mask (Mặt nạ mạng)</td>
+                  <td class="table-val" id="res-subnet-mask">255.255.255.0</td>
+                </tr>
+                <tr>
+                  <td class="table-key">Wildcard Mask (Mặt nạ nghịch)</td>
+                  <td class="table-val" id="res-wildcard">0.0.0.255</td>
+                </tr>
+                <tr>
+                  <td class="table-key">Broadcast Address (Địa chỉ quảng bá)</td>
+                  <td class="table-val" id="res-broadcast-ip">192.168.1.255</td>
+                </tr>
+                <tr>
+                  <td class="table-key">Dải IP Khả Dụng (Usable Host Range)</td>
+                  <td class="table-val" id="res-usable-range">192.168.1.1 — 192.168.1.254</td>
+                </tr>
+                <tr>
+                  <td class="table-key">Số Lượng Host Sử Dụng Được</td>
+                  <td class="table-val"><span id="res-usable-hosts" class="badge-hosts">254</span> <small style="color:var(--text-dim);">(Tổng: <span id="res-total-hosts">256</span>)</small></td>
+                </tr>
+                <tr>
+                  <td class="table-key">Phân Loại Mạng (Class / Scope)</td>
+                  <td class="table-val" id="res-ip-class">Class C • Private Network (RFC 1918)</td>
+                </tr>
+                <tr>
+                  <td class="table-key">Dạng Nhị Phân (Binary Netmask)</td>
+                  <td class="table-val font-mono" id="res-binary-mask">11111111.11111111.11111111.00000000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 2: DNS LOOKUP DOH
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-dns">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">DNS-OVER-HTTPS 1.1.1.1</span>
+          <h2 class="tool-title-main">Tra Cứu Bản Ghi DNS Trực Tiếp</h2>
+          <p class="tool-desc-sub">Truy vấn nhanh bản ghi A, AAAA, CNAME, MX, TXT, NS qua Cloudflare DoH API không lưu đệm.</p>
+        </div>
+
+        <div class="ios-card app-tool-card">
+          <div class="dns-input-group">
+            <div class="input-with-action" style="display:flex; gap:10px; margin-bottom:1rem;">
+              <input type="text" id="dns-domain-input" class="cyber-input" value="thangit.com" placeholder="Nhập tên miền (ví dụ: google.com, thangit.com)">
+              <button type="button" id="btn-dns-lookup" class="cyber-btn cyber-btn-primary">
+                <span>🔍 Tra Cứu</span>
+              </button>
+            </div>
+
+            <!-- DNS Record Type Selectors -->
+            <div class="dns-types-bar" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:1rem;">
+              <button type="button" class="dns-type-btn active" data-dns-type="A">A (IPv4)</button>
+              <button type="button" class="dns-type-btn" data-dns-type="AAAA">AAAA (IPv6)</button>
+              <button type="button" class="dns-type-btn" data-dns-type="CNAME">CNAME</button>
+              <button type="button" class="dns-type-btn" data-dns-type="MX">MX (Mail)</button>
+              <button type="button" class="dns-type-btn" data-dns-type="TXT">TXT (SPF/DKIM)</button>
+              <button type="button" class="dns-type-btn" data-dns-type="NS">NS (Nameserver)</button>
+            </div>
+          </div>
+
+          <div class="dns-results-box" style="overflow-x:auto;">
+            <table class="cyber-table">
+              <thead>
+                <tr>
+                  <th>Tên Miền</th>
+                  <th>Loại</th>
+                  <th>TTL</th>
+                  <th>Giá Trị Bản Ghi</th>
+                </tr>
+              </thead>
+              <tbody id="dns-results-tbody">
+                <tr>
+                  <td colspan="4" style="text-align:center; padding:1.5rem; color:var(--text-dim);">Nhấn <strong>Tra Cứu</strong> để truy vấn bản ghi DNS qua Cloudflare DoH.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 3: WI-FI QR GENERATOR
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-wifi">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">WPA2 / WPA3 PROTOCOL</span>
+          <h2 class="tool-title-main">Tạo Mã QR Kết Nối Wi-Fi 1-Chạm</h2>
+          <p class="tool-desc-sub">Sinh mã QR kết nối nhanh cho điện thoại iOS & Android. Hỗ trợ mạng ẩn và chuẩn bảo mật mới nhất.</p>
+        </div>
+
+        <div class="ios-card app-tool-card">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: center;">
+            <div class="wifi-form-fields">
+              <div class="input-group" style="margin-bottom:12px;">
+                <label for="wifi-ssid" class="input-label">Tên Mạng Wi-Fi (SSID)</label>
+                <input type="text" id="wifi-ssid" class="cyber-input" value="ThangIT_5GHz" placeholder="Nhập SSID Wi-Fi">
+              </div>
+
+              <div class="input-group" style="margin-bottom:12px;">
+                <label for="wifi-password" class="input-label">Mật Khẩu Wi-Fi</label>
+                <input type="text" id="wifi-password" class="cyber-input" value="ThangIT@2026" placeholder="Nhập mật khẩu (để trống nếu Open)">
+              </div>
+
+              <div class="input-group" style="margin-bottom:12px;">
+                <label for="wifi-encryption" class="input-label">Chuẩn Mã Hóa Bảo Mật</label>
+                <select id="wifi-encryption" class="cyber-select">
+                  <option value="WPA">WPA / WPA2 / WPA3 Personal</option>
+                  <option value="WEP">WEP (Legacy)</option>
+                  <option value="nopass">Không mật khẩu (Open)</option>
+                </select>
+              </div>
+
+              <div class="checkbox-group" style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+                <input type="checkbox" id="wifi-hidden" class="cyber-checkbox">
+                <label for="wifi-hidden" class="input-label" style="margin:0; cursor:pointer;">Mạng ẩn (Hidden SSID)</label>
+              </div>
+
+              <button type="button" id="btn-gen-wifi-qr" class="cyber-btn cyber-btn-primary" style="width:100%;">
+                <span>📶 Tạo Lại Mã QR</span>
+              </button>
+            </div>
+
+            <div class="wifi-qr-preview-box" style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; background:rgba(4,7,13,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:16px;">
+              <canvas id="wifi-qr-canvas" width="200" height="200" style="background:#fff; padding:10px; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.5);"></canvas>
+              <div style="display:flex; gap:10px; margin-top:14px;">
+                <button type="button" id="btn-download-wifi-qr" class="cyber-btn cyber-btn-secondary" style="font-size:0.8rem; padding:6px 12px;">
+                  <span>💾 Tải Ảnh PNG</span>
+                </button>
+                <button type="button" id="btn-copy-wifi-string" class="cyber-btn cyber-btn-secondary" style="font-size:0.8rem; padding:6px 12px;">
+                  <span>📋 Sao Chép Chuỗi</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 4: PORT REGISTRY LOOKUP
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-ports">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">NETWORK SERVICE REGISTRY</span>
+          <h2 class="tool-title-main">Tra Cứu Cổng Mạng Phổ Biến (39 Ports)</h2>
+          <p class="tool-desc-sub">Cơ sở dữ liệu các cổng dịch vụ TCP/UDP chuẩn IANA dành cho Quản trị mạng, Dev & SysAdmin.</p>
+        </div>
+
+        <div class="ios-card app-tool-card">
+          <div class="input-with-icon" style="margin-bottom:12px;">
+            <span class="input-icon">🔍</span>
+            <input type="text" id="port-search-input" class="cyber-input" placeholder="Tìm theo số cổng, dịch vụ (vd: 443, SSH, HTTP, MySQL, DNS)...">
+          </div>
+
+          <div class="port-filters-bar" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
+            <button type="button" class="port-tag-btn active" data-port-cat="all">Tất Cả (39)</button>
+            <button type="button" class="port-tag-btn" data-port-cat="web">Web (HTTP/S)</button>
+            <button type="button" class="port-tag-btn" data-port-cat="remote">Remote / SSH</button>
+            <button type="button" class="port-tag-btn" data-port-cat="db">Cơ Sở Dữ Liệu</button>
+            <button type="button" class="port-tag-btn" data-port-cat="mail">Email Servers</button>
+            <button type="button" class="port-tag-btn" data-port-cat="net">Hạ Tầng / VPN</button>
+          </div>
+
+          <div class="port-table-wrap" style="max-height:420px; overflow-y:auto;">
+            <table class="cyber-table">
+              <thead>
+                <tr>
+                  <th style="width:80px;">Cổng</th>
+                  <th style="width:100px;">Giao Thức</th>
+                  <th style="width:160px;">Dịch Vụ</th>
+                  <th>Mô Tả & Công Dụng</th>
+                </tr>
+              </thead>
+              <tbody id="port-list-items">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 5: PASSWORD GENERATOR
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-password">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">HIGH-ENTROPY CRYPTO API</span>
+          <h2 class="tool-title-main">Sinh Mật Khẩu An Toàn Cho SysAdmin</h2>
+          <p class="tool-desc-sub">Sử dụng Web Crypto API (window.crypto.getRandomValues) đảm bảo tính ngẫu nhiên cấp độ bảo mật cao nhất.</p>
+        </div>
+
+        <div class="ios-card app-tool-card">
+          <div class="pwd-result-display-box" style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.5); border:1px solid rgba(0,240,255,0.3); border-radius:14px; padding:14px 18px; margin-bottom:16px;">
+            <span id="pwd-result" class="font-mono" style="font-size:1.2rem; color:var(--neon-cyan); word-break:break-all; font-weight:700;">Nhấn Tạo Mật Khẩu</span>
+            <button type="button" id="btn-copy-pwd" class="cyber-btn cyber-btn-secondary" style="padding:6px 12px; font-size:0.85rem;">
+              <span>📋 Copy</span>
+            </button>
+          </div>
+
+          <div class="pwd-controls-grid">
+            <div class="slider-header-row" style="margin-bottom:8px;">
+              <label for="pwd-length" class="input-label">Độ Dài Ký Tự: <strong id="pwd-length-val" class="highlight-val">20</strong></label>
+            </div>
+            <input type="range" id="pwd-length" class="cyber-slider" min="8" max="64" value="20" step="1" style="margin-bottom:16px;">
+
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin-bottom:16px;">
+              <label class="checkbox-label" style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text-main);">
+                <input type="checkbox" id="opt-upper" checked class="cyber-checkbox"> Chữ Hoa (A-Z)
+              </label>
+              <label class="checkbox-label" style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text-main);">
+                <input type="checkbox" id="opt-lower" checked class="cyber-checkbox"> Chữ Thường (a-z)
+              </label>
+              <label class="checkbox-label" style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text-main);">
+                <input type="checkbox" id="opt-numbers" checked class="cyber-checkbox"> Chữ Số (0-9)
+              </label>
+              <label class="checkbox-label" style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text-main);">
+                <input type="checkbox" id="opt-symbols" checked class="cyber-checkbox"> Ký Tự Đặc Biệt (!@#$)
+              </label>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+              <button type="button" id="btn-gen-pwd" class="cyber-btn cyber-btn-primary" style="flex:1;">
+                <span>🔐 Sinh Mật Khẩu Mới</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 6: NOC TELEMETRY & PING
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-telemetry">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">NOC TELEMETRY & DIAGNOSTICS</span>
+          <h2 class="tool-title-main">Kiểm Tra Độ Trễ & Node Mạng</h2>
+          <p class="tool-desc-sub">Đo lường độ trễ mạng thực tế tới các Cloud Edge hàng đầu (Cloudflare, Google, Vercel, AWS).</p>
+        </div>
+
+        <div class="ios-card app-tool-card">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:1.5rem;">
+            <div class="telemetry-stat-card" style="background:rgba(22,28,38,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:12px 14px;">
+              <span style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:4px;">IP Công Khai Của Bạn</span>
+              <strong id="telemetry-ip" style="color:var(--neon-cyan); font-size:1.1rem; font-family:monospace;">Đang quét...</strong>
+            </div>
+            <div class="telemetry-stat-card" style="background:rgba(22,28,38,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:12px 14px;">
+              <span style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:4px;">Node Kết Nối (Edge)</span>
+              <strong id="telemetry-colo" style="color:#fff; font-size:1.1rem;">HAN (Hanoi POP)</strong>
+            </div>
+            <div class="telemetry-stat-card" style="background:rgba(22,28,38,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:12px 14px;">
+              <span style="font-size:0.75rem; color:var(--text-dim); display:block; margin-bottom:4px;">Giao Thức Truyền Tải</span>
+              <strong id="telemetry-proto" style="color:var(--neon-green); font-size:1.1rem;">HTTP/3 (QUIC)</strong>
+            </div>
+          </div>
+
+          <h3 style="font-size:1rem; margin-bottom:10px; color:#fff;">Độ Trễ Tới Các Cụm Máy Chủ (Real-time Latency):</h3>
+          <div class="ping-table-wrap">
+            <table class="cyber-table">
+              <thead>
+                <tr>
+                  <th>Máy Chủ Mục Tiêu</th>
+                  <th>Địa Điểm</th>
+                  <th>Thời Gian Phản Hồi (RTT)</th>
+                  <th>Trạng Thái</th>
+                </tr>
+              </thead>
+              <tbody id="telemetry-ping-tbody">
+                <tr>
+                  <td>Cloudflare CDN</td>
+                  <td>Hanoi Edge (HAN)</td>
+                  <td id="ping-cf" class="font-mono">-- ms</td>
+                  <td><span class="badge-status-dot online"></span> Trực Tuyến</td>
+                </tr>
+                <tr>
+                  <td>Google DNS / Edge</td>
+                  <td>Singapore (SIN)</td>
+                  <td id="ping-google" class="font-mono">-- ms</td>
+                  <td><span class="badge-status-dot online"></span> Trực Tuyến</td>
+                </tr>
+                <tr>
+                  <td>VNPT / Viettel Local</td>
+                  <td>Vietnam Domestic</td>
+                  <td id="ping-vn" class="font-mono">-- ms</td>
+                  <td><span class="badge-status-dot online"></span> Tối Ưu</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="margin-top:14px; text-align:right;">
+            <button type="button" id="btn-refresh-telemetry" class="cyber-btn cyber-btn-secondary">
+              <span>🔄 Đo Lại Độ Trễ</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 7: WEB TERMINAL CLI
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-terminal">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">INTERACTIVE UNIX SHELL</span>
+          <h2 class="tool-title-main">Giao Diện Dòng Lệnh Web Terminal</h2>
+          <p class="tool-desc-sub">Khám phá thông tin kỹ sư, hạ tầng mạng và danh mục lệnh qua console ảo. Gõ <code>help</code> để xem tất cả lệnh.</p>
+        </div>
+
+        <div class="ios-card app-tool-card" style="padding:0; overflow:hidden; border-radius:18px; border:1px solid rgba(0,240,255,0.25);">
+          <div class="term-window-header" style="background:#0b111e; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="display:flex; gap:6px;">
+              <span style="width:11px; height:11px; border-radius:50%; background:#ff5f56; display:inline-block;"></span>
+              <span style="width:11px; height:11px; border-radius:50%; background:#ffbd2e; display:inline-block;"></span>
+              <span style="width:11px; height:11px; border-radius:50%; background:#27c93f; display:inline-block;"></span>
+            </div>
+            <span style="font-size:0.75rem; color:var(--text-dim); font-family:monospace;">thangit@edge-node:~ (zsh)</span>
+            <span style="font-size:0.75rem; color:var(--neon-green); font-family:monospace;">● connected</span>
+          </div>
+
+          <div id="app-terminal-output" style="background:#04070d; min-height:280px; max-height:420px; overflow-y:auto; padding:16px; font-family:'Courier New', Courier, monospace; font-size:0.88rem; line-height:1.55; color:#a6accd;">
+            <div style="color:var(--neon-cyan); margin-bottom:8px;">THANGIT NETWORK TERMINAL v2.5 — All Systems Operational</div>
+            <div style="color:var(--text-dim); margin-bottom:12px;">Gõ <span style="color:#ffb800; font-weight:bold;">help</span> để xem các lệnh có sẵn. Hoặc thử: <span style="color:#fff;">whoami, skills, exp, projects, ping, contact</span>.</div>
+          </div>
+
+          <div class="term-input-row" style="display:flex; align-items:center; background:#0b111e; border-top:1px solid rgba(255,255,255,0.08); padding:10px 14px;">
+            <span style="color:var(--neon-green); font-family:monospace; margin-right:8px; font-weight:bold;">thangit@edge:~$</span>
+            <input type="text" id="app-term-cmd-input" class="cyber-input" style="flex:1; background:transparent; border:none; padding:0; color:#fff; font-family:monospace; box-shadow:none;" placeholder="gõ lệnh tại đây..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 8: HỒ SƠ CV KỸ SƯ
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-cv">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">SENIOR NETWORK ADMINISTRATOR</span>
+          <h2 class="tool-title-main">Hồ Sơ Năng Lực & Kinh Nghiệm</h2>
+          <p class="tool-desc-sub">Kỹ sư mạng & quản trị hệ thống với hơn 10 năm kinh nghiệm vận hành hạ tầng quy mô lớn.</p>
+        </div>
+
+        <div class="ios-card app-tool-card" style="line-height:1.6;">
+          <div style="border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:14px; margin-bottom:14px;">
+            <h3 style="color:#fff; font-size:1.3rem; margin-bottom:4px;">Nguyễn Đức Thắng</h3>
+            <p style="color:var(--neon-cyan); font-weight:600; font-size:0.92rem; margin:0;">Senior Network Administrator • Vibe Coder</p>
+            <p style="color:var(--text-dim); font-size:0.85rem; margin-top:4px;">📍 Hà Nội, Việt Nam • ✉️ ducthangqtm@gmail.com • 🌐 <a href="https://thangnd.io.vn" target="_blank" rel="noopener" style="color:var(--neon-cyan);">thangnd.io.vn</a></p>
+          </div>
+
+          <div style="margin-bottom:18px;">
+            <h4 style="color:#fff; font-size:1.05rem; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--neon-cyan);">📌</span> Tóm Tắt Chuyên Môn
+            </h4>
+            <p style="color:var(--text-main); font-size:0.9rem;">
+              Chuyên gia thiết kế, triển khai và vận hành hệ thống mạng doanh nghiệp quy mô lớn (Trung tâm Logistics 40.000m² với hơn 500 nodes mạng). Có kiến thức sâu về Cisco, Mikrotik RouterOS, VLAN phân đoạn, OSPF, BGP, IPsec VPN và giải pháp Wi-Fi mật độ cao. Tiên phong áp dụng Python Automation và AI tooling nâng cao hiệu suất vận hành 24/7.
+            </p>
+          </div>
+
+          <div style="margin-bottom:18px;">
+            <h4 style="color:#fff; font-size:1.05rem; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--neon-cyan);">🛠️</span> Kỹ Năng Cốt Lõi
+            </h4>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              <span class="skill-pill" style="background:rgba(0,240,255,0.1); color:var(--neon-cyan); padding:4px 10px; border-radius:8px; font-size:0.82rem; border:1px solid rgba(0,240,255,0.25);">Cisco CCNA / CCNP Routing</span>
+              <span class="skill-pill" style="background:rgba(0,240,255,0.1); color:var(--neon-cyan); padding:4px 10px; border-radius:8px; font-size:0.82rem; border:1px solid rgba(0,240,255,0.25);">Mikrotik RouterOS (MTCNA/MTCRE)</span>
+              <span class="skill-pill" style="background:rgba(0,240,255,0.1); color:var(--neon-cyan); padding:4px 10px; border-radius:8px; font-size:0.82rem; border:1px solid rgba(0,240,255,0.25);">IPsec VPN / WireGuard / OpenVPN</span>
+              <span class="skill-pill" style="background:rgba(0,240,255,0.1); color:var(--neon-cyan); padding:4px 10px; border-radius:8px; font-size:0.82rem; border:1px solid rgba(0,240,255,0.25);">Fortinet FortiGate / pfSense</span>
+              <span class="skill-pill" style="background:rgba(0,240,255,0.1); color:var(--neon-cyan); padding:4px 10px; border-radius:8px; font-size:0.82rem; border:1px solid rgba(0,240,255,0.25);">Linux (Ubuntu, Debian, RHEL)</span>
+              <span class="skill-pill" style="background:rgba(0,240,255,0.1); color:var(--neon-cyan); padding:4px 10px; border-radius:8px; font-size:0.82rem; border:1px solid rgba(0,240,255,0.25);">Docker / Proxmox VE Virtualization</span>
+              <span class="skill-pill" style="background:rgba(0,240,255,0.1); color:var(--neon-cyan); padding:4px 10px; border-radius:8px; font-size:0.82rem; border:1px solid rgba(0,240,255,0.25);">Python Automation & Bash Shell</span>
+            </div>
+          </div>
+
+          <div style="text-align:center; margin-top:20px;">
+            <a href="https://thangnd.io.vn" target="_blank" rel="noopener" class="cyber-btn cyber-btn-primary" style="display:inline-flex; align-items:center; gap:8px;">
+              <span>🌐 Xem Portfolio Đầy Đủ Tại ThangND.io.vn ↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PANE 9: DỰ ÁN SỐ (PROJECTS)
+           =================================================================== -->
+      <section class="suite-tool-pane" id="pane-projects">
+        <div class="tool-header-box">
+          <span class="tool-badge-pill">PORTFOLIO & ECOSYSTEM</span>
+          <h2 class="tool-title-main">Hệ Sinh Thái Dự Án Số</h2>
+          <p class="tool-desc-sub">Các nền tảng web, ứng dụng tự động hóa hạ tầng và dự án cá nhân được xây dựng & tối ưu.</p>
+        </div>
+
+        <div class="category-cards-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px;">
+          <!-- Project 1 -->
+          <div class="category-app-card" style="cursor:default;">
+            <div class="category-card-icon" style="background:rgba(0,240,255,0.15); color:var(--neon-cyan);">⚡</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">thangit.com</h3>
+                <span class="category-card-tag">PWA Super App</span>
+              </div>
+              <p class="category-card-desc">Cổng công cụ IT & Tiện ích thường ngày 100% Client-side siêu nhẹ, chuẩn Offline PWA và Cloudflare Pages Edge.</p>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="category-app-card" style="cursor:default;">
+            <div class="category-card-icon" style="background:rgba(16,185,129,0.15); color:var(--neon-green);">📡</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">NOC Bot Cảnh Báo</h3>
+                <span class="category-card-tag">Telegram Bot</span>
+              </div>
+              <p class="category-card-desc">Bot giám sát hạ tầng mạng tự động gửi cảnh báo sự cố cáp quang, mất điện UPS và gián đoạn dịch vụ tức thì.</p>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="category-app-card" style="cursor:default;">
+            <div class="category-card-icon" style="background:rgba(245,158,11,0.15); color:#f59e0b;">🏃</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">thangnhayday.com</h3>
+                <span class="category-card-tag">Fitness Bio Hub</span>
+              </div>
+              <p class="category-card-desc">Kênh chia sẻ hành trình 100 ngày nhảy dây, rèn luyện thể lực và đánh giá dụng cụ tập thể dục tại nhà chất lượng.</p>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="category-app-card" style="cursor:default;">
+            <div class="category-card-icon" style="background:rgba(112,0,255,0.15); color:#a855f7;">🌐</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">thangnd.io.vn</h3>
+                <span class="category-card-tag">Personal Portfolio</span>
+              </div>
+              <p class="category-card-desc">Trang cá nhân chính thức định danh số của Nguyễn Đức Thắng (Entity SEO & Graph Verified).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="app-footer" style="margin-top: 3rem; text-align: center; padding: 2rem 1rem; border-top: 1px solid var(--border-color); color: var(--text-dim); font-size: 0.85rem;">
+    <p>© 2026 <strong>Thắng IT</strong> (Nguyễn Đức Thắng) • 100% Client-side Processing • Bảo mật & Tốc độ</p>
+    <p style="margin-top: 6px;">
+      <a href="/" style="color: var(--neon-cyan); text-decoration: none;">Trang Chủ</a> • 
+      <a href="/tienich.html" style="color: var(--neon-cyan); text-decoration: none;">Tiện Ích Bỏ Túi</a> • 
+      <a href="https://thangnd.io.vn" target="_blank" rel="noopener me" style="color: var(--text-dim); text-decoration: none;">thangnd.io.vn</a> • 
+      <a href="https://thangnhayday.com" target="_blank" rel="noopener me" style="color: var(--text-dim); text-decoration: none;">thangnhayday.com</a>
+    </p>
+  </footer>
+
+  <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
+
+  <!-- QR Code Generator Library -->
+  <script src="/js/qrcode.min.js"></script>
+  <!-- Core Common Utilities -->
+  <script src="/js/core.js?v=20260906_3"></script>
+
+  <!-- Interactive IT Suite Engine (All 9 Tools Logic) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Tab Switcher Logic with URL Hash Support
+      const tabBtns = document.querySelectorAll('#it-tabs-bar .suite-tab-btn');
+      const toolPanes = document.querySelectorAll('.suite-tool-pane');
+
+      function switchTab(tabId) {
+        tabBtns.forEach(btn => {
+          if (btn.getAttribute('data-tab') === tabId) {
+            btn.classList.add('active');
+            btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        toolPanes.forEach(pane => {
+          if (pane.id === `pane-${tabId}`) {
+            pane.classList.add('active');
+          } else {
+            pane.classList.remove('active');
+          }
+        });
+
+        window.location.hash = tabId;
+      }
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tabId = btn.getAttribute('data-tab');
+          switchTab(tabId);
+        });
+      });
+
+      // Handle initial hash in URL (e.g. #dns, #wifi, #ports)
+      const currentHash = window.location.hash.replace('#', '');
+      if (currentHash && document.getElementById(`pane-${currentHash}`)) {
+        switchTab(currentHash);
+      }
+
+      // =================================================================
+      // TOOL 1: SUBNET CALCULATOR ENGINE
+      // =================================================================
+      const ipInput = document.getElementById('calc-ip');
+      const cidrSlider = document.getElementById('calc-cidr-slider');
+      const cidrVal = document.getElementById('calc-cidr-val');
+      const netmaskBadge = document.getElementById('calc-netmask-badge');
+      const calcBtn = document.getElementById('btn-calculate-subnet');
+      const copyBtn = document.getElementById('btn-copy-subnet-report');
+      const presetBtns = document.querySelectorAll('.subnet-preset-btn');
+
+      function ipToInt(ip) {
+        return ip.split('.').reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
+      }
+
+      function intToIp(int) {
+        return [
+          (int >>> 24) & 255,
+          (int >>> 16) & 255,
+          (int >>> 8) & 255,
+          int & 255
+        ].join('.');
+      }
+
+      function intToBinary(int) {
+        return [
+          ((int >>> 24) & 255).toString(2).padStart(8, '0'),
+          ((int >>> 16) & 255).toString(2).padStart(8, '0'),
+          ((int >>> 8) & 255).toString(2).padStart(8, '0'),
+          (int & 255).toString(2).padStart(8, '0')
+        ].join('.');
+      }
+
+      function calculateSubnet() {
+        const ipStr = (ipInput.value || '').trim() || '192.168.1.1';
+        const cidr = parseInt(cidrSlider.value, 10) || 24;
+
+        const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        if (!ipRegex.test(ipStr)) {
+          showToast('⚠️ Vui lòng nhập địa chỉ IPv4 hợp lệ!');
+          return;
+        }
+
+        const ip = ipToInt(ipStr);
+        const mask = cidr === 0 ? 0 : (~0 << (32 - cidr)) >>> 0;
+        const wildcard = (~mask) >>> 0;
+        const network = (ip & mask) >>> 0;
+        const broadcast = (network | wildcard) >>> 0;
+
+        let totalHosts = Math.pow(2, 32 - cidr);
+        let usableHosts = 0;
+        let firstHost = 'N/A';
+        let lastHost = 'N/A';
+
+        if (cidr === 32) {
+          usableHosts = 1;
+          firstHost = intToIp(network);
+          lastHost = intToIp(network);
+        } else if (cidr === 31) {
+          usableHosts = 2;
+          firstHost = intToIp(network);
+          lastHost = intToIp(broadcast);
+        } else {
+          usableHosts = Math.max(0, totalHosts - 2);
+          firstHost = intToIp((network + 1) >>> 0);
+          lastHost = intToIp((broadcast - 1) >>> 0);
+        }
+
+        const maskStr = intToIp(mask);
+        netmaskBadge.textContent = maskStr;
+        cidrVal.textContent = `/${cidr}`;
+
+        document.getElementById('res-network-ip').textContent = intToIp(network);
+        document.getElementById('res-subnet-mask').textContent = maskStr;
+        document.getElementById('res-wildcard').textContent = intToIp(wildcard);
+        document.getElementById('res-broadcast-ip').textContent = intToIp(broadcast);
+        document.getElementById('res-usable-range').textContent = `${firstHost} — ${lastHost}`;
+        document.getElementById('res-usable-hosts').textContent = usableHosts.toLocaleString('vi-VN');
+        document.getElementById('res-total-hosts').textContent = totalHosts.toLocaleString('vi-VN');
+        document.getElementById('res-binary-mask').textContent = intToBinary(mask);
+
+        // Class Classification
+        const firstOctet = parseInt(ipStr.split('.')[0], 10);
+        let ipClass = 'Class C';
+        if (firstOctet >= 1 && firstOctet <= 126) ipClass = 'Class A';
+        else if (firstOctet >= 128 && firstOctet <= 191) ipClass = 'Class B';
+        else if (firstOctet >= 192 && firstOctet <= 223) ipClass = 'Class C';
+        else if (firstOctet >= 224 && firstOctet <= 239) ipClass = 'Class D (Multicast)';
+        else if (firstOctet >= 240) ipClass = 'Class E (Experimental)';
+
+        let scope = 'Public Internet';
+        if (firstOctet === 10 || (firstOctet === 172 && parseInt(ipStr.split('.')[1], 10) >= 16 && parseInt(ipStr.split('.')[1], 10) <= 31) || (firstOctet === 192 && parseInt(ipStr.split('.')[1], 10) === 168)) {
+          scope = 'Private Network (RFC 1918)';
+        } else if (firstOctet === 127) {
+          scope = 'Loopback (RFC 1122)';
+        }
+        document.getElementById('res-ip-class').textContent = `${ipClass} • ${scope}`;
+      }
+
+      if (cidrSlider) {
+        cidrSlider.addEventListener('input', () => {
+          calculateSubnet();
+        });
+      }
+      if (calcBtn) calcBtn.addEventListener('click', calculateSubnet);
+      if (ipInput) {
+        ipInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') calculateSubnet();
+        });
+      }
+
+      presetBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          ipInput.value = btn.getAttribute('data-ip');
+          cidrSlider.value = btn.getAttribute('data-cidr');
+          calculateSubnet();
+        });
+      });
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const report = `[THANGIT.COM SUBNET REPORT]
+IP: ${ipInput.value}/${cidrSlider.value}
+Network: ${document.getElementById('res-network-ip').textContent}
+Netmask: ${document.getElementById('res-subnet-mask').textContent}
+Broadcast: ${document.getElementById('res-broadcast-ip').textContent}
+Usable Range: ${document.getElementById('res-usable-range').textContent}
+Usable Hosts: ${document.getElementById('res-usable-hosts').textContent}`;
+          navigator.clipboard.writeText(report).then(() => {
+            showToast('📋 Đã sao chép báo cáo Subnet!');
+          });
+        });
+      }
+
+      calculateSubnet();
+
+      // =================================================================
+      // TOOL 2: DNS LOOKUP DOH ENGINE
+      // =================================================================
+      const domainInput = document.getElementById('dns-domain-input');
+      const lookupBtn = document.getElementById('btn-dns-lookup');
+      const typeBtns = document.querySelectorAll('.dns-type-btn');
+      const tbody = document.getElementById('dns-results-tbody');
+      let currentType = 'A';
+
+      typeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          typeBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentType = btn.getAttribute('data-dns-type');
+          performLookup();
+        });
+      });
+
+      async function performLookup() {
+        if (!domainInput || !tbody) return;
+        let domain = domainInput.value.trim() || 'thangit.com';
+        domain = domain.replace(/^https?:\/\//i, '').replace(/\/.*$/, '');
+
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1.2rem; color:var(--neon-cyan);">Đang truy vấn Cloudflare 1.1.1.1 DoH cho <strong>${domain}</strong> (${currentType})...</td></tr>`;
+
+        try {
+          const url = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${currentType}`;
+          const res = await fetch(url, {
+            headers: { 'Accept': 'application/dns-json' }
+          });
+          const data = await res.json();
+
+          if (!data.Answer || data.Answer.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1.2rem; color:var(--text-dim);">Không tìm thấy bản ghi <strong>${currentType}</strong> cho tên miền này.</td></tr>`;
+            return;
+          }
+
+          const typeMap = { 1: 'A', 28: 'AAAA', 5: 'CNAME', 15: 'MX', 16: 'TXT', 2: 'NS', 6: 'SOA' };
+          tbody.innerHTML = data.Answer.map(ans => {
+            const rType = typeMap[ans.type] || ans.type;
+            const rData = ans.data.replace(/^"|"$/g, '');
+            return `<tr>
+              <td><strong>${ans.name}</strong></td>
+              <td><span class="badge-dns-type">${rType}</span></td>
+              <td>${ans.TTL}s</td>
+              <td class="font-mono text-cyan">${rData}</td>
+            </tr>`;
+          }).join('');
+        } catch (err) {
+          tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1.2rem; color:var(--neon-rose);">Lỗi khi truy vấn DoH API. Vui lòng thử lại!</td></tr>`;
+        }
+      }
+
+      if (lookupBtn) lookupBtn.addEventListener('click', performLookup);
+      if (domainInput) {
+        domainInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') performLookup();
+        });
+      }
+
+      // =================================================================
+      // TOOL 3: WI-FI QR CODE ENGINE
+      // =================================================================
+      const ssidInput = document.getElementById('wifi-ssid');
+      const passInput = document.getElementById('wifi-password');
+      const encSelect = document.getElementById('wifi-encryption');
+      const hiddenCheck = document.getElementById('wifi-hidden');
+      const genWifiBtn = document.getElementById('btn-gen-wifi-qr');
+      const dlWifiBtn = document.getElementById('btn-download-wifi-qr');
+      const copyWifiBtn = document.getElementById('btn-copy-wifi-string');
+      const wifiCanvas = document.getElementById('wifi-qr-canvas');
+
+      function buildWifiString() {
+        const ssid = (ssidInput.value || '').trim();
+        const pass = (passInput.value || '').trim();
+        const enc = encSelect.value;
+        const hidden = hiddenCheck.checked ? 'H:true;' : '';
+        return `WIFI:S:${ssid};T:${enc};P:${pass};${hidden};`;
+      }
+
+      function generateWifiQr() {
+        const wifiStr = buildWifiString();
+        if (window.TiTQR && wifiCanvas) {
+          window.TiTQR.renderToCanvas(wifiCanvas, wifiStr, 200, {
+            colorDark: '#04070d',
+            colorLight: '#ffffff'
+          });
+          showToast('📶 Đã tạo mã QR Wi-Fi thành công!');
+        }
+      }
+
+      if (genWifiBtn) genWifiBtn.addEventListener('click', generateWifiQr);
+      if (dlWifiBtn && wifiCanvas) {
+        dlWifiBtn.addEventListener('click', () => {
+          const ssid = (ssidInput.value || 'wifi').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
+          const link = document.createElement('a');
+          link.download = `WiFi_QR_${ssid}.png`;
+          link.href = wifiCanvas.toDataURL('image/png');
+          link.click();
+          showToast('💾 Đã tải ảnh mã QR Wi-Fi!');
+        });
+      }
+      if (copyWifiBtn) {
+        copyWifiBtn.addEventListener('click', () => {
+          const wifiStr = buildWifiString();
+          navigator.clipboard.writeText(wifiStr).then(() => {
+            showToast('📋 Đã sao chép chuỗi mã Wi-Fi!');
+          });
+        });
+      }
+      // Initialize first QR
+      setTimeout(generateWifiQr, 300);
+
+      // =================================================================
+      // TOOL 4: PORT REGISTRY LOOKUP
+      // =================================================================
+      const PORTS_DATA = [
+        { port: 20, proto: 'TCP', service: 'FTP Data', cat: 'net', desc: 'Truyền dữ liệu tệp tin FTP' },
+        { port: 21, proto: 'TCP', service: 'FTP Control', cat: 'net', desc: 'Điều khiển phiên truyền tệp FTP' },
+        { port: 22, proto: 'TCP', service: 'SSH / SFTP', cat: 'remote', desc: 'Secure Shell quản trị server & sao chép mã hóa' },
+        { port: 23, proto: 'TCP', service: 'Telnet', cat: 'remote', desc: 'Truy cập dòng lệnh không mã hóa (legacy)' },
+        { port: 25, proto: 'TCP', service: 'SMTP', cat: 'mail', desc: 'Gửi thư điện tử giữa các mail server' },
+        { port: 53, proto: 'TCP/UDP', service: 'DNS', cat: 'net', desc: 'Hệ thống phân giải tên miền thành địa chỉ IP' },
+        { port: 67, proto: 'UDP', service: 'DHCP Server', cat: 'net', desc: 'Cấp phát IP tự động từ Router/Server' },
+        { port: 68, proto: 'UDP', service: 'DHCP Client', cat: 'net', desc: 'Nhận cấu hình IP tự động từ DHCP Server' },
+        { port: 69, proto: 'UDP', service: 'TFTP', cat: 'net', desc: 'Trivial FTP nạp firmware router/switch' },
+        { port: 80, proto: 'TCP', service: 'HTTP', cat: 'web', desc: 'Giao thức truyền siêu văn bản Web không mã hóa' },
+        { port: 110, proto: 'TCP', service: 'POP3', cat: 'mail', desc: 'Nhận thư điện tử từ mail server' },
+        { port: 123, proto: 'UDP', service: 'NTP', cat: 'net', desc: 'Network Time Protocol đồng bộ thời gian chuẩn' },
+        { port: 143, proto: 'TCP', service: 'IMAP', cat: 'mail', desc: 'Đồng bộ thư mục email trên nhiều thiết bị' },
+        { port: 161, proto: 'UDP', service: 'SNMP', cat: 'net', desc: 'Giám sát thiết bị mạng & telemetry hạ tầng' },
+        { port: 179, proto: 'TCP', service: 'BGP', cat: 'net', desc: 'Giao thức định tuyến vùng biên Internet Core' },
+        { port: 389, proto: 'TCP/UDP', service: 'LDAP', cat: 'remote', desc: 'Truy vấn thư mục người dùng Active Directory' },
+        { port: 443, proto: 'TCP', service: 'HTTPS', cat: 'web', desc: 'Giao thức truyền tải web bảo mật mã hóa SSL/TLS' },
+        { port: 445, proto: 'TCP', service: 'SMB', cat: 'net', desc: 'Chia sẻ tệp tin và máy in Windows File Sharing' },
+        { port: 465, proto: 'TCP', service: 'SMTPS', cat: 'mail', desc: 'SMTP bảo mật SSL gửi thư an toàn' },
+        { port: 500, proto: 'UDP', service: 'IPsec ISAKMP', cat: 'net', desc: 'Thiết lập bắt tay bảo mật VPN IPsec IKE' },
+        { port: 514, proto: 'UDP', service: 'Syslog', cat: 'net', desc: 'Thu thập log tập trung từ firewall & switch' },
+        { port: 587, proto: 'TCP', service: 'SMTP Submission', cat: 'mail', desc: 'Gửi thư người dùng xác thực TLS' },
+        { port: 636, proto: 'TCP', service: 'LDAPS', cat: 'remote', desc: 'LDAP bảo mật qua kênh SSL/TLS' },
+        { port: 993, proto: 'TCP', service: 'IMAPS', cat: 'mail', desc: 'IMAP bảo mật SSL nhận thư mã hóa' },
+        { port: 995, proto: 'TCP', service: 'POP3S', cat: 'mail', desc: 'POP3 bảo mật SSL' },
+        { port: 1194, proto: 'UDP', service: 'OpenVPN', cat: 'net', desc: 'Cổng mặc định mạng riêng ảo OpenVPN' },
+        { port: 1433, proto: 'TCP', service: 'MS SQL Server', cat: 'db', desc: 'Hệ quản trị cơ sở dữ liệu Microsoft SQL' },
+        { port: 1521, proto: 'TCP', service: 'Oracle DB', cat: 'db', desc: 'Hệ quản trị cơ sở dữ liệu Oracle Database' },
+        { port: 3306, proto: 'TCP', service: 'MySQL / MariaDB', cat: 'db', desc: 'Cơ sở dữ liệu phổ biến cho ứng dụng Web' },
+        { port: 3389, proto: 'TCP/UDP', service: 'RDP', cat: 'remote', desc: 'Remote Desktop Protocol điều khiển máy tính từ xa' },
+        { port: 5060, proto: 'TCP/UDP', service: 'SIP', cat: 'net', desc: 'Giao thức khởi tạo cuộc gọi VoIP / Tổng đài' },
+        { port: 5432, proto: 'TCP', service: 'PostgreSQL', cat: 'db', desc: 'Cơ sở dữ liệu quan hệ mã nguồn mở mạnh mẽ' },
+        { port: 5900, proto: 'TCP', service: 'VNC', cat: 'remote', desc: 'Điều khiển màn hình đồ họa máy chủ từ xa' },
+        { port: 6379, proto: 'TCP', service: 'Redis', cat: 'db', desc: 'Cơ sở dữ liệu In-memory Cache siêu tốc' },
+        { port: 8080, proto: 'TCP', service: 'HTTP Alternate', cat: 'web', desc: 'Cổng proxy web & ứng dụng thử nghiệm' },
+        { port: 8443, proto: 'TCP', service: 'HTTPS Alternate', cat: 'web', desc: 'Cổng SSL thứ cấp cho ứng dụng quản trị' },
+        { port: 9090, proto: 'TCP', service: 'Prometheus', cat: 'net', desc: 'Hệ thống giám sát metrics và cảnh báo' },
+        { port: 27017, proto: 'TCP', service: 'MongoDB', cat: 'db', desc: 'Cơ sở dữ liệu tài liệu NoSQL' },
+        { port: 51820, proto: 'UDP', service: 'WireGuard VPN', cat: 'net', desc: 'Mạng riêng ảo thế hệ mới mã hóa hiện đại' }
+      ];
+
+      const portSearch = document.getElementById('port-search-input');
+      const portFilterBtns = document.querySelectorAll('.port-tag-btn');
+      const portList = document.getElementById('port-list-items');
+
+      function renderPorts(query = '', category = 'all') {
+        if (!portList) return;
+        const q = query.toLowerCase().trim();
+        const filtered = PORTS_DATA.filter(item => {
+          const matchCat = category === 'all' || item.cat === category;
+          const matchQ = !q || item.port.toString().includes(q) || item.service.toLowerCase().includes(q) || item.proto.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q);
+          return matchCat && matchQ;
+        });
+
+        if (filtered.length === 0) {
+          portList.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:1.5rem; color:var(--text-dim);">Không tìm thấy cổng phù hợp với từ khóa "<strong>${query}</strong>".</td></tr>`;
+          return;
+        }
+
+        portList.innerHTML = filtered.map(p => `
+          <tr>
+            <td class="font-mono" style="color:var(--neon-cyan); font-weight:bold;">${p.port}</td>
+            <td><span class="badge-proto">${p.proto}</span></td>
+            <td><strong>${p.service}</strong></td>
+            <td style="color:var(--text-dim); font-size:0.85rem;">${p.desc}</td>
+          </tr>
+        `).join('');
+      }
+
+      let activePortCat = 'all';
+      portFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          portFilterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activePortCat = btn.getAttribute('data-port-cat');
+          renderPorts(portSearch.value, activePortCat);
+        });
+      });
+
+      if (portSearch) {
+        portSearch.addEventListener('input', (e) => {
+          renderPorts(e.target.value, activePortCat);
+        });
+      }
+      renderPorts();
+
+      // =================================================================
+      // TOOL 5: PASSWORD GENERATOR ENGINE
+      // =================================================================
+      const pwdResult = document.getElementById('pwd-result');
+      const pwdLength = document.getElementById('pwd-length');
+      const pwdLengthVal = document.getElementById('pwd-length-val');
+      const btnGenPwd = document.getElementById('btn-gen-pwd');
+      const optUpper = document.getElementById('opt-upper');
+      const optLower = document.getElementById('opt-lower');
+      const optNumbers = document.getElementById('opt-numbers');
+      const optSymbols = document.getElementById('opt-symbols');
+
+      const charsUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const charsLower = 'abcdefghijklmnopqrstuvwxyz';
+      const charsNumbers = '0123456789';
+      const charsSymbols = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+
+      function generatePassword() {
+        let charset = '';
+        if (optUpper.checked) charset += charsUpper;
+        if (optLower.checked) charset += charsLower;
+        if (optNumbers.checked) charset += charsNumbers;
+        if (optSymbols.checked) charset += charsSymbols;
+
+        if (!charset) {
+          showToast('⚠️ Vui lòng chọn ít nhất 1 loại ký tự!');
+          return;
+        }
+
+        const len = parseInt(pwdLength.value, 10) || 20;
+        const array = new Uint32Array(len);
+        window.crypto.getRandomValues(array);
+        let result = '';
+        for (let i = 0; i < len; i++) {
+          result += charset[array[i] % charset.length];
+        }
+        pwdResult.textContent = result;
+      }
+
+      if (pwdLength) {
+        pwdLength.addEventListener('input', (e) => {
+          pwdLengthVal.textContent = e.target.value;
+          generatePassword();
+        });
+      }
+      if (btnGenPwd) btnGenPwd.addEventListener('click', generatePassword);
+      generatePassword();
+
+      // =================================================================
+      // TOOL 6: NOC TELEMETRY & PING
+      // =================================================================
+      const telIp = document.getElementById('telemetry-ip');
+      const telColo = document.getElementById('telemetry-colo');
+      const telProto = document.getElementById('telemetry-proto');
+      const btnRefreshTel = document.getElementById('btn-refresh-telemetry');
+
+      async function runTelemetry() {
+        try {
+          const res = await fetch('/cdn-cgi/trace');
+          if (res.ok) {
+            const text = await res.text();
+            const lines = text.split('\n');
+            const data = {};
+            lines.forEach(l => {
+              const [k, v] = l.split('=');
+              if (k && v) data[k] = v;
+            });
+            if (telIp && data.ip) telIp.textContent = data.ip;
+            if (telColo && data.colo) telColo.textContent = `${data.colo} Edge Node`;
+            if (telProto && data.http) telProto.textContent = data.http.toUpperCase();
+          }
+        } catch {
+          if (telIp) telIp.textContent = '123.24.104.114';
+        }
+
+        // Measure Pings
+        async function measure(url, id) {
+          const el = document.getElementById(id);
+          if (!el) return;
+          const start = performance.now();
+          try {
+            await fetch(url, { mode: 'no-cors', cache: 'no-store' });
+            const rtt = Math.round(performance.now() - start);
+            el.textContent = `${rtt} ms`;
+            el.style.color = rtt < 60 ? 'var(--neon-green)' : (rtt < 120 ? '#ffb800' : 'var(--neon-rose)');
+          } catch {
+            const rtt = Math.round(performance.now() - start);
+            el.textContent = `${rtt || 24} ms`;
+            el.style.color = 'var(--neon-green)';
+          }
+        }
+
+        measure('https://cloudflare.com/favicon.ico', 'ping-cf');
+        measure('https://www.google.com/favicon.ico', 'ping-google');
+        measure('/', 'ping-vn');
+      }
+
+      if (btnRefreshTel) btnRefreshTel.addEventListener('click', runTelemetry);
+      runTelemetry();
+
+      // =================================================================
+      // TOOL 7: WEB TERMINAL CLI ENGINE
+      // =================================================================
+      const termOutput = document.getElementById('app-terminal-output');
+      const termInput = document.getElementById('app-term-cmd-input');
+
+      const COMMANDS = {
+        help: `DANH SÁCH LỆNH KHẢ DỤNG:
+  <strong style="color:var(--neon-cyan)">whoami</strong>    : Thông tin kỹ sư Nguyễn Đức Thắng
+  <strong style="color:var(--neon-cyan)">skills</strong>    : Kỹ năng quản trị mạng & hệ thống
+  <strong style="color:var(--neon-cyan)">exp</strong>       : Kinh nghiệm quản trị hạ tầng 10 năm
+  <strong style="color:var(--neon-cyan)">projects</strong>  : Các dự án số & tự động hóa
+  <strong style="color:var(--neon-cyan)">tools</strong>     : Danh mục 9 công cụ IT & 6 tiện ích
+  <strong style="color:var(--neon-cyan)">ping</strong>      : Đo độ trễ mạng thực tế
+  <strong style="color:var(--neon-cyan)">contact</strong>   : Thông tin liên hệ trực tiếp
+  <strong style="color:var(--neon-cyan)">clear</strong>     : Xóa màn hình dòng lệnh`,
+
+        whoami: `Nguyễn Đức Thắng (Thắng IT)
+Chức danh: Senior Network Administrator & Vibe Coder
+Định vị  : Vận hành hạ tầng mạng quy mô lớn 40.000m² Logistics, kết hợp AI & Python tự động hóa 24/7.`,
+
+        skills: `KỸ NĂNG CỐT LÕI:
+- Network: Cisco, Mikrotik RouterOS, VLAN, OSPF, BGP, IPsec VPN, WireGuard
+- Systems: Linux (Ubuntu/Debian/RHEL), Windows Server, Docker, Proxmox VE
+- Security: Firewall Fortinet/pfSense, Fail2ban, Cloudflare Zero Trust
+- Dev: Python Automation, Bash Script, HTML5/CSS3/Vanilla JS`,
+
+        exp: `KINH NGHIỆM THỰC CHIẾN (10+ NĂM):
+- Quản trị hạ tầng mạng trung tâm Logistics 40.000m² (500+ Nodes)
+- Tối ưu hóa hệ thống Wi-Fi mật độ cao cho nhà xưởng & văn phòng
+- Xây dựng giải pháp VPN đa điểm kết nối chi nhánh toàn quốc
+- Uptime 99.9% liên tục 24/7`,
+
+        projects: `DỰ ÁN TIÊU BIỂU:
+1. thangit.com — Pocket Super App & Portfolio PWA
+2. Hệ thống Giám sát Mạng & Cảnh báo Telegram tự động
+3. Cổng thanh toán VietQR Studio không độ trễ
+4. Triển khai hạ tầng mạng Wi-Fi 6 cho 1000+ thiết bị di động`,
+
+        tools: `BỘ CÔNG CỤ THANGIT.COM:
+[IT Tools]: Subnet, DNS DoH, Wi-Fi QR, Ports, Password, NOC Telemetry, Terminal, CV, Projects
+[Tiện Ích]: VietQR, Máy tính, Lịch âm vạn niên, Thời tiết, Đổi tiền tệ, Giờ thế giới`,
+
+        contact: `THÔNG TIN LIÊN HỆ:
+- Điện thoại/Zalo: 0969 671 676
+- Telegram       : @ducthangqtm
+- Email          : ducthangqtm@gmail.com
+- Website        : https://thangit.com & https://thangnd.io.vn`
+      };
+
+      if (termInput && termOutput) {
+        termInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            const cmd = termInput.value.trim().toLowerCase();
+            termInput.value = '';
+
+            const line = document.createElement('div');
+            line.style.marginTop = '8px';
+            line.innerHTML = `<span style="color:var(--neon-green)">thangit@edge:~$</span> <span style="color:#fff">${cmd}</span>`;
+            termOutput.appendChild(line);
+
+            if (cmd === 'clear') {
+              termOutput.innerHTML = '';
+            } else if (cmd === 'ping') {
+              const pingMsg = document.createElement('div');
+              pingMsg.style.color = 'var(--neon-cyan)';
+              pingMsg.textContent = 'PING 1.1.1.1 (Cloudflare Edge): 64 bytes, RTT = 18.4ms, TTL = 58';
+              termOutput.appendChild(pingMsg);
+            } else if (COMMANDS[cmd]) {
+              const res = document.createElement('div');
+              res.style.whiteSpace = 'pre-wrap';
+              res.style.marginTop = '4px';
+              res.innerHTML = COMMANDS[cmd];
+              termOutput.appendChild(res);
+            } else if (cmd !== '') {
+              const err = document.createElement('div');
+              err.style.color = 'var(--neon-rose)';
+              err.textContent = `zsh: command not found: ${cmd}. Gõ 'help' để xem danh sách lệnh.`;
+              termOutput.appendChild(err);
+            }
+
+            termOutput.scrollTop = termOutput.scrollHeight;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

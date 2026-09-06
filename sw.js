@@ -1,35 +1,20 @@
-// THANGIT.COM — PWA Service Worker (Multi-Page Architecture Engine)
-const CACHE_NAME = 'tit-hub-v12';
+// THANGIT.COM — PWA Service Worker (Clean Consolidated Architecture)
+const CACHE_NAME = 'tit-hub-v14';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/it/',
-  '/tools/',
+  '/it.html',
+  '/tienich.html',
+  '/admin.html',
+  '/data/products.json',
   '/css/style.css',
   '/js/core.js',
   '/js/lunar.js',
   '/js/qrcode.min.js',
   '/manifest.json',
   '/favicon.svg',
-  '/assets/images/apple-touch-icon.png',
-  '/assets/images/icon-192.png',
-  '/assets/images/icon-512.png',
-  '/assets/images/avata.jpg',
-  '/subnet/',
-  '/dns/',
-  '/wifi-qr/',
-  '/ports/',
-  '/password/',
-  '/telemetry/',
-  '/terminal/',
-  '/cv/',
-  '/projects/',
-  '/vietqr/',
-  '/calc/',
-  '/lunar/',
-  '/weather/',
-  '/converter/',
-  '/world/'
+  '/apple-touch-icon.png',
+  '/assets/images/avata.jpg'
 ];
 
 self.addEventListener('install', (event) => {
