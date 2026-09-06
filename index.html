@@ -180,10 +180,13 @@
       </nav>
     </section>
 
-    <!-- SECTION: 3 CATEGORY TABS (IT Tools, Tiện Ích, Đồ Công Nghệ) -->
+    <!-- SECTION: 4 CATEGORY TABS (IT Tools, Hồ Sơ CV, Tiện Ích, Đồ Công Nghệ) -->
     <nav class="category-tabs-wrap" id="home-tabs-nav" aria-label="Phân loại danh mục">
       <button type="button" class="tab-pill-btn active" data-target="tab-it">
         <span>🛠️ IT Tools</span>
+      </button>
+      <button type="button" class="tab-pill-btn" data-target="tab-cv">
+        <span>💼 Hồ Sơ CV</span>
       </button>
       <button type="button" class="tab-pill-btn" data-target="tab-tienich">
         <span>☕ Tiện Ích</span>
@@ -194,7 +197,7 @@
     </nav>
 
     <!-- ===================================================================
-         TAB 1: IT TOOLS (2 Cột Lưới — Click Mở Thẳng Tool Tương Ứng)
+         TAB 1: IT TOOLS (8 Công Cụ — Lưới 2 Cột Đối Xứng)
          =================================================================== -->
     <section class="home-tab-content active" id="tab-it">
       <div class="tools-grid-2col">
@@ -311,34 +314,18 @@
           </div>
         </a>
 
-        <!-- 8. Hồ Sơ CV -->
-        <a href="/it.html#cv" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-cv">💼</div>
-            <span class="tool-grid-tag">SysAdmin</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Hồ Sơ CV</h3>
-            <p class="tool-grid-desc">Kinh nghiệm quản trị mạng & hạ tầng 10 năm.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Xem CV</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 9. Dự Án Số -->
-        <a href="/it.html#projects" class="tool-grid-card" style="grid-column: span 2;">
+        <!-- 8. Dự Án Số Tiêu Biểu -->
+        <a href="/it.html#projects" class="tool-grid-card">
           <div class="tool-grid-top">
             <div class="tool-grid-icon icon-grad-projects">🚀</div>
             <span class="tool-grid-tag">Portfolio</span>
           </div>
           <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Dự Án Số Tiêu Biểu</h3>
-            <p class="tool-grid-desc">Hệ sinh thái web app, PWA và tự động hóa hệ thống mạng.</p>
+            <h3 class="tool-grid-name">Dự Án Số</h3>
+            <p class="tool-grid-desc">Hệ sinh thái web app, PWA và tự động hóa.</p>
           </div>
           <div class="tool-grid-bottom">
-            <span>Khám Phá Dự Án</span>
+            <span>Khám Phá</span>
             <span class="tool-grid-arrow">↗</span>
           </div>
         </a>
@@ -347,7 +334,74 @@
     </section>
 
     <!-- ===================================================================
-         TAB 2: TIỆN ÍCH BỎ TÚI (2 Cột Lưới — Click Mở Thẳng Tool Tương Ứng)
+         TAB 2: HỒ SƠ CV (Mục Riêng Biệt Theo Yêu Cầu)
+         =================================================================== -->
+    <section class="home-tab-content" id="tab-cv" style="display:none;">
+      <div class="cv-summary-card">
+        <div class="cv-card-header">
+          <span class="cv-role-badge">SENIOR NETWORK ADMINISTRATOR</span>
+          <h2 class="cv-name">Nguyễn Đức Thắng</h2>
+          <p class="cv-tagline">10+ Năm Vận Hành Hạ Tầng Mạng Quy Mô Lớn • Vibe Coder</p>
+        </div>
+
+        <!-- Quick Stats Row -->
+        <div class="cv-stats-row">
+          <div class="cv-stat-box">
+            <span class="cv-stat-val">10+</span>
+            <span class="cv-stat-lbl">Năm KN</span>
+          </div>
+          <div class="cv-stat-box">
+            <span class="cv-stat-val">40.000m²</span>
+            <span class="cv-stat-lbl">Logistics</span>
+          </div>
+          <div class="cv-stat-box">
+            <span class="cv-stat-val">500+</span>
+            <span class="cv-stat-lbl">Thiết Bị</span>
+          </div>
+          <div class="cv-stat-box">
+            <span class="cv-stat-val" style="color:var(--neon-green);">99.9%</span>
+            <span class="cv-stat-lbl">Uptime</span>
+          </div>
+        </div>
+
+        <!-- Professional Summary -->
+        <div class="cv-bio-block">
+          <h3 class="cv-section-title">📌 Năng Lực Cốt Lõi</h3>
+          <p class="cv-bio-text">
+            Chuyên gia thiết kế, triển khai và quản trị hạ tầng mạng doanh nghiệp quy mô lớn (Trung tâm Logistics 40.000m² với 500+ nodes). Thành thạo Cisco, Mikrotik RouterOS, phân đoạn VLAN bảo mật, OSPF, BGP, IPsec VPN và giải pháp Wi-Fi mật độ cao. Tiên phong áp dụng Python Automation & AI tối ưu hóa vận hành 24/7.
+          </p>
+        </div>
+
+        <!-- Skills Pills -->
+        <div class="cv-skills-block">
+          <h3 class="cv-section-title">🛠️ Công Nghệ & Chứng Chỉ</h3>
+          <div class="cv-pills-wrap">
+            <span class="cv-pill">Cisco CCNA / CCNP</span>
+            <span class="cv-pill">Mikrotik RouterOS</span>
+            <span class="cv-pill">IPsec / WireGuard VPN</span>
+            <span class="cv-pill">VLAN / OSPF / BGP</span>
+            <span class="cv-pill">Fortinet FortiGate</span>
+            <span class="cv-pill">Linux Server (Ubuntu/Debian)</span>
+            <span class="cv-pill">Docker & Proxmox VE</span>
+            <span class="cv-pill">Python Automation</span>
+            <span class="cv-pill">Cloudflare Zero Trust</span>
+          </div>
+        </div>
+
+        <!-- CTA Actions -->
+        <div class="cv-cta-actions">
+          <a href="https://thangnd.io.vn" target="_blank" rel="noopener me" class="btn-cv-primary">
+            <span>🌐 Xem Portfolio Chính Thức (thangnd.io.vn) ↗</span>
+          </a>
+          <a href="/it.html#cv" class="btn-cv-secondary">
+            <span>📄 Xem Bản CV Đầy Đủ Trên it.html ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 3: TIỆN ÍCH BỎ TÚI (2 Cột Lưới — Click Mở Thẳng Tool Tương Ứng)
          =================================================================== -->
     <section class="home-tab-content" id="tab-tienich" style="display:none;">
       <div class="tools-grid-2col">
@@ -490,6 +544,7 @@
       const tabBtns = document.querySelectorAll('#home-tabs-nav .tab-pill-btn');
       const tabContents = {
         'tab-it': document.getElementById('tab-it'),
+        'tab-cv': document.getElementById('tab-cv'),
         'tab-tienich': document.getElementById('tab-tienich'),
         'tab-aff': document.getElementById('tab-aff')
       };
@@ -501,10 +556,12 @@
 
           const targetId = btn.getAttribute('data-target');
           Object.keys(tabContents).forEach(key => {
-            if (key === targetId) {
-              tabContents[key].style.display = 'block';
-            } else {
-              tabContents[key].style.display = 'none';
+            if (tabContents[key]) {
+              if (key === targetId) {
+                tabContents[key].style.display = (key === 'tab-aff') ? 'flex' : 'block';
+              } else {
+                tabContents[key].style.display = 'none';
+              }
             }
           });
 
