@@ -743,6 +743,13 @@
         switchTab(currentHash);
       }
 
+      window.addEventListener('hashchange', () => {
+        const h = window.location.hash.replace('#', '');
+        if (h && document.getElementById(`pane-${h}`)) {
+          switchTab(h);
+        }
+      });
+
       // =================================================================
       // TOOL 1: SUBNET CALCULATOR ENGINE
       // =================================================================
@@ -1226,7 +1233,7 @@ Chức danh: Senior Network Administrator & Vibe Coder
 [Tiện Ích]: VietQR, Máy tính, Lịch âm vạn niên, Thời tiết, Đổi tiền tệ, Giờ thế giới`,
 
         contact: `THÔNG TIN LIÊN HỆ:
-- Điện thoại/Zalo: 0969 671 676
+- Điện thoại/Zalo: 0986 192 092
 - Telegram       : @ducthangqtm
 - Email          : ducthangqtm@gmail.com
 - Website        : https://thangit.com & https://thangnd.io.vn`

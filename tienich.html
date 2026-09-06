@@ -504,6 +504,13 @@
         switchTab(currentHash);
       }
 
+      window.addEventListener('hashchange', () => {
+        const h = window.location.hash.replace('#', '');
+        if (h && document.getElementById(`pane-${h}`)) {
+          switchTab(h);
+        }
+      });
+
       // =================================================================
       // TOOL 1: VIETQR STUDIO
       // =================================================================

@@ -89,7 +89,7 @@
           "https://thangnhayday.com",
           "https://github.com/ducthangqtm",
           "https://t.me/ducthangqtm",
-          "https://zalo.me/0969671676"
+          "https://zalo.me/0986192092"
         ],
         "knowsAbout": [
           "Network Administration",
@@ -160,7 +160,7 @@
       <!-- 4 Squircle Social Buttons: Zalo -> Telegram -> Discord -> GitHub -->
       <nav class="social-bar" aria-label="Mạng xã hội">
         <!-- 1. Zalo -->
-        <a href="https://zalo.me/0969671676" target="_blank" rel="noopener noreferrer" class="social-icon-btn zalo" aria-label="Zalo Thắng IT" title="Zalo: 0969671676">
+        <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="social-icon-btn zalo" aria-label="Zalo Thắng IT" title="Zalo: 0986192092">
           <span class="zalo-text-badge">Zalo</span>
         </a>
 
@@ -195,205 +195,261 @@
     </nav>
 
     <!-- ===================================================================
-         TAB 1: IT TOOLS (Links to it.html anchors)
+         TAB 1: IT TOOLS (2 Cột Lưới — Click Mở Thẳng Tool Tương Ứng)
          =================================================================== -->
-    <section class="home-tab-content active" id="tab-it" style="display:flex; flex-direction:column; gap:10px;">
-      <a href="/it.html" style="text-decoration:none; display:flex; align-items:center; justify-content:space-between; background:rgba(0,240,255,0.08); border:1px solid rgba(0,240,255,0.25); border-radius:14px; padding:10px 14px; color:var(--neon-cyan); font-size:0.82rem; font-weight:700;">
-        <span>👉 Mở bộ 9 công cụ IT (Network Suite) tập trung</span>
-        <span>it.html ↗</span>
-      </a>
+    <section class="home-tab-content active" id="tab-it">
+      <div class="tools-grid-2col">
 
-      <!-- 9 IT Cards -->
-      <a href="/it.html#subnet" class="category-app-card">
-        <div class="category-card-icon icon-grad-subnet">🧮</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Subnet CIDR</h3>
-            <span class="category-card-tag">Bitwise /1 - /32</span>
+        <!-- 1. Subnet CIDR -->
+        <a href="/it.html#subnet" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-subnet">🧮</div>
+            <span class="tool-grid-tag">IPv4 Math</span>
           </div>
-          <p class="category-card-desc">Tính dải IP, Network, Broadcast, Wildcard mask và host khả dụng.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Subnet CIDR</h3>
+            <p class="tool-grid-desc">Tính dải IP, Network, Broadcast & Host khả dụng.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/it.html#dns" class="category-app-card">
-        <div class="category-card-icon icon-grad-dns">🌐</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">DNS Lookup DoH</h3>
-            <span class="category-card-tag">Cloudflare 1.1.1.1</span>
+        <!-- 2. DNS Lookup DoH -->
+        <a href="/it.html#dns" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-dns">🌐</div>
+            <span class="tool-grid-tag">DoH 1.1.1.1</span>
           </div>
-          <p class="category-card-desc">Tra cứu trực tiếp bản ghi A, AAAA, CNAME, MX, TXT, NS bảo mật.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">DNS Lookup</h3>
+            <p class="tool-grid-desc">Tra cứu trực tiếp bản ghi A, AAAA, CNAME, MX, TXT.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/it.html#wifi" class="category-app-card">
-        <div class="category-card-icon icon-grad-wifi">📶</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Wi-Fi QR Code</h3>
-            <span class="category-card-tag">WPA2 / WPA3</span>
+        <!-- 3. Wi-Fi QR -->
+        <a href="/it.html#wifi" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-wifi">📶</div>
+            <span class="tool-grid-tag">WPA2/WPA3</span>
           </div>
-          <p class="category-card-desc">Tạo mã QR quét kết nối Wi-Fi tức thì kèm xuất ảnh PNG.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Wi-Fi QR</h3>
+            <p class="tool-grid-desc">Tạo mã QR quét kết nối Wi-Fi 1-chạm & tải PNG.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/it.html#ports" class="category-app-card">
-        <div class="category-card-icon icon-grad-ports">🔌</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Tra Cứu Port Mạng</h3>
-            <span class="category-card-tag">39 Ports Chuẩn</span>
+        <!-- 4. Tra Cứu Port -->
+        <a href="/it.html#ports" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-ports">🔌</div>
+            <span class="tool-grid-tag">39 Ports</span>
           </div>
-          <p class="category-card-desc">Tra nhanh cổng TCP/UDP dịch vụ Web, DB, SSH, VPN, Mail.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Tra Cứu Port</h3>
+            <p class="tool-grid-desc">Cổng TCP/UDP chuẩn Web, SSH, DB, VPN, Mail.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/it.html#password" class="category-app-card">
-        <div class="category-card-icon icon-grad-password">🔐</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Sinh Mật Khẩu IT</h3>
-            <span class="category-card-tag">Web Crypto API</span>
+        <!-- 5. Sinh Mật Khẩu -->
+        <a href="/it.html#password" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-password">🔐</div>
+            <span class="tool-grid-tag">Web Crypto</span>
           </div>
-          <p class="category-card-desc">Mật khẩu an toàn cao cho Root, Router, Switch và Database.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Sinh Mật Khẩu</h3>
+            <p class="tool-grid-desc">Mật khẩu an toàn cao ngẫu nhiên cho SysAdmin.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/it.html#telemetry" class="category-app-card">
-        <div class="category-card-icon icon-grad-telemetry">📡</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">NOC Ping & Telemetry</h3>
-            <span class="category-card-tag">Cloud Edge Trace</span>
+        <!-- 6. NOC Telemetry & Ping -->
+        <a href="/it.html#telemetry" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-telemetry">📡</div>
+            <span class="tool-grid-tag">Cloud Edge</span>
           </div>
-          <p class="category-card-desc">Kiểm tra IP công khai, độ trễ RTT tới các trung tâm dữ liệu.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">NOC Ping</h3>
+            <p class="tool-grid-desc">Kiểm tra IP công khai & đo độ trễ tới máy chủ.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/it.html#terminal" class="category-app-card">
-        <div class="category-card-icon icon-grad-terminal">💻</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Web Terminal CLI</h3>
-            <span class="category-card-tag">Interactive Shell</span>
+        <!-- 7. Web Terminal CLI -->
+        <a href="/it.html#terminal" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-terminal">💻</div>
+            <span class="tool-grid-tag">Unix Shell</span>
           </div>
-          <p class="category-card-desc">Dòng lệnh tương tác khám phá thông tin kỹ sư và hạ tầng.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Web Terminal</h3>
+            <p class="tool-grid-desc">Console ảo dòng lệnh tương tác trực tiếp.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/it.html#cv" class="category-app-card">
-        <div class="category-card-icon icon-grad-cv">💼</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Hồ Sơ CV Kỹ Sư</h3>
-            <span class="category-card-tag">Senior SysAdmin</span>
+        <!-- 8. Hồ Sơ CV -->
+        <a href="/it.html#cv" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-cv">💼</div>
+            <span class="tool-grid-tag">SysAdmin</span>
           </div>
-          <p class="category-card-desc">Kinh nghiệm vận hành hạ tầng mạng 40.000m² Logistics & Cisco/Mikrotik.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Hồ Sơ CV</h3>
+            <p class="tool-grid-desc">Kinh nghiệm quản trị mạng & hạ tầng 10 năm.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Xem CV</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/it.html#projects" class="category-app-card">
-        <div class="category-card-icon icon-grad-projects">🚀</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Dự Án Số Tiêu Biểu</h3>
-            <span class="category-card-tag">Digital Portfolio</span>
+        <!-- 9. Dự Án Số -->
+        <a href="/it.html#projects" class="tool-grid-card" style="grid-column: span 2;">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-projects">🚀</div>
+            <span class="tool-grid-tag">Portfolio</span>
           </div>
-          <p class="category-card-desc">Hệ sinh thái web app, bot cảnh báo NOC và tự động hóa.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Dự Án Số Tiêu Biểu</h3>
+            <p class="tool-grid-desc">Hệ sinh thái web app, PWA và tự động hóa hệ thống mạng.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Khám Phá Dự Án</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
+
+      </div>
     </section>
 
     <!-- ===================================================================
-         TAB 2: TIỆN ÍCH BỎ TÚI (Links to tienich.html anchors)
+         TAB 2: TIỆN ÍCH BỎ TÚI (2 Cột Lưới — Click Mở Thẳng Tool Tương Ứng)
          =================================================================== -->
-    <section class="home-tab-content" id="tab-tienich" style="display:none; flex-direction:column; gap:10px;">
-      <a href="/tienich.html" style="text-decoration:none; display:flex; align-items:center; justify-content:space-between; background:rgba(255,184,0,0.08); border:1px solid rgba(255,184,0,0.25); border-radius:14px; padding:10px 14px; color:#ffb800; font-size:0.82rem; font-weight:700;">
-        <span>👉 Mở bộ 6 tiện ích bỏ túi tập trung</span>
-        <span>tienich.html ↗</span>
-      </a>
+    <section class="home-tab-content" id="tab-tienich" style="display:none;">
+      <div class="tools-grid-2col">
 
-      <!-- 6 Basic Cards -->
-      <a href="/tienich.html#vietqr" class="category-app-card">
-        <div class="category-card-icon icon-grad-vietqr">🏦</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">VietQR Bank Studio</h3>
-            <span class="category-card-tag" style="border-color:rgba(0,240,255,0.3); color:var(--neon-cyan);">40+ Ngân Hàng</span>
+        <!-- 1. VietQR Bank Studio -->
+        <a href="/tienich.html#vietqr" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-vietqr">🏦</div>
+            <span class="tool-grid-tag">NAPAS 247</span>
           </div>
-          <p class="category-card-desc">Tạo mã QR chuyển khoản nhanh chuẩn NAPAS 247 kèm số tiền.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">VietQR Studio</h3>
+            <p class="tool-grid-desc">Tạo mã QR nhận tiền 40+ ngân hàng kèm số tiền.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/tienich.html#calc" class="category-app-card">
-        <div class="category-card-icon icon-grad-calc">🔢</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Máy Tính Cyber</h3>
-            <span class="category-card-tag" style="border-color:rgba(255,184,0,0.3); color:#ffb800;">Haptic Feedback</span>
+        <!-- 2. Máy Tính Cyber -->
+        <a href="/tienich.html#calc" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-calc">🔢</div>
+            <span class="tool-grid-tag">Haptic</span>
           </div>
-          <p class="category-card-desc">Bàn tính bỏ túi giải quyết nhanh các phép tính toán học thường nhật.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Máy Tính</h3>
+            <p class="tool-grid-desc">Bàn tính bỏ túi giải quyết nhanh phép tính thường nhật.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/tienich.html#lunar" class="category-app-card">
-        <div class="category-card-icon icon-grad-lunar">📅</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Lịch Vạn Niên & Âm Lịch</h3>
-            <span class="category-card-tag" style="border-color:rgba(16,185,129,0.3); color:var(--neon-green);">Hồ Ngọc Đức Math</span>
+        <!-- 3. Lịch Vạn Niên -->
+        <a href="/tienich.html#lunar" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-lunar">📅</div>
+            <span class="tool-grid-tag">Âm Dương</span>
           </div>
-          <p class="category-card-desc">Tra ngày hoàng đạo, can chi ngày tháng năm và tiết khí chuẩn xác.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Lịch Vạn Niên</h3>
+            <p class="tool-grid-desc">Ngày hoàng đạo, can chi ngày tháng năm & tiết khí.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/tienich.html#weather" class="category-app-card">
-        <div class="category-card-icon icon-grad-weather">⛅</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Dự Báo Thời Tiết</h3>
-            <span class="category-card-tag" style="border-color:rgba(0,104,255,0.3); color:#38bdf8;">Open-Meteo API</span>
+        <!-- 4. Dự Báo Thời Tiết -->
+        <a href="/tienich.html#weather" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-weather">⛅</div>
+            <span class="tool-grid-tag">Open-Meteo</span>
           </div>
-          <p class="category-card-desc">Nhiệt độ, độ ẩm và dự báo 7 ngày tại Việt Nam hoặc vị trí GPS.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Thời Tiết</h3>
+            <p class="tool-grid-desc">Nhiệt độ, độ ẩm & dự báo 7 ngày tại Việt Nam.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/tienich.html#converter" class="category-app-card">
-        <div class="category-card-icon icon-grad-converter">💱</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Đổi Ngoại Tệ & Đơn Vị IT</h3>
-            <span class="category-card-tag" style="border-color:rgba(244,63,94,0.3); color:#fb7185;">Tỷ Giá Tức Thì</span>
+        <!-- 5. Đổi Ngoại Tệ & Đơn Vị -->
+        <a href="/tienich.html#converter" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-converter">💱</div>
+            <span class="tool-grid-tag">Tỷ Giá & Byte</span>
           </div>
-          <p class="category-card-desc">Chuyển đổi tiền tệ phổ biến và dung lượng lưu trữ Byte/KB/MB/GB.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Đổi Tỷ Giá</h3>
+            <p class="tool-grid-desc">Quy đổi USD, EUR, VND và bộ nhớ Byte/KB/MB/GB.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
 
-      <a href="/tienich.html#world" class="category-app-card">
-        <div class="category-card-icon icon-grad-world">🌍</div>
-        <div class="category-card-info">
-          <div class="category-card-top">
-            <h3 class="category-card-name">Giờ Quốc Tế Thế Giới</h3>
-            <span class="category-card-tag" style="border-color:rgba(168,85,247,0.3); color:#c084fc;">8 Trung Tâm Lớn</span>
+        <!-- 6. Giờ Quốc Tế -->
+        <a href="/tienich.html#world" class="tool-grid-card">
+          <div class="tool-grid-top">
+            <div class="tool-grid-icon icon-grad-world">🌍</div>
+            <span class="tool-grid-tag">8 Múi Giờ</span>
           </div>
-          <p class="category-card-desc">Đồng hồ nhảy giây trực tiếp Hà Nội, Tokyo, London, New York, Sydney.</p>
-        </div>
-        <span class="category-card-arrow">↗</span>
-      </a>
+          <div class="tool-grid-body">
+            <h3 class="tool-grid-name">Giờ Thế Giới</h3>
+            <p class="tool-grid-desc">Đồng hồ trực tiếp Hà Nội, Tokyo, London, New York.</p>
+          </div>
+          <div class="tool-grid-bottom">
+            <span>Mở Tool</span>
+            <span class="tool-grid-arrow">↗</span>
+          </div>
+        </a>
+
+      </div>
     </section>
 
     <!-- ===================================================================
@@ -447,7 +503,7 @@
           const targetId = btn.getAttribute('data-target');
           Object.keys(tabContents).forEach(key => {
             if (key === targetId) {
-              tabContents[key].style.display = 'flex';
+              tabContents[key].style.display = 'block';
             } else {
               tabContents[key].style.display = 'none';
             }

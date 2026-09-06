@@ -3630,5 +3630,115 @@ body::before {
   box-shadow: 0 6px 16px rgba(0, 240, 255, 0.45);
 }
 
+/* ==========================================================================
+   2-COLUMN TOOLS GRID (IT TOOLS & TIEN ICH)
+   ========================================================================== */
+.tools-grid-2col {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
 
+.tool-grid-card {
+  background: #0d121d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 14px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  animation: fadeInCard 0.35s ease backwards;
+}
 
+.tool-grid-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.18);
+  background: #111827;
+}
+
+.tool-grid-card:active {
+  transform: scale(0.97);
+}
+
+.tool-grid-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tool-grid-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.tool-grid-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.tool-grid-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.tool-grid-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin: 0 0 5px;
+}
+
+.tool-grid-desc {
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  line-height: 1.35;
+  margin: 0 0 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tool-grid-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+}
+
+.tool-grid-arrow {
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+}
+
+.tool-grid-card:hover .tool-grid-arrow {
+  transform: translate(2px, -2px);
+}
