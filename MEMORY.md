@@ -2,7 +2,7 @@
 
 > **Cập nhật lần cuối:** 06/09/2026  
 > **Chủ sở hữu:** Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder  
-> **Tên Ứng Dụng (PWA):** **TiT** (TiT Pocket Super App & NOC Portfolio)  
+> **Tên Ứng Dụng (PWA):** **TiT** (Thắng IT — Super Tool Hub & Portfolio)  
 > **Domain Trực Tiếp:** [thangit.com](https://thangit.com)  
 > **Cổng Định Danh Trung Tâm:** [thangnd.io.vn](https://thangnd.io.vn) (Thắng ND)  
 > **Cổng Thể Thao KOC:** [thangnhayday.com](https://thangnhayday.com) (Thắng Nhảy Dây)  
@@ -11,133 +11,94 @@
 
 ---
 
-## 1. Kiến Trúc & Triết Lý Phát Triển
-1. **100% Static & Zero Server Cost:**
-   - Không cơ sở dữ liệu (No Database), không backend server phụ thuộc, bảo mật tuyệt đối, kháng DDoS qua Cloudflare CDN toàn cầu.
-2. **Kiến Trúc Multi-Page Architecture (MPA) — 2 Cổng Lớn (Bento Hubs):**
-   - **Trang chủ tinh gọn (`/`):** Tối giản, thanh lịch, tập trung vào Profile định danh và 2 Thẻ Bento Hub lớn dẫn vào 2 danh mục:
-     - 🛠️ **Hạ Tầng & Công Cụ IT (`/it/`):** 9 công cụ quản trị mạng & SysAdmin.
-     - ☕ **Tiện Ích Bỏ Túi Thường Ngày (`/tools/`):** 6 tiện ích thường ngày.
-   - **Tách biệt hoàn toàn từng tiện ích con:** Người dùng có thể truy cập thẳng từng công cụ (`/subnet/`, `/dns/`, `/vietqr/`...) hoặc duyệt qua 2 trang hub trung tâm (`/it/`, `/tools/`).
-   - **Thanh Header Topbar Đồng Nhất:** Mỗi trang con có nút `<a href="/" class="ios-back-btn"> Trang chủ</a>` ở góc trên cùng bên trái để quay lại trang chủ tức thì.
-3. **PWA Multi-Page Engine (Cache v12):**
-   - Hoạt động mượt mà cả offline lẫn online qua Service Worker `tit-hub-v12`.
-   - Lưu cache toàn bộ trang chủ, 2 trang hub và 15 trang công cụ con trong `js/core.js`.
-4. **Hệ Sinh Thái Định Danh Thực Thể & Entity SEO (Cross-Domain Knowledge Graph):**
-   - Đồng bộ 3 domain độc lập: **thangnd.io.vn** (Root Identity) ↔ **thangit.com** (Tech / IT Hub) ↔ **thangnhayday.com** (Fitness / KOC Hub).
-   - Xác thực quyền sở hữu đồng nhất bằng chuẩn `rel="me"` và liên kết thực thể đa chiều trong Schema.org (`Person`, `WebSite`, `sameAs`).
+## 1. Kiến Trúc & Triết Lý Phát Triển (Phiên Bản Tối Giản Hiện Đại 06/09/2026)
+
+1. **Chuẩn Thiết Kế & Nhận Diện (Đồng Bộ Thangnhayday.com):**
+   - **Typography:** 100% Google Fonts `Roboto` hoàn chỉnh, loại bỏ tiền tố `@thangit`, tên hiển thị chuẩn: **Nguyễn Đức Thắng** kèm tick xanh verified.
+   - **Bố cục Mobile-First:** Container `480px` căn giữa với hiệu ứng nền Cyber Glow, Glassmorphism cao cấp.
+   - **Thanh 4 Nút Mạng Xã Hội Squircle Chuẩn:**
+     1. **Zalo:** Số điện thoại `0986192092` (`https://zalo.me/0986192092`), logo chữ Zalo đậm nét màu xanh thương hiệu.
+     2. **Telegram:** `@ducthangqtm` (`https://t.me/ducthangqtm`).
+     3. **Discord:** `ducthangqtm` (sao chép username 1-chạm vào clipboard & mở Discord).
+     4. **GitHub:** `ducthangqtm` (`https://github.com/ducthangqtm`).
+
+2. **Cấu Trúc Tinh Gọn 2 File Tổng Hợp (Gom 15 Thư Mục Cũ Thành 2 File):**
+   - Thay vì hàng chục thư mục/file HTML phân tán khó bảo trì, toàn bộ công cụ được gom thành 2 file ứng dụng đơn nhất:
+     - `it.html`: Chứa toàn bộ 8 công cụ IT & bản CV đầy đủ kèm bộ điều hướng Header Tab & Accordion.
+     - `tienich.html`: Chứa toàn bộ 6 tiện ích bỏ túi thường nhật.
+   - Mỗi công cụ được đánh dấu theo anchor hash (`#subnet`, `#dns`, `#vietqr`, `#calc`...), khi bấm từ trang chủ sẽ cuộn mở thẳng đến công cụ đó.
+
+3. **Thanh 4 Tab Danh Mục Trên Trang Chủ (`index.html`):**
+   - **Tab 1: 💼 Hồ Sơ CV (Vị Trí Đầu Tiên & Mặc Định Khi Tải Trang):**
+     - Thẻ tóm tắt năng lực Senior Network Administrator & Vibe Coder.
+     - 4 chỉ số thống kê ấn tượng: `10+ Năm KN` | `40.000m² Logistics` | `500+ Thiết Bị` | `99.9% Uptime`.
+     - Năng lực cốt lõi (Cisco, Mikrotik, Fortinet, IPsec VPN, Linux, Python Automation).
+     - Nút CTA chuyển hướng đến Portfolio chính thức [thangnd.io.vn](https://thangnd.io.vn) và bản CV chi tiết trên [it.html#cv](file:///it.html#cv).
+   - **Tab 2: 🛠️ IT Tools (Lưới 2 Cột Đối Xứng — 8 Công Cụ):**
+     1. Subnet CIDR (`/it.html#subnet`)
+     2. DNS Lookup DoH Cloudflare (`/it.html#dns`)
+     3. Wi-Fi QR Studio (`/it.html#wifi`)
+     4. Tra Cứu 39 Cổng Mạng (`/it.html#ports`)
+     5. Sinh Mật Khẩu Web Crypto (`/it.html#password`)
+     6. NOC Ping & Trace CDN (`/it.html#telemetry`)
+     7. Web Terminal CLI (`/it.html#terminal`)
+     8. Dự Án Số Tiêu Biểu (`/it.html#projects`)
+   - **Tab 3: ☕ Tiện Ích (Lưới 2 Cột Đối Xứng — 6 Tiện Ích):**
+     1. VietQR Studio 40+ Ngân Hàng (`/tienich.html#vietqr`)
+     2. Máy Tính Cyber Calculator (`/tienich.html#calc`)
+     3. Lịch Vạn Niên & Can Chi Offline (`/tienich.html#lunar`)
+     4. Dự Báo Thời Tiết Open-Meteo (`/tienich.html#weather`)
+     5. Đổi Tỷ Giá & Đơn Vị IT (`/tienich.html#converter`)
+     6. Giờ Thế Giới 8 Múi Giờ (`/tienich.html#world`)
+   - **Tab 4: ⚡ Đồ Công Nghệ (Affiliate Products Hub):**
+     - Đọc dữ liệu động từ `data/products.json`.
+     - Đi kèm trang quản lý liên kết [admin.html](file:///admin.html) giúp thêm/sửa/xoá/xuất link affiliate nhanh chóng (tương tự thangnhayday.com).
+
+4. **Dọn Sạch Toàn Diện Mã Nguồn (Purged Legacy Code):**
+   - `css/style.css`: Đã lược bỏ hơn 2.900 dòng CSS chết từ các phiên bản Bento/Springboard/Modal cũ, tinh giản từ gần 4.000 dòng xuống chỉ còn **~1.100 dòng** sạch sẽ, tối ưu tốc độ render.
+   - `js/core.js`: Rút gọn từ 482 dòng xuống **118 dòng**, chỉ giữ lại logic cốt lõi (Toast, copy 1-chạm, PWA Service Worker, favicon động...).
 
 ---
 
-## 2. Hệ Thống 15 Ứng Dụng (Standalone Multi-Page URLs)
+## 2. Cấu Trúc Thư Mục Hiện Tại
 
-### A. 🛠️ Hạ Tầng & Công Cụ IT (Network Suite - 9 Apps)
-| STT | Ứng Dụng | URL / Thư mục | Công Nghệ / Nguồn | Tính Năng & Điểm Nhấn |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | **Subnet CIDR** | `/subnet/` | Client-side Bitwise Math | Tính toán Subnet /1 đến /32, Subnet Mask, Wildcard, Network/Broadcast IP, Dải Host khả dụng, Binary Mask, Phân lớp IP & Copy báo cáo cấu hình 1-chạm. |
-| 2 | **DNS Lookup DoH** | `/dns/` | Cloudflare DoH REST API (`1.1.1.1`) | Tra cứu bản ghi DNS trực tiếp qua HTTPS: A, AAAA, CNAME, MX, TXT, NS với TTL, Answer, và Copy nhanh. |
-| 3 | **Wi-Fi QR** | `/wifi-qr/` | `qrcode.min.js` | Tạo mã QR kết nối Wi-Fi 1-chạm chuẩn WPA/WPA2/WPA3 (hỗ trợ mạng ẩn). Nút Tải PNG & Copy cấu hình text. |
-| 4 | **Tra Cứu Port** | `/ports/` | Local Enterprise Port Registry | Bảng tra cứu & lọc 39 cổng dịch vụ mạng phổ biến (Web, Mail, Remote, Database, VPN, Monitoring) kèm protocol TCP/UDP. |
-| 5 | **Mật Khẩu IT** | `/password/` | Web Crypto API (Entropy cao) | Sinh mật khẩu mạnh cho Root/Switch/DB/Wi-Fi với thanh trượt độ dài và phân loại ký tự. |
-| 6 | **NOC Ping** | `/telemetry/` | Cloudflare CDN Trace (`/cdn-cgi/trace`) | Giám sát độ trễ Ping thực tế tới Edge CDN, bóc tách IP công cộng, Node POP, Giao thức HTTP, TLS cipher, SNI. |
-| 7 | **Terminal CLI** | `/terminal/` | In-browser Linux Emulator | Bàn gõ CLI phong cách zsh, hỗ trợ phím nóng `~`, các lệnh `help`, `whoami`, `skills`, `projects`, `ping`, `clear`. |
-| 8 | **Hồ Sơ CV** | `/cv/` | Timeline Component | Trình bày 10 năm kinh nghiệm quản trị hệ thống, hạ tầng logistics 40,000m², 500+ nodes, nút In / Xuất PDF. |
-| 9 | **Dự Án Số** | `/projects/` | Showcase Grid | Danh mục các dự án số tiêu biểu, hệ thống đã triển khai thực tế. |
-
-### B. ☕ Tiện Ích Bỏ Túi Thường Ngày (Pocket Tools - 6 Apps)
-| STT | Ứng Dụng | URL / Thư mục | Công Nghệ / Nguồn | Tính Năng Chính |
-| :--- | :--- | :--- | :--- | :--- |
-| 10 | **VietQR Bank** | `/vietqr/` | VietQR API + QR Engine | Tạo QR thanh toán nhanh cho 40+ ngân hàng VN kèm số tiền & nội dung. Tải ảnh & copy link. |
-| 11 | **Máy Tính** | `/calc/` | In-browser Math Engine | Bàn phím Cyber Neon với phép tính nhanh, mượt trên mobile kèm lịch sử tính. |
-| 12 | **Lịch Âm** | `/lunar/` | Thuật toán Hồ Ngọc Đức | 100% Offline: Lịch vạn niên, Can Chi, Hoàng Đạo, Tiết Khí GMT+7, chọn ngày tùy ý. |
-| 13 | **Thời Tiết** | `/weather/` | Open-Meteo REST API | Dự báo 6 tỉnh thành + GPS tự động, nhiệt độ, độ ẩm, gió, UV, mưa. |
-| 14 | **Đổi Đơn Vị** | `/converter/` | ExchangeRate API + Math | Tỷ giá ngoại tệ, Dung lượng IT (Bytes ↔ TB), Tốc độ mạng (Mbps ↔ MB/s). |
-| 15 | **Giờ Quốc Tế** | `/world/` | Javascript `Intl` | 8 múi giờ toàn cầu cập nhật từng giây, biểu tượng Ngày/Đêm. |
-
----
-
-## 3. Cấu Trúc Thư Mục & Tài Nguyên Mã Nguồn
 ```text
 thangit.com/
-├── index.html            # Trang chủ Springboard dạng icon app iOS, Profile, Social Dock
+├── index.html            # Trang chủ: Profile, Social dock, 4 tab (Hồ sơ CV mặc định, IT Tools, Tiện ích, Đồ công nghệ)
+├── it.html               # Trang tổng hợp toàn bộ công cụ IT & SysAdmin
+├── tienich.html          # Trang tổng hợp toàn bộ tiện ích bỏ túi
+├── admin.html            # Trang quản trị quản lý link Affiliate Đồ Công Nghệ
+├── data/
+│   └── products.json     # Danh sách sản phẩm đồ công nghệ gắn link affiliate
 ├── css/
-│   └── style.css         # Hệ thống CSS Cyber Dark, Glassmorphism, animations, responsive
+│   └── style.css         # Hệ thống CSS duy nhất (~1.100 dòng), chuẩn Roboto, Cyber Dark UI
 ├── js/
-│   ├── core.js           # Bộ tiện ích dùng chung: Toast, Clipboard Copy, Radar Favicon, PWA, Visitor Badge
+│   ├── core.js           # Utilities dùng chung: Toast, Copy 1-chạm, Favicon radar, PWA init
 │   ├── lunar.js          # Thuật toán thiên văn Hồ Ngọc Đức tính Lịch Âm & Can Chi
-│   └── qrcode.min.js     # Engine vẽ mã QR Client-side & xuất Canvas
-├── subnet/index.html     # Subnet & CIDR Calculator (/subnet/)
-├── dns/index.html        # DNS Lookup DoH Cloudflare (/dns/)
-├── wifi-qr/index.html    # Trình tạo mã QR Wi-Fi (/wifi-qr/)
-├── ports/index.html      # Tra cứu cổng mạng IT (/ports/)
-├── password/index.html   # Trình tạo mật khẩu an toàn Web Crypto (/password/)
-├── telemetry/index.html  # NOC Edge Latency & Network Telemetry (/telemetry/)
-├── terminal/index.html   # Linux Web Terminal Emulator (/terminal/)
-├── cv/index.html         # Hồ sơ năng lực 10 năm kinh nghiệm (/cv/)
-├── projects/index.html   # Dự án công nghệ tiêu biểu (/projects/)
-├── vietqr/index.html     # Tạo mã VietQR 40+ ngân hàng (/vietqr/)
-├── calc/index.html       # Máy tính Cyber Calculator (/calc/)
-├── lunar/index.html      # Lịch Âm Vạn Niên & Can Chi (/lunar/)
-├── weather/index.html    # Thời tiết thời gian thực (/weather/)
-├── converter/index.html  # Chuyển đổi ngoại tệ & đơn vị IT (/converter/)
-├── world/index.html      # Đồng hồ 8 múi giờ quốc tế (/world/)
-├── assets/images/        # Icon PWA, avatar, apple-touch-icon
-├── manifest.json         # Cấu hình PWA (Name: "Nguyễn Đức Thắng (Thắng IT)", Short: "TiT")
-├── sw.js                 # Service Worker (Cache v10: tit-hub-v10)
-├── favicon.svg           # Vector favicon thương hiệu TiT
-├── _headers              # Cấu hình header Cloudflare Pages
+│   └── qrcode.min.js     # Thư viện vẽ QR Code client-side
+├── assets/images/        # Logo, avata.jpg, icon PWA
+├── manifest.json         # Cấu hình PWA
+├── sw.js                 # Service Worker (Cache version: tit-hub-v16)
+├── favicon.svg           # Vector radar favicon
+├── _headers              # Cấu hình Cache Control & Security Headers cho Cloudflare Pages
 ├── robots.txt            # Chỉ mục Search Engine
-├── sitemap.xml           # Sơ đồ trang web (gồm 15 trang công cụ)
-└── MEMORY.md             # File ghi nhớ dự án (tài liệu này)
+├── sitemap.xml           # Sơ đồ trang web
+└── MEMORY.md             # Bộ nhớ dự án (tài liệu này)
 ```
 
 ---
 
-## 4. Các Quy Tắc Kỹ Thuật Quan Trọng (Dành Cho Lần Làm Việc Tiếp Theo)
-1. **Quy tắc API:**
-   - Chỉ sử dụng các API công khai **100% miễn phí, không yêu cầu API Key bí mật, hỗ trợ CORS mở** để người dùng truy cập trực tiếp từ trình duyệt mà không cần backend proxy.
-2. **Quy tắc PWA & Cache:**
-   - Khi chỉnh sửa file JS hoặc CSS, nếu muốn người dùng nhận bản cập nhật ngay lập tức:
-     - Tăng query version trong `index.html` (ví dụ `?v=20260905_11`).
-     - Tăng `CACHE_NAME` trong `sw.js` (ví dụ `tit-hub-v10`).
-3. **Quy tắc Deploy:**
-   - Mọi thay đổi sau khi kiểm tra xong (`node -c js/file.js`) được commit và push vào nhánh `main`:
-     ```bash
+## 3. Các Quy Tắc Vận Hành & Bảo Trì
+
+1. **Quy tắc PWA & Cache:**
+   - Mỗi khi cập nhật giao diện, CSS hoặc JS quan trọng, luôn tăng `CACHE_NAME` trong `sw.js` (hiện tại là `tit-hub-v16`) và tăng query version `?v=...` tại các file HTML để trình duyệt người dùng xóa cache cũ ngay lập tức.
+2. **Quy tắc Deploy:**
+   - Đẩy trực tiếp vào nhánh `main`:
+     ```powershell
      git add .
-     git commit -m "feat/fix: mô tả nội dung"
+     git commit -m "feat/fix: mô tả"
      git push origin main
      ```
-   - Cloudflare Pages sẽ tự động hoàn tất build và cập nhật live trên `thangit.com` sau ~15 giây.
-
----
-
-## 5. Cấu Trúc Hero, Profile & Springboard Mới Nhất (Cập nhật 05/09/2026)
-1. **Tiêu đề & Tên:** Hiển thị **Nguyễn Đức Thắng**.
-2. **Avatar tương tác & Nút Hồ Sơ CV (Interactive Profile Card):**
-   - Click vào Avatar sẽ trượt Avatar sang trái (phóng to) và mở card kính mờ bên phải:
-     - Cột trái: Avatar phóng to, nút **📄 Hồ Sơ CV** (chuyển hướng trực tiếp sang `/cv/`), nút **✕ Thu gọn**.
-     - Cột phải: Họ & Tên, Ngày sinh, Địa chỉ, SĐT (copy + tel), Email (copy + mailto), Bio tóm tắt 10+ năm kinh nghiệm (đã bỏ tình trạng hôn nhân).
-3. **Bộ Lọc Phân Loại Springboard (Filter Tabs):**
-   - ⚡ **Tất cả (15)**
-   - 🛠️ **Hạ Tầng IT (9)**
-   - ☕ **Tiện Ích (6)**
-4. **Hàng 3 Chip Số Liệu (Metric Chips Row):**
-   - Hiển thị cân đối, đối xứng 1 hàng: `10+ Năm Thực Chiến` • `40K m² Logistics` • `500+ Nodes Quản Trị` (đã bỏ chip lẻ 99.9% Uptime).
-5. **Thanh Dock Mạng Xã Hội (Unified Social Action Bar):**
-   - 4 icon chuẩn thương hiệu: **Zalo**, **Telegram**, **Discord**, **GitHub**.
-6. **PWA Cache:** Service Worker hiện tại là `tit-hub-v10`, script/style version `?v=20260905_11`.
-
----
-
-## 6. Ý Tưởng & Hướng Phát Triển Tiếp Theo (Roadmap)
-- [ ] **Giá Vàng & Nhiên Liệu:**
-  - Tích hợp thêm tab xem Giá Vàng (SJC, PNJ, Vàng 9999) và Giá Xăng Dầu (RON 95, E5, Dầu DO) nếu tìm thấy nguồn API hoặc RSS feed mở ổn định.
-- [ ] **Âm Thanh Tương Tác (Haptic & Cyber SFX):**
-  - Tùy chọn bật/tắt hiệu ứng âm thanh click phím cyber nhẹ khi bấm phím máy tính hoặc chuyển tab.
-- [ ] **Lưu Trữ Cấu Hình Cá Nhân (LocalStorage):**
-  - Tự động ghi nhớ STK ngân hàng hay dùng trong QR Studio để lần sau mở ra có sẵn không cần nhập lại.
-- [ ] **Kết Quả Xổ Số (KQXS 3 Miền):**
-  - Xem kết quả xổ số Miền Bắc, Miền Trung, Miền Nam theo ngày.
-- [ ] **Thêm Widget Đếm Ngược Sự Kiện (Event Countdown):**
-  - Đếm ngược đến Tết Nguyên Đán, World Cup, các ngày lễ lớn.
-
+   - Cloudflare Pages tự động build và đồng bộ CDN toàn cầu trong vòng 15-30 giây.
+3. **Quy tắc SEO & Thực Thể (Entity Graph):**
+   - Mọi trang đều duy trì liên kết xác thực thực thể `rel="me"` và `sameAs` tới **thangnd.io.vn**, **thangnhayday.com** và **github.com/ducthangqtm**.
