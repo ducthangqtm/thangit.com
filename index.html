@@ -10,6 +10,11 @@
   <meta name="author" content="Nguyễn Đức Thắng">
   <link rel="canonical" href="https://thangit.com">
 
+  <!-- IndieWeb / Cross-Domain Entity Verification -->
+  <link rel="me" href="https://thangnd.io.vn">
+  <link rel="me" href="https://thangnhayday.com">
+  <link rel="me" href="https://github.com/ducthangqtm">
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thangit.com">
@@ -37,22 +42,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Structured Data (Schema.org JSON-LD) -->
+  <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://thangit.com/#website",
+        "url": "https://thangit.com",
+        "name": "Thắng IT",
+        "alternateName": ["TiT", "ThangIT", "thangit.com", "Nguyễn Đức Thắng IT"],
+        "description": "Portfolio & Network Hub của Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder.",
+        "publisher": {
+          "@id": "https://thangit.com/#person"
+        },
+        "author": {
+          "@id": "https://thangit.com/#person"
+        },
+        "inLanguage": "vi-VN"
+      },
+      {
         "@type": "Person",
         "@id": "https://thangit.com/#person",
         "name": "Nguyễn Đức Thắng",
-        "alternateName": "Thắng IT",
+        "alternateName": ["Thắng IT", "Thắng ND", "ducthangqtm", "Thắng Nhảy Dây"],
         "jobTitle": "Senior Network Administrator & Vibe Coder",
-        "url": "https://thangit.com",
+        "url": "https://thangnd.io.vn",
         "image": "https://thangit.com/assets/images/avata.jpg",
         "sameAs": [
+          "https://thangnd.io.vn",
+          "https://thangnhayday.com",
           "https://github.com/ducthangqtm",
-          "https://thangnhayday.com"
+          "https://t.me/ducthangqtm",
+          "https://zalo.me/0986192092"
         ],
         "knowsAbout": [
           "Network Administration",
@@ -79,7 +102,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=20260905_11">
+  <link rel="stylesheet" href="css/style.css?v=20260906_1">
 </head>
 <body>
 
@@ -258,6 +281,13 @@
                     <strong class="info-value">
                       <a href="mailto:ducthangqtm@gmail.com" class="phone-link">ducthangqtm@gmail.com</a>
                       <button class="btn-copy-chip" data-copy="ducthangqtm@gmail.com" title="Sao chép Email">📋 Copy</button>
+                    </strong>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label"><span class="info-icon">🌐</span> Định danh:</span>
+                    <strong class="info-value">
+                      <a href="https://thangnd.io.vn" target="_blank" rel="me" class="phone-link">thangnd.io.vn</a>
+                      <button class="btn-copy-chip" data-copy="https://thangnd.io.vn" title="Sao chép cổng định danh">📋 Copy</button>
                     </strong>
                   </div>
                 </div>
@@ -507,10 +537,15 @@
        ======================================================================== -->
   <footer class="footer">
     <div class="container">
-      © 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong> • 100% Static Web trên Cloudflare Pages
+      <p class="footer-identity-link">
+        Phát triển bởi <a href="https://thangnd.io.vn" target="_blank" rel="me">Thắng ND</a> • Cổng định danh cá nhân
+      </p>
+      <p class="footer-copyright">
+        © 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong> • 100% Static Web trên Cloudflare Pages
+      </p>
     </div>
   </footer>
 
-  <script src="js/core.js?v=20260905_11"></script>
+  <script src="js/core.js?v=20260906_1"></script>
 </body>
 </html>

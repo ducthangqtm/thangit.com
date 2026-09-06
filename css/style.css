@@ -1652,6 +1652,24 @@ body::before {
   text-align: center;
   width: 100%;
 }
+.footer-identity-link {
+  margin: 0 0 0.35rem 0;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+.footer-identity-link a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+.footer-identity-link a:hover {
+  color: var(--neon-green);
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.4);
+}
+.footer-copyright {
+  margin: 0;
+}
 
 /* ==========================================================================
    TiT POCKET SUPER APP (8-IN-1 UTILITY HUB)

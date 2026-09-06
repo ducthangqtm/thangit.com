@@ -1,9 +1,11 @@
 # THANGIT.COM (TiT) — PROJECT MEMORY
 
-> **Cập nhật lần cuối:** 05/09/2026  
+> **Cập nhật lần cuối:** 06/09/2026  
 > **Chủ sở hữu:** Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder  
 > **Tên Ứng Dụng (PWA):** **TiT** (TiT Pocket Super App & NOC Portfolio)  
 > **Domain Trực Tiếp:** [thangit.com](https://thangit.com)  
+> **Cổng Định Danh Trung Tâm:** [thangnd.io.vn](https://thangnd.io.vn) (Thắng ND)  
+> **Cổng Thể Thao KOC:** [thangnhayday.com](https://thangnhayday.com) (Thắng Nhảy Dây)  
 > **GitHub Repository:** [ducthangqtm/thangit.com](https://github.com/ducthangqtm/thangit.com) (Branch: `main`)  
 > **Môi Trường Vận Hành:** Cloudflare Pages (Deploy tự động sau mỗi lần `git push origin main`, chi phí 0đ/tháng, 100% Client-side).
 
@@ -13,7 +15,7 @@
 1. **100% Static & Zero Server Cost:**
    - Không cơ sở dữ liệu (No Database), không backend server phụ thuộc, bảo mật tuyệt đối, kháng DDoS qua Cloudflare CDN toàn cầu.
 2. **Kiến Trúc Multi-Page Architecture (MPA) — Clean URLs:**
-   - **Tách biệt hoàn toàn từng tiện ích:** Thay vì nhét toàn bộ 17 công cụ vào một file HTML khổng lồ, hệ thống được cấu trúc thành từng thư mục con độc lập (`/subnet/`, `/dns/`, `/wifi-qr/`, `/calc/`, `/lunar/`...).
+   - **Tách biệt hoàn toàn từng tiện ích:** Thay vì nhét toàn bộ 15 công cụ vào một file HTML khổng lồ, hệ thống được cấu trúc thành từng thư mục con độc lập (`/subnet/`, `/dns/`, `/wifi-qr/`, `/calc/`, `/lunar/`...).
    - **Đường dẫn đẹp & Chuẩn SEO:** Cloudflare Pages tự động phục vụ file `index.html` trong mỗi thư mục con mà không cần đuôi `.html` (URL sạch: `thangit.com/subnet/`). Mỗi trang có thẻ `<title>`, `<meta name="description">` riêng biệt và có trong `sitemap.xml`.
    - **Trang chủ Springboard (`/`):** Hiển thị màn hình chính dạng icon iOS squircle, badge IP mạng edge, và điều hướng trực tiếp bằng thẻ `<a href="/subnet/">`.
    - **Thanh Header Topbar Đồng Nhất:** Mỗi trang con có nút `<a href="/" class="ios-back-btn"> Trang chủ</a>` ở góc trên cùng bên trái để quay lại trang chủ tức thì.
@@ -21,9 +23,12 @@
 3. **Phân Định 2 Danh Mục Rõ Ràng:**
    - 🛠️ **Hạ Tầng & Công Cụ IT (Network Suite):** Bộ công cụ chuyên sâu cho SysAdmin/Network Engineer.
    - ☕ **Tiện Ích Bỏ Túi Thường Ngày (Pocket Tools):** Bộ tiện ích thiết thực cho cuộc sống hàng ngày.
-4. **PWA Multi-Page Engine (Cache v10):**
-   - Hoạt động mượt mà cả offline lẫn online qua Service Worker `tit-hub-v10`.
+4. **PWA Multi-Page Engine (Cache v11):**
+   - Hoạt động mượt mà cả offline lẫn online qua Service Worker `tit-hub-v11`.
    - Lưu cache toàn bộ 15 trang công cụ con và tài nguyên dùng chung trong `js/core.js`.
+5. **Hệ Sinh Thái Định Danh Thực Thể & Entity SEO (Cross-Domain Knowledge Graph):**
+   - Đồng bộ 3 domain độc lập: **thangnd.io.vn** (Root Identity) ↔ **thangit.com** (Tech / IT Hub) ↔ **thangnhayday.com** (Fitness / KOC Hub).
+   - Xác thực quyền sở hữu đồng nhất bằng chuẩn `rel="me"` và liên kết thực thể đa chiều trong Schema.org (`Person`, `WebSite`, `sameAs`).
 
 ---
 
