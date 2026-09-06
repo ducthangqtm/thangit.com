@@ -102,7 +102,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=20260906_1">
+  <link rel="stylesheet" href="css/style.css?v=20260906_2">
 </head>
 <body>
 
@@ -331,142 +331,57 @@
           </div>
         </div>
 
-      <!-- Springboard Category Filter Tabs -->
-      <div class="springboard-filter-tabs" id="springboard-filter-tabs" role="tablist" aria-label="Bộ lọc ứng dụng">
-        <button class="filter-tab-btn active" data-category="all" role="tab" aria-selected="true">
-          <span>⚡ Tất cả</span>
-          <span class="tab-badge">15</span>
-        </button>
-        <button class="filter-tab-btn" data-category="network" role="tab" aria-selected="false">
-          <span>🛠️ Hạ Tầng IT</span>
-          <span class="tab-badge">9</span>
-        </button>
-        <button class="filter-tab-btn" data-category="pocket" role="tab" aria-selected="false">
-          <span>☕ Tiện Ích</span>
-          <span class="tab-badge">6</span>
-        </button>
-      </div>
-
-      <!-- iOS Springboard App Launcher (Multi-Page Navigation Grid) -->
-      <section id="springboard-view" class="ios-springboard">
-        <!-- Category 1: IT & Network Tools -->
-        <div class="ios-category-group" data-category-group="network">
-          <div class="ios-section-header">
-            <div class="ios-section-title">
-              <span>🛠️</span>
-              <span>Hạ Tầng & Công Cụ IT</span>
-              <span class="badge-pill">Network Suite</span>
+        <!-- 2-Column Bento Hub Cards (Clean & Focused Navigation) -->
+        <div class="hub-bento-grid">
+          
+          <!-- Cổng 1: IT Tools & Network Suite -->
+          <a href="/it/" class="hub-bento-card" aria-label="Mở Hạ Tầng & Công Cụ IT">
+            <div class="hub-bento-header">
+              <span class="hub-bento-badge">🛠️ NETWORK SUITE • 9 APPS</span>
+              <div class="hub-bento-arrow">↗</div>
             </div>
-            <span class="ios-section-subtitle">Chuyên sâu SysAdmin</span>
-          </div>
-
-          <div class="ios-app-grid">
-            <!-- App 1: Subnet CIDR -->
-            <a href="/subnet/" class="ios-app-item" aria-label="Mở Subnet & CIDR Calculator">
-              <div class="ios-app-icon icon-grad-subnet">🧮</div>
-              <span class="ios-app-label">Subnet CIDR</span>
-            </a>
-
-            <!-- App 2: DNS Lookup DoH -->
-            <a href="/dns/" class="ios-app-item" aria-label="Mở DNS Lookup DoH">
-              <div class="ios-app-icon icon-grad-dns">🌐</div>
-              <span class="ios-app-label">DNS Lookup</span>
-            </a>
-
-            <!-- App 3: Wi-Fi QR -->
-            <a href="/wifi-qr/" class="ios-app-item" aria-label="Mở Wi-Fi QR 1-Chạm">
-              <div class="ios-app-icon icon-grad-wifi">📶</div>
-              <span class="ios-app-label">Wi-Fi QR</span>
-            </a>
-
-            <!-- App 4: Port Lookup -->
-            <a href="/ports/" class="ios-app-item" aria-label="Mở Tra Cứu Cổng Mạng">
-              <div class="ios-app-icon icon-grad-ports">🔌</div>
-              <span class="ios-app-label">Tra Cứu Port</span>
-            </a>
-
-            <!-- App 5: Key & Password Generator -->
-            <a href="/password/" class="ios-app-item" aria-label="Mở Sinh Mật Khẩu IT">
-              <div class="ios-app-icon icon-grad-password">🔐</div>
-              <span class="ios-app-label">Mật Khẩu IT</span>
-            </a>
-
-            <!-- App 6: Live NOC Telemetry & Ping -->
-            <a href="/telemetry/" class="ios-app-item" aria-label="Mở Giám Sát Ping & Edge IP">
-              <div class="ios-app-icon icon-grad-telemetry">⚡</div>
-              <span class="ios-app-label">NOC Ping</span>
-            </a>
-
-            <!-- App 7: Terminal CLI -->
-            <a href="/terminal/" class="ios-app-item" aria-label="Mở NOC Terminal zsh">
-              <div class="ios-app-icon icon-grad-terminal">⌨️</div>
-              <span class="ios-app-label">Terminal CLI</span>
-            </a>
-
-            <!-- App 8: 10 Năm Quản Trị CV -->
-            <a href="/cv/" class="ios-app-item" aria-label="Mở Hồ Sơ Năng Lực 10 Năm">
-              <div class="ios-app-icon icon-grad-career">💼</div>
-              <span class="ios-app-label">Hồ Sơ CV</span>
-            </a>
-
-            <!-- App 9: Dự Án Tiêu Biểu -->
-            <a href="/projects/" class="ios-app-item" aria-label="Mở Danh Sách Dự Án">
-              <div class="ios-app-icon icon-grad-projects">🚀</div>
-              <span class="ios-app-label">Dự Án Số</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Category 2: Daily Pocket Tools -->
-        <div class="ios-category-group" data-category-group="pocket">
-          <div class="ios-section-header">
-            <div class="ios-section-title">
-              <span>☕</span>
-              <span>Tiện Ích Bỏ Túi Thường Ngày</span>
-              <span class="badge-pill">Pocket Tools</span>
+            <h2 class="hub-bento-title">Hạ Tầng & Công Cụ IT</h2>
+            <p class="hub-bento-desc">Bộ công cụ chuyên sâu cho SysAdmin: Subnet CIDR, DNS Lookup DoH, Wi-Fi QR, Port Registry, Password Generator, NOC Ping, Terminal CLI, CV & Dự Án.</p>
+            <div class="hub-bento-preview-row">
+              <span class="hub-mini-icon" title="Subnet CIDR">🧮</span>
+              <span class="hub-mini-icon" title="DNS Lookup">🌐</span>
+              <span class="hub-mini-icon" title="Wi-Fi QR">📶</span>
+              <span class="hub-mini-icon" title="Tra Cứu Port">🔌</span>
+              <span class="hub-mini-icon" title="Mật Khẩu IT">🔐</span>
+              <span class="hub-mini-icon" title="NOC Ping">⚡</span>
+              <span class="hub-mini-icon" title="Terminal">⌨️</span>
+              <span class="hub-mini-icon" title="Hồ Sơ CV">💼</span>
+              <span class="hub-mini-icon" title="Dự Án Số">🚀</span>
             </div>
-            <span class="ios-section-subtitle">Hữu dụng hàng ngày</span>
-          </div>
+            <div class="hub-bento-action">
+              <span>Khám phá 9 công cụ IT</span>
+              <span>→</span>
+            </div>
+          </a>
 
-          <div class="ios-app-grid">
-            <!-- App 10: VietQR Studio -->
-            <a href="/vietqr/" class="ios-app-item" aria-label="Mở VietQR Bank Studio">
-              <div class="ios-app-icon icon-grad-vietqr">🏦</div>
-              <span class="ios-app-label">VietQR Bank</span>
-            </a>
+          <!-- Cổng 2: Basic & Pocket Tools -->
+          <a href="/tools/" class="hub-bento-card card-pocket" aria-label="Mở Tiện Ích Bỏ Túi Thường Ngày">
+            <div class="hub-bento-header">
+              <span class="hub-bento-badge">☕ POCKET TOOLS • 6 APPS</span>
+              <div class="hub-bento-arrow">↗</div>
+            </div>
+            <h2 class="hub-bento-title">Tiện Ích Bỏ Túi</h2>
+            <p class="hub-bento-desc">Bộ tiện ích thiết thực cho cuộc sống thường ngày: VietQR Bank 40+ ngân hàng, Máy tính Cyber, Lịch âm vạn niên, Dự báo thời tiết, Đổi ngoại tệ, Giờ quốc tế.</p>
+            <div class="hub-bento-preview-row">
+              <span class="hub-mini-icon" title="VietQR Bank">🏦</span>
+              <span class="hub-mini-icon" title="Máy Tính">🧮</span>
+              <span class="hub-mini-icon" title="Lịch Âm">📅</span>
+              <span class="hub-mini-icon" title="Thời Tiết">🌤️</span>
+              <span class="hub-mini-icon" title="Đổi Ngoại Tệ">⚖️</span>
+              <span class="hub-mini-icon" title="Giờ Quốc Tế">🌍</span>
+            </div>
+            <div class="hub-bento-action">
+              <span>Mở 6 tiện ích bỏ túi</span>
+              <span>→</span>
+            </div>
+          </a>
 
-            <!-- App 11: Máy Tính Cyber -->
-            <a href="/calc/" class="ios-app-item" aria-label="Mở Máy Tính Cyber">
-              <div class="ios-app-icon icon-grad-calc">🧮</div>
-              <span class="ios-app-label">Máy Tính</span>
-            </a>
-
-            <!-- App 12: Lịch Âm Vạn Niên -->
-            <a href="/lunar/" class="ios-app-item" aria-label="Mở Lịch Âm Vạn Niên">
-              <div class="ios-app-icon icon-grad-lunar">📅</div>
-              <span class="ios-app-label">Lịch Âm</span>
-            </a>
-
-            <!-- App 13: Thời Tiết -->
-            <a href="/weather/" class="ios-app-item" aria-label="Mở Thời Tiết Trực Tiếp">
-              <div class="ios-app-icon icon-grad-weather">🌤️</div>
-              <span class="ios-app-label">Thời Tiết</span>
-            </a>
-
-            <!-- App 14: Đổi Đơn Vị & Tỷ Giá -->
-            <a href="/converter/" class="ios-app-item" aria-label="Mở Đổi Đơn Vị & Ngoại Tệ">
-              <div class="ios-app-icon icon-grad-converter">⚖️</div>
-              <span class="ios-app-label">Đổi Đơn Vị</span>
-            </a>
-
-            <!-- App 15: Giờ Quốc Tế -->
-            <a href="/world/" class="ios-app-item" aria-label="Mở Giờ Quốc Tế">
-              <div class="ios-app-icon icon-grad-world">🌍</div>
-              <span class="ios-app-label">Giờ Quốc Tế</span>
-            </a>
-          </div>
         </div>
-      </section>
 
       <!-- 3 Chips Số Liệu Minh Chứng (Gọn Gàng & Cân Đối 1 Hàng) -->
       <div class="metric-chips-row">

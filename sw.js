@@ -1,8 +1,10 @@
 // THANGIT.COM — PWA Service Worker (Multi-Page Architecture Engine)
-const CACHE_NAME = 'tit-hub-v11';
+const CACHE_NAME = 'tit-hub-v12';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
+  '/it/',
+  '/tools/',
   '/css/style.css',
   '/js/core.js',
   '/js/lunar.js',

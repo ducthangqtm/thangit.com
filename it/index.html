@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hạ Tầng & Công Cụ IT (Network Suite) — Thắng IT</title>
+  <meta name="description" content="Bộ công cụ IT & Quản trị mạng chuyên sâu: Subnet CIDR, DNS Lookup DoH, Wi-Fi QR, Port Registry, Password Generator, NOC Ping, Terminal CLI, Hồ Sơ CV & Dự Án Số.">
+  <meta name="keywords" content="it tools thangit, network suite, subnet calculator, dns lookup doh, wifi qr, port lookup, password generator, noc telemetry, terminal cli">
+  <meta name="author" content="Nguyễn Đức Thắng">
+  <link rel="canonical" href="https://thangit.com/it/">
+
+  <!-- IndieWeb / Entity Verification -->
+  <link rel="me" href="https://thangnd.io.vn">
+  <link rel="me" href="https://thangnhayday.com">
+  <link rel="me" href="https://github.com/ducthangqtm">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hạ Tầng & Công Cụ IT (Network Suite) — Thắng IT">
+  <meta property="og:description" content="Bộ công cụ IT & Quản trị mạng chuyên sâu phục vụ SysAdmin/Network Engineer. 100% Client-side.">
+  <meta property="og:image" content="https://thangit.com/assets/images/apple-touch-icon.png">
+  <meta property="og:url" content="https://thangit.com/it/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css?v=20260906_2">
+</head>
+<body>
+  <div id="pwa-pull-indicator" class="pwa-pull-indicator" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <polyline points="1 20 1 14 7 14"></polyline>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+    </svg>
+  </div>
+
+  <header class="header-nav">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Về Trang chủ">
+        <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none" role="img" aria-label="TiT Logo">
+          <defs>
+            <linearGradient id="tit-bg-it" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0b1320"/>
+              <stop offset="100%" stop-color="#04070d"/>
+            </linearGradient>
+            <linearGradient id="tit-neon-it" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="50%" stop-color="#7000ff"/>
+              <stop offset="100%" stop-color="#ff007b"/>
+            </linearGradient>
+          </defs>
+          <rect x="1.5" y="1.5" width="41" height="41" rx="10" fill="url(#tit-bg-it)" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1.5"/>
+          <g>
+            <path d="M 6.5 15.2 H 16.5 M 11.5 15.2 V 29" stroke="url(#tit-neon-it)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 22 18.5 V 29" stroke="#00f0ff" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="22" cy="23.5" r="1.2" fill="#ffffff"/>
+            <path d="M 27.5 15.2 H 37.5 M 32.5 15.2 V 29" stroke="url(#tit-neon-it)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <circle cx="22" cy="12" r="2.3" fill="#00f0ff"/>
+        </svg>
+        <span class="brand-name">THANG<span>IT</span>.COM</span>
+      </a>
+
+      <div class="topbar-actions">
+        <a href="/" class="ios-back-btn" title="Quay lại Trang chủ">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Trang chủ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-hub">
+    <div class="container hub-center-wrapper">
+      <div class="ios-app-view-container active" style="display:block; width:100%; max-width:820px;">
+        
+        <!-- Header Banner Hub -->
+        <div class="hub-page-hero">
+          <div class="hub-hero-badge">🛠️ NETWORK SUITE</div>
+          <h1 class="hub-hero-title">Hạ Tầng & Công Cụ IT</h1>
+          <p class="hub-hero-subtitle">Bộ công cụ chuyên sâu dành cho Network Administrator & Kỹ sư hệ thống. Xử lý 100% Client-side, bảo mật và tốc độ cao.</p>
+        </div>
+
+        <!-- 9 App Cards Grid -->
+        <div class="category-cards-grid">
+          
+          <!-- Card 1: Subnet CIDR -->
+          <a href="/subnet/" class="category-app-card" aria-label="Mở Subnet CIDR Calculator">
+            <div class="category-card-icon icon-grad-subnet">🧮</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">Subnet CIDR</h3>
+                <span class="category-card-tag">Bitwise Math</span>
+              </div>
+              <p class="category-card-desc">Tính toán chia mạng IPv4 từ /1 đến /32, Network/Broadcast IP, Wildcard Mask và dải Host khả dụng 1-chạm.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+          <!-- Card 2: DNS Lookup DoH -->
+          <a href="/dns/" class="category-app-card" aria-label="Mở DNS Lookup DoH">
+            <div class="category-card-icon icon-grad-dns">🌐</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">DNS Lookup DoH</h3>
+                <span class="category-card-tag">Cloudflare 1.1.1.1</span>
+              </div>
+              <p class="category-card-desc">Tra cứu trực tiếp bản ghi A, AAAA, CNAME, MX, TXT, NS qua giao thức HTTPS chuẩn bảo mật.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+          <!-- Card 3: Wi-Fi QR -->
+          <a href="/wifi-qr/" class="category-app-card" aria-label="Mở Wi-Fi QR">
+            <div class="category-card-icon icon-grad-wifi">📶</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">Wi-Fi QR</h3>
+                <span class="category-card-tag">WPA2/WPA3</span>
+              </div>
+              <p class="category-card-desc">Tạo mã QR quét kết nối Wi-Fi tức thì, hỗ trợ mạng ẩn, chuẩn mã hóa mới nhất kèm nút xuất ảnh PNG.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+          <!-- Card 4: Tra Cứu Port -->
+          <a href="/ports/" class="category-app-card" aria-label="Mở Tra Cứu Port">
+            <div class="category-card-icon icon-grad-ports">🔌</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">Tra Cứu Port Mạng</h3>
+                <span class="category-card-tag">39 Ports</span>
+              </div>
+              <p class="category-card-desc">Cơ sở dữ liệu 39 cổng dịch vụ mạng phổ biến nhất (Web, Remote, DB, VPN, Mail, Monitoring) kèm TCP/UDP.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+          <!-- Card 5: Sinh Mật Khẩu IT -->
+          <a href="/password/" class="category-app-card" aria-label="Mở Sinh Mật Khẩu IT">
+            <div class="category-card-icon icon-grad-password">🔐</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">Mật Khẩu IT</h3>
+                <span class="category-card-tag">Web Crypto API</span>
+              </div>
+              <p class="category-card-desc">Sinh mật khẩu độ an toàn cao (High Entropy) cho Root, Router, Switch, Database với tùy biến ký tự.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+          <!-- Card 6: NOC Ping & Edge Telemetry -->
+          <a href="/telemetry/" class="category-app-card" aria-label="Mở NOC Ping">
+            <div class="category-card-icon icon-grad-telemetry">⚡</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">NOC Ping & Edge Telemetry</h3>
+                <span class="category-card-tag">Edge Cloudflare</span>
+              </div>
+              <p class="category-card-desc">Đo độ trễ Ping thực tế tới Edge CDN, bóc tách IP công cộng, Node POP gần nhất, TLS cipher & HTTP protocol.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+          <!-- Card 7: Terminal CLI -->
+          <a href="/terminal/" class="category-app-card" aria-label="Mở Terminal CLI">
+            <div class="category-card-icon icon-grad-terminal">⌨️</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">Terminal CLI</h3>
+                <span class="category-card-tag">In-browser zsh</span>
+              </div>
+              <p class="category-card-desc">Bàn gõ giả lập terminal Linux, hỗ trợ phím tắt `~`, các lệnh whoami, skills, projects, ping trực tiếp.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+          <!-- Card 8: Hồ Sơ CV -->
+          <a href="/cv/" class="category-app-card" aria-label="Mở Hồ Sơ CV">
+            <div class="category-card-icon icon-grad-career">💼</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">Hồ Sơ Năng Lực 10 Năm</h3>
+                <span class="category-card-tag">Senior Profile</span>
+              </div>
+              <p class="category-card-desc">Lộ trình thực chiến quản trị hạ tầng mạng logistics 40.000m², 500+ nodes, hệ sinh thái Cisco & Proxmox VE.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+          <!-- Card 9: Dự Án Số -->
+          <a href="/projects/" class="category-app-card" aria-label="Mở Danh Mục Dự Án">
+            <div class="category-card-icon icon-grad-projects">🚀</div>
+            <div class="category-card-info">
+              <div class="category-card-top">
+                <h3 class="category-card-name">Dự Án Số Tiêu Biểu</h3>
+                <span class="category-card-tag">Showcase Hub</span>
+              </div>
+              <p class="category-card-desc">Tổng hợp hệ thống thangit.com, thangnd.io.vn, thangnhayday.com, cụm Homelab HA & bot tự động hóa NOC.</p>
+            </div>
+            <span class="category-card-arrow">↗</span>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-identity-link">
+        Phát triển bởi <a href="https://thangnd.io.vn" target="_blank" rel="me">Thắng ND</a> • Cổng định danh cá nhân
+      </p>
+      <p class="footer-copyright">
+        © 2026 <strong>Nguyễn Đức Thắng (Thắng IT)</strong> • 100% Static Web trên Cloudflare Pages
+      </p>
+    </div>
+  </footer>
+
+  <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
+  <script src="/js/core.js?v=20260906_2"></script>
+</body>
+</html>

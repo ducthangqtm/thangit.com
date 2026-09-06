@@ -14,19 +14,16 @@
 ## 1. Kiến Trúc & Triết Lý Phát Triển
 1. **100% Static & Zero Server Cost:**
    - Không cơ sở dữ liệu (No Database), không backend server phụ thuộc, bảo mật tuyệt đối, kháng DDoS qua Cloudflare CDN toàn cầu.
-2. **Kiến Trúc Multi-Page Architecture (MPA) — Clean URLs:**
-   - **Tách biệt hoàn toàn từng tiện ích:** Thay vì nhét toàn bộ 15 công cụ vào một file HTML khổng lồ, hệ thống được cấu trúc thành từng thư mục con độc lập (`/subnet/`, `/dns/`, `/wifi-qr/`, `/calc/`, `/lunar/`...).
-   - **Đường dẫn đẹp & Chuẩn SEO:** Cloudflare Pages tự động phục vụ file `index.html` trong mỗi thư mục con mà không cần đuôi `.html` (URL sạch: `thangit.com/subnet/`). Mỗi trang có thẻ `<title>`, `<meta name="description">` riêng biệt và có trong `sitemap.xml`.
-   - **Trang chủ Springboard (`/`):** Hiển thị màn hình chính dạng icon iOS squircle, badge IP mạng edge, và điều hướng trực tiếp bằng thẻ `<a href="/subnet/">`.
+2. **Kiến Trúc Multi-Page Architecture (MPA) — 2 Cổng Lớn (Bento Hubs):**
+   - **Trang chủ tinh gọn (`/`):** Tối giản, thanh lịch, tập trung vào Profile định danh và 2 Thẻ Bento Hub lớn dẫn vào 2 danh mục:
+     - 🛠️ **Hạ Tầng & Công Cụ IT (`/it/`):** 9 công cụ quản trị mạng & SysAdmin.
+     - ☕ **Tiện Ích Bỏ Túi Thường Ngày (`/tools/`):** 6 tiện ích thường ngày.
+   - **Tách biệt hoàn toàn từng tiện ích con:** Người dùng có thể truy cập thẳng từng công cụ (`/subnet/`, `/dns/`, `/vietqr/`...) hoặc duyệt qua 2 trang hub trung tâm (`/it/`, `/tools/`).
    - **Thanh Header Topbar Đồng Nhất:** Mỗi trang con có nút `<a href="/" class="ios-back-btn"> Trang chủ</a>` ở góc trên cùng bên trái để quay lại trang chủ tức thì.
-   - **Tối ưu tốc độ tải:** Người dùng chỉ tải mã JS của đúng công cụ đang sử dụng, tiết kiệm băng thông và tăng tốc độ tương tác.
-3. **Phân Định 2 Danh Mục Rõ Ràng:**
-   - 🛠️ **Hạ Tầng & Công Cụ IT (Network Suite):** Bộ công cụ chuyên sâu cho SysAdmin/Network Engineer.
-   - ☕ **Tiện Ích Bỏ Túi Thường Ngày (Pocket Tools):** Bộ tiện ích thiết thực cho cuộc sống hàng ngày.
-4. **PWA Multi-Page Engine (Cache v11):**
-   - Hoạt động mượt mà cả offline lẫn online qua Service Worker `tit-hub-v11`.
-   - Lưu cache toàn bộ 15 trang công cụ con và tài nguyên dùng chung trong `js/core.js`.
-5. **Hệ Sinh Thái Định Danh Thực Thể & Entity SEO (Cross-Domain Knowledge Graph):**
+3. **PWA Multi-Page Engine (Cache v12):**
+   - Hoạt động mượt mà cả offline lẫn online qua Service Worker `tit-hub-v12`.
+   - Lưu cache toàn bộ trang chủ, 2 trang hub và 15 trang công cụ con trong `js/core.js`.
+4. **Hệ Sinh Thái Định Danh Thực Thể & Entity SEO (Cross-Domain Knowledge Graph):**
    - Đồng bộ 3 domain độc lập: **thangnd.io.vn** (Root Identity) ↔ **thangit.com** (Tech / IT Hub) ↔ **thangnhayday.com** (Fitness / KOC Hub).
    - Xác thực quyền sở hữu đồng nhất bằng chuẩn `rel="me"` và liên kết thực thể đa chiều trong Schema.org (`Person`, `WebSite`, `sameAs`).
 
