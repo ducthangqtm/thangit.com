@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   
   <title>Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder</title>
   <meta name="title" content="Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder">
@@ -45,7 +45,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20260907_v4">
+  <link rel="stylesheet" href="/css/style.css?v=20260907_ptr">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -111,6 +111,17 @@
   </script>
 </head>
 <body>
+  <!-- Pull-to-Refresh Indicator (PWA / Standalone Mobile) -->
+  <div id="ptr-indicator" class="ptr-indicator" aria-hidden="true">
+    <div class="ptr-pill">
+      <div class="ptr-icon-box">
+        <i class="fas fa-arrow-down ptr-arrow"></i>
+        <i class="fas fa-circle-notch fa-spin ptr-spinner"></i>
+      </div>
+      <span class="ptr-text">Kéo để làm mới</span>
+    </div>
+  </div>
+
   <!-- Ambient background glow effects -->
   <div class="glow-bg glow-1"></div>
   <div class="glow-bg glow-2"></div>
@@ -539,10 +550,6 @@
           <i class="fas fa-fire"></i> thangnhayday.com
         </a>
         <span class="footer-sep">•</span>
-        <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener me" class="footer-link gh-link">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-        <span class="footer-sep">•</span>
         <a href="/admin/" class="footer-link admin-link" title="Đăng nhập trang quản trị">
           <i class="fas fa-lock"></i> Admin
         </a>
@@ -563,7 +570,7 @@
 
   <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
 
-  <script src="/js/core.js?v=20260906_3"></script>
+  <script src="/js/core.js?v=20260907_ptr"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Tab switching between IT Tools, Tiện Ích, Đồ Công Nghệ

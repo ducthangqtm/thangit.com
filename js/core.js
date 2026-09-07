@@ -87,37 +87,151 @@ function initAnimatedFavicon() {
 }
 
 /* ==========================================================================
-   MOBILE PULL TO REFRESH
+/* ==========================================================================
+   MOBILE PULL TO REFRESH (PWA & STANDALONE SUPPORT)
    ========================================================================== */
 function initPullToRefresh() {
+  const ptr = document.getElementById('ptr-indicator');
+  const appContainer = document.querySelector('.app-container');
+  if (!ptr || !appContainer) return;
+
+  const ptrText = ptr.querySelector('.ptr-text');
   let startY = 0;
-  let isPulling = false;
-  const indicator = document.getElementById('pwa-pull-indicator');
+  let startX = 0;
+  let currentY = 0;
+  let isDragging = false;
+  let isRefreshing = false;
+  let canPull = false;
 
-  window.addEventListener('touchstart', (e) => {
-    if (window.scrollY === 0) {
-      startY = e.touches[0].clientY;
-      isPulling = true;
+  const THRESHOLD = 65; // Distance in px to trigger refresh
+  const MAX_PULL = 95;  // Max visual travel distance
+
+  function isPageAtTop() {
+    return (window.scrollY || document.documentElement.scrollTop || 0) <= 0;
+  }
+
+  function handleTouchStart(e) {
+    if (isRefreshing) return;
+    if (isPageAtTop()) {
+      canPull = true;
+      const touch = e.touches[0];
+      startY = touch.clientY;
+      startX = touch.clientX;
+      currentY = startY;
+      isDragging = false;
+
+      ptr.style.transition = 'none';
+      appContainer.style.transition = 'none';
+    } else {
+      canPull = false;
     }
-  }, { passive: true });
+  }
 
-  window.addEventListener('touchmove', (e) => {
-    if (!isPulling || !indicator) return;
-    const currentY = e.touches[0].clientY;
-    const diff = currentY - startY;
+  function handleTouchMove(e) {
+    if (isRefreshing || !canPull) return;
 
-    if (diff > 50) {
-      indicator.style.display = 'flex';
-      indicator.style.transform = `translateX(-50%) translateY(${Math.min(diff - 50, 40)}px)`;
+    if (!isPageAtTop()) {
+      if (isDragging) resetPTR();
+      canPull = false;
+      return;
     }
-  }, { passive: true });
 
-  window.addEventListener('touchend', (e) => {
-    if (!isPulling) return;
-    isPulling = false;
-    if (indicator) {
-      indicator.style.display = 'none';
-      indicator.style.transform = 'translateX(-50%) translateY(0)';
+    const touch = e.touches[0];
+    currentY = touch.clientY;
+    const diffY = currentY - startY;
+    const diffX = touch.clientX - startX;
+
+    // Downward drag predominantly vertical
+    if (diffY > 8 && Math.abs(diffY) > Math.abs(diffX) * 1.2) {
+      isDragging = true;
+      if (e.cancelable) {
+        e.preventDefault(); // Prevent iOS rubber-banding
+      }
+
+      const pullDist = Math.min(diffY * 0.42, MAX_PULL);
+      const indicatorOffset = pullDist - 65;
+
+      ptr.style.transform = `translateX(-50%) translateY(${indicatorOffset}px)`;
+      ptr.style.opacity = Math.min(1, pullDist / 35).toString();
+
+      // Elastic content pull
+      appContainer.style.transform = `translateY(${pullDist * 0.35}px)`;
+
+      if (pullDist >= THRESHOLD) {
+        if (!ptr.classList.contains('ptr-ready')) {
+          ptr.classList.add('ptr-ready');
+          if (ptrText) ptrText.textContent = 'Thả ra để làm mới';
+          if (navigator.vibrate) {
+            try { navigator.vibrate(12); } catch (_) {}
+          }
+        }
+      } else {
+        if (ptr.classList.contains('ptr-ready')) {
+          ptr.classList.remove('ptr-ready');
+          if (ptrText) ptrText.textContent = 'Kéo để làm mới';
+        }
+      }
     }
-  });
+  }
+
+  function handleTouchEnd() {
+    if (!isDragging || isRefreshing) {
+      canPull = false;
+      return;
+    }
+    isDragging = false;
+    canPull = false;
+
+    const diffY = currentY - startY;
+    const pullDist = Math.min(diffY * 0.42, MAX_PULL);
+
+    if (pullDist >= THRESHOLD) {
+      triggerRefresh();
+    } else {
+      resetPTR();
+    }
+  }
+
+  function resetPTR() {
+    ptr.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.25s ease';
+    appContainer.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    ptr.style.transform = 'translateX(-50%) translateY(-80px)';
+    ptr.style.opacity = '0';
+    appContainer.style.transform = 'translateY(0)';
+    ptr.classList.remove('ptr-ready');
+    if (ptrText) ptrText.textContent = 'Kéo để làm mới';
+  }
+
+  async function triggerRefresh() {
+    isRefreshing = true;
+    ptr.classList.remove('ptr-ready');
+    ptr.classList.add('ptr-refreshing');
+    if (ptrText) ptrText.textContent = 'Đang làm mới...';
+
+    ptr.style.transition = 'transform 0.25s ease';
+    appContainer.style.transition = 'transform 0.25s ease';
+    ptr.style.transform = 'translateX(-50%) translateY(14px)';
+    ptr.style.opacity = '1';
+    appContainer.style.transform = 'translateY(40px)';
+
+    // Clear caches
+    try {
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+    } catch (_) {}
+
+    // Reload bypassing cache
+    setTimeout(() => {
+      const url = new URL(window.location.href);
+      url.searchParams.set('_r', Date.now().toString());
+      window.location.replace(url.toString());
+    }, 450);
+  }
+
+  window.addEventListener('touchstart', handleTouchStart, { passive: true });
+  window.addEventListener('touchmove', handleTouchMove, { passive: false });
+  window.addEventListener('touchend', handleTouchEnd, { passive: true });
+  window.addEventListener('touchcancel', resetPTR, { passive: true });
 }
