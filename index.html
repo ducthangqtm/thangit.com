@@ -194,26 +194,309 @@
       </nav>
     </section>
 
-    <!-- SECTION: 4 CATEGORY TABS (Hồ Sơ CV, IT Tools, Tiện Ích, Đồ Công Nghệ) -->
+    <!-- SECTION: 3 PRIMARY TABS (Công Cụ Mạng, Năng Lực & Dịch Vụ, Đồ Công Nghệ) -->
     <nav class="category-tabs-wrap" id="home-tabs-nav" aria-label="Phân loại danh mục">
-      <button type="button" class="tab-pill-btn active" data-target="tab-cv">
-        <span>💼 Hồ Sơ CV</span>
+      <button type="button" class="tab-pill-btn active" data-target="tab-tools">
+        <span>⚡ Công Cụ Mạng (5-in-1)</span>
       </button>
-      <button type="button" class="tab-pill-btn" data-target="tab-it">
-        <span>🛠️ IT Tools</span>
-      </button>
-      <button type="button" class="tab-pill-btn" data-target="tab-tienich">
-        <span>☕ Tiện Ích</span>
+      <button type="button" class="tab-pill-btn" data-target="tab-cv">
+        <span>💼 Hồ Sơ &amp; Dịch Vụ</span>
       </button>
       <button type="button" class="tab-pill-btn" data-target="tab-aff">
-        <span>⚡ Đồ Công Nghệ</span>
+        <span>🛒 Đồ Công Nghệ</span>
       </button>
     </nav>
 
     <!-- ===================================================================
-         TAB 1: HỒ SƠ CV (Mục Riêng Biệt & Mặc Định Đầu Trang)
+         TAB 1: CÔNG CỤ MẠNG CHUYÊN SÂU (5-in-1 Network Pro Tools)
          =================================================================== -->
-    <section class="home-tab-content active" id="tab-cv">
+    <section class="home-tab-content active" id="tab-tools">
+      
+      <!-- Sub-switcher for 5 tools -->
+      <div class="tool-switcher-wrap" id="tools-subnav">
+        <button type="button" class="tool-switcher-btn active" data-tool="tool-subnet">
+          <span>🧮 Subnet CIDR</span>
+        </button>
+        <button type="button" class="tool-switcher-btn" data-tool="tool-wifi">
+          <span>📶 Wi-Fi QR</span>
+        </button>
+        <button type="button" class="tool-switcher-btn" data-tool="tool-ports">
+          <span>🔌 Tra Cứu Port</span>
+        </button>
+        <button type="button" class="tool-switcher-btn" data-tool="tool-ipdns">
+          <span>🌐 IP &amp; DNS</span>
+        </button>
+        <button type="button" class="tool-switcher-btn" data-tool="tool-password">
+          <span>🔐 Sinh Mật Khẩu</span>
+        </button>
+      </div>
+
+      <!-- TOOL 1: SUBNET & CIDR CALCULATOR -->
+      <div class="tool-panel active" id="tool-subnet">
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-calculator" style="color:var(--neon-cyan);"></i> Tính Subnet &amp; CIDR</h3>
+            <span class="tool-tag-badge">IPv4 Engine</span>
+          </div>
+
+          <div class="tool-form-grid">
+            <div class="tool-field">
+              <label class="tool-label" for="subnet-ip">Địa chỉ IP:</label>
+              <input type="text" id="subnet-ip" class="tool-input" value="192.168.1.100" placeholder="192.168.1.100" autocomplete="off">
+            </div>
+            <div class="tool-field">
+              <label class="tool-label" for="subnet-prefix">Tiền tố Subnet Mask (/CIDR):</label>
+              <select id="subnet-prefix" class="tool-select">
+                <!-- Dropdown populated by JS -->
+              </select>
+            </div>
+          </div>
+
+          <div class="tool-chip-group">
+            <span class="tool-chip" data-prefix="24">/24 (254 Host - LAN)</span>
+            <span class="tool-chip" data-prefix="26">/26 (62 Host - Phòng ban)</span>
+            <span class="tool-chip" data-prefix="28">/28 (14 Host - Server)</span>
+            <span class="tool-chip" data-prefix="30">/30 (2 Host - P2P/VPN)</span>
+          </div>
+
+          <div id="subnet-result-box" style="margin-top: 4px;">
+            <table class="tool-result-table">
+              <tr class="tool-result-row">
+                <td class="tool-res-cell-label">Subnet Mask</td>
+                <td class="tool-res-cell-val"><span id="res-mask">255.255.255.0</span> <button type="button" class="copy-mini-btn" data-copy-id="res-mask" title="Copy"><i class="far fa-copy"></i></button></td>
+              </tr>
+              <tr class="tool-result-row">
+                <td class="tool-res-cell-label">Wildcard Mask</td>
+                <td class="tool-res-cell-val"><span id="res-wildcard">0.0.0.255</span> <button type="button" class="copy-mini-btn" data-copy-id="res-wildcard" title="Copy"><i class="far fa-copy"></i></button></td>
+              </tr>
+              <tr class="tool-result-row">
+                <td class="tool-res-cell-label">Network IP</td>
+                <td class="tool-res-cell-val"><span id="res-network" style="color:var(--neon-cyan);">192.168.1.0/24</span> <button type="button" class="copy-mini-btn" data-copy-id="res-network" title="Copy"><i class="far fa-copy"></i></button></td>
+              </tr>
+              <tr class="tool-result-row">
+                <td class="tool-res-cell-label">Broadcast IP</td>
+                <td class="tool-res-cell-val"><span id="res-broadcast" style="color:#f59e0b;">192.168.1.255</span> <button type="button" class="copy-mini-btn" data-copy-id="res-broadcast" title="Copy"><i class="far fa-copy"></i></button></td>
+              </tr>
+              <tr class="tool-result-row">
+                <td class="tool-res-cell-label">Dải Host Khả Dụng</td>
+                <td class="tool-res-cell-val"><span id="res-range">192.168.1.1 - 192.168.1.254</span> <button type="button" class="copy-mini-btn" data-copy-id="res-range" title="Copy"><i class="far fa-copy"></i></button></td>
+              </tr>
+              <tr class="tool-result-row">
+                <td class="tool-res-cell-label">Số Host Khả Dụng</td>
+                <td class="tool-res-cell-val"><strong id="res-hosts" style="color:#00ff9d;">254</strong></td>
+              </tr>
+              <tr class="tool-result-row">
+                <td class="tool-res-cell-label">Phân Lớp &amp; Loại Mạng</td>
+                <td class="tool-res-cell-val"><span id="res-type">Class C • Private (RFC 1918)</span></td>
+              </tr>
+            </table>
+          </div>
+
+          <button type="button" class="tool-btn-secondary" id="btn-copy-subnet-summary">
+            <i class="far fa-copy"></i> Sao Chép Bảng Tổng Hợp
+          </button>
+        </div>
+      </div>
+
+      <!-- TOOL 2: WI-FI QR CODE GENERATOR -->
+      <div class="tool-panel" id="tool-wifi">
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-qrcode" style="color:var(--neon-cyan);"></i> Tạo Mã QR Wi-Fi</h3>
+            <span class="tool-tag-badge">WPA2/WPA3 Fast Connect</span>
+          </div>
+
+          <div class="tool-form-grid">
+            <div class="tool-field">
+              <label class="tool-label" for="wifi-ssid">Tên Wi-Fi (SSID):</label>
+              <input type="text" id="wifi-ssid" class="tool-input" placeholder="Ví dụ: ThangIT_Guest_5G" autocomplete="off">
+            </div>
+            <div class="tool-field">
+              <label class="tool-label" for="wifi-pass">Mật Khẩu Wi-Fi:</label>
+              <input type="text" id="wifi-pass" class="tool-input" placeholder="Nhập mật khẩu (để trống nếu Open)" autocomplete="off">
+            </div>
+            <div class="tool-field">
+              <label class="tool-label" for="wifi-auth">Chuẩn Bảo Mật:</label>
+              <select id="wifi-auth" class="tool-select">
+                <option value="WPA" selected>WPA2 / WPA3 (Phổ biến nhất)</option>
+                <option value="WEP">WEP (Thiết bị cũ)</option>
+                <option value="nopass">Không mật khẩu (Mạng công cộng / Open)</option>
+              </select>
+            </div>
+            <label class="pwd-check-label" style="margin-top: 2px;">
+              <input type="checkbox" id="wifi-hidden">
+              <span>Mạng ẩn (Hidden SSID)</span>
+            </label>
+          </div>
+
+          <div class="wifi-qr-center">
+            <canvas id="wifi-qr-canvas"></canvas>
+          </div>
+
+          <div class="wifi-action-btns">
+            <button type="button" class="tool-btn-action" id="btn-download-wifi-qr">
+              <i class="fas fa-download"></i> Tải Ảnh PNG
+            </button>
+            <button type="button" class="tool-btn-secondary" id="btn-print-wifi-qr">
+              <i class="fas fa-print"></i> In Mã Dán Tường
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOL 3: TRA CỨU PORT & DỊCH VỤ MẠNG -->
+      <div class="tool-panel" id="tool-ports">
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-network-wired" style="color:var(--neon-cyan);"></i> Tra Cứu Port Mạng</h3>
+            <span class="tool-tag-badge" id="port-count-badge">40+ Ports Chuẩn</span>
+          </div>
+
+          <div class="port-search-box">
+            <i class="fas fa-search port-search-icon"></i>
+            <input type="text" id="port-search-input" class="port-search-input" placeholder="Tìm port (22, 443, 8291...) hoặc dịch vụ (ssh, winbox, vpn)..." autocomplete="off">
+          </div>
+
+          <div class="tool-chip-group" id="port-filter-chips">
+            <span class="tool-chip active" data-cat="all">Tất Cả</span>
+            <span class="tool-chip" data-cat="web">Web &amp; Proxy</span>
+            <span class="tool-chip" data-cat="remote">Remote &amp; Shell</span>
+            <span class="tool-chip" data-cat="sysadmin">SysAdmin &amp; Lab</span>
+            <span class="tool-chip" data-cat="vpn">VPN &amp; Tunnel</span>
+            <span class="tool-chip" data-cat="database">Database</span>
+            <span class="tool-chip" data-cat="network">Hạ Tầng Core</span>
+          </div>
+
+          <div class="port-list-scroll" id="port-items-container">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOL 4: MY IP & CLOUDFLARE DOH DNS -->
+      <div class="tool-panel" id="tool-ipdns">
+        <!-- Top: IP WAN -->
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-globe" style="color:var(--neon-cyan);"></i> IP WAN Của Bạn</h3>
+            <button type="button" class="copy-mini-btn" id="btn-refresh-ip" title="Kiểm tra lại"><i class="fas fa-sync-alt"></i></button>
+          </div>
+
+          <div class="pwd-display-card" style="padding: 12px 14px;">
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-dim); margin-bottom:2px;">Địa chỉ IP Public:</div>
+              <div id="wan-ip-val" class="pwd-text-output" style="font-size:1.15rem; color:var(--neon-cyan);">Đang kiểm tra...</div>
+            </div>
+            <button type="button" class="copy-mini-btn" id="btn-copy-wan-ip" title="Sao chép IP" style="font-size:1.1rem; padding:6px 10px;">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom: DNS DoH -->
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-server" style="color:var(--neon-cyan);"></i> Cloudflare DoH DNS</h3>
+            <span class="tool-tag-badge">DNS 1.1.1.1</span>
+          </div>
+
+          <div class="tool-form-grid">
+            <div class="tool-field">
+              <label class="tool-label" for="dns-domain">Tên miền cần tra cứu:</label>
+              <input type="text" id="dns-domain" class="tool-input" value="thangit.com" placeholder="google.com hoặc thangit.com" autocomplete="off">
+            </div>
+            <div class="tool-field">
+              <label class="tool-label" for="dns-type">Loại bản ghi:</label>
+              <select id="dns-type" class="tool-select">
+                <option value="A" selected>A (IPv4 Address)</option>
+                <option value="AAAA">AAAA (IPv6 Address)</option>
+                <option value="CNAME">CNAME (Canonical Name)</option>
+                <option value="MX">MX (Mail Exchange)</option>
+                <option value="TXT">TXT (Verification / SPF / DKIM)</option>
+                <option value="NS">NS (Name Server)</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="button" class="tool-btn-action" id="btn-query-dns">
+            <i class="fas fa-search"></i> Tra Cứu Bản Ghi DNS
+          </button>
+
+          <div id="dns-results-container" class="dns-results-box" style="display:none;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOL 5: PASSWORD GENERATOR -->
+      <div class="tool-panel" id="tool-password">
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-shield-alt" style="color:var(--neon-cyan);"></i> Sinh Mật Khẩu SysAdmin</h3>
+            <span class="tool-tag-badge">Web Crypto API</span>
+          </div>
+
+          <div class="pwd-display-card">
+            <span id="pwd-output" class="pwd-text-output">P@ssw0rd123!</span>
+            <button type="button" class="copy-mini-btn" id="btn-copy-pwd" title="Sao chép mật khẩu" style="font-size:1.1rem; padding:6px 10px;">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+
+          <div class="pwd-strength-wrap">
+            <div class="pwd-strength-txt">
+              <span style="color:var(--text-dim);">Độ mạnh:</span>
+              <span id="pwd-strength-label" style="color:var(--neon-cyan);">Rất mạnh</span>
+            </div>
+            <div class="pwd-strength-bar">
+              <div id="pwd-strength-fill" class="pwd-strength-fill"></div>
+            </div>
+          </div>
+
+          <div class="tool-field" style="margin-top:4px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:600; color:#cbd5e1;">
+              <span>Độ dài:</span>
+              <strong id="pwd-length-val" style="color:var(--neon-cyan); font-family:var(--font-mono);">16 ký tự</strong>
+            </div>
+            <input type="range" id="pwd-length-slider" min="8" max="64" value="16" style="width:100%; accent-color:var(--neon-cyan); cursor:pointer;">
+          </div>
+
+          <div class="pwd-checkbox-grid">
+            <label class="pwd-check-label">
+              <input type="checkbox" id="pwd-opt-upper" checked>
+              <span>Chữ hoa (A-Z)</span>
+            </label>
+            <label class="pwd-check-label">
+              <input type="checkbox" id="pwd-opt-lower" checked>
+              <span>Chữ thường (a-z)</span>
+            </label>
+            <label class="pwd-check-label">
+              <input type="checkbox" id="pwd-opt-nums" checked>
+              <span>Chữ số (0-9)</span>
+            </label>
+            <label class="pwd-check-label">
+              <input type="checkbox" id="pwd-opt-symbols" checked>
+              <span>Ký tự (!@#$...)</span>
+            </label>
+          </div>
+
+          <label class="pwd-check-label" style="margin-top:2px;">
+            <input type="checkbox" id="pwd-opt-noambig" checked>
+            <span>Loại bỏ ký tự dễ nhầm lẫn (l, 1, I, O, 0)</span>
+          </label>
+
+          <button type="button" class="tool-btn-action" id="btn-generate-pwd">
+            <i class="fas fa-redo"></i> Tạo Mật Khẩu Mới
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===================================================================
+         TAB 2: HỒ SƠ & NĂNG LỰC DOANH NGHIỆP
+         =================================================================== -->
+    <section class="home-tab-content" id="tab-cv" style="display:none;">
       <div class="cv-summary-card">
         <div class="cv-card-header">
           <span class="cv-role-badge">SENIOR NETWORK ADMINISTRATOR</span>
@@ -245,13 +528,13 @@
         <div class="cv-bio-block">
           <h3 class="cv-section-title">📌 Năng Lực Cốt Lõi</h3>
           <p class="cv-bio-text">
-            Chuyên gia thiết kế, triển khai và quản trị hạ tầng mạng doanh nghiệp quy mô lớn (Trung tâm Logistics 40.000m² với 500+ nodes). Thành thạo Cisco, Mikrotik RouterOS, phân đoạn VLAN bảo mật, OSPF, BGP, IPsec VPN và giải pháp Wi-Fi mật độ cao. Tiên phong áp dụng Python Automation & AI tối ưu hóa vận hành 24/7.
+            Chuyên gia thiết kế, triển khai và quản trị hạ tầng mạng doanh nghiệp quy mô lớn (Trung tâm Logistics 40.000m² với 500+ nodes). Thành thạo Cisco, Mikrotik RouterOS, phân đoạn VLAN bảo mật, OSPF, BGP, IPsec VPN và giải pháp Wi-Fi mật độ cao. Tiên phong áp dụng Python Automation &amp; AI tối ưu hóa vận hành 24/7.
           </p>
         </div>
 
         <!-- Skills Pills -->
         <div class="cv-skills-block">
-          <h3 class="cv-section-title">🛠️ Công Nghệ & Chứng Chỉ</h3>
+          <h3 class="cv-section-title">🛠️ Công Nghệ &amp; Chứng Chỉ</h3>
           <div class="cv-pills-wrap">
             <span class="cv-pill">Cisco CCNA / CCNP</span>
             <span class="cv-pill">Mikrotik RouterOS</span>
@@ -259,7 +542,7 @@
             <span class="cv-pill">VLAN / OSPF / BGP</span>
             <span class="cv-pill">Fortinet FortiGate</span>
             <span class="cv-pill">Linux Server (Ubuntu/Debian)</span>
-            <span class="cv-pill">Docker & Proxmox VE</span>
+            <span class="cv-pill">Docker &amp; Proxmox VE</span>
             <span class="cv-pill">Python Automation</span>
             <span class="cv-pill">Cloudflare Zero Trust</span>
           </div>
@@ -270,252 +553,10 @@
           <a href="https://thangnd.io.vn" target="_blank" rel="noopener me" class="btn-cv-primary">
             <span>🌐 Xem Portfolio Chính Thức (thangnd.io.vn) ↗</span>
           </a>
-          <a href="/it.html#cv" class="btn-cv-secondary">
-            <span>📄 Xem Bản CV Đầy Đủ Trên it.html ↗</span>
+          <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="btn-cv-secondary" style="color:var(--neon-cyan);">
+            <span>💬 Nhận Tư Vấn Hạ Tầng Mạng (Zalo) ↗</span>
           </a>
         </div>
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         TAB 2: IT TOOLS (8 Công Cụ — Lưới 2 Cột Đối Xứng)
-         =================================================================== -->
-    <section class="home-tab-content" id="tab-it" style="display:none;">
-      <div class="tools-grid-2col">
-
-        <!-- 1. Subnet CIDR -->
-        <a href="/it.html#subnet" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-subnet">🧮</div>
-            <span class="tool-grid-tag">IPv4 Math</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Subnet CIDR</h3>
-            <p class="tool-grid-desc">Tính dải IP, Network, Broadcast & Host khả dụng.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 2. DNS Lookup DoH -->
-        <a href="/it.html#dns" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-dns">🌐</div>
-            <span class="tool-grid-tag">DoH 1.1.1.1</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">DNS Lookup</h3>
-            <p class="tool-grid-desc">Tra cứu trực tiếp bản ghi A, AAAA, CNAME, MX, TXT.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 3. Wi-Fi QR -->
-        <a href="/it.html#wifi" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-wifi">📶</div>
-            <span class="tool-grid-tag">WPA2/WPA3</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Wi-Fi QR</h3>
-            <p class="tool-grid-desc">Tạo mã QR quét kết nối Wi-Fi 1-chạm & tải PNG.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 4. Tra Cứu Port -->
-        <a href="/it.html#ports" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-ports">🔌</div>
-            <span class="tool-grid-tag">39 Ports</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Tra Cứu Port</h3>
-            <p class="tool-grid-desc">Cổng TCP/UDP chuẩn Web, SSH, DB, VPN, Mail.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 5. Sinh Mật Khẩu -->
-        <a href="/it.html#password" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-password">🔐</div>
-            <span class="tool-grid-tag">Web Crypto</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Sinh Mật Khẩu</h3>
-            <p class="tool-grid-desc">Mật khẩu an toàn cao ngẫu nhiên cho SysAdmin.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 6. NOC Telemetry & Ping -->
-        <a href="/it.html#telemetry" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-telemetry">📡</div>
-            <span class="tool-grid-tag">Cloud Edge</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">NOC Ping</h3>
-            <p class="tool-grid-desc">Kiểm tra IP công khai & đo độ trễ tới máy chủ.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 7. Web Terminal CLI -->
-        <a href="/it.html#terminal" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-terminal">💻</div>
-            <span class="tool-grid-tag">Unix Shell</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Web Terminal</h3>
-            <p class="tool-grid-desc">Console ảo dòng lệnh tương tác trực tiếp.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 8. Dự Án Số Tiêu Biểu -->
-        <a href="/it.html#projects" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-projects">🚀</div>
-            <span class="tool-grid-tag">Portfolio</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Dự Án Số</h3>
-            <p class="tool-grid-desc">Hệ sinh thái web app, PWA và tự động hóa.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Khám Phá</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         TAB 3: TIỆN ÍCH BỎ TÚI (2 Cột Lưới — Click Mở Thẳng Tool Tương Ứng)
-         =================================================================== -->
-    <section class="home-tab-content" id="tab-tienich" style="display:none;">
-      <div class="tools-grid-2col">
-
-        <!-- 1. VietQR Bank Studio -->
-        <a href="/tienich.html#vietqr" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-vietqr">🏦</div>
-            <span class="tool-grid-tag">NAPAS 247</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">VietQR Studio</h3>
-            <p class="tool-grid-desc">Tạo mã QR nhận tiền 40+ ngân hàng kèm số tiền.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 2. Máy Tính Cyber -->
-        <a href="/tienich.html#calc" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-calc">🔢</div>
-            <span class="tool-grid-tag">Haptic</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Máy Tính</h3>
-            <p class="tool-grid-desc">Bàn tính bỏ túi giải quyết nhanh phép tính thường nhật.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 3. Lịch Vạn Niên -->
-        <a href="/tienich.html#lunar" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-lunar">📅</div>
-            <span class="tool-grid-tag">Âm Dương</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Lịch Vạn Niên</h3>
-            <p class="tool-grid-desc">Ngày hoàng đạo, can chi ngày tháng năm & tiết khí.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 4. Dự Báo Thời Tiết -->
-        <a href="/tienich.html#weather" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-weather">⛅</div>
-            <span class="tool-grid-tag">Open-Meteo</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Thời Tiết</h3>
-            <p class="tool-grid-desc">Nhiệt độ, độ ẩm & dự báo 7 ngày tại Việt Nam.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 5. Đổi Ngoại Tệ & Đơn Vị -->
-        <a href="/tienich.html#converter" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-converter">💱</div>
-            <span class="tool-grid-tag">Tỷ Giá & Byte</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Đổi Tỷ Giá</h3>
-            <p class="tool-grid-desc">Quy đổi USD, EUR, VND và bộ nhớ Byte/KB/MB/GB.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
-        <!-- 6. Giờ Quốc Tế -->
-        <a href="/tienich.html#world" class="tool-grid-card">
-          <div class="tool-grid-top">
-            <div class="tool-grid-icon icon-grad-world">🌍</div>
-            <span class="tool-grid-tag">8 Múi Giờ</span>
-          </div>
-          <div class="tool-grid-body">
-            <h3 class="tool-grid-name">Giờ Thế Giới</h3>
-            <p class="tool-grid-desc">Đồng hồ trực tiếp Hà Nội, Tokyo, London, New York.</p>
-          </div>
-          <div class="tool-grid-bottom">
-            <span>Mở Tool</span>
-            <span class="tool-grid-arrow">↗</span>
-          </div>
-        </a>
-
       </div>
     </section>
 
@@ -569,15 +610,16 @@
 
   <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
 
-  <script src="/js/core.js?v=20260907_ptr"></script>
+  <script src="/js/qrcode.min.js"></script>
+  <script src="/js/tools.js?v=20260907_v1"></script>
+  <script src="/js/core.js?v=20260907_v1"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Tab switching between IT Tools, Tiện Ích, Đồ Công Nghệ
+      // 1. Tab switching between Công Cụ Mạng, Hồ Sơ, Đồ Công Nghệ
       const tabBtns = document.querySelectorAll('#home-tabs-nav .tab-pill-btn');
       const tabContents = {
-        'tab-it': document.getElementById('tab-it'),
+        'tab-tools': document.getElementById('tab-tools'),
         'tab-cv': document.getElementById('tab-cv'),
-        'tab-tienich': document.getElementById('tab-tienich'),
         'tab-aff': document.getElementById('tab-aff')
       };
 
