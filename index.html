@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Thắng IT">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thangit.com">
-  <meta property="og:title" content="Nguyễn Đức Thắng (Thắng IT) — Senior Network Administrator & Vibe Coder">
+  <meta property="og:title" content="Nguyễn Đức Thắng (Thắng iT) — Senior Network Administrator & Vibe Coder">
   <meta property="og:description" content="10+ năm kinh nghiệm quản trị hạ tầng mạng logistics 40.000m², tự động hóa bằng AI & Python.">
   <meta property="og:image" content="https://thangit.com/assets/images/avata.jpg">
 
@@ -212,7 +212,10 @@
       
       <!-- Sub-switcher for 5 tools -->
       <div class="tool-switcher-wrap" id="tools-subnav">
-        <button type="button" class="tool-switcher-btn active" data-tool="tool-subnet" title="Tính Subnet & CIDR">
+        <button type="button" class="tool-switcher-btn active" data-tool="tool-ipdns" title="Kiểm tra IP, Đo tốc độ & Cloudflare DNS">
+          <span>🌐 IP/DNS</span>
+        </button>
+        <button type="button" class="tool-switcher-btn" data-tool="tool-subnet" title="Tính Subnet & CIDR">
           <span>🧮 Subnet</span>
         </button>
         <button type="button" class="tool-switcher-btn" data-tool="tool-wifi" title="Tạo mã QR Wi-Fi">
@@ -221,16 +224,117 @@
         <button type="button" class="tool-switcher-btn" data-tool="tool-ports" title="Tra cứu Port mạng">
           <span>🔌 Port</span>
         </button>
-        <button type="button" class="tool-switcher-btn" data-tool="tool-ipdns" title="Kiểm tra IP & Cloudflare DoH DNS">
-          <span>🌐 IP/DNS</span>
-        </button>
         <button type="button" class="tool-switcher-btn" data-tool="tool-password" title="Sinh mật khẩu an toàn">
           <span>🔐 Mật khẩu</span>
         </button>
       </div>
 
-      <!-- TOOL 1: SUBNET & CIDR CALCULATOR -->
-      <div class="tool-panel active" id="tool-subnet">
+      <!-- TOOL 1: MY IP, SPEEDTEST & CLOUDFLARE DOH DNS -->
+      <div class="tool-panel active" id="tool-ipdns">
+        <!-- Top: IP WAN -->
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-globe" style="color:var(--neon-cyan);"></i> IP WAN Của Bạn</h3>
+            <button type="button" class="copy-mini-btn" id="btn-refresh-ip" title="Kiểm tra lại"><i class="fas fa-sync-alt"></i></button>
+          </div>
+
+          <div class="pwd-display-card" style="padding: 12px 14px;">
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-dim); margin-bottom:2px;">Địa chỉ IP Public:</div>
+              <div id="wan-ip-val" class="pwd-text-output" style="font-size:1.15rem; color:var(--neon-cyan);">Đang kiểm tra...</div>
+            </div>
+            <button type="button" class="copy-mini-btn" id="btn-copy-wan-ip" title="Sao chép IP" style="font-size:1.1rem; padding:6px 10px;">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Middle: SPEEDTEST PRO (Cloudflare Engine) -->
+        <div class="tool-card speedtest-pro-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-tachometer-alt" style="color:var(--neon-cyan);"></i> Đo Tốc Độ Mạng (Speedtest)</h3>
+            <span class="tool-tag-badge">Cloudflare Edge</span>
+          </div>
+
+          <div class="speed-gauge-wrap">
+            <div class="speed-gauge-circle" id="st-gauge-circle">
+              <div class="speed-gauge-inner">
+                <span class="speed-val-number" id="st-live-speed">0.0</span>
+                <span class="speed-val-unit">Mbps</span>
+                <div class="speed-status-text" id="st-status-text">Sẵn sàng đo tốc độ</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="speed-metrics-grid">
+            <div class="speed-metric-box">
+              <div class="st-m-label"><i class="fas fa-satellite-dish"></i> Độ trễ (Ping)</div>
+              <div class="st-m-val" id="st-ping">-- <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">ms</span></div>
+              <div class="st-m-sub" id="st-jitter-text">Jitter: -- ms</div>
+            </div>
+
+            <div class="speed-metric-box">
+              <div class="st-m-label"><i class="fas fa-download"></i> Tải về (Download)</div>
+              <div class="st-m-val highlight-down" id="st-down">-- <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span></div>
+              <div class="st-m-sub">Tải luồng Cloudflare</div>
+            </div>
+
+            <div class="speed-metric-box">
+              <div class="st-m-label"><i class="fas fa-upload"></i> Tải lên (Upload)</div>
+              <div class="st-m-val highlight-up" id="st-up">-- <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span></div>
+              <div class="st-m-sub">Đẩy dữ liệu Cloudflare</div>
+            </div>
+          </div>
+
+          <div id="st-rating-banner" class="speed-rating-banner" style="display:none;"></div>
+
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <button type="button" class="tool-btn-action" id="btn-start-speedtest" style="flex:1;">
+              <i class="fas fa-play"></i> Bắt Đầu Đo Tốc Độ
+            </button>
+            <button type="button" class="tool-btn-secondary" id="btn-copy-speedtest" style="display:none;" title="Sao chép kết quả">
+              <i class="far fa-copy"></i> Chia sẻ
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom: DNS DoH -->
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-server" style="color:var(--neon-cyan);"></i> Cloudflare DoH DNS</h3>
+            <span class="tool-tag-badge">DNS 1.1.1.1</span>
+          </div>
+
+          <div class="tool-form-grid">
+            <div class="tool-field">
+              <label class="tool-label" for="dns-domain">Tên miền cần tra cứu:</label>
+              <input type="text" id="dns-domain" class="tool-input" value="thangit.com" placeholder="google.com hoặc thangit.com" autocomplete="off">
+            </div>
+            <div class="tool-field">
+              <label class="tool-label" for="dns-type">Loại bản ghi:</label>
+              <select id="dns-type" class="tool-select">
+                <option value="A" selected>A (IPv4 Address)</option>
+                <option value="AAAA">AAAA (IPv6 Address)</option>
+                <option value="CNAME">CNAME (Canonical Name)</option>
+                <option value="MX">MX (Mail Exchange)</option>
+                <option value="TXT">TXT (Verification / SPF / DKIM)</option>
+                <option value="NS">NS (Name Server)</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="button" class="tool-btn-action" id="btn-query-dns">
+            <i class="fas fa-search"></i> Tra Cứu Bản Ghi DNS
+          </button>
+
+          <div id="dns-results-container" class="dns-results-box" style="display:none;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOL 2: SUBNET & CIDR CALCULATOR -->
+      <div class="tool-panel" id="tool-subnet">
         <div class="tool-card">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-calculator" style="color:var(--neon-cyan);"></i> Tính Subnet &amp; CIDR</h3>
@@ -367,61 +471,6 @@
 
           <div class="port-list-scroll" id="port-items-container">
             <!-- Rendered dynamically by JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- TOOL 4: MY IP & CLOUDFLARE DOH DNS -->
-      <div class="tool-panel" id="tool-ipdns">
-        <!-- Top: IP WAN -->
-        <div class="tool-card">
-          <div class="tool-header-row">
-            <h3 class="tool-title"><i class="fas fa-globe" style="color:var(--neon-cyan);"></i> IP WAN Của Bạn</h3>
-            <button type="button" class="copy-mini-btn" id="btn-refresh-ip" title="Kiểm tra lại"><i class="fas fa-sync-alt"></i></button>
-          </div>
-
-          <div class="pwd-display-card" style="padding: 12px 14px;">
-            <div>
-              <div style="font-size:0.75rem; color:var(--text-dim); margin-bottom:2px;">Địa chỉ IP Public:</div>
-              <div id="wan-ip-val" class="pwd-text-output" style="font-size:1.15rem; color:var(--neon-cyan);">Đang kiểm tra...</div>
-            </div>
-            <button type="button" class="copy-mini-btn" id="btn-copy-wan-ip" title="Sao chép IP" style="font-size:1.1rem; padding:6px 10px;">
-              <i class="far fa-copy"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Bottom: DNS DoH -->
-        <div class="tool-card">
-          <div class="tool-header-row">
-            <h3 class="tool-title"><i class="fas fa-server" style="color:var(--neon-cyan);"></i> Cloudflare DoH DNS</h3>
-            <span class="tool-tag-badge">DNS 1.1.1.1</span>
-          </div>
-
-          <div class="tool-form-grid">
-            <div class="tool-field">
-              <label class="tool-label" for="dns-domain">Tên miền cần tra cứu:</label>
-              <input type="text" id="dns-domain" class="tool-input" value="thangit.com" placeholder="google.com hoặc thangit.com" autocomplete="off">
-            </div>
-            <div class="tool-field">
-              <label class="tool-label" for="dns-type">Loại bản ghi:</label>
-              <select id="dns-type" class="tool-select">
-                <option value="A" selected>A (IPv4 Address)</option>
-                <option value="AAAA">AAAA (IPv6 Address)</option>
-                <option value="CNAME">CNAME (Canonical Name)</option>
-                <option value="MX">MX (Mail Exchange)</option>
-                <option value="TXT">TXT (Verification / SPF / DKIM)</option>
-                <option value="NS">NS (Name Server)</option>
-              </select>
-            </div>
-          </div>
-
-          <button type="button" class="tool-btn-action" id="btn-query-dns">
-            <i class="fas fa-search"></i> Tra Cứu Bản Ghi DNS
-          </button>
-
-          <div id="dns-results-container" class="dns-results-box" style="display:none;">
-            <!-- Rendered by JS -->
           </div>
         </div>
       </div>

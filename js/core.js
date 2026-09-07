@@ -653,6 +653,9 @@ async function loadWanIp() {
 }
 
 function initIpDnsUI() {
+  // Load WAN IP on initial load (since IP/DNS is the default active tool tab)
+  loadWanIp();
+
   // WAN IP refresh button
   const btnRefresh = document.getElementById('btn-refresh-ip');
   if (btnRefresh) {
@@ -663,6 +666,97 @@ function initIpDnsUI() {
         setTimeout(() => {
           if (icon) icon.classList.remove('fa-spin');
         }, 500);
+      });
+    });
+  }
+
+  // Speedtest Pro Engine integration
+  const btnStartSpeed = document.getElementById('btn-start-speedtest');
+  const btnCopySpeed = document.getElementById('btn-copy-speedtest');
+  const stLiveSpeed = document.getElementById('st-live-speed');
+  const stStatusText = document.getElementById('st-status-text');
+  const stGaugeCircle = document.getElementById('st-gauge-circle');
+  const stPing = document.getElementById('st-ping');
+  const stJitterText = document.getElementById('st-jitter-text');
+  const stDown = document.getElementById('st-down');
+  const stUp = document.getElementById('st-up');
+  const stRatingBanner = document.getElementById('st-rating-banner');
+
+  let lastSpeedResult = null;
+
+  if (btnStartSpeed) {
+    btnStartSpeed.addEventListener('click', async () => {
+      if (btnStartSpeed.disabled) return;
+      btnStartSpeed.disabled = true;
+      btnStartSpeed.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang Đo Tốc Độ...';
+      if (btnCopySpeed) btnCopySpeed.style.display = 'none';
+      if (stRatingBanner) stRatingBanner.style.display = 'none';
+      if (stGaugeCircle) stGaugeCircle.classList.add('testing');
+
+      // Reset values
+      if (stLiveSpeed) stLiveSpeed.textContent = '0.0';
+      if (stStatusText) stStatusText.textContent = 'Bắt đầu kiểm tra...';
+      if (stPing) stPing.innerHTML = '-- <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">ms</span>';
+      if (stJitterText) stJitterText.textContent = 'Jitter: -- ms';
+      if (stDown) stDown.innerHTML = '-- <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>';
+      if (stUp) stUp.innerHTML = '-- <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>';
+
+      try {
+        if (typeof runNetworkSpeedTest === 'function') {
+          await runNetworkSpeedTest((data) => {
+            if (data.phase === 'ping') {
+              if (stStatusText) stStatusText.textContent = `Kiểm tra Ping (${data.currentSample}/${data.totalSamples})...`;
+            } else if (data.phase === 'ping_done') {
+              if (stPing) stPing.innerHTML = `${data.ping} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">ms</span>`;
+              if (stJitterText) stJitterText.textContent = `Jitter: ${data.jitter} ms`;
+            } else if (data.phase === 'download') {
+              if (stStatusText) stStatusText.textContent = `Tải về: ${data.progress}%`;
+              if (stLiveSpeed) stLiveSpeed.textContent = data.liveMbps;
+              if (stDown) stDown.innerHTML = `${data.liveMbps} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>`;
+            } else if (data.phase === 'download_done') {
+              if (stDown) stDown.innerHTML = `${data.download} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>`;
+            } else if (data.phase === 'upload') {
+              if (stStatusText) stStatusText.textContent = `Tải lên: ${data.progress}%`;
+              if (stLiveSpeed) stLiveSpeed.textContent = data.liveMbps;
+              if (stUp) stUp.innerHTML = `${data.liveMbps} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>`;
+            } else if (data.phase === 'complete') {
+              lastSpeedResult = data.result;
+              if (stLiveSpeed) stLiveSpeed.textContent = data.result.download;
+              if (stStatusText) stStatusText.textContent = 'Hoàn tất đo tốc độ';
+              if (stGaugeCircle) stGaugeCircle.classList.remove('testing');
+              if (stRatingBanner) {
+                stRatingBanner.style.display = 'block';
+                stRatingBanner.textContent = `⚡ ${data.result.rating}`;
+                stRatingBanner.style.borderColor = data.result.ratingColor;
+                stRatingBanner.style.color = data.result.ratingColor;
+              }
+              if (btnCopySpeed) btnCopySpeed.style.display = 'inline-flex';
+            }
+          });
+        }
+      } catch (err) {
+        if (stStatusText) stStatusText.textContent = 'Đo tốc độ bị gián đoạn';
+        if (stGaugeCircle) stGaugeCircle.classList.remove('testing');
+      } finally {
+        btnStartSpeed.disabled = false;
+        btnStartSpeed.innerHTML = '<i class="fas fa-redo"></i> Đo Lại Tốc Độ';
+      }
+    });
+  }
+
+  if (btnCopySpeed) {
+    btnCopySpeed.addEventListener('click', () => {
+      if (!lastSpeedResult) return;
+      const text = `📊 KẾT QUẢ ĐO TỐC ĐỘ MẠNG — Thắng iT (thangit.com)\n` +
+        `• Ping: ${lastSpeedResult.ping} ms (Jitter: ${lastSpeedResult.jitter} ms)\n` +
+        `• Download: ${lastSpeedResult.download} Mbps\n` +
+        `• Upload: ${lastSpeedResult.upload} Mbps\n` +
+        `• Đánh giá: ${lastSpeedResult.rating}\n` +
+        `• Máy chủ: Cloudflare Edge Network`;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('📋 Đã sao chép kết quả đo tốc độ!');
+      }).catch(() => {
+        showToast('📋 Đã sao chép!');
       });
     });
   }
