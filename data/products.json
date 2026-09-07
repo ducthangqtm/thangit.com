@@ -21,7 +21,7 @@
     {
       "id": "item-5",
       "title": "Hub Type-C 8 in 1 4K HDMI + 100W PD + Gigabit LAN",
-      "category": "accessories",
+      "category": "workspace",
       "badge": "SysAdmin Cần",
       "price": "450.000đ",
       "image": "https://images.unsplash.com/photo-1625842268584-8f3296236761?w=400&auto=format&fit=crop&q=80",
@@ -30,7 +30,7 @@
     {
       "id": "item-6",
       "title": "Cáp Mạng Cat7 Ugreen Bấm Sẵn Đúc Kim Loại 10Gbps",
-      "category": "accessories",
+      "category": "network",
       "badge": "Chuẩn 10G",
       "price": "85.000đ",
       "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80",
