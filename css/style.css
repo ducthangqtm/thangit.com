@@ -1196,3 +1196,80 @@ body {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ==========================================================================
+   ECOSYSTEM UNIFIED FOOTER (3 TẦNG ĐỒNG BỘ)
+   ========================================================================== */
+.ecosystem-footer {
+  margin-top: 28px;
+  padding: 20px 0 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.footer-crosslinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--neon-cyan);
+  transform: translateY(-1px);
+}
+
+.footer-link.main-link:hover { color: var(--neon-cyan); }
+.footer-link.jump-link:hover { color: var(--neon-amber); }
+.footer-link.gh-link:hover { color: #fff; }
+.footer-link.admin-link:hover { color: var(--neon-emerald); }
+
+.footer-sep {
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 0.7rem;
+}
+
+.footer-copyright-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-body);
+  flex-wrap: wrap;
+}
+
+.footer-author-link {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+.footer-author-link:hover {
+  text-decoration: underline;
+}
+
+.footer-tagline {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.02em;
+}

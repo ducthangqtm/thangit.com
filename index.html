@@ -515,7 +515,7 @@
     <section class="home-tab-content" id="tab-aff" style="display:none; flex-direction:column; gap:14px;">
       <div style="display:flex; justify-content:space-between; align-items:center; padding:0 4px;">
         <span style="font-size:0.8rem; color:var(--text-dim);">Đồ công nghệ chọn lọc dành cho SysAdmin & Dân IT</span>
-        <a href="/admin.html" style="font-size:0.75rem; color:var(--neon-cyan); text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+        <a href="/admin/" style="font-size:0.75rem; color:var(--neon-cyan); text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
           <i class="fas fa-cog"></i> Quản lý link
         </a>
       </div>
@@ -525,15 +525,37 @@
       </div>
     </section>
 
-    <!-- Footer Section with Entity SEO Sync Links -->
-    <footer style="margin-top: 1.5rem; text-align: center; padding: 1.5rem 0 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; color: var(--text-dim); display: flex; flex-direction: column; gap: 8px;">
-      <div>
-        © 2026 <strong>Thắng IT</strong> (Nguyễn Đức Thắng) • Built with Pride in Vietnam
+    <!-- ===================================================================
+         FOOTER: CHUẨN HỆ SINH THÁI (3 TẦNG ĐỒNG BỘ 3 TRANG)
+         =================================================================== -->
+    <footer class="ecosystem-footer">
+      <!-- Tầng 1: Liên kết chéo hệ sinh thái -->
+      <nav class="footer-crosslinks" aria-label="Liên kết hệ sinh thái">
+        <a href="https://thangnd.io.vn" target="_blank" rel="noopener me" class="footer-link main-link">
+          <i class="fas fa-globe"></i> thangnd.io.vn
+        </a>
+        <span class="footer-sep">•</span>
+        <a href="https://thangnhayday.com" target="_blank" rel="noopener me" class="footer-link jump-link">
+          <i class="fas fa-fire"></i> thangnhayday.com
+        </a>
+        <span class="footer-sep">•</span>
+        <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener me" class="footer-link gh-link">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <span class="footer-sep">•</span>
+        <a href="/admin/" class="footer-link admin-link" title="Đăng nhập trang quản trị">
+          <i class="fas fa-lock"></i> Admin
+        </a>
+      </nav>
+
+      <!-- Tầng 2: Bản quyền & Thực thể tác giả (Entity SEO) -->
+      <div class="footer-copyright-row">
+        <span>&copy; 2026 <strong>Thắng IT</strong> • Sáng lập bởi <a href="https://thangnd.io.vn" target="_blank" rel="noopener me" class="footer-author-link">Nguyễn Đức Thắng (Thắng ND) ↗</a></span>
       </div>
-      <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
-        <a href="https://thangnd.io.vn" target="_blank" rel="noopener me" style="color: var(--neon-cyan); text-decoration: none;">thangnd.io.vn</a>
-        <a href="https://thangnhayday.com" target="_blank" rel="noopener me" style="color: var(--neon-cyan); text-decoration: none;">thangnhayday.com</a>
-        <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener me" style="color: var(--text-dim); text-decoration: none;">GitHub</a>
+
+      <!-- Tầng 3: Slogan / Định danh hệ sinh thái -->
+      <div class="footer-tagline">
+        Hạ Tầng Mạng &amp; Hệ Thống • Vibe Coding • Tiện Ích IT
       </div>
     </footer>
 
@@ -612,9 +634,16 @@
         if (!grid) return;
 
         try {
-          const res = await fetch('/data/products.json?v=' + Date.now());
-          if (!res.ok) throw new Error();
-          const data = await res.json();
+          let data = null;
+          const localCached = localStorage.getItem('thangit_local_data');
+          if (localCached) {
+            try { data = JSON.parse(localCached); } catch {}
+          }
+          if (!data || !data.items) {
+            const res = await fetch('/data/products.json?v=' + Date.now());
+            if (!res.ok) throw new Error();
+            data = await res.json();
+          }
           const items = data.items || [];
 
           if (!items.length) {
