@@ -666,21 +666,13 @@
         <i class="fa-solid fa-shield-halved"></i>
       </div>
       <h2 class="auth-title">Đăng Nhập Quản Trị</h2>
-      <p class="auth-desc">Nhập <strong>Mã Token GitHub</strong> của bạn để có quyền thêm/sửa đồ công nghệ &amp; link affiliate trực tiếp.</p>
+      <p class="auth-desc">Khu vực dành riêng cho quản trị viên. Vui lòng nhập mã khóa bảo mật để tiếp tục.</p>
       
-      <input type="password" id="gh-token" class="input-field" placeholder="Dán mã Token (ghp_... hoặc github_pat_...)" autocomplete="off">
+      <input type="password" id="gh-token" class="input-field" placeholder="Nhập mã khóa quản trị (Access Key)..." autocomplete="off">
       <button type="button" class="btn-primary" onclick="loginWithToken()">
         <i class="fa-solid fa-key"></i>
         <span>Đăng Nhập Quản Trị</span>
       </button>
-
-      <div class="token-guide">
-        💡 <strong>Cách lấy mã Token (chỉ làm 1 lần):</strong><br>
-        1. Vào <a href="https://github.com/settings/tokens/new?scopes=repo&description=ThangITAdmin" target="_blank">Tạo GitHub Token Nhanh</a><br>
-        2. Chọn thời hạn: <strong>No expiration</strong> (vĩnh viễn)<br>
-        3. Tích chọn quyền <strong>repo</strong> ➔ Bấm <strong>Generate token</strong><br>
-        4. Copy mã token và dán vào ô trên là xong!
-      </div>
     </div>
 
     <!-- 2. DASHBOARD SCREEN -->
