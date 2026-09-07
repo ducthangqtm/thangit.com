@@ -273,9 +273,6 @@ function initNetworkTools() {
 
   // 5. My IP & Cloudflare DoH DNS
   initIpDnsUI();
-
-  // 6. SysAdmin Password Generator
-  initPasswordUI();
 }
 
 /* 1. Tool Sub-Switcher */
@@ -309,6 +306,11 @@ function initToolSwitcher() {
         const ipVal = document.getElementById('wan-ip-val');
         if (ipVal && (ipVal.textContent.includes('Đang kiểm tra') || ipVal.textContent === '...')) {
           loadWanIp();
+        }
+      } else if (toolId === 'tool-ports') {
+        const portContainer = document.getElementById('port-items-container');
+        if (portContainer && (!portContainer.children || portContainer.children.length === 0)) {
+          initPortUI();
         }
       }
     });
@@ -563,10 +565,12 @@ function initPortUI() {
   let searchVal = '';
 
   function renderPorts() {
-    if (!window.NETWORK_PORTS_DATABASE) return;
+    const db = (typeof window !== 'undefined' && window.NETWORK_PORTS_DATABASE) 
+      || (typeof NETWORK_PORTS_DATABASE !== 'undefined' ? NETWORK_PORTS_DATABASE : []);
+    if (!db || db.length === 0) return;
 
     const q = searchVal.toLowerCase().trim();
-    const list = window.NETWORK_PORTS_DATABASE.filter(item => {
+    const list = db.filter(item => {
       const matchCat = (activeCat === 'all') || (item.cat === activeCat);
       if (!matchCat) return false;
       if (!q) return true;
@@ -579,7 +583,7 @@ function initPortUI() {
     });
 
     if (countBadge) {
-      countBadge.textContent = `${list.length} / ${window.NETWORK_PORTS_DATABASE.length} Ports`;
+      countBadge.textContent = `${list.length} / ${db.length} Ports`;
     }
 
     if (list.length === 0) {
@@ -847,69 +851,3 @@ function initIpDnsUI() {
   }
 }
 
-/* 6. SysAdmin Password Generator UI */
-function initPasswordUI() {
-  const slider = document.getElementById('pwd-length-slider');
-  const lengthVal = document.getElementById('pwd-length-val');
-  const output = document.getElementById('pwd-output');
-  const strengthLbl = document.getElementById('pwd-strength-label');
-  const strengthFill = document.getElementById('pwd-strength-fill');
-  const btnGen = document.getElementById('btn-generate-pwd');
-  const btnCopy = document.getElementById('btn-copy-pwd');
-
-  function update() {
-    if (!slider || !output || typeof generateSecurePassword !== 'function') return;
-    const len = parseInt(slider.value, 10) || 16;
-    if (lengthVal) lengthVal.textContent = `${len} ký tự`;
-
-    const upper = document.getElementById('pwd-opt-upper')?.checked ?? true;
-    const lower = document.getElementById('pwd-opt-lower')?.checked ?? true;
-    const nums = document.getElementById('pwd-opt-nums')?.checked ?? true;
-    const symbols = document.getElementById('pwd-opt-symbols')?.checked ?? true;
-    const noAmbig = document.getElementById('pwd-opt-noambig')?.checked ?? true;
-
-    const res = generateSecurePassword(len, upper, lower, nums, symbols, noAmbig);
-    output.textContent = res.password;
-
-    if (strengthLbl) {
-      strengthLbl.textContent = `${res.strength} (${res.entropy} bits)`;
-      strengthLbl.style.color = res.strengthColor;
-    }
-    if (strengthFill) {
-      strengthFill.style.width = `${res.strengthPercent}%`;
-      strengthFill.style.background = res.strengthColor;
-    }
-  }
-
-  if (slider) slider.addEventListener('input', update);
-  ['pwd-opt-upper', 'pwd-opt-lower', 'pwd-opt-nums', 'pwd-opt-symbols', 'pwd-opt-noambig'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('change', update);
-  });
-
-  if (btnGen) {
-    btnGen.addEventListener('click', () => {
-      const icon = btnGen.querySelector('i');
-      if (icon) icon.classList.add('fa-spin');
-      update();
-      setTimeout(() => {
-        if (icon) icon.classList.remove('fa-spin');
-      }, 300);
-    });
-  }
-
-  if (btnCopy) {
-    btnCopy.addEventListener('click', () => {
-      if (!output) return;
-      const pwd = output.textContent.trim();
-      navigator.clipboard.writeText(pwd).then(() => {
-        showToast('🔑 Đã sao chép mật khẩu an toàn!');
-      }).catch(() => {
-        showToast('📋 Đã sao chép!');
-      });
-    });
-  }
-
-  // Generate default on page ready
-  update();
-}

@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20260907_ptr">
+  <link rel="stylesheet" href="/css/style.css?v=20260907_v2">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -195,7 +195,7 @@
     <!-- SECTION: 3 PRIMARY TABS (Công Cụ Mạng, Năng Lực & Dịch Vụ, Đồ Công Nghệ) -->
     <nav class="category-tabs-wrap" id="home-tabs-nav" aria-label="Phân loại danh mục">
       <button type="button" class="tab-pill-btn active" data-target="tab-tools">
-        <span>⚡ Công Cụ Mạng (5-in-1)</span>
+        <span>⚡ Công Cụ Mạng (4-in-1)</span>
       </button>
       <button type="button" class="tab-pill-btn" data-target="tab-cv">
         <span>💼 Hồ Sơ &amp; Dịch Vụ</span>
@@ -206,11 +206,11 @@
     </nav>
 
     <!-- ===================================================================
-         TAB 1: CÔNG CỤ MẠNG CHUYÊN SÂU (5-in-1 Network Pro Tools)
+         TAB 1: CÔNG CỤ MẠNG CHUYÊN SÂU (4-in-1 Network Pro Tools)
          =================================================================== -->
     <section class="home-tab-content active" id="tab-tools">
       
-      <!-- Sub-switcher for 5 tools -->
+      <!-- Sub-switcher for 4 tools -->
       <div class="tool-switcher-wrap" id="tools-subnav">
         <button type="button" class="tool-switcher-btn active" data-tool="tool-ipdns" title="Kiểm tra IP, Đo tốc độ & Cloudflare DNS">
           <span>🌐 IP/DNS</span>
@@ -223,9 +223,6 @@
         </button>
         <button type="button" class="tool-switcher-btn" data-tool="tool-ports" title="Tra cứu Port mạng">
           <span>🔌 Port</span>
-        </button>
-        <button type="button" class="tool-switcher-btn" data-tool="tool-password" title="Sinh mật khẩu an toàn">
-          <span>🔐 Mật khẩu</span>
         </button>
       </div>
 
@@ -475,68 +472,6 @@
         </div>
       </div>
 
-      <!-- TOOL 5: PASSWORD GENERATOR -->
-      <div class="tool-panel" id="tool-password">
-        <div class="tool-card">
-          <div class="tool-header-row">
-            <h3 class="tool-title"><i class="fas fa-shield-alt" style="color:var(--neon-cyan);"></i> Sinh Mật Khẩu SysAdmin</h3>
-            <span class="tool-tag-badge">Web Crypto API</span>
-          </div>
-
-          <div class="pwd-display-card">
-            <span id="pwd-output" class="pwd-text-output">P@ssw0rd123!</span>
-            <button type="button" class="copy-mini-btn" id="btn-copy-pwd" title="Sao chép mật khẩu" style="font-size:1.1rem; padding:6px 10px;">
-              <i class="far fa-copy"></i>
-            </button>
-          </div>
-
-          <div class="pwd-strength-wrap">
-            <div class="pwd-strength-txt">
-              <span style="color:var(--text-dim);">Độ mạnh:</span>
-              <span id="pwd-strength-label" style="color:var(--neon-cyan);">Rất mạnh</span>
-            </div>
-            <div class="pwd-strength-bar">
-              <div id="pwd-strength-fill" class="pwd-strength-fill"></div>
-            </div>
-          </div>
-
-          <div class="tool-field" style="margin-top:4px;">
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:600; color:#cbd5e1;">
-              <span>Độ dài:</span>
-              <strong id="pwd-length-val" style="color:var(--neon-cyan); font-family:var(--font-mono);">16 ký tự</strong>
-            </div>
-            <input type="range" id="pwd-length-slider" min="8" max="64" value="16" style="width:100%; accent-color:var(--neon-cyan); cursor:pointer;">
-          </div>
-
-          <div class="pwd-checkbox-grid">
-            <label class="pwd-check-label">
-              <input type="checkbox" id="pwd-opt-upper" checked>
-              <span>Chữ hoa (A-Z)</span>
-            </label>
-            <label class="pwd-check-label">
-              <input type="checkbox" id="pwd-opt-lower" checked>
-              <span>Chữ thường (a-z)</span>
-            </label>
-            <label class="pwd-check-label">
-              <input type="checkbox" id="pwd-opt-nums" checked>
-              <span>Chữ số (0-9)</span>
-            </label>
-            <label class="pwd-check-label">
-              <input type="checkbox" id="pwd-opt-symbols" checked>
-              <span>Ký tự (!@#$...)</span>
-            </label>
-          </div>
-
-          <label class="pwd-check-label" style="margin-top:2px;">
-            <input type="checkbox" id="pwd-opt-noambig" checked>
-            <span>Loại bỏ ký tự dễ nhầm lẫn (l, 1, I, O, 0)</span>
-          </label>
-
-          <button type="button" class="tool-btn-action" id="btn-generate-pwd">
-            <i class="fas fa-redo"></i> Tạo Mật Khẩu Mới
-          </button>
-        </div>
-      </div>
 
     </section>
 
@@ -657,8 +592,8 @@
   <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
 
   <script src="/js/qrcode.min.js"></script>
-  <script src="/js/tools.js?v=20260907_v1"></script>
-  <script src="/js/core.js?v=20260907_v1"></script>
+  <script src="/js/tools.js?v=20260907_v2"></script>
+  <script src="/js/core.js?v=20260907_v2"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Tab switching between Công Cụ Mạng, Hồ Sơ, Đồ Công Nghệ

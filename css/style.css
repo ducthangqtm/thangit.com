@@ -1395,9 +1395,9 @@ body {
    ========================================================================== */
 .tool-switcher-wrap {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  padding: 2px 0 8px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  padding: 2px 0 10px;
   width: 100%;
 }
 .tool-switcher-wrap::-webkit-scrollbar { display: none; }
@@ -1406,13 +1406,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  padding: 8px 2px;
+  gap: 4px;
+  padding: 9px 4px;
   background: rgba(13, 18, 29, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 9px;
   color: var(--text-dim);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;

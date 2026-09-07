@@ -174,6 +174,10 @@ const NETWORK_PORTS_DATABASE = [
   { port: 10051, proto: 'TCP', name: 'Zabbix Server', cat: 'sysadmin', desc: 'Server tập trung Zabbix' }
 ];
 
+if (typeof window !== 'undefined') {
+  window.NETWORK_PORTS_DATABASE = NETWORK_PORTS_DATABASE;
+}
+
 /* ==========================================================================
    3. PASSWORD GENERATOR (Web Crypto API)
    ========================================================================== */
