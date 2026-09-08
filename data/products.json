@@ -5,36 +5,19 @@
       "name": "⚡ Tất Cả"
     },
     {
-      "id": "network",
-      "name": "📶 Mạng & Wi-Fi"
-    },
-    {
-      "id": "workspace",
-      "name": "🖥️ Góc Setup"
-    },
-    {
-      "id": "accessories",
-      "name": "🔌 Phụ Kiện IT"
+      "id": "phukien",
+      "name": "Phụ Kiện"
     }
   ],
   "items": [
     {
-      "id": "item-5",
-      "title": "Hub Type-C 8 in 1 4K HDMI + 100W PD + Gigabit LAN",
-      "category": "workspace",
-      "badge": "SysAdmin Cần",
-      "price": "450.000đ",
-      "image": "https://images.unsplash.com/photo-1625842268584-8f3296236761?w=400&auto=format&fit=crop&q=80",
-      "url": "https://shope.ee/thangit"
-    },
-    {
-      "id": "item-6",
-      "title": "Cáp Mạng Cat7 Ugreen Bấm Sẵn Đúc Kim Loại 10Gbps",
-      "category": "network",
-      "badge": "Chuẩn 10G",
-      "price": "85.000đ",
-      "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80",
-      "url": "https://shope.ee/thangit"
+      "id": "item-1788859884160",
+      "title": "Đế điện thoại từ tính hút chân không",
+      "category": "phukien",
+      "badge": "",
+      "price": "",
+      "image": "https://down-vn.img.susercontent.com/file/sg-11134201-824g1-mfmc95rbv9cc69.webp",
+      "url": "https://s.shopee.vn/9pe9X9YSzm"
     }
   ]
 }
