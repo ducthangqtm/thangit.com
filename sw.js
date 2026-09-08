@@ -1,5 +1,5 @@
 // THANGIT.COM — PWA Service Worker (Clean Consolidated Architecture)
-const CACHE_NAME = 'tit-hub-v20';
+const CACHE_NAME = 'tit-hub-v21';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',

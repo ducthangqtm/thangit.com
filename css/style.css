@@ -658,6 +658,123 @@ body {
   color: var(--neon-cyan);
 }
 
+/* Quick Contact Row */
+.cv-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 14px;
+  margin-top: 8px;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+.cv-contact-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.cv-contact-row i {
+  color: var(--neon-cyan);
+  font-size: 0.72rem;
+}
+
+/* Timeline Experience */
+.cv-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  padding-left: 14px;
+  border-left: 2px solid rgba(0, 240, 255, 0.25);
+  margin-left: 6px;
+  margin-top: 6px;
+}
+.cv-timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
+}
+.cv-timeline-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px;
+}
+.cv-timeline-company {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #fff;
+}
+.cv-timeline-date {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--neon-green);
+  background: rgba(0, 255, 157, 0.1);
+  padding: 1px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 157, 0.2);
+}
+.cv-timeline-role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--neon-cyan);
+}
+.cv-timeline-desc {
+  font-size: 0.76rem;
+  color: var(--text-body);
+  line-height: 1.45;
+  margin: 0;
+  padding-left: 14px;
+}
+.cv-timeline-desc li {
+  margin-bottom: 3px;
+}
+
+/* Education List */
+.cv-edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+.cv-edu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(22, 28, 38, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+.cv-edu-school {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+.cv-edu-major {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+.cv-edu-year {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
 .cv-cta-actions {
   display: flex;
   flex-direction: column;
