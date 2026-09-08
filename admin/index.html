@@ -1249,6 +1249,9 @@
         document.getElementById('save-bar').style.display = 'none';
         if (btnHeader) btnHeader.style.display = 'none';
 
+        // Cập nhật lại localStorage với dữ liệu vừa xuất bản
+        localStorage.setItem('thangit_local_data', JSON.stringify(payload));
+
         showToast('🎉 Đã xuất bản thành công! Web sẽ cập nhật sau vài giây.');
       } catch (err) {
         console.error(err);

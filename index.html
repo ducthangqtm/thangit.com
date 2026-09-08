@@ -674,16 +674,21 @@
 
         try {
           let data = null;
-          const localCached = localStorage.getItem('thangit_local_data');
-          if (localCached) {
-            try { data = JSON.parse(localCached); } catch {}
-          }
-          if (!data || !data.items) {
+          try {
             const res = await fetch('/data/products.json?v=' + Date.now());
-            if (!res.ok) throw new Error();
-            data = await res.json();
+            if (res.ok) {
+              data = await res.json();
+            }
+          } catch {}
+
+          // Fallback sang localStorage nếu mất mạng hoặc fetch lỗi
+          if (!data || !data.items) {
+            const localCached = localStorage.getItem('thangit_local_data');
+            if (localCached) {
+              try { data = JSON.parse(localCached); } catch {}
+            }
           }
-          const items = data.items || [];
+          const items = (data && data.items) ? data.items : [];
 
           if (!items.length) {
             grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:2rem; color:var(--text-dim);">Chưa có sản phẩm nào.</div>`;
