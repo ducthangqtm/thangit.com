@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initServiceWorker();
   initPullToRefresh();
   initNetworkTools();
+  initAffiliateFilter();
 });
 
 /* ==========================================================================
@@ -850,4 +851,123 @@ function initIpDnsUI() {
     });
   }
 }
+
+/* ==========================================================================
+   AFFILIATE PRODUCTS & DYNAMIC CATEGORY FILTER (MATCHING THANGNHAYDAY.COM)
+   ========================================================================== */
+let affiliateDataLoaded = false;
+let allAffiliateItems = [];
+let allAffiliateCategories = [];
+let activeAffiliateCategory = 'all';
+
+async function loadAffiliateProducts() {
+  const grid = document.getElementById('home-products-grid');
+  const catContainer = document.getElementById('aff-category-tabs');
+  if (!grid) return;
+
+  if (affiliateDataLoaded && allAffiliateItems.length > 0) {
+    renderFilteredProducts(activeAffiliateCategory);
+    return;
+  }
+
+  try {
+    let data = null;
+    try {
+      const res = await fetch('/data/products.json?v=' + Date.now());
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch {}
+
+    // Fallback sang localStorage nếu mất mạng hoặc fetch lỗi
+    if (!data || !data.items) {
+      const localCached = localStorage.getItem('thangit_local_data');
+      if (localCached) {
+        try { data = JSON.parse(localCached); } catch {}
+      }
+    }
+
+    allAffiliateCategories = (data && data.categories) ? data.categories : [];
+    allAffiliateItems = (data && data.items) ? data.items : [];
+
+    // Đảm bảo danh mục 'all' có mặt ở đầu
+    if (!allAffiliateCategories.find(c => c.id === 'all')) {
+      allAffiliateCategories.unshift({ id: 'all', name: '⚡ Tất Cả' });
+    }
+
+    // Render thanh category filter pills
+    renderAffiliateCategories(catContainer);
+
+    // Render danh sách sản phẩm theo category hiện tại
+    renderFilteredProducts(activeAffiliateCategory);
+
+    affiliateDataLoaded = true;
+  } catch {
+    grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:1.5rem; color:var(--neon-rose);">Không thể tải dữ liệu sản phẩm.</div>`;
+  }
+}
+
+function renderAffiliateCategories(container) {
+  if (!container) return;
+  if (!allAffiliateCategories.length) {
+    container.innerHTML = '';
+    return;
+  }
+
+  container.innerHTML = allAffiliateCategories.map(cat => `
+    <button type="button" class="category-tab ${cat.id === activeAffiliateCategory ? 'active' : ''}" data-cat-id="${cat.id}">
+      <span>${cat.name}</span>
+    </button>
+  `).join('');
+
+  container.querySelectorAll('.category-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const catId = btn.getAttribute('data-cat-id');
+      if (!catId || catId === activeAffiliateCategory) return;
+
+      activeAffiliateCategory = catId;
+      container.querySelectorAll('.category-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      renderFilteredProducts(activeAffiliateCategory);
+    });
+  });
+}
+
+function renderFilteredProducts(categoryId) {
+  const grid = document.getElementById('home-products-grid');
+  if (!grid) return;
+
+  const filteredItems = (categoryId === 'all')
+    ? allAffiliateItems
+    : allAffiliateItems.filter(item => item.category === categoryId);
+
+  if (!filteredItems.length) {
+    grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:2rem; color:var(--text-dim);">Chưa có sản phẩm nào trong danh mục này.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filteredItems.map(item => `
+    <div class="product-card">
+      <div class="card-media">
+        ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
+        <img src="${item.image}" alt="${item.title}" class="product-img" loading="lazy">
+      </div>
+      <div class="card-body">
+        <div>
+          <h4 class="product-name">${item.title}</h4>
+          <div class="product-price">${item.price || 'Giá ưu đãi'}</div>
+        </div>
+        <a href="${item.url}" target="_blank" rel="noopener sponsored" class="btn-aff">
+          <span>Mua Ngay ↗</span>
+        </a>
+      </div>
+    </div>
+  `).join('');
+}
+
+function initAffiliateFilter() {
+  window.loadAffiliateProducts = loadAffiliateProducts;
+}
+
 

@@ -631,8 +631,11 @@
          =================================================================== -->
     <section class="home-tab-content" id="tab-aff" style="display:none; flex-direction:column; gap:14px;">
       <div style="display:flex; justify-content:space-between; align-items:center; padding:0 4px;">
-        <span style="font-size:0.8rem; color:var(--text-dim);">Đồ công nghệ chọn lọc dành cho SysAdmin & Dân IT</span>
+        <span style="font-size:0.8rem; color:var(--text-dim);">Đồ công nghệ chọn lọc dành cho SysAdmin &amp; Dân IT</span>
       </div>
+
+      <!-- Category Filter Pills (Matching thangnhayday.com) -->
+      <div class="category-tabs-container" id="aff-category-tabs" aria-label="Bộ lọc danh mục sản phẩm"></div>
 
       <div class="products-grid" id="home-products-grid">
         <!-- Rendered dynamically from data/products.json -->
@@ -734,56 +737,9 @@
       }
 
       // 4. Load Affiliate Products
-      let productsLoaded = false;
-      async function loadAffiliateProducts() {
-        if (productsLoaded) return;
-        const grid = document.getElementById('home-products-grid');
-        if (!grid) return;
-
-        try {
-          let data = null;
-          try {
-            const res = await fetch('/data/products.json?v=' + Date.now());
-            if (res.ok) {
-              data = await res.json();
-            }
-          } catch {}
-
-          // Fallback sang localStorage nếu mất mạng hoặc fetch lỗi
-          if (!data || !data.items) {
-            const localCached = localStorage.getItem('thangit_local_data');
-            if (localCached) {
-              try { data = JSON.parse(localCached); } catch {}
-            }
-          }
-          const items = (data && data.items) ? data.items : [];
-
-          if (!items.length) {
-            grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:2rem; color:var(--text-dim);">Chưa có sản phẩm nào.</div>`;
-            return;
-          }
-
-          grid.innerHTML = items.map(item => `
-            <div class="product-card">
-              <div class="card-media">
-                ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
-                <img src="${item.image}" alt="${item.title}" class="product-img" loading="lazy">
-              </div>
-              <div class="card-body">
-                <div>
-                  <h4 class="product-name">${item.title}</h4>
-                  <div class="product-price">${item.price || 'Giá ưu đãi'}</div>
-                </div>
-                <a href="${item.url}" target="_blank" rel="noopener sponsored" class="btn-aff">
-                  <span>Mua Ngay ↗</span>
-                </a>
-              </div>
-            </div>
-          `).join('');
-
-          productsLoaded = true;
-        } catch {
-          grid.innerHTML = `<div style="grid-column:span 2; text-align:center; padding:1.5rem; color:var(--neon-rose);">Không thể tải dữ liệu sản phẩm.</div>`;
+      function loadAffiliateProducts() {
+        if (typeof window.loadAffiliateProducts === 'function') {
+          window.loadAffiliateProducts();
         }
       }
     });

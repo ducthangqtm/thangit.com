@@ -843,6 +843,64 @@ body {
 }
 
 /* ==========================================================================
+   AFFILIATE CATEGORY FILTER PILLS (MATCHING THANGNHAYDAY.COM)
+   ========================================================================== */
+.category-tabs-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-top: 2px;
+  padding-bottom: 4px;
+}
+
+.category-tabs-container::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all .2s cubic-bezier(.4, 0, .2, 1);
+  flex-shrink: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.category-tab:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #f1f5f9;
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.category-tab.active {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(0, 153, 255, 0.16)) !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(0, 242, 254, 0.75) !important;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3) !important;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
    AFFILIATE PRODUCTS GRID
    ========================================================================== */
 .products-grid {
