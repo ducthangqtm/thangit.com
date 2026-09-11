@@ -126,7 +126,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 6px 4px;
-  min-height: 38px;
+  min-height: 40px;
   box-sizing: border-box;
 }
 
@@ -134,54 +134,69 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 38px;
-  padding: 0 14px 0 6px;
-  background: rgba(22, 28, 38, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 9999px;
-  backdrop-filter: blur(8px);
+  height: 40px;
+  padding: 0 14px 0 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-sizing: border-box;
-  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all .25s cubic-bezier(.4, 0, .2, 1);
+  user-select: none;
+  cursor: default;
 }
 
 .badge-status:hover {
-  background: rgba(30, 38, 52, 0.95);
-  border-color: rgba(0, 240, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(0, 255, 157, 0.5);
+  box-shadow: 0 0 14px rgba(0, 255, 157, 0.35);
+  transform: scale(1.03) translateY(-1px);
 }
 
 .badge-status-icon {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  flex-shrink: 0;
 }
 
 .badge-status-text {
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--neon-green);
-  letter-spacing: 0.2px;
+  color: #00ff9d;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.35);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .icon-btn {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(22, 28, 38, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #f8fafc;
   cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
+  transition: all .25s cubic-bezier(.4, 0, .2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 .icon-btn:hover {
-  background: rgba(30, 38, 52, 0.95);
-  border-color: rgba(0, 240, 255, 0.4);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  transform: scale(1.05) translateY(-1px);
 }
 
 /* ==========================================================================
