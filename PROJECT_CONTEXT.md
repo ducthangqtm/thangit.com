@@ -97,7 +97,7 @@ File `data/products.json` được định dạng chuẩn JSON, phân tách thà
   "items": [
     {
       "id": "item-1788860025028",
-      "title": "Lót Chuột Cỡ Lớn Full 100 Mẫu Kích Thước 80x30m",
+      "title": "Lót Chuột Cỡ Lớn Full 100 Mẫu Kích Thước 80x30cm",
       "category": "phukien",
       "badge": "Bán Chạy",
       "price": "68.000đ",
