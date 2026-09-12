@@ -460,6 +460,18 @@ body {
   display: none; 
 }
 
+#tools-subnav.tools-subtabs {
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 5px;
+}
+
+#tools-subnav .subtab-btn,
+#tools-subnav .tool-switcher-btn {
+  padding: 8px 2px;
+  font-size: 0.74rem;
+  gap: 3px;
+}
+
 .cv-subtabs-wrap {
   grid-template-columns: repeat(2, 1fr) !important;
 }
@@ -951,36 +963,41 @@ body {
   font-size: 0.78rem;
 }
 
-/* Speedtest Pro (Cloudflare Edge Engine) */
+/* Speedtest Pro (Cloudflare Edge Engine) - Compact UI */
+.speedtest-pro-card {
+  padding: 14px 12px;
+  gap: 10px;
+}
+
 .speed-gauge-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0 6px;
+  padding: 4px 0 2px;
 }
 
 .speed-gauge-circle {
-  width: 154px;
-  height: 154px;
+  width: 126px;
+  height: 126px;
   border-radius: 50%;
   background: conic-gradient(from 180deg at 50% 50%, #00f0ff 0deg, #00ff9d 180deg, #0d1829 180deg, #0d1829 360deg);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6px;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+  padding: 5px;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
   transition: all 0.3s ease;
   position: relative;
 }
 
 .speed-gauge-circle.testing {
   animation: pulseGauge 1.8s infinite alternate ease-in-out;
-  box-shadow: 0 0 35px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
 }
 
 @keyframes pulseGauge {
-  0% { transform: scale(1); filter: drop-shadow(0 0 10px #00f0ff); }
-  100% { transform: scale(1.03); filter: drop-shadow(0 0 22px #00ff9d); }
+  0% { transform: scale(1); filter: drop-shadow(0 0 8px #00f0ff); }
+  100% { transform: scale(1.03); filter: drop-shadow(0 0 18px #00ff9d); }
 }
 
 .speed-gauge-inner {
@@ -993,12 +1010,12 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 8px;
+  padding: 6px;
 }
 
 .speed-val-number {
   font-family: var(--font-mono);
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   line-height: 1;
   color: #fff;
@@ -1006,19 +1023,19 @@ body {
 }
 
 .speed-val-unit {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--neon-cyan);
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .speed-status-text {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   color: var(--text-dim);
-  margin-top: 4px;
-  max-width: 110px;
+  margin-top: 3px;
+  max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1027,43 +1044,43 @@ body {
 .speed-metrics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: 2px;
 }
 
 .speed-metric-box {
   background: rgba(20, 27, 43, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  padding: 10px 6px;
+  border-radius: 9px;
+  padding: 8px 4px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2px;
+  gap: 1px;
 }
 
 .st-m-label, .metric-lbl {
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 600;
   color: var(--text-dim);
 }
 
 .st-m-val, .metric-val {
   font-family: var(--font-mono);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: #fff;
 }
 
 .st-m-val small, .metric-val small {
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 600;
   color: var(--text-dim);
 }
 
 .st-m-sub, .metric-sub {
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   color: #64748b;
 }
 
@@ -1079,9 +1096,9 @@ body {
   background: rgba(0, 255, 157, 0.1);
   border: 1px solid rgba(0, 255, 157, 0.3);
   border-radius: var(--radius-btn);
-  padding: 9px 12px;
+  padding: 7px 10px;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--neon-green);
   display: flex;

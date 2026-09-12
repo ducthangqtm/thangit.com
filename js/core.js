@@ -309,6 +309,8 @@ function initToolSwitcher() {
         if (ipVal && (ipVal.textContent.includes('Đang kiểm tra') || ipVal.textContent === '...')) {
           loadWanIp();
         }
+      } else if (toolId === 'tool-speedtest') {
+        // Speedtest pane activated
       } else if (toolId === 'tool-ports') {
         const portContainer = document.getElementById('port-items-container');
         if (portContainer && (!portContainer.children || portContainer.children.length === 0)) {
