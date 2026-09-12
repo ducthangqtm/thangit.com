@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPullToRefresh();
   initNetworkTools();
   initAffiliateFilter();
+  initCvSubTabs();
 });
 
 /* ==========================================================================
@@ -278,7 +279,7 @@ function initNetworkTools() {
 
 /* 1. Tool Sub-Switcher */
 function initToolSwitcher() {
-  const btns = document.querySelectorAll('#tools-subnav .tool-switcher-btn');
+  const btns = document.querySelectorAll('#tools-subnav .tool-switcher-btn, #tools-subnav .subtab-btn');
   const panels = document.querySelectorAll('#tab-tools .tool-panel');
 
   btns.forEach(btn => {
@@ -915,18 +916,18 @@ function renderAffiliateCategories(container) {
   }
 
   container.innerHTML = allAffiliateCategories.map(cat => `
-    <button type="button" class="category-tab ${cat.id === activeAffiliateCategory ? 'active' : ''}" data-cat-id="${cat.id}">
+    <button type="button" class="tool-switcher-btn subtab-btn category-tab ${cat.id === activeAffiliateCategory ? 'active' : ''}" data-cat-id="${cat.id}">
       <span>${cat.name}</span>
     </button>
   `).join('');
 
-  container.querySelectorAll('.category-tab').forEach(btn => {
+  container.querySelectorAll('.category-tab, .subtab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const catId = btn.getAttribute('data-cat-id');
       if (!catId || catId === activeAffiliateCategory) return;
 
       activeAffiliateCategory = catId;
-      container.querySelectorAll('.category-tab').forEach(b => b.classList.remove('active'));
+      container.querySelectorAll('.category-tab, .subtab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       renderFilteredProducts(activeAffiliateCategory);
@@ -969,5 +970,42 @@ function renderFilteredProducts(categoryId) {
 function initAffiliateFilter() {
   window.loadAffiliateProducts = loadAffiliateProducts;
 }
+
+/* ==========================================================================
+   CV TAB SUB-SWITCHER (HỒ SƠ NĂNG LỰC / DỰ ÁN GIT)
+   ========================================================================== */
+function initCvSubTabs() {
+  const subnav = document.getElementById('cv-subnav');
+  if (!subnav) return;
+
+  const btns = subnav.querySelectorAll('.subtab-btn, .tool-switcher-btn');
+  const panels = {
+    'cv-profile': document.getElementById('cv-profile'),
+    'cv-git': document.getElementById('cv-git')
+  };
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-cv-tab');
+      if (!targetTab) return;
+
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      Object.keys(panels).forEach(key => {
+        if (panels[key]) {
+          if (key === targetTab) {
+            panels[key].classList.add('active');
+            panels[key].style.display = 'block';
+          } else {
+            panels[key].classList.remove('active');
+            panels[key].style.display = 'none';
+          }
+        }
+      });
+    });
+  });
+}
+
 
 

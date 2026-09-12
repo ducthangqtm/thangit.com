@@ -52,7 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css?_v=20260911">
+  <link rel="stylesheet" href="/css/style.css?_v=20260913">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -219,17 +219,17 @@
     <section class="home-tab-content active" id="tab-tools">
       
       <!-- Sub-switcher for 4 tools -->
-      <div class="tool-switcher-wrap" id="tools-subnav">
-        <button type="button" class="tool-switcher-btn active" data-tool="tool-ipdns" title="Kiểm tra IP, Đo tốc độ & Cloudflare DNS">
+      <div class="tool-switcher-wrap tools-subtabs" id="tools-subnav">
+        <button type="button" class="tool-switcher-btn subtab-btn active" data-tool="tool-ipdns" title="Kiểm tra IP, Đo tốc độ & Cloudflare DNS">
           <span>🌐 IP/DNS</span>
         </button>
-        <button type="button" class="tool-switcher-btn" data-tool="tool-subnet" title="Tính Subnet & CIDR">
+        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="tool-subnet" title="Tính Subnet & CIDR">
           <span>🧮 Subnet</span>
         </button>
-        <button type="button" class="tool-switcher-btn" data-tool="tool-wifi" title="Tạo mã QR Wi-Fi">
+        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="tool-wifi" title="Tạo mã QR Wi-Fi">
           <span>📶 Wi-Fi</span>
         </button>
-        <button type="button" class="tool-switcher-btn" data-tool="tool-ports" title="Tra cứu Port mạng">
+        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="tool-ports" title="Tra cứu Port mạng">
           <span>🔌 Port</span>
         </button>
       </div>
@@ -487,141 +487,264 @@
          TAB 2: HỒ SƠ & NĂNG LỰC DOANH NGHIỆP
          =================================================================== -->
     <section class="home-tab-content" id="tab-cv" style="display:none;">
-      <div class="cv-summary-card">
-        <div class="cv-card-header">
-          <span class="cv-role-badge">SENIOR IT NETWORK ENGINEER</span>
-          <h2 class="cv-name">Nguyễn Đức Thắng</h2>
-          <p class="cv-tagline">10+ Năm Vận Hành Hạ Tầng Mạng Quy Mô Lớn • Automation &amp; Vibe Coder</p>
-          <div class="cv-contact-row">
-            <span><i class="fa-solid fa-phone"></i> 0986.192.092</span>
-            <span><i class="fa-solid fa-envelope"></i> ducthangqtm@gmail.com</span>
-            <span><i class="fa-solid fa-location-dot"></i> Hà Nội</span>
-          </div>
-        </div>
+      
+      <!-- Sub-switcher for CV & Git Projects -->
+      <div class="tool-switcher-wrap tools-subtabs cv-subtabs-wrap" id="cv-subnav">
+        <button type="button" class="tool-switcher-btn subtab-btn active" data-cv-tab="cv-profile" title="Hồ Sơ Năng Lực">
+          <span>📄 Hồ Sơ Năng Lực</span>
+        </button>
+        <button type="button" class="tool-switcher-btn subtab-btn" data-cv-tab="cv-git" title="Dự Án Git">
+          <span>🚀 Dự Án Git</span>
+        </button>
+      </div>
 
-        <!-- Quick Stats Row -->
-        <div class="cv-stats-row">
-          <div class="cv-stat-box">
-            <span class="cv-stat-val">10+</span>
-            <span class="cv-stat-lbl">Năm KN</span>
-          </div>
-          <div class="cv-stat-box">
-            <span class="cv-stat-val">40.000m²</span>
-            <span class="cv-stat-lbl">Logistics</span>
-          </div>
-          <div class="cv-stat-box">
-            <span class="cv-stat-val">500+</span>
-            <span class="cv-stat-lbl">Thiết Bị</span>
-          </div>
-          <div class="cv-stat-box">
-            <span class="cv-stat-val" style="color:var(--neon-green);">99.9%</span>
-            <span class="cv-stat-lbl">Uptime</span>
-          </div>
-        </div>
-
-        <!-- Professional Summary -->
-        <div class="cv-bio-block">
-          <h3 class="cv-section-title">📌 Tóm Tắt Năng Lực</h3>
-          <p class="cv-bio-text">
-            Kỹ sư hệ thống mạng với 10 năm kinh nghiệm vận hành hạ tầng quy mô lớn. Chuyên gia thiết kế, triển khai hạ tầng mạng kho vận, phân đoạn VLAN bảo mật, Wi-Fi công nghiệp chịu tải cao và VPN đa điểm. Đam mê ứng dụng Python &amp; Flask xây dựng hệ thống tự động hóa quy trình, tối ưu hiệu suất và giảm thiểu rủi ro vận hành 24/7.
-          </p>
-        </div>
-
-        <!-- Work Experience Timeline -->
-        <div class="cv-experience-block">
-          <h3 class="cv-section-title">💼 Kinh Nghiệm Làm Việc Thực Chiến</h3>
-          <div class="cv-timeline">
-            <!-- Job 1 -->
-            <div class="cv-timeline-item">
-              <div class="cv-timeline-header">
-                <span class="cv-timeline-company">Chi nhánh Cty TNHH Behn Meyer VN</span>
-                <span class="cv-timeline-date">04/2025 - Hiện tại</span>
-              </div>
-              <div class="cv-timeline-role">IT Network Executive (Bắc Ninh)</div>
-              <ul class="cv-timeline-desc">
-                <li>Quản trị toàn bộ hạ tầng mạng &amp; hệ thống CNTT chi nhánh (LAN/WAN, Wi-Fi, thiết bị ngoại vi &amp; Server).</li>
-                <li>Hỗ trợ End-user, quản trị phần cứng/phần mềm doanh nghiệp và kiểm soát an toàn thông tin.</li>
-                <li>Ứng dụng Python/Flask xây dựng hệ thống tự động hóa đơn hàng, tối ưu quy trình phối hợp vận chuyển.</li>
-              </ul>
-            </div>
-
-            <!-- Job 2 -->
-            <div class="cv-timeline-item">
-              <div class="cv-timeline-header">
-                <span class="cv-timeline-company">Cty TNHH DB Schenker Việt Nam</span>
-                <span class="cv-timeline-date">10/2016 - 03/2025</span>
-              </div>
-              <div class="cv-timeline-role">Senior IT Network (Kho VSIP • Đại Đồng • Quảng An)</div>
-              <ul class="cv-timeline-desc">
-                <li>Thiết kế &amp; triển khai hạ tầng mạng trung tâm kho vận Logistics quy mô 30.000 – 40.000 m².</li>
-                <li>Quản trị hơn 500 thiết bị IT, vận hành hệ thống Server, LAN, VLANs, Wi-Fi công nghiệp mật độ cao.</li>
-                <li>Quản trị Azure Domain, Office 365 và hỗ trợ kỹ thuật vận hành hệ thống ERP (WMS, SAP).</li>
-              </ul>
-            </div>
-
-            <!-- Job 3 -->
-            <div class="cv-timeline-item">
-              <div class="cv-timeline-header">
-                <span class="cv-timeline-company">Cty TNHH Srithai Hà Nội</span>
-                <span class="cv-timeline-date">11/2015 - 08/2016</span>
-              </div>
-              <div class="cv-timeline-role">Nhân viên IT</div>
-              <ul class="cv-timeline-desc">
-                <li>Xây dựng hạ tầng mạng nội bộ, hệ thống Camera giám sát &amp; mạng điện thoại doanh nghiệp.</li>
-                <li>Quản trị người dùng &amp; hỗ trợ kỹ thuật phần mềm ERP Microsoft Dynamics AX.</li>
-              </ul>
+      <!-- CV Sub-panel 1: Hồ Sơ Năng Lực (active default) -->
+      <div class="cv-subpanel active" id="cv-profile">
+        <div class="cv-summary-card">
+          <div class="cv-card-header">
+            <span class="cv-role-badge">SENIOR IT NETWORK ENGINEER</span>
+            <h2 class="cv-name">Nguyễn Đức Thắng</h2>
+            <p class="cv-tagline">10+ Năm Vận Hành Hạ Tầng Mạng Quy Mô Lớn • Automation &amp; Vibe Coder</p>
+            <div class="cv-contact-row">
+              <span><i class="fa-solid fa-phone"></i> 0986.192.092</span>
+              <span><i class="fa-solid fa-envelope"></i> ducthangqtm@gmail.com</span>
+              <span><i class="fa-solid fa-location-dot"></i> Hà Nội</span>
             </div>
           </div>
-        </div>
 
-        <!-- Education -->
-        <div class="cv-education-block">
-          <h3 class="cv-section-title">🎓 Học Vấn &amp; Đào Tạo</h3>
-          <div class="cv-edu-list">
-            <div class="cv-edu-item">
-              <div>
-                <div class="cv-edu-school">Đại Học Điện Lực</div>
-                <div class="cv-edu-major">Chuyên ngành: Công nghệ Thông tin</div>
-              </div>
-              <span class="cv-edu-year">2013 - 2015</span>
+          <!-- Quick Stats Row -->
+          <div class="cv-stats-row">
+            <div class="cv-stat-box">
+              <span class="cv-stat-val">10+</span>
+              <span class="cv-stat-lbl">Năm KN</span>
             </div>
-            <div class="cv-edu-item">
-              <div>
-                <div class="cv-edu-school">Bách Khoa - Aptech</div>
-                <div class="cv-edu-major">Quản trị mạng &amp; Bảo mật hệ thống HDSM</div>
-              </div>
-              <span class="cv-edu-year">2010 - 2013</span>
+            <div class="cv-stat-box">
+              <span class="cv-stat-val">40.000m²</span>
+              <span class="cv-stat-lbl">Logistics</span>
+            </div>
+            <div class="cv-stat-box">
+              <span class="cv-stat-val">500+</span>
+              <span class="cv-stat-lbl">Thiết Bị</span>
+            </div>
+            <div class="cv-stat-box">
+              <span class="cv-stat-val" style="color:var(--neon-green);">99.9%</span>
+              <span class="cv-stat-lbl">Uptime</span>
             </div>
           </div>
-        </div>
 
-        <!-- Skills Pills -->
-        <div class="cv-skills-block">
-          <h3 class="cv-section-title">🛠️ Công Nghệ &amp; Kỹ Năng Cốt Lõi</h3>
-          <div class="cv-pills-wrap">
-            <span class="cv-pill">Cisco CCNA / CCNP</span>
-            <span class="cv-pill">Mikrotik RouterOS</span>
-            <span class="cv-pill">IPsec / WireGuard VPN</span>
-            <span class="cv-pill">VLAN / OSPF / BGP</span>
-            <span class="cv-pill">Wi-Fi Công Nghiệp</span>
-            <span class="cv-pill">Fortinet FortiGate</span>
-            <span class="cv-pill">Azure AD / Office 365</span>
-            <span class="cv-pill">ERP (SAP, WMS, AX)</span>
-            <span class="cv-pill">Python &amp; Flask Automation</span>
-            <span class="cv-pill">Linux Server (Ubuntu/Debian)</span>
-            <span class="cv-pill">Docker &amp; Proxmox VE</span>
-            <span class="cv-pill">Cloudflare Zero Trust</span>
+          <!-- Professional Summary -->
+          <div class="cv-bio-block">
+            <h3 class="cv-section-title">📌 Tóm Tắt Năng Lực</h3>
+            <p class="cv-bio-text">
+              Kỹ sư hệ thống mạng với 10 năm kinh nghiệm vận hành hạ tầng quy mô lớn. Chuyên gia thiết kế, triển khai hạ tầng mạng kho vận, phân đoạn VLAN bảo mật, Wi-Fi công nghiệp chịu tải cao và VPN đa điểm. Đam mê ứng dụng Python &amp; Flask xây dựng hệ thống tự động hóa quy trình, tối ưu hiệu suất và giảm thiểu rủi ro vận hành 24/7.
+            </p>
+          </div>
+
+          <!-- Work Experience Timeline -->
+          <div class="cv-experience-block">
+            <h3 class="cv-section-title">💼 Kinh Nghiệm Làm Việc Thực Chiến</h3>
+            <div class="cv-timeline">
+              <!-- Job 1 -->
+              <div class="cv-timeline-item">
+                <div class="cv-timeline-header">
+                  <span class="cv-timeline-company">Chi nhánh Cty TNHH Behn Meyer VN</span>
+                  <span class="cv-timeline-date">04/2025 - Hiện tại</span>
+                </div>
+                <div class="cv-timeline-role">IT Network Executive (Bắc Ninh)</div>
+                <ul class="cv-timeline-desc">
+                  <li>Quản trị toàn bộ hạ tầng mạng &amp; hệ thống CNTT chi nhánh (LAN/WAN, Wi-Fi, thiết bị ngoại vi &amp; Server).</li>
+                  <li>Hỗ trợ End-user, quản trị phần cứng/phần mềm doanh nghiệp và kiểm soát an toàn thông tin.</li>
+                  <li>Ứng dụng Python/Flask xây dựng hệ thống tự động hóa đơn hàng, tối ưu quy trình phối hợp vận chuyển.</li>
+                </ul>
+              </div>
+
+              <!-- Job 2 -->
+              <div class="cv-timeline-item">
+                <div class="cv-timeline-header">
+                  <span class="cv-timeline-company">Cty TNHH DB Schenker Việt Nam</span>
+                  <span class="cv-timeline-date">10/2016 - 03/2025</span>
+                </div>
+                <div class="cv-timeline-role">Senior IT Network (Kho VSIP • Đại Đồng • Quảng An)</div>
+                <ul class="cv-timeline-desc">
+                  <li>Thiết kế &amp; triển khai hạ tầng mạng trung tâm kho vận Logistics quy mô 30.000 – 40.000 m².</li>
+                  <li>Quản trị hơn 500 thiết bị IT, vận hành hệ thống Server, LAN, VLANs, Wi-Fi công nghiệp mật độ cao.</li>
+                  <li>Quản trị Azure Domain, Office 365 và hỗ trợ kỹ thuật vận hành hệ thống ERP (WMS, SAP).</li>
+                </ul>
+              </div>
+
+              <!-- Job 3 -->
+              <div class="cv-timeline-item">
+                <div class="cv-timeline-header">
+                  <span class="cv-timeline-company">Cty TNHH Srithai Hà Nội</span>
+                  <span class="cv-timeline-date">11/2015 - 08/2016</span>
+                </div>
+                <div class="cv-timeline-role">Nhân viên IT</div>
+                <ul class="cv-timeline-desc">
+                  <li>Xây dựng hạ tầng mạng nội bộ, hệ thống Camera giám sát &amp; mạng điện thoại doanh nghiệp.</li>
+                  <li>Quản trị người dùng &amp; hỗ trợ kỹ thuật phần mềm ERP Microsoft Dynamics AX.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="cv-education-block">
+            <h3 class="cv-section-title">🎓 Học Vấn &amp; Đào Tạo</h3>
+            <div class="cv-edu-list">
+              <div class="cv-edu-item">
+                <div>
+                  <div class="cv-edu-school">Đại Học Điện Lực</div>
+                  <div class="cv-edu-major">Chuyên ngành: Công nghệ Thông tin</div>
+                </div>
+                <span class="cv-edu-year">2013 - 2015</span>
+              </div>
+              <div class="cv-edu-item">
+                <div>
+                  <div class="cv-edu-school">Bách Khoa - Aptech</div>
+                  <div class="cv-edu-major">Quản trị mạng &amp; Bảo mật hệ thống HDSM</div>
+                </div>
+                <span class="cv-edu-year">2010 - 2013</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills Pills -->
+          <div class="cv-skills-block">
+            <h3 class="cv-section-title">🛠️ Công Nghệ &amp; Kỹ Năng Cốt Lõi</h3>
+            <div class="cv-pills-wrap">
+              <span class="cv-pill">Cisco CCNA / CCNP</span>
+              <span class="cv-pill">Mikrotik RouterOS</span>
+              <span class="cv-pill">IPsec / WireGuard VPN</span>
+              <span class="cv-pill">VLAN / OSPF / BGP</span>
+              <span class="cv-pill">Wi-Fi Công Nghiệp</span>
+              <span class="cv-pill">Fortinet FortiGate</span>
+              <span class="cv-pill">Azure AD / Office 365</span>
+              <span class="cv-pill">ERP (SAP, WMS, AX)</span>
+              <span class="cv-pill">Python &amp; Flask Automation</span>
+              <span class="cv-pill">Linux Server (Ubuntu/Debian)</span>
+              <span class="cv-pill">Docker &amp; Proxmox VE</span>
+              <span class="cv-pill">Cloudflare Zero Trust</span>
+            </div>
+          </div>
+
+          <!-- CTA Actions -->
+          <div class="cv-cta-actions">
+            <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="btn-cv-primary">
+              <span>💬 Nhận Tư Vấn Hạ Tầng Mạng (Zalo: 0986.192.092) ↗</span>
+            </a>
+            <a href="https://thangnhayday.com" target="_blank" rel="noopener me" class="btn-cv-secondary" style="color:var(--neon-cyan);">
+              <span>🔥 Kênh Thắng Nhảy Dây (thangnhayday.com) ↗</span>
+            </a>
           </div>
         </div>
+      </div>
 
-        <!-- CTA Actions -->
-        <div class="cv-cta-actions">
-          <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="btn-cv-primary">
-            <span>💬 Nhận Tư Vấn Hạ Tầng Mạng (Zalo: 0986.192.092) ↗</span>
-          </a>
-          <a href="https://thangnhayday.com" target="_blank" rel="noopener me" class="btn-cv-secondary" style="color:var(--neon-cyan);">
-            <span>🔥 Kênh Thắng Nhảy Dây (thangnhayday.com) ↗</span>
-          </a>
+      <!-- CV Sub-panel 2: Dự Án Git -->
+      <div class="cv-subpanel" id="cv-git" style="display:none;">
+        <div class="git-projects-grid">
+          <!-- Card 1: thangit.com -->
+          <div class="git-repo-card">
+            <div class="git-repo-header">
+              <div class="git-repo-title-wrap">
+                <i class="fa-brands fa-github git-repo-icon"></i>
+                <h3 class="git-repo-name">thangit.com</h3>
+              </div>
+              <span class="git-repo-badge production">Production</span>
+            </div>
+            <p class="git-repo-desc">Cổng tiện ích mạng chuyên sâu &amp; SysAdmin Toolbox. Tích hợp Cloudflare Speedtest, subnet calculator, IP/DNS lookup, QR Wi-Fi và PWA Offline.</p>
+            <div class="git-repo-tags">
+              <span class="git-tag">Vanilla JS</span>
+              <span class="git-tag">Speedtest</span>
+              <span class="git-tag">PWA</span>
+              <span class="git-tag">Network Tools</span>
+            </div>
+            <div class="git-repo-actions">
+              <a href="https://github.com/ducthangqtm/thangit.com" target="_blank" rel="noopener noreferrer" class="git-action-btn git-btn-code">
+                <i class="fa-brands fa-github"></i> <span>Mã Nguồn</span>
+              </a>
+              <a href="https://thangit.com" target="_blank" rel="noopener noreferrer" class="git-action-btn git-btn-live">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span>Trực Tiếp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: thangnhayday.com -->
+          <div class="git-repo-card">
+            <div class="git-repo-header">
+              <div class="git-repo-title-wrap">
+                <i class="fa-brands fa-github git-repo-icon"></i>
+                <h3 class="git-repo-name">thangnhayday.com</h3>
+              </div>
+              <span class="git-repo-badge production">Live Community</span>
+            </div>
+            <p class="git-repo-desc">Nền tảng chia sẻ kỹ thuật nhảy dây từ cơ bản đến nâng cao, giáo trình rèn luyện cardio/sức bền &amp; affiliate phụ kiện thể thao.</p>
+            <div class="git-repo-tags">
+              <span class="git-tag">Vibe Coding</span>
+              <span class="git-tag">Tailwind CSS</span>
+              <span class="git-tag">Cloudflare Pages</span>
+              <span class="git-tag">Affiliate</span>
+            </div>
+            <div class="git-repo-actions">
+              <a href="https://github.com/ducthangqtm/thangnhayday.com" target="_blank" rel="noopener noreferrer" class="git-action-btn git-btn-code">
+                <i class="fa-brands fa-github"></i> <span>Mã Nguồn</span>
+              </a>
+              <a href="https://thangnhayday.com" target="_blank" rel="noopener noreferrer" class="git-action-btn git-btn-live">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span>Trực Tiếp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: ngancare.com -->
+          <div class="git-repo-card">
+            <div class="git-repo-header">
+              <div class="git-repo-title-wrap">
+                <i class="fa-brands fa-github git-repo-icon"></i>
+                <h3 class="git-repo-name">ngancare.com</h3>
+              </div>
+              <span class="git-repo-badge production">Production</span>
+            </div>
+            <p class="git-repo-desc">Hệ thống website thương hiệu chăm sóc sức khỏe &amp; sắc đẹp, giao diện tối ưu trải nghiệm di động, tích hợp đặt lịch tư vấn trực tuyến.</p>
+            <div class="git-repo-tags">
+              <span class="git-tag">Healthcare UI</span>
+              <span class="git-tag">Mobile First</span>
+              <span class="git-tag">Cloudflare</span>
+              <span class="git-tag">SEO Schema</span>
+            </div>
+            <div class="git-repo-actions">
+              <a href="https://github.com/ducthangqtm/ngancare.com" target="_blank" rel="noopener noreferrer" class="git-action-btn git-btn-code">
+                <i class="fa-brands fa-github"></i> <span>Mã Nguồn</span>
+              </a>
+              <a href="https://ngancare.com" target="_blank" rel="noopener noreferrer" class="git-action-btn git-btn-live">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span>Trực Tiếp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 4: thangnd.io.vn -->
+          <div class="git-repo-card">
+            <div class="git-repo-header">
+              <div class="git-repo-title-wrap">
+                <i class="fa-brands fa-github git-repo-icon"></i>
+                <h3 class="git-repo-name">thangnd.io.vn</h3>
+              </div>
+              <span class="git-repo-badge">Personal Dev</span>
+            </div>
+            <p class="git-repo-desc">Trang định danh &amp; bio portfolio cá nhân của Nguyễn Đức Thắng, kết nối hạ tầng số, các kênh truyền thông và tài nguyên kỹ thuật.</p>
+            <div class="git-repo-tags">
+              <span class="git-tag">Portfolio</span>
+              <span class="git-tag">Custom Domain</span>
+              <span class="git-tag">Cloudflare DNS</span>
+              <span class="git-tag">IT Bio</span>
+            </div>
+            <div class="git-repo-actions">
+              <a href="https://github.com/ducthangqtm/thangnd.io.vn" target="_blank" rel="noopener noreferrer" class="git-action-btn git-btn-code">
+                <i class="fa-brands fa-github"></i> <span>Mã Nguồn</span>
+              </a>
+              <a href="https://thangnd.io.vn" target="_blank" rel="noopener noreferrer" class="git-action-btn git-btn-live">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span>Trực Tiếp</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -630,12 +753,8 @@
          TAB 3: ĐỒ CÔNG NGHỆ (Affiliate Products from data/products.json)
          =================================================================== -->
     <section class="home-tab-content" id="tab-aff" style="display:none; flex-direction:column; gap:14px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:0 4px;">
-        <span style="font-size:0.8rem; color:var(--text-dim);">Đồ công nghệ chọn lọc dành cho SysAdmin &amp; Dân IT</span>
-      </div>
-
-      <!-- Category Filter Pills (Matching thangnhayday.com) -->
-      <div class="category-tabs-container" id="aff-category-tabs" aria-label="Bộ lọc danh mục sản phẩm"></div>
+      <!-- Category Filter Sub-tabs -->
+      <div class="tool-switcher-wrap tools-subtabs category-tabs-container" id="aff-category-tabs" aria-label="Bộ lọc danh mục sản phẩm"></div>
 
       <div class="products-grid" id="home-products-grid">
         <!-- Rendered dynamically from data/products.json -->
@@ -674,7 +793,7 @@
 
   <script src="/js/qrcode.min.js?_v=20260911"></script>
   <script src="/js/tools.js?_v=20260911"></script>
-  <script src="/js/core.js?_v=20260911"></script>
+  <script src="/js/core.js?_v=20260913"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Tab switching between Công Cụ Mạng, Hồ Sơ, Đồ Công Nghệ
