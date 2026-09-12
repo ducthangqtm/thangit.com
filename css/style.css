@@ -461,15 +461,15 @@ body {
 }
 
 #tools-subnav.tools-subtabs {
-  grid-template-columns: repeat(5, 1fr) !important;
-  gap: 5px;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 7px;
 }
 
 #tools-subnav .subtab-btn,
 #tools-subnav .tool-switcher-btn {
-  padding: 8px 2px;
-  font-size: 0.74rem;
-  gap: 3px;
+  padding: 9px 4px;
+  font-size: 0.78rem;
+  gap: 4px;
 }
 
 .cv-subtabs-wrap {

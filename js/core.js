@@ -275,6 +275,9 @@ function initNetworkTools() {
 
   // 5. My IP & Cloudflare DoH DNS
   initIpDnsUI();
+
+  // Fetch WAN IP immediately on page load (#pane-speedtest is active default)
+  loadWanIp();
 }
 
 /* 1. Tool Sub-Switcher */
@@ -299,22 +302,20 @@ function initToolSwitcher() {
       });
 
       // Special triggers on tab activation
-      if (toolId === 'tool-wifi') {
-        const canvas = document.getElementById('wifi-qr-canvas');
-        if (canvas && (!canvas.width || canvas.width < 100)) {
-          triggerWifiQrRender();
-        }
-      } else if (toolId === 'tool-ipdns') {
+      if (toolId === 'pane-speedtest' || toolId === 'tool-speedtest') {
         const ipVal = document.getElementById('wan-ip-val');
         if (ipVal && (ipVal.textContent.includes('Đang kiểm tra') || ipVal.textContent === '...')) {
           loadWanIp();
         }
-      } else if (toolId === 'tool-speedtest') {
-        // Speedtest pane activated
-      } else if (toolId === 'tool-ports') {
+      } else if (toolId === 'pane-dns-port' || toolId === 'tool-ports' || toolId === 'tool-ipdns') {
         const portContainer = document.getElementById('port-items-container');
         if (portContainer && (!portContainer.children || portContainer.children.length === 0)) {
           initPortUI();
+        }
+      } else if (toolId === 'pane-wifi' || toolId === 'tool-wifi') {
+        const canvas = document.getElementById('wifi-qr-canvas');
+        if (canvas && (!canvas.width || canvas.width < 100)) {
+          triggerWifiQrRender();
         }
       }
     });
@@ -383,7 +384,7 @@ function initSubnetUI() {
   prefixSelect.addEventListener('change', updateSubnet);
 
   // Preset chips
-  document.querySelectorAll('#tool-subnet .tool-chip[data-prefix]').forEach(chip => {
+  document.querySelectorAll('#pane-subnet .tool-chip[data-prefix], #tool-subnet .tool-chip[data-prefix]').forEach(chip => {
     chip.addEventListener('click', () => {
       const p = chip.getAttribute('data-prefix');
       if (p && prefixSelect) {

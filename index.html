@@ -216,28 +216,25 @@
          =================================================================== -->
     <section class="home-tab-content active" id="tab-tools">
       
-      <!-- Sub-switcher for 5 tools -->
+      <!-- Sub-switcher for 4 tools -->
       <div class="tool-switcher-wrap tools-subtabs" id="tools-subnav">
-        <button type="button" class="tool-switcher-btn subtab-btn active" data-tool="tool-ipdns" title="Kiểm tra IP & Cloudflare DNS">
-          <span>🌐 IP/DNS</span>
-        </button>
-        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="tool-speedtest" title="Đo Tốc Độ Mạng Cloudflare">
+        <button type="button" class="tool-switcher-btn subtab-btn active" data-tool="pane-speedtest" title="Đo Tốc Độ Mạng Cloudflare">
           <span>⚡ Speedtest</span>
         </button>
-        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="tool-subnet" title="Tính Subnet & CIDR">
+        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="pane-dns-port" title="DNS &amp; Tra cứu Port">
+          <span>🌐 DNS &amp; Port</span>
+        </button>
+        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="pane-subnet" title="Tính Subnet &amp; CIDR">
           <span>🧮 Subnet</span>
         </button>
-        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="tool-wifi" title="Tạo mã QR Wi-Fi">
+        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="pane-wifi" title="Tạo mã QR Wi-Fi">
           <span>📶 Wi-Fi</span>
-        </button>
-        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="tool-ports" title="Tra cứu Port mạng">
-          <span>🔌 Port</span>
         </button>
       </div>
 
-      <!-- TOOL 1: MY IP & CLOUDFLARE DOH DNS -->
-      <div class="tool-panel active" id="tool-ipdns">
-        <!-- Top: IP WAN -->
+      <!-- PANE 1: SPEEDTEST (WAN IP on top, Speedtest below) -->
+      <div class="tool-panel active" id="pane-speedtest">
+        <!-- Top: IP WAN Của Bạn -->
         <div class="tool-card">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-globe" style="color:var(--neon-cyan);"></i> IP WAN Của Bạn</h3>
@@ -255,43 +252,7 @@
           </div>
         </div>
 
-        <!-- Bottom: DNS DoH -->
-        <div class="tool-card">
-          <div class="tool-header-row">
-            <h3 class="tool-title"><i class="fas fa-server" style="color:var(--neon-cyan);"></i> Cloudflare DoH DNS</h3>
-            <span class="tool-tag-badge">DNS 1.1.1.1</span>
-          </div>
-
-          <div class="tool-form-grid">
-            <div class="tool-field">
-              <label class="tool-label" for="dns-domain">Tên miền cần tra cứu:</label>
-              <input type="text" id="dns-domain" class="tool-input" value="thangit.com" placeholder="google.com hoặc thangit.com" autocomplete="off">
-            </div>
-            <div class="tool-field">
-              <label class="tool-label" for="dns-type">Loại bản ghi:</label>
-              <select id="dns-type" class="tool-select">
-                <option value="A" selected>A (IPv4 Address)</option>
-                <option value="AAAA">AAAA (IPv6 Address)</option>
-                <option value="CNAME">CNAME (Canonical Name)</option>
-                <option value="MX">MX (Mail Exchange)</option>
-                <option value="TXT">TXT (Verification / SPF / DKIM)</option>
-                <option value="NS">NS (Name Server)</option>
-              </select>
-            </div>
-          </div>
-
-          <button type="button" class="tool-btn-action" id="btn-query-dns">
-            <i class="fas fa-search"></i> Tra Cứu Bản Ghi DNS
-          </button>
-
-          <div id="dns-results-container" class="dns-results-box" style="display:none;">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- TOOL 2: SPEEDTEST PRO (Cloudflare Engine) -->
-      <div class="tool-panel" id="tool-speedtest">
+        <!-- Speedtest Pro (Cloudflare Engine) -->
         <div class="tool-card speedtest-pro-card">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-tachometer-alt" style="color:var(--neon-cyan);"></i> Đo Tốc Độ Mạng (Speedtest)</h3>
@@ -341,8 +302,72 @@
         </div>
       </div>
 
-      <!-- TOOL 2: SUBNET & CIDR CALCULATOR -->
-      <div class="tool-panel" id="tool-subnet">
+      <!-- PANE 2: DNS & PORT (Cloudflare DoH DNS on top, Port Directory underneath) -->
+      <div class="tool-panel" id="pane-dns-port">
+        <!-- Top: Cloudflare DoH DNS -->
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-server" style="color:var(--neon-cyan);"></i> Cloudflare DoH DNS</h3>
+            <span class="tool-tag-badge">DNS 1.1.1.1</span>
+          </div>
+
+          <div class="tool-form-grid">
+            <div class="tool-field">
+              <label class="tool-label" for="dns-domain">Tên miền cần tra cứu:</label>
+              <input type="text" id="dns-domain" class="tool-input" value="thangit.com" placeholder="google.com hoặc thangit.com" autocomplete="off">
+            </div>
+            <div class="tool-field">
+              <label class="tool-label" for="dns-type">Loại bản ghi:</label>
+              <select id="dns-type" class="tool-select">
+                <option value="A" selected>A (IPv4 Address)</option>
+                <option value="AAAA">AAAA (IPv6 Address)</option>
+                <option value="CNAME">CNAME (Canonical Name)</option>
+                <option value="MX">MX (Mail Exchange)</option>
+                <option value="TXT">TXT (Verification / SPF / DKIM)</option>
+                <option value="NS">NS (Name Server)</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="button" class="tool-btn-action" id="btn-query-dns">
+            <i class="fas fa-search"></i> Tra Cứu Bản Ghi DNS
+          </button>
+
+          <div id="dns-results-container" class="dns-results-box" style="display:none;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Bottom: Tra Cứu Port Mạng -->
+        <div class="tool-card">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-network-wired" style="color:var(--neon-cyan);"></i> Tra Cứu Port Mạng</h3>
+            <span class="tool-tag-badge" id="port-count-badge">40+ Ports Chuẩn</span>
+          </div>
+
+          <div class="port-search-box">
+            <i class="fas fa-search port-search-icon"></i>
+            <input type="text" id="port-search-input" class="port-search-input" placeholder="Tìm port (22, 443, 8291...) hoặc dịch vụ (ssh, winbox, vpn)..." autocomplete="off">
+          </div>
+
+          <div class="tool-chip-group" id="port-filter-chips">
+            <span class="tool-chip active" data-cat="all">Tất Cả</span>
+            <span class="tool-chip" data-cat="web">Web &amp; Proxy</span>
+            <span class="tool-chip" data-cat="remote">Remote &amp; Shell</span>
+            <span class="tool-chip" data-cat="sysadmin">SysAdmin &amp; Lab</span>
+            <span class="tool-chip" data-cat="vpn">VPN &amp; Tunnel</span>
+            <span class="tool-chip" data-cat="database">Database</span>
+            <span class="tool-chip" data-cat="network">Hạ Tầng Core</span>
+          </div>
+
+          <div class="port-list-scroll" id="port-items-container">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- PANE 3: SUBNET & CIDR CALCULATOR -->
+      <div class="tool-panel" id="pane-subnet">
         <div class="tool-card">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-calculator" style="color:var(--neon-cyan);"></i> Tính Subnet &amp; CIDR</h3>
@@ -408,8 +433,8 @@
         </div>
       </div>
 
-      <!-- TOOL 2: WI-FI QR CODE GENERATOR -->
-      <div class="tool-panel" id="tool-wifi">
+      <!-- PANE 4: WI-FI QR CODE GENERATOR -->
+      <div class="tool-panel" id="pane-wifi">
         <div class="tool-card">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-qrcode" style="color:var(--neon-cyan);"></i> Tạo Mã QR Wi-Fi</h3>
@@ -450,35 +475,6 @@
             <button type="button" class="tool-btn-secondary" id="btn-print-wifi-qr">
               <i class="fas fa-print"></i> In Mã Dán Tường
             </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- TOOL 3: TRA CỨU PORT & DỊCH VỤ MẠNG -->
-      <div class="tool-panel" id="tool-ports">
-        <div class="tool-card">
-          <div class="tool-header-row">
-            <h3 class="tool-title"><i class="fas fa-network-wired" style="color:var(--neon-cyan);"></i> Tra Cứu Port Mạng</h3>
-            <span class="tool-tag-badge" id="port-count-badge">40+ Ports Chuẩn</span>
-          </div>
-
-          <div class="port-search-box">
-            <i class="fas fa-search port-search-icon"></i>
-            <input type="text" id="port-search-input" class="port-search-input" placeholder="Tìm port (22, 443, 8291...) hoặc dịch vụ (ssh, winbox, vpn)..." autocomplete="off">
-          </div>
-
-          <div class="tool-chip-group" id="port-filter-chips">
-            <span class="tool-chip active" data-cat="all">Tất Cả</span>
-            <span class="tool-chip" data-cat="web">Web &amp; Proxy</span>
-            <span class="tool-chip" data-cat="remote">Remote &amp; Shell</span>
-            <span class="tool-chip" data-cat="sysadmin">SysAdmin &amp; Lab</span>
-            <span class="tool-chip" data-cat="vpn">VPN &amp; Tunnel</span>
-            <span class="tool-chip" data-cat="database">Database</span>
-            <span class="tool-chip" data-cat="network">Hạ Tầng Core</span>
-          </div>
-
-          <div class="port-list-scroll" id="port-items-container">
-            <!-- Rendered dynamically by JS -->
           </div>
         </div>
       </div>
