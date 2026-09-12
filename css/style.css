@@ -326,14 +326,12 @@ body {
 .profile-bio {
   font-size: 0.88rem;
   color: var(--text-body);
-  line-height: 1.5;
+  line-height: 1.4;
   width: 100%;
   max-width: 360px;
-  height: 64px;
-  margin: 8px auto 0;
+  margin: 4px auto 0;
   text-align: center;
   display: block;
-  overflow: hidden;
 }
 
 /* 4 Squircle Social Buttons */
