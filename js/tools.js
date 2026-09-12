@@ -417,14 +417,14 @@ async function runNetworkSpeedTest(onProgress, serverRegion = 'vn') {
   if (isGlobal) {
     result.detectedPoP = 'SIN';
     result.serverName = 'Singapore Edge (Quốc Tế)';
-    onProgress({ phase: 'pop_detected', pop: 'SIN', serverChip: 'Máy chủ: Singapore Edge' });
+    onProgress({ phase: 'pop_detected', pop: 'SIN', serverChip: 'Singapore Edge' });
   } else {
     result.detectedPoP = detectedPoP || 'VN';
     result.serverName = detectedPoP ? `Cloudflare VN (${detectedPoP})` : 'Cloudflare VN';
     onProgress({
       phase: 'pop_detected',
       pop: detectedPoP,
-      serverChip: detectedPoP ? `Máy chủ: Cloudflare VN (${detectedPoP})` : 'Máy chủ: Cloudflare VN'
+      serverChip: detectedPoP ? `Cloudflare VN (${detectedPoP})` : 'Cloudflare VN'
     });
   }
 

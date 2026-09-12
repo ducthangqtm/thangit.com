@@ -610,6 +610,8 @@ body {
   background: rgba(0, 240, 255, 0.1);
   border: 1px solid rgba(0, 240, 255, 0.25);
   color: var(--neon-cyan);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Tool Form Elements */

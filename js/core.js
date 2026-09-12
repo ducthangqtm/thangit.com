@@ -727,11 +727,11 @@ function initIpDnsUI() {
 
       if (serverBadge) {
         if (currentServerRegion === 'global') {
-          serverBadge.textContent = 'Máy chủ: Singapore Edge';
+          serverBadge.textContent = 'Singapore Edge';
         } else {
           serverBadge.textContent = lastSpeedResult && lastSpeedResult.detectedPoP && lastSpeedResult.serverRegion === 'vn'
-            ? `Máy chủ: Cloudflare VN (${lastSpeedResult.detectedPoP})`
-            : 'Máy chủ: Cloudflare VN';
+            ? `Cloudflare VN (${lastSpeedResult.detectedPoP})`
+            : 'Cloudflare VN';
         }
       }
     });
