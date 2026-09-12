@@ -63,8 +63,8 @@ function initCopyButtons() {
   const btnDiscord = document.getElementById('btn-discord-action') || document.getElementById('btn-discord-link');
   if (btnDiscord) {
     btnDiscord.addEventListener('click', () => {
-      navigator.clipboard.writeText('ducthangqtm').catch(() => {});
-      showToast('🚀 Đang mở Discord & đã sao chép username: <strong>ducthangqtm</strong>');
+      navigator.clipboard.writeText('thangnhayday').catch(() => {});
+      showToast('🚀 Đang mở Discord & đã sao chép username: <strong>@thangnhayday</strong>');
     });
   }
 }
