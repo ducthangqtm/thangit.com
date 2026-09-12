@@ -241,12 +241,15 @@
             <button type="button" class="copy-mini-btn" id="btn-refresh-ip" title="Kiểm tra lại"><i class="fas fa-sync-alt"></i></button>
           </div>
 
-          <div class="pwd-display-card" style="padding: 12px 14px;">
-            <div>
-              <div style="font-size:0.75rem; color:var(--text-dim); margin-bottom:2px;">Địa chỉ IP Public:</div>
+          <div class="pwd-display-card wan-ip-display-card" style="padding: 12px 14px;">
+            <div style="flex: 1; min-width: 0;">
+              <div class="wan-ip-header-meta">
+                <span style="font-size:0.75rem; color:var(--text-dim);">Địa chỉ IP Public:</span>
+                <span id="wan-isp-badge" class="wan-isp-badge" style="display:none;"></span>
+              </div>
               <div id="wan-ip-val" class="pwd-text-output" style="font-size:1.15rem; color:var(--neon-cyan);">Đang kiểm tra...</div>
             </div>
-            <button type="button" class="copy-mini-btn" id="btn-copy-wan-ip" title="Sao chép IP" style="font-size:1.1rem; padding:6px 10px;">
+            <button type="button" class="copy-mini-btn" id="btn-copy-wan-ip" title="Sao chép IP" style="font-size:1.1rem; padding:6px 10px; margin-left: 8px;">
               <i class="far fa-copy"></i>
             </button>
           </div>
@@ -256,7 +259,7 @@
         <div class="tool-card speedtest-pro-card">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-tachometer-alt" style="color:var(--neon-cyan);"></i> Đo Tốc Độ Mạng (Speedtest)</h3>
-            <span class="tool-tag-badge" id="st-server-badge">Máy chủ: Cloudflare HAN/SGN</span>
+            <span class="tool-tag-badge" id="st-server-badge">Máy chủ: Cloudflare VN</span>
           </div>
 
           <div class="speed-gauge-wrap">
@@ -294,10 +297,10 @@
           <!-- Server Region Selector Switch -->
           <div class="speed-server-switch-wrap" id="st-server-switch" role="group" aria-label="Chọn máy chủ kiểm tra">
             <button type="button" class="speed-server-btn active" data-server="vn">
-              <span>🇻🇳 Nội Địa (VN Edge)</span>
+              <span>🇻🇳 Nội Địa (HAN/SGN)</span>
             </button>
             <button type="button" class="speed-server-btn" data-server="global">
-              <span>🌐 Quốc Tế (Singapore / Global)</span>
+              <span>🌐 Quốc Tế (Singapore/Global)</span>
             </button>
           </div>
 

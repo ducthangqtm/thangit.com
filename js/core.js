@@ -641,9 +641,11 @@ function initPortUI() {
 /* 5. My IP & Cloudflare DoH DNS UI */
 async function loadWanIp() {
   const ipValEl = document.getElementById('wan-ip-val');
+  const ispBadgeEl = document.getElementById('wan-isp-badge');
   if (!ipValEl) return;
   ipValEl.textContent = 'Đang kiểm tra...';
   ipValEl.style.opacity = '0.6';
+  if (ispBadgeEl) ispBadgeEl.style.display = 'none';
 
   try {
     const res = typeof fetchClientIpInfo === 'function' 
@@ -653,11 +655,34 @@ async function loadWanIp() {
     ipValEl.textContent = res.ip;
     ipValEl.style.opacity = '1';
 
+    if (ispBadgeEl) {
+      let ispInfo = res.isp || res.org || '';
+      if (ispInfo.toLowerCase().includes('viettel')) ispInfo = 'Viettel Telecom';
+      else if (ispInfo.toLowerCase().includes('vnpt') || ispInfo.toLowerCase().includes('vietnam posts and telecommunications')) ispInfo = 'VNPT';
+      else if (ispInfo.toLowerCase().includes('fpt')) ispInfo = 'FPT Telecom';
+      else if (ispInfo.toLowerCase().includes('mobifone')) ispInfo = 'MobiFone';
+      else if (ispInfo.toLowerCase().includes('vinaphone')) ispInfo = 'VinaPhone';
+
+      let locInfo = res.city || res.region || '';
+      if (locInfo.toLowerCase() === 'hanoi') locInfo = 'Hà Nội';
+      else if (locInfo.toLowerCase() === 'ho chi minh city' || locInfo.toLowerCase() === 'saigon') locInfo = 'TP.HCM';
+      else if (locInfo.toLowerCase() === 'da nang') locInfo = 'Đà Nẵng';
+
+      const label = [ispInfo, locInfo ? `(${locInfo})` : ''].filter(Boolean).join(' ');
+      if (label) {
+        ispBadgeEl.textContent = label;
+        ispBadgeEl.style.display = 'inline-flex';
+      } else {
+        ispBadgeEl.style.display = 'none';
+      }
+    }
+
     const btnCopy = document.getElementById('btn-copy-wan-ip');
     if (btnCopy) btnCopy.setAttribute('data-copy', res.ip);
   } catch {
     ipValEl.textContent = 'Không thể lấy IP';
     ipValEl.style.opacity = '1';
+    if (ispBadgeEl) ispBadgeEl.style.display = 'none';
   }
 }
 
@@ -705,9 +730,11 @@ function initIpDnsUI() {
 
       if (serverBadge) {
         if (currentServerRegion === 'global') {
-          serverBadge.textContent = 'Máy chủ: Quốc Tế (SIN)';
+          serverBadge.textContent = 'Máy chủ: Singapore Edge';
         } else {
-          serverBadge.textContent = 'Máy chủ: Cloudflare HAN/SGN';
+          serverBadge.textContent = lastSpeedResult && lastSpeedResult.detectedPoP && lastSpeedResult.serverRegion === 'vn'
+            ? `Máy chủ: Cloudflare VN (${lastSpeedResult.detectedPoP})`
+            : 'Máy chủ: Cloudflare VN';
         }
       }
     });
@@ -733,7 +760,9 @@ function initIpDnsUI() {
       try {
         if (typeof runNetworkSpeedTest === 'function') {
           await runNetworkSpeedTest((data) => {
-            if (data.phase === 'ping') {
+            if (data.phase === 'pop_detected') {
+              if (serverBadge) serverBadge.textContent = data.serverChip;
+            } else if (data.phase === 'ping') {
               if (stStatusText) stStatusText.textContent = `Kiểm tra Ping (${data.currentSample}/${data.totalSamples})...`;
             } else if (data.phase === 'ping_done') {
               if (stPing) stPing.innerHTML = `${data.ping} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">ms</span>`;
@@ -776,7 +805,7 @@ function initIpDnsUI() {
   if (btnCopySpeed) {
     btnCopySpeed.addEventListener('click', () => {
       if (!lastSpeedResult) return;
-      const srvName = lastSpeedResult.serverName || (currentServerRegion === 'global' ? 'Quốc Tế (Singapore / Global)' : 'Cloudflare HAN/SGN (Nội Địa)');
+      const srvName = lastSpeedResult.serverName || (currentServerRegion === 'global' ? 'Singapore Edge (Quốc Tế)' : 'Cloudflare VN');
       const text = `📊 KẾT QUẢ ĐO TỐC ĐỘ MẠNG — Thắng iT (thangit.com)\n` +
         `• Máy chủ: ${srvName}\n` +
         `• Ping: ${lastSpeedResult.ping} ms (Jitter: ${lastSpeedResult.jitter} ms)\n` +

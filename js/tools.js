@@ -256,19 +256,55 @@ async function queryCloudflareDoH(domain, type) {
 }
 
 /* ==========================================================================
-   5. CLIENT IP & WAN INSPECTOR
+   5. CLIENT IP & WAN INSPECTOR (ISP & City Detection)
    ========================================================================== */
 async function fetchClientIpInfo() {
+  // Method 1: ipwho.is (CORS-friendly, rich ISP & City data)
   try {
-    // Try ipify first (extremely fast & reliable for Public IP)
-    const res = await fetch('https://api.ipify.org?format=json');
+    const res = await fetch('https://ipwho.is/', { cache: 'no-store' });
     if (res.ok) {
       const data = await res.json();
-      return { ip: data.ip, status: 'ok' };
+      if (data && data.success && data.ip) {
+        return {
+          ip: data.ip,
+          isp: data.connection?.isp || data.connection?.org || '',
+          org: data.connection?.org || '',
+          city: data.city || '',
+          country: data.country || 'VN',
+          status: 'ok'
+        };
+      }
     }
   } catch (e) {}
 
-  // Fallback via Cloudflare Trace
+  // Method 2: ipapi.co (CORS JSON)
+  try {
+    const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.ip && !data.error) {
+        return {
+          ip: data.ip,
+          isp: data.org || data.asn || '',
+          org: data.org || '',
+          city: data.city || '',
+          country: data.country_name || 'VN',
+          status: 'ok'
+        };
+      }
+    }
+  } catch (e) {}
+
+  // Method 3: ipify (Fast Public IP fallback)
+  try {
+    const res = await fetch('https://api.ipify.org?format=json');
+    if (res.ok) {
+      const data = await res.json();
+      return { ip: data.ip, isp: '', city: '', country: 'VN', status: 'ok' };
+    }
+  } catch (e) {}
+
+  // Method 4: Cloudflare Trace fallback
   try {
     const res = await fetch('https://1.1.1.1/cdn-cgi/trace');
     if (res.ok) {
@@ -282,6 +318,7 @@ async function fetchClientIpInfo() {
       return {
         ip: info.ip || 'Unknown',
         loc: info.loc || 'VN',
+        city: info.loc || 'VN',
         warp: info.warp || 'off',
         status: 'ok'
       };
@@ -321,8 +358,9 @@ async function runNetworkSpeedTest(onProgress, serverRegion = 'vn') {
     upload: 0,
     rating: '',
     ratingColor: '',
+    detectedPoP: isGlobal ? 'SIN' : 'VN',
     serverRegion: isGlobal ? 'global' : 'vn',
-    serverName: isGlobal ? 'Quốc Tế (Singapore / Global)' : 'Cloudflare HAN/SGN (Nội Địa)'
+    serverName: isGlobal ? 'Singapore Edge (Quốc Tế)' : 'Cloudflare VN'
   };
 
   if (!onProgress) onProgress = () => {};
@@ -332,6 +370,8 @@ async function runNetworkSpeedTest(onProgress, serverRegion = 'vn') {
   const pingUrl = isGlobal
     ? `https://sgp.download.datapacket.com/1mb.bin?_t=${Date.now()}`
     : `https://speed.cloudflare.com/__down?bytes=0&_t=${Date.now()}`;
+
+  let detectedPoP = isGlobal ? 'SIN' : '';
 
   for (let i = 0; i < 3; i++) {
     onProgress({ phase: 'ping', currentSample: i + 1, totalSamples: 3 });
@@ -344,26 +384,48 @@ async function runNetworkSpeedTest(onProgress, serverRegion = 'vn') {
           headers: { 'Range': 'bytes=0-0' }
         });
       } else {
-        await fetch(`${pingUrl}_${i}`, {
+        const resp = await fetch(`${pingUrl}_${i}`, {
           cache: 'no-store',
           mode: 'cors'
         });
+        if (!detectedPoP && resp.ok) {
+          const colo = resp.headers.get('cf-meta-colo');
+          if (colo) detectedPoP = colo.toUpperCase();
+        }
       }
       const t1 = performance.now();
       pingSamples.push(Math.round(t1 - t0));
     } catch (e) {
       try {
         const fb0 = performance.now();
-        await fetch(`https://speed.cloudflare.com/__down?bytes=0&_t=${Date.now()}_${i}`, {
+        const fbResp = await fetch(`https://speed.cloudflare.com/__down?bytes=0&_t=${Date.now()}_${i}`, {
           cache: 'no-store',
           mode: 'cors'
         });
+        if (!detectedPoP && fbResp.ok) {
+          const colo = fbResp.headers.get('cf-meta-colo');
+          if (colo) detectedPoP = colo.toUpperCase();
+        }
         const fb1 = performance.now();
         pingSamples.push(Math.round(fb1 - fb0) + (isGlobal ? 32 : 0));
       } catch (err2) {
         pingSamples.push(isGlobal ? 46 : 24);
       }
     }
+  }
+
+  if (isGlobal) {
+    result.detectedPoP = 'SIN';
+    result.serverName = 'Singapore Edge (Quốc Tế)';
+    onProgress({ phase: 'pop_detected', pop: 'SIN', serverChip: 'Máy chủ: Singapore Edge' });
+  } else {
+    result.detectedPoP = detectedPoP || 'VN';
+    result.serverName = detectedPoP ? `Cloudflare VN (${detectedPoP})` : 'Cloudflare VN';
+    onProgress({
+      phase: 'pop_detected',
+      pop: detectedPoP,
+      serverChip: detectedPoP ? `Máy chủ: Cloudflare VN (${detectedPoP})` : 'Máy chủ: Cloudflare VN'
+    });
   }
 
   const avgPing = Math.round(pingSamples.reduce((a, b) => a + b, 0) / pingSamples.length);
