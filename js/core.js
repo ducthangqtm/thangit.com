@@ -690,8 +690,28 @@ function initIpDnsUI() {
   const stDown = document.getElementById('st-down');
   const stUp = document.getElementById('st-up');
   const stRatingBanner = document.getElementById('st-rating-banner');
+  const serverBadge = document.getElementById('st-server-badge');
+  const serverBtns = document.querySelectorAll('#st-server-switch .speed-server-btn');
 
   let lastSpeedResult = null;
+  let currentServerRegion = 'vn';
+
+  // Server Region Switcher
+  serverBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      serverBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentServerRegion = btn.getAttribute('data-server') || 'vn';
+
+      if (serverBadge) {
+        if (currentServerRegion === 'global') {
+          serverBadge.textContent = 'Máy chủ: Quốc Tế (SIN)';
+        } else {
+          serverBadge.textContent = 'Máy chủ: Cloudflare HAN/SGN';
+        }
+      }
+    });
+  });
 
   if (btnStartSpeed) {
     btnStartSpeed.addEventListener('click', async () => {
@@ -741,7 +761,7 @@ function initIpDnsUI() {
               }
               if (btnCopySpeed) btnCopySpeed.style.display = 'inline-flex';
             }
-          });
+          }, currentServerRegion);
         }
       } catch (err) {
         if (stStatusText) stStatusText.textContent = 'Đo tốc độ bị gián đoạn';
@@ -756,12 +776,13 @@ function initIpDnsUI() {
   if (btnCopySpeed) {
     btnCopySpeed.addEventListener('click', () => {
       if (!lastSpeedResult) return;
+      const srvName = lastSpeedResult.serverName || (currentServerRegion === 'global' ? 'Quốc Tế (Singapore / Global)' : 'Cloudflare HAN/SGN (Nội Địa)');
       const text = `📊 KẾT QUẢ ĐO TỐC ĐỘ MẠNG — Thắng iT (thangit.com)\n` +
+        `• Máy chủ: ${srvName}\n` +
         `• Ping: ${lastSpeedResult.ping} ms (Jitter: ${lastSpeedResult.jitter} ms)\n` +
         `• Download: ${lastSpeedResult.download} Mbps\n` +
         `• Upload: ${lastSpeedResult.upload} Mbps\n` +
-        `• Đánh giá: ${lastSpeedResult.rating}\n` +
-        `• Máy chủ: Cloudflare Edge Network`;
+        `• Đánh giá: ${lastSpeedResult.rating}`;
       navigator.clipboard.writeText(text).then(() => {
         showToast('📋 Đã sao chép kết quả đo tốc độ!');
       }).catch(() => {

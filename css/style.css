@@ -1108,6 +1108,51 @@ body {
   animation: fadeInTool 0.3s ease;
 }
 
+/* Speedtest Server Switcher (Dark Neon Pills) */
+.speed-server-switch-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  width: 100%;
+}
+
+.speed-server-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 6px;
+  background: rgba(13, 18, 29, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-btn);
+  color: var(--text-dim);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.speed-server-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-hover);
+  color: #fff;
+}
+
+.speed-server-btn.active {
+  background: rgba(0, 240, 255, 0.12) !important;
+  border-color: var(--neon-cyan) !important;
+  color: var(--neon-cyan) !important;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25) !important;
+}
+
+@media (max-width: 380px) {
+  .speed-server-btn {
+    font-size: 0.68rem;
+    padding: 7px 4px;
+  }
+}
+
 /* ==========================================================================
    5. CV TAB (PROFILE & GIT REPOSITORIES)
    ========================================================================== */

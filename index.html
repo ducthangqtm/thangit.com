@@ -256,7 +256,7 @@
         <div class="tool-card speedtest-pro-card">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-tachometer-alt" style="color:var(--neon-cyan);"></i> Đo Tốc Độ Mạng (Speedtest)</h3>
-            <span class="tool-tag-badge">Cloudflare Edge</span>
+            <span class="tool-tag-badge" id="st-server-badge">Máy chủ: Cloudflare HAN/SGN</span>
           </div>
 
           <div class="speed-gauge-wrap">
@@ -290,6 +290,16 @@
           </div>
 
           <div id="st-rating-banner" class="speed-rating-banner" style="display:none;"></div>
+
+          <!-- Server Region Selector Switch -->
+          <div class="speed-server-switch-wrap" id="st-server-switch" role="group" aria-label="Chọn máy chủ kiểm tra">
+            <button type="button" class="speed-server-btn active" data-server="vn">
+              <span>🇻🇳 Nội Địa (VN Edge)</span>
+            </button>
+            <button type="button" class="speed-server-btn" data-server="global">
+              <span>🌐 Quốc Tế (Singapore / Global)</span>
+            </button>
+          </div>
 
           <div style="display: flex; gap: 8px; margin-top: 10px;">
             <button type="button" class="tool-btn-action" id="btn-start-speedtest" style="flex:1;">

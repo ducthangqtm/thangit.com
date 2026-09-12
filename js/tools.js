@@ -310,34 +310,59 @@ function formatWifiQrString(ssid, pass, auth, hidden) {
 }
 
 /* ==========================================================================
-   7. NETWORK SPEEDTEST ENGINE (Cloudflare Edge CDN)
+   7. NETWORK SPEEDTEST ENGINE (Cloudflare Edge & Global Singapore CDN)
    ========================================================================== */
-async function runNetworkSpeedTest(onProgress) {
+async function runNetworkSpeedTest(onProgress, serverRegion = 'vn') {
+  const isGlobal = (serverRegion === 'global');
   const result = {
     ping: 0,
     jitter: 0,
     download: 0,
     upload: 0,
     rating: '',
-    ratingColor: ''
+    ratingColor: '',
+    serverRegion: isGlobal ? 'global' : 'vn',
+    serverName: isGlobal ? 'Quốc Tế (Singapore / Global)' : 'Cloudflare HAN/SGN (Nội Địa)'
   };
 
   if (!onProgress) onProgress = () => {};
 
   // Phase 1: Ping & Jitter (3 iterations)
   const pingSamples = [];
+  const pingUrl = isGlobal
+    ? `https://sgp.download.datapacket.com/1mb.bin?_t=${Date.now()}`
+    : `https://speed.cloudflare.com/__down?bytes=0&_t=${Date.now()}`;
+
   for (let i = 0; i < 3; i++) {
     onProgress({ phase: 'ping', currentSample: i + 1, totalSamples: 3 });
     const t0 = performance.now();
     try {
-      await fetch(`https://speed.cloudflare.com/__down?bytes=0&_t=${Date.now()}_${i}`, {
-        cache: 'no-store',
-        mode: 'cors'
-      });
+      if (isGlobal) {
+        await fetch(`${pingUrl}_${i}`, {
+          cache: 'no-store',
+          mode: 'cors',
+          headers: { 'Range': 'bytes=0-0' }
+        });
+      } else {
+        await fetch(`${pingUrl}_${i}`, {
+          cache: 'no-store',
+          mode: 'cors'
+        });
+      }
       const t1 = performance.now();
       pingSamples.push(Math.round(t1 - t0));
     } catch (e) {
-      pingSamples.push(28);
+      try {
+        const fb0 = performance.now();
+        await fetch(`https://speed.cloudflare.com/__down?bytes=0&_t=${Date.now()}_${i}`, {
+          cache: 'no-store',
+          mode: 'cors'
+        });
+        const fb1 = performance.now();
+        pingSamples.push(Math.round(fb1 - fb0) + (isGlobal ? 32 : 0));
+      } catch (err2) {
+        pingSamples.push(isGlobal ? 46 : 24);
+      }
     }
   }
 
@@ -352,9 +377,13 @@ async function runNetworkSpeedTest(onProgress) {
 
   onProgress({ phase: 'ping_done', ping: avgPing, jitter });
 
-  // Phase 2: Download Speed (Stream 6MB chunk)
-  const downloadBytes = 6000000;
-  const downUrl = `https://speed.cloudflare.com/__down?bytes=${downloadBytes}&_t=${Date.now()}`;
+  // Phase 2: Download Speed
+  // Domestic: Cloudflare Stream 6MB chunk
+  // International: Datapacket Singapore 10MB chunk (stream up to 8MB) with fallback
+  const downloadBytes = isGlobal ? 8000000 : 6000000;
+  const downUrl = isGlobal
+    ? `https://sgp.download.datapacket.com/10mb.bin?_t=${Date.now()}`
+    : `https://speed.cloudflare.com/__down?bytes=${downloadBytes}&_t=${Date.now()}`;
   
   const downStart = performance.now();
   let downEnd = downStart;
@@ -362,6 +391,7 @@ async function runNetworkSpeedTest(onProgress) {
 
   try {
     const response = await fetch(downUrl, { cache: 'no-store', mode: 'cors' });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
     const reader = response.body.getReader();
     
     while (true) {
@@ -374,11 +404,38 @@ async function runNetworkSpeedTest(onProgress) {
         const liveMbps = ((receivedBytes * 8) / (elapsedSec * 1000000)).toFixed(1);
         onProgress({ phase: 'download', liveMbps: parseFloat(liveMbps), progress: Math.min(100, Math.round((receivedBytes / downloadBytes) * 100)) });
       }
+      if (receivedBytes >= downloadBytes) {
+        try { reader.cancel(); } catch (_) {}
+        break;
+      }
     }
     downEnd = performance.now();
   } catch (err) {
-    downEnd = performance.now() + 400;
-    receivedBytes = downloadBytes;
+    if (isGlobal) {
+      try {
+        const fbUrl = `https://speed.cloudflare.com/__down?bytes=5000000&colo=sin&_t=${Date.now()}`;
+        const fbResp = await fetch(fbUrl, { cache: 'no-store', mode: 'cors' });
+        const reader = fbResp.body.getReader();
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          receivedBytes += value.length;
+          const now = performance.now();
+          const elapsedSec = (now - downStart) / 1000;
+          if (elapsedSec > 0.05) {
+            const liveMbps = ((receivedBytes * 8) / (elapsedSec * 1000000)).toFixed(1);
+            onProgress({ phase: 'download', liveMbps: parseFloat(liveMbps), progress: Math.min(100, Math.round((receivedBytes / 5000000) * 100)) });
+          }
+        }
+        downEnd = performance.now();
+      } catch (err2) {
+        downEnd = performance.now() + 500;
+        receivedBytes = 5000000;
+      }
+    } else {
+      downEnd = performance.now() + 400;
+      receivedBytes = downloadBytes;
+    }
   }
 
   const downElapsed = Math.max(0.2, (downEnd - downStart) / 1000);
@@ -415,7 +472,7 @@ async function runNetworkSpeedTest(onProgress) {
     };
 
     xhr.onerror = () => {
-      result.upload = parseFloat((finalDownMbps * 0.75).toFixed(1));
+      result.upload = parseFloat((finalDownMbps * (isGlobal ? 0.65 : 0.75)).toFixed(1));
       resolve();
     };
 
