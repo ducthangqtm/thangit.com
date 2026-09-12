@@ -649,6 +649,14 @@ body {
   box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
 }
 
+.tool-input::placeholder,
+.port-search-input::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+  opacity: 1;
+}
+
 .tool-chip-group {
   display: flex;
   flex-wrap: wrap;
@@ -890,6 +898,16 @@ body {
   gap: 10px;
 }
 
+.wan-ip-display-card {
+  overflow: hidden;
+}
+
+.wan-ip-info-col {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
 .pwd-text-output {
   font-family: var(--font-mono);
   font-size: 1.05rem;
@@ -900,13 +918,24 @@ body {
   user-select: all;
 }
 
+#wan-ip-val.pwd-text-output {
+  font-size: clamp(0.85rem, 3.8vw, 1.15rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: normal;
+  display: block;
+  max-width: 100%;
+}
+
 .wan-ip-header-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   margin-bottom: 3px;
+  overflow: hidden;
 }
 
 .wan-isp-badge {
@@ -924,6 +953,9 @@ body {
   white-space: nowrap;
   letter-spacing: 0.02em;
   box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pwd-check-label {

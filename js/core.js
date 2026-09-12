@@ -354,7 +354,8 @@ function initSubnetUI() {
 
   function updateSubnet() {
     if (typeof calculateSubnet !== 'function') return;
-    const ipStr = ipInput.value.trim();
+    const rawIp = ipInput.value.trim();
+    const ipStr = rawIp || '192.168.1.1';
     const prefix = prefixSelect.value;
     const res = calculateSubnet(ipStr, prefix);
 
@@ -398,7 +399,7 @@ function initSubnetUI() {
   const btnSummary = document.getElementById('btn-copy-subnet-summary');
   if (btnSummary) {
     btnSummary.addEventListener('click', () => {
-      const ip = ipInput.value.trim();
+      const ip = ipInput.value.trim() || '192.168.1.1';
       const prefix = prefixSelect.value;
       const mask = document.getElementById('res-mask')?.textContent || '';
       const wildcard = document.getElementById('res-wildcard')?.textContent || '';
@@ -438,8 +439,8 @@ function triggerWifiQrRender() {
   const canvas = document.getElementById('wifi-qr-canvas');
   if (!canvas) return;
 
-  const ssid = document.getElementById('wifi-ssid')?.value.trim() || 'ThangIT_Office_5G';
-  const pass = document.getElementById('wifi-pass')?.value || 'thangit@2026';
+  const ssid = document.getElementById('wifi-ssid')?.value.trim() || 'Cong_Ty_TNHH_5G';
+  const pass = document.getElementById('wifi-pass')?.value || '12345678';
   const auth = document.getElementById('wifi-auth')?.value || 'WPA';
   const hidden = document.getElementById('wifi-hidden')?.checked || false;
 
@@ -464,10 +465,6 @@ function initWifiQrUI() {
   const hiddenCheck = document.getElementById('wifi-hidden');
 
   if (!ssidInput || !passInput) return;
-
-  // Default seed values if empty
-  if (!ssidInput.value) ssidInput.value = 'ThangIT_Office_5G';
-  if (!passInput.value) passInput.value = 'thangit@2026';
 
   let debounceTimer = null;
   function scheduleRender() {

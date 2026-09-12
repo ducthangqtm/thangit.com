@@ -242,14 +242,14 @@
           </div>
 
           <div class="pwd-display-card wan-ip-display-card" style="padding: 12px 14px;">
-            <div style="flex: 1; min-width: 0;">
+            <div class="wan-ip-info-col" style="flex: 1; min-width: 0;">
               <div class="wan-ip-header-meta">
                 <span style="font-size:0.75rem; color:var(--text-dim);">Địa chỉ IP Public:</span>
                 <span id="wan-isp-badge" class="wan-isp-badge" style="display:none;"></span>
               </div>
-              <div id="wan-ip-val" class="pwd-text-output" style="font-size:1.15rem; color:var(--neon-cyan);">Đang kiểm tra...</div>
+              <div id="wan-ip-val" class="pwd-text-output" style="color:var(--neon-cyan);">Đang kiểm tra...</div>
             </div>
-            <button type="button" class="copy-mini-btn" id="btn-copy-wan-ip" title="Sao chép IP" style="font-size:1.1rem; padding:6px 10px; margin-left: 8px;">
+            <button type="button" class="copy-mini-btn" id="btn-copy-wan-ip" title="Sao chép IP" style="font-size:1.1rem; padding:6px 10px; margin-left: 8px; flex-shrink: 0;">
               <i class="far fa-copy"></i>
             </button>
           </div>
@@ -327,7 +327,7 @@
           <div class="tool-form-grid">
             <div class="tool-field">
               <label class="tool-label" for="dns-domain">Tên miền cần tra cứu:</label>
-              <input type="text" id="dns-domain" class="tool-input" value="thangit.com" placeholder="google.com hoặc thangit.com" autocomplete="off">
+              <input type="text" id="dns-domain" class="tool-input" placeholder="VD: google.com, cloudflare.com..." autocomplete="off">
             </div>
             <div class="tool-field">
               <label class="tool-label" for="dns-type">Loại bản ghi:</label>
@@ -390,7 +390,7 @@
           <div class="tool-form-grid">
             <div class="tool-field">
               <label class="tool-label" for="subnet-ip">Địa chỉ IP:</label>
-              <input type="text" id="subnet-ip" class="tool-input" value="192.168.1.100" placeholder="192.168.1.100" autocomplete="off">
+              <input type="text" id="subnet-ip" class="tool-input" placeholder="VD: 192.168.1.1" autocomplete="off">
             </div>
             <div class="tool-field">
               <label class="tool-label" for="subnet-prefix">Tiền tố Subnet Mask (/CIDR):</label>
@@ -457,11 +457,11 @@
           <div class="tool-form-grid">
             <div class="tool-field">
               <label class="tool-label" for="wifi-ssid">Tên Wi-Fi (SSID):</label>
-              <input type="text" id="wifi-ssid" class="tool-input" placeholder="Ví dụ: ThangIT_Guest_5G" autocomplete="off">
+              <input type="text" id="wifi-ssid" class="tool-input" placeholder="VD: Cong_Ty_TNHH_5G" autocomplete="off">
             </div>
             <div class="tool-field">
               <label class="tool-label" for="wifi-pass">Mật Khẩu Wi-Fi:</label>
-              <input type="text" id="wifi-pass" class="tool-input" placeholder="Nhập mật khẩu (để trống nếu Open)" autocomplete="off">
+              <input type="text" id="wifi-pass" class="tool-input" placeholder="Nhập mật khẩu Wi-Fi..." autocomplete="off">
             </div>
             <div class="tool-field">
               <label class="tool-label" for="wifi-auth">Chuẩn Bảo Mật:</label>
