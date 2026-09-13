@@ -382,14 +382,14 @@
             <span class="tool-tag-badge">IPv4 Engine</span>
           </div>
 
-          <div class="subnet-input-row" style="display: flex; gap: 8px;">
-            <div class="tool-field subnet-ip-field" style="flex: 58; min-width: 0;">
+          <div class="subnet-input-row">
+            <div class="tool-field subnet-ip-field">
               <label class="tool-label" for="subnet-ip">Địa chỉ IP:</label>
               <input type="text" id="subnet-ip" class="tool-input" placeholder="VD: 192.168.1.1" autocomplete="off">
             </div>
-            <div class="tool-field subnet-mask-field" style="flex: 42; min-width: 0;">
-              <label class="tool-label" for="subnet-prefix">Subnet Mask (/CIDR):</label>
-              <select id="subnet-prefix" class="tool-select">
+            <div class="tool-field subnet-mask-field">
+              <label class="tool-label" for="subnet-prefix">CIDR / Subnet:</label>
+              <select id="subnet-prefix" class="tool-select subnet-cidr-select">
                 <!-- Dropdown populated by JS -->
               </select>
             </div>

@@ -334,17 +334,11 @@ function initSubnetUI() {
       const opt = document.createElement('option');
       opt.value = p;
       let note = '';
-      if (p === 24) note = ' - 254 Hosts (Mạng LAN)';
-      else if (p === 16) note = ' - 65,534 Hosts (Doanh Nghiệp)';
-      else if (p === 26) note = ' - 62 Hosts (Phòng ban)';
-      else if (p === 27) note = ' - 30 Hosts (Phân đoạn)';
-      else if (p === 28) note = ' - 14 Hosts (Server / DMZ)';
-      else if (p === 29) note = ' - 6 Hosts (Cụm thiết bị)';
-      else if (p === 30) note = ' - 2 Hosts (Point-to-Point / VPN)';
-      else if (p === 32) note = ' - Single Host IP';
+      if (p === 32) note = ' (1 host)';
+      else if (p === 31) note = ' (2 hosts)';
       else {
-        const hosts = p === 31 ? 2 : Math.max(0, Math.pow(2, 32 - p) - 2);
-        note = ` - ${hosts.toLocaleString('vi-VN')} Hosts`;
+        const hosts = Math.max(0, Math.pow(2, 32 - p) - 2);
+        note = ` (${hosts.toLocaleString('vi-VN')} hosts)`;
       }
       opt.textContent = `/${p}${note}`;
       if (p === 24) opt.selected = true;
