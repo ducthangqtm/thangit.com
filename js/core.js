@@ -597,21 +597,23 @@ function initPortUI() {
       return;
     }
 
-    container.innerHTML = list.map(item => `
-      <div class="port-item-card">
-        <div class="port-num-badge">
-          <span class="port-num">${item.port}</span>
-          <span class="port-proto">${item.proto}</span>
+    container.innerHTML = list.map(item => {
+      if (typeof window !== 'undefined' && typeof window.renderPortItemHtml === 'function') {
+        return window.renderPortItemHtml(item);
+      }
+      return `
+        <div class="port-item-card port-item">
+          <div class="port-num-badge">
+            <span class="port-num">${item.port}</span>
+            <span class="port-proto">${item.proto}</span>
+          </div>
+          <span class="port-desc"><strong>${item.name}</strong> • ${item.desc}</span>
+          <button type="button" class="copy-mini-btn" data-copy="${item.port}" title="Sao chép cổng ${item.port}">
+            <i class="far fa-copy"></i>
+          </button>
         </div>
-        <div class="port-info">
-          <div class="port-name">${item.name}</div>
-          <div class="port-desc">${item.desc}</div>
-        </div>
-        <button type="button" class="copy-mini-btn" data-copy="${item.port}" title="Sao chép cổng ${item.port}">
-          <i class="far fa-copy"></i>
-        </button>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     initCopyButtons();
   }

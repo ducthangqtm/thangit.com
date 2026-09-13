@@ -896,7 +896,7 @@ textarea::placeholder {
 .port-list-scroll {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   max-height: 380px;
   overflow-y: auto;
   padding-right: 4px;
@@ -911,57 +911,85 @@ textarea::placeholder {
   border-radius: 4px;
 }
 
-.port-item-card {
+.port-item-card,
+.port-item {
   background: #111726;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 10px 12px;
+  border-radius: 8px;
+  padding: 7px 10px;
+  min-height: 38px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   transition: background 0.15s, border-color 0.15s;
 }
 
-.port-item-card:hover {
+.port-item-card:hover,
+.port-item:hover {
   background: #162035;
   border-color: rgba(0, 240, 255, 0.25);
 }
 
 .port-num-badge {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 800;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--neon-cyan);
   background: rgba(0, 240, 255, 0.1);
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 2px 6px;
+  border-radius: 5px;
   border: 1px solid rgba(0, 240, 255, 0.2);
-  min-width: 58px;
+  min-width: 66px;
+  max-width: 76px;
+  flex-shrink: 0;
   text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  white-space: nowrap;
 }
 
-.port-info-main {
+.port-num-badge .port-proto {
+  font-size: 0.62rem;
+  opacity: 0.75;
+  font-weight: 600;
+}
+
+.port-desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   flex: 1;
   min-width: 0;
-}
-
-.port-name-text {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.port-desc-text {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   color: var(--text-dim);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 2px;
+}
+
+.port-desc strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.port-item .copy-mini-btn,
+.port-item-card .copy-mini-btn {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: opacity 0.15s, color 0.15s;
+}
+
+.port-item .copy-mini-btn:hover,
+.port-item-card .copy-mini-btn:hover {
+  opacity: 1;
+  color: var(--neon-cyan);
 }
 
 /* IP WAN Display & Wi-Fi Checkbox */

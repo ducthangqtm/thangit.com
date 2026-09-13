@@ -166,8 +166,24 @@ const NETWORK_PORTS_DATABASE = [
   { port: 10051, proto: 'TCP', name: 'Zabbix Server', cat: 'infra', desc: 'Server tập trung Zabbix' }
 ];
 
+function renderPortItemHtml(item) {
+  return `
+    <div class="port-item-card port-item">
+      <div class="port-num-badge">
+        <span class="port-num">${item.port}</span>
+        <span class="port-proto">${item.proto}</span>
+      </div>
+      <span class="port-desc"><strong>${item.name}</strong> • ${item.desc}</span>
+      <button type="button" class="copy-mini-btn" data-copy="${item.port}" title="Sao chép cổng ${item.port}">
+        <i class="far fa-copy"></i>
+      </button>
+    </div>
+  `.trim();
+}
+
 if (typeof window !== 'undefined') {
   window.NETWORK_PORTS_DATABASE = NETWORK_PORTS_DATABASE;
+  window.renderPortItemHtml = renderPortItemHtml;
 }
 
 /* ==========================================================================
