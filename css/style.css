@@ -777,6 +777,14 @@ body {
   box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
 }
 
+.tool-input:disabled, .tool-select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+}
+
 .tool-input::placeholder,
 .port-search-input::placeholder,
 input::placeholder,

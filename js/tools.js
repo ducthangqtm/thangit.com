@@ -343,8 +343,10 @@ function formatWifiQrString(ssid, pass, auth, hidden) {
   function escape(str) {
     return (str || '').replace(/([\\;,:"])/g, '\\$1');
   }
-  let qr = `WIFI:T:${auth || 'WPA'};S:${escape(ssid || '')};`;
-  if (auth !== 'nopass' && pass) {
+  const isNoPass = !auth || auth === 'nopass' || auth === 'none' || auth === 'open';
+  const authType = isNoPass ? 'nopass' : auth;
+  let qr = `WIFI:T:${authType};S:${escape(ssid || '')};`;
+  if (!isNoPass && pass) {
     qr += `P:${escape(pass)};`;
   }
   if (hidden) {
@@ -632,5 +634,6 @@ if (typeof window !== 'undefined') {
   window.formatSpeedtestShareText = formatSpeedtestShareText;
   window.formatDnsResultsText = formatDnsResultsText;
   window.getSpeedVerdict = getSpeedVerdict;
+  window.formatWifiQrString = formatWifiQrString;
 }
 

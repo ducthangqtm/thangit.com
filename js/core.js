@@ -442,13 +442,16 @@ function triggerWifiQrRender() {
   if (!canvas) return;
 
   const ssid = document.getElementById('wifi-ssid')?.value.trim() || 'Cong_Ty_TNHH_5G';
-  const pass = document.getElementById('wifi-pass')?.value || '12345678';
   const auth = document.getElementById('wifi-auth')?.value || 'WPA';
+  const isNoPass = auth === 'nopass' || auth === 'none' || auth === 'open';
+  const pass = isNoPass ? '' : (document.getElementById('wifi-pass')?.value || '');
   const hidden = document.getElementById('wifi-hidden')?.checked || false;
 
   const qrStr = typeof formatWifiQrString === 'function'
     ? formatWifiQrString(ssid, pass, auth, hidden)
-    : `WIFI:T:${auth};S:${ssid};P:${pass};;`;
+    : (isNoPass
+        ? `WIFI:T:nopass;S:${ssid};${hidden ? 'H:true;' : ''};`
+        : `WIFI:T:${auth};S:${ssid};P:${pass};${hidden ? 'H:true;' : ''};`);
 
   if (window.TiTQR && window.TiTQR.render) {
     window.TiTQR.render(canvas, {
@@ -468,6 +471,18 @@ function initWifiQrUI() {
 
   if (!ssidInput || !passInput) return;
 
+  function syncAuthInputState() {
+    const isNoPass = authSelect ? (authSelect.value === 'nopass' || authSelect.value === 'none' || authSelect.value === 'open') : false;
+    if (isNoPass) {
+      passInput.value = '';
+      passInput.disabled = true;
+      passInput.placeholder = 'Không yêu cầu mật khẩu';
+    } else {
+      passInput.disabled = false;
+      passInput.placeholder = 'Nhập mật khẩu...';
+    }
+  }
+
   let debounceTimer = null;
   function scheduleRender() {
     clearTimeout(debounceTimer);
@@ -476,8 +491,16 @@ function initWifiQrUI() {
 
   ssidInput.addEventListener('input', scheduleRender);
   passInput.addEventListener('input', scheduleRender);
-  if (authSelect) authSelect.addEventListener('change', scheduleRender);
+  if (authSelect) {
+    authSelect.addEventListener('change', () => {
+      syncAuthInputState();
+      scheduleRender();
+    });
+  }
   if (hiddenCheck) hiddenCheck.addEventListener('change', scheduleRender);
+
+  // Sync initial state
+  syncAuthInputState();
 
   // Download PNG Button
   const btnDownload = document.getElementById('btn-download-wifi-qr');
@@ -502,8 +525,10 @@ function initWifiQrUI() {
       if (!canvas) return;
       const dataUrl = canvas.toDataURL('image/png');
       const ssid = ssidInput.value.trim() || 'Mạng Wi-Fi';
-      const pass = passInput.value || '(Không có mật khẩu)';
+      const isNoPass = authSelect ? (authSelect.value === 'nopass' || authSelect.value === 'none' || authSelect.value === 'open') : false;
+      const pass = isNoPass ? '' : (passInput.value || '');
       const auth = authSelect ? authSelect.options[authSelect.selectedIndex].text : 'WPA2/WPA3';
+      const passRowHtml = isNoPass ? '' : `<div class="info-item">Mật khẩu: <strong>${pass}</strong></div>`;
 
       const printWin = window.open('', '_blank', 'width=600,height=720');
       if (!printWin) {
@@ -535,7 +560,7 @@ function initWifiQrUI() {
             <img src="${dataUrl}" class="qr-img" alt="Wi-Fi QR">
             <div class="info-box">
               <div class="info-item">Tên Wi-Fi (SSID): <strong>${ssid}</strong></div>
-              <div class="info-item">Mật khẩu: <strong>${pass}</strong></div>
+              ${passRowHtml}
               <div class="info-item">Bảo mật: <span>${auth}</span></div>
             </div>
             <div class="footer">Thắng iT • thangit.com</div>
