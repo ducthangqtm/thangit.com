@@ -1676,19 +1676,38 @@ textarea::placeholder {
 }
 
 .cv-pills-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
 }
 
 .cv-pill {
   font-size: 0.72rem;
   font-weight: 600;
-  padding: 4px 9px;
+  padding: 8px 6px;
   border-radius: 8px;
   background: rgba(0, 240, 255, 0.08);
   border: 1px solid rgba(0, 240, 255, 0.2);
   color: var(--neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.35;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.cv-pill:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: rgba(0, 240, 255, 0.4);
+}
+
+@media (max-width: 480px) {
+  .cv-pills-wrap {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
 }
 
 .cv-contact-row {
