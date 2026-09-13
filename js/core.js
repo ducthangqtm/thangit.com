@@ -785,7 +785,7 @@ function initIpDnsUI() {
               if (stGaugeCircle) stGaugeCircle.classList.remove('testing');
               if (stRatingBanner) {
                 stRatingBanner.style.display = 'block';
-                stRatingBanner.textContent = `⚡ ${data.result.rating}`;
+                stRatingBanner.textContent = data.result.rating;
                 stRatingBanner.style.borderColor = data.result.ratingColor;
                 stRatingBanner.style.color = data.result.ratingColor;
               }

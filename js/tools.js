@@ -357,6 +357,31 @@ function formatWifiQrString(ssid, pass, auth, hidden) {
 /* ==========================================================================
    7. NETWORK SPEEDTEST ENGINE (Cloudflare Edge & Global Singapore CDN)
    ========================================================================== */
+function getSpeedVerdict(downloadSpeed) {
+  const speed = parseFloat(downloadSpeed) || 0;
+  if (speed >= 100) {
+    return {
+      rating: '🚀 Rất Nhanh • Streaming 4K & Gaming',
+      ratingColor: '#00ff9d'
+    };
+  } else if (speed >= 50) {
+    return {
+      rating: '⚡ Mượt Mà • Làm Việc & Giải Trí Tốt',
+      ratingColor: '#00f0ff'
+    };
+  } else if (speed >= 25) {
+    return {
+      rating: 'Ổn Định • Nhu Cầu Hàng Ngày',
+      ratingColor: '#38bdf8'
+    };
+  } else {
+    return {
+      rating: '⚠️ Tốc Độ Thấp • Có Thể Gián Đoạn',
+      ratingColor: '#f59e0b'
+    };
+  }
+}
+
 async function runNetworkSpeedTest(onProgress, serverRegion = 'vn') {
   const isGlobal = (serverRegion === 'global');
   const result = {
@@ -550,17 +575,10 @@ async function runNetworkSpeedTest(onProgress, serverRegion = 'vn') {
     xhr.send(uploadData);
   });
 
-  // Rating
-  if (result.download >= 80 && result.ping <= 35) {
-    result.rating = 'Siêu Tốc • 4K HDR & Game Esports Mượt Mà';
-    result.ratingColor = '#00ff9d';
-  } else if (result.download >= 30) {
-    result.rating = 'Rất Tốt • Xem Video Full HD & Họp Zoom Trơn Tru';
-    result.ratingColor = '#00f0ff';
-  } else {
-    result.rating = 'Bình Thường • Phù Hợp Lướt Web & Đọc Báo';
-    result.ratingColor = '#f59e0b';
-  }
+  // Rating & Verdict
+  const verdict = getSpeedVerdict(result.download);
+  result.rating = verdict.rating;
+  result.ratingColor = verdict.ratingColor;
 
   onProgress({ phase: 'complete', result });
   return result;
@@ -613,5 +631,6 @@ if (typeof window !== 'undefined') {
   window.formatSubnetSummaryText = formatSubnetSummaryText;
   window.formatSpeedtestShareText = formatSpeedtestShareText;
   window.formatDnsResultsText = formatDnsResultsText;
+  window.getSpeedVerdict = getSpeedVerdict;
 }
 

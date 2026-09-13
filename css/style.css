@@ -1368,7 +1368,17 @@ textarea::placeholder {
   align-items: center;
   justify-content: center;
   gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   animation: fadeInTool 0.3s ease;
+}
+
+@media (max-width: 420px) {
+  .speed-rating-banner {
+    font-size: 0.72rem;
+    padding: 6px 6px;
+  }
 }
 
 /* Speedtest Server Switcher (Dark Neon Pills) */
