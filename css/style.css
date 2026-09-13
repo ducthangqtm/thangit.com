@@ -681,6 +681,87 @@ body {
   }
 }
 
+/* Wi-Fi Compact 2-Row Form */
+.wifi-form-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wifi-row-ssid {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+.wifi-hidden-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 10px;
+  background: var(--bg-input);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-btn);
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  user-select: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.wifi-hidden-check:hover {
+  border-color: rgba(0, 240, 255, 0.35);
+  color: #fff;
+}
+
+.wifi-hidden-check input[type="checkbox"] {
+  accent-color: var(--neon-cyan);
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+
+.wifi-row-security {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.wifi-form-compact .tool-label {
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+}
+
+.wifi-row-security select.tool-select {
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 480px) {
+  .wifi-row-ssid,
+  .wifi-row-security {
+    gap: 8px;
+  }
+  .wifi-hidden-check {
+    padding: 0 8px;
+    font-size: 0.72rem;
+    height: 38px;
+  }
+  .wifi-form-compact .tool-input,
+  .wifi-form-compact .tool-select {
+    padding: 9px 8px;
+    font-size: 0.82rem;
+    height: 38px;
+  }
+}
+
 .tool-input, .tool-select {
   width: 100%;
   background: var(--bg-input);

@@ -442,27 +442,32 @@
             <span class="tool-tag-badge">WPA2/WPA3 Fast Connect</span>
           </div>
 
-          <div class="tool-form-grid">
-            <div class="tool-field">
-              <label class="tool-label" for="wifi-ssid">Tên Wi-Fi (SSID):</label>
-              <input type="text" id="wifi-ssid" class="tool-input" placeholder="VD: Cong_Ty_TNHH_5G" autocomplete="off">
+          <div class="wifi-form-compact">
+            <div class="wifi-row-ssid">
+              <div class="tool-field" style="flex: 1; min-width: 0;">
+                <label class="tool-label" for="wifi-ssid">Tên Wi-Fi (SSID):</label>
+                <input type="text" id="wifi-ssid" class="tool-input" placeholder="VD: Cong_Ty_TNHH_5G" autocomplete="off">
+              </div>
+              <label class="wifi-hidden-check" for="wifi-hidden">
+                <input type="checkbox" id="wifi-hidden">
+                <span>Ẩn SSID</span>
+              </label>
             </div>
-            <div class="tool-field">
-              <label class="tool-label" for="wifi-pass">Mật Khẩu Wi-Fi:</label>
-              <input type="text" id="wifi-pass" class="tool-input" placeholder="Nhập mật khẩu Wi-Fi..." autocomplete="off">
+
+            <div class="wifi-row-security">
+              <div class="tool-field" style="min-width: 0;">
+                <label class="tool-label" for="wifi-pass">Mật Khẩu Wi-Fi:</label>
+                <input type="text" id="wifi-pass" class="tool-input" placeholder="Nhập mật khẩu..." autocomplete="off">
+              </div>
+              <div class="tool-field" style="min-width: 0;">
+                <label class="tool-label" for="wifi-auth">Chuẩn Bảo Mật:</label>
+                <select id="wifi-auth" class="tool-select">
+                  <option value="WPA" selected>WPA2/WPA3</option>
+                  <option value="WEP">WEP</option>
+                  <option value="nopass">Không mật khẩu</option>
+                </select>
+              </div>
             </div>
-            <div class="tool-field">
-              <label class="tool-label" for="wifi-auth">Chuẩn Bảo Mật:</label>
-              <select id="wifi-auth" class="tool-select">
-                <option value="WPA" selected>WPA2 / WPA3 (Phổ biến nhất)</option>
-                <option value="WEP">WEP (Thiết bị cũ)</option>
-                <option value="nopass">Không mật khẩu (Mạng công cộng / Open)</option>
-              </select>
-            </div>
-            <label class="pwd-check-label" style="margin-top: 2px;">
-              <input type="checkbox" id="wifi-hidden">
-              <span>Mạng ẩn (Hidden SSID)</span>
-            </label>
           </div>
 
           <div class="wifi-qr-center">
