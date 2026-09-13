@@ -691,6 +691,35 @@ textarea::placeholder {
   font-weight: 700;
 }
 
+#port-filter-chips {
+  display: flex !important;
+  gap: 6px !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+
+#port-filter-chips .tool-chip {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  white-space: nowrap;
+  padding: 6px 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  box-sizing: border-box;
+  outline: none;
+}
+
+@media (max-width: 400px) {
+  #port-filter-chips .tool-chip {
+    font-size: 0.68rem;
+    padding: 5px 2px;
+  }
+}
+
 /* Tool Key-Value Results Table */
 .tool-result-table {
   width: 100%;

@@ -361,14 +361,11 @@
             <input type="text" id="port-search-input" class="port-search-input" placeholder="Tìm port (22, 443, 8291...) hoặc dịch vụ (ssh, winbox, vpn)..." autocomplete="off">
           </div>
 
-          <div class="tool-chip-group" id="port-filter-chips">
-            <span class="tool-chip active" data-cat="all">Tất Cả</span>
-            <span class="tool-chip" data-cat="web">Web &amp; Proxy</span>
-            <span class="tool-chip" data-cat="remote">Remote &amp; Shell</span>
-            <span class="tool-chip" data-cat="sysadmin">SysAdmin &amp; Lab</span>
-            <span class="tool-chip" data-cat="vpn">VPN &amp; Tunnel</span>
-            <span class="tool-chip" data-cat="database">Database</span>
-            <span class="tool-chip" data-cat="network">Hạ Tầng Core</span>
+          <div class="tool-chip-group" id="port-filter-chips" style="display: flex; gap: 6px; justify-content: space-between;">
+            <button type="button" class="tool-chip active" data-cat="all">Tất Cả</button>
+            <button type="button" class="tool-chip" data-cat="web">Web</button>
+            <button type="button" class="tool-chip" data-cat="remote">Remote/VPN</button>
+            <button type="button" class="tool-chip" data-cat="infra">Hạ Tầng/DB</button>
           </div>
 
           <div class="port-list-scroll" id="port-items-container">
