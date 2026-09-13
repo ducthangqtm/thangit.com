@@ -633,6 +633,54 @@ body {
   color: #cbd5e1;
 }
 
+.subnet-input-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.subnet-ip-field {
+  flex: 58 1 0;
+  min-width: 0;
+}
+
+.subnet-mask-field {
+  flex: 42 1 0;
+  min-width: 0;
+}
+
+.subnet-ip-field .tool-label,
+.subnet-mask-field .tool-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subnet-mask-field .tool-select {
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.tool-select option {
+  background: #0d1527;
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .subnet-input-row {
+    gap: 6px;
+  }
+  .subnet-ip-field .tool-label,
+  .subnet-mask-field .tool-label {
+    font-size: 0.74rem;
+  }
+  .subnet-ip-field .tool-input,
+  .subnet-mask-field .tool-select {
+    padding: 9px 8px;
+    font-size: 0.82rem;
+  }
+}
+
 .tool-input, .tool-select {
   width: 100%;
   background: var(--bg-input);

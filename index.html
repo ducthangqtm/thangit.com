@@ -382,27 +382,20 @@
             <span class="tool-tag-badge">IPv4 Engine</span>
           </div>
 
-          <div class="tool-form-grid">
-            <div class="tool-field">
+          <div class="subnet-input-row" style="display: flex; gap: 8px;">
+            <div class="tool-field subnet-ip-field" style="flex: 58; min-width: 0;">
               <label class="tool-label" for="subnet-ip">Địa chỉ IP:</label>
               <input type="text" id="subnet-ip" class="tool-input" placeholder="VD: 192.168.1.1" autocomplete="off">
             </div>
-            <div class="tool-field">
-              <label class="tool-label" for="subnet-prefix">Tiền tố Subnet Mask (/CIDR):</label>
+            <div class="tool-field subnet-mask-field" style="flex: 42; min-width: 0;">
+              <label class="tool-label" for="subnet-prefix">Subnet Mask (/CIDR):</label>
               <select id="subnet-prefix" class="tool-select">
                 <!-- Dropdown populated by JS -->
               </select>
             </div>
           </div>
 
-          <div class="tool-chip-group">
-            <span class="tool-chip" data-prefix="24">/24 (254 Host - LAN)</span>
-            <span class="tool-chip" data-prefix="26">/26 (62 Host - Phòng ban)</span>
-            <span class="tool-chip" data-prefix="28">/28 (14 Host - Server)</span>
-            <span class="tool-chip" data-prefix="30">/30 (2 Host - P2P/VPN)</span>
-          </div>
-
-          <div id="subnet-result-box" style="margin-top: 4px;">
+          <div id="subnet-result-box" style="margin-top: 10px;">
             <table class="tool-result-table">
               <tr class="tool-result-row">
                 <td class="tool-res-cell-label">Subnet Mask</td>
