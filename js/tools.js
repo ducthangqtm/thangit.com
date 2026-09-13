@@ -503,15 +503,31 @@ function generateWifiCardCanvas(qrCanvas, wifiData) {
 }
 
 /**
- * Mobile-First Save/Share Image Utility
- * Native Web Share API allows saving directly to Camera Roll (Photos) on iOS & Android
+ * Device-Aware Save/Share Image Utility
+ * - Desktop/PC (Windows, macOS): Always direct download to browser's Downloads folder
+ * - Mobile (iOS, Android): Uses Web Share API so users can save directly to Photos (Camera Roll)
  */
 async function saveCanvasImageWithShare(canvas, fileName, shareTitle) {
   if (!canvas) return;
 
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-  // 1. Try Mobile Native Web Share API first
+  // 1. Desktop/PC (Windows, macOS, Linux): Always direct download to Downloads folder
+  if (!isMobile) {
+    const dataUrl = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.download = fileName;
+    link.href = dataUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    if (typeof showToast === 'function') showToast('📥 Đã tải ảnh xuống máy!');
+    return;
+  }
+
+  // 2. Mobile devices (iOS, Android): Use Web Share API so users can tap "Save Image" to Photos
   if (navigator.share && typeof canvas.toBlob === 'function') {
     try {
       const fileData = await new Promise((resolve) => {
@@ -532,11 +548,11 @@ async function saveCanvasImageWithShare(canvas, fileName, shareTitle) {
             files: [fileData.file],
             title: shareTitle || 'Wi-Fi Card'
           });
-          if (typeof showToast === 'function') showToast('✅ Đã chia sẻ / lưu ảnh thành công!');
+          if (typeof showToast === 'function') showToast('✅ Đã mở trình lưu ảnh / chia sẻ!');
           return;
         } catch (shareErr) {
           if (shareErr.name === 'AbortError') {
-            // User cancelled share sheet
+            // User intentionally closed share sheet
             return;
           }
         }
@@ -544,7 +560,7 @@ async function saveCanvasImageWithShare(canvas, fileName, shareTitle) {
     } catch (err) {}
   }
 
-  // 2. Desktop or standard fallback: virtual download link
+  // 3. Mobile Fallback: Virtual download link
   const dataUrl = canvas.toDataURL('image/png');
   const link = document.createElement('a');
   link.download = fileName;
@@ -555,7 +571,7 @@ async function saveCanvasImageWithShare(canvas, fileName, shareTitle) {
 
   if (typeof showToast === 'function') showToast('📥 Đang tải ảnh xuống...');
 
-  // 3. If iOS Safari, also display image in modal so user can long-press to save to Photos
+  // If iOS Safari blocks direct downloads, open preview modal for long-press saving
   if (isIOS) {
     showWifiImageModal(dataUrl);
   }
