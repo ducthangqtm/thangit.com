@@ -700,30 +700,27 @@ body {
   align-items: center;
   gap: 6px;
   height: 42px;
-  padding: 0 10px;
-  background: var(--bg-input);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-btn);
+  padding: 0 4px;
+  background: transparent;
+  border: none;
   font-size: 0.75rem;
-  color: #cbd5e1;
+  color: var(--text-dim);
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
-  box-sizing: border-box;
   user-select: none;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: color 0.15s ease;
 }
 
 .wifi-hidden-check:hover {
-  border-color: rgba(0, 240, 255, 0.35);
-  color: #fff;
+  color: var(--neon-cyan);
 }
 
 .wifi-hidden-check input[type="checkbox"] {
   accent-color: var(--neon-cyan);
   cursor: pointer;
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   margin: 0;
 }
 
@@ -750,7 +747,7 @@ body {
     gap: 8px;
   }
   .wifi-hidden-check {
-    padding: 0 8px;
+    padding: 0 2px;
     font-size: 0.72rem;
     height: 38px;
   }
@@ -980,8 +977,9 @@ textarea::placeholder {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  max-height: 240px;
+  max-height: 220px;
   overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 4px;
   scroll-behavior: smooth;
   scrollbar-width: thin;
@@ -1012,8 +1010,12 @@ textarea::placeholder {
   background: #111726;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  padding: 7px 10px;
-  min-height: 38px;
+  padding: 0 10px;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  box-sizing: border-box;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
