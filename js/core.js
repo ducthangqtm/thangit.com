@@ -832,9 +832,13 @@ function initIpDnsUI() {
               if (stStatusText) stStatusText.textContent = `Tải lên: ${data.progress}%`;
               if (stLiveSpeed) stLiveSpeed.textContent = data.liveMbps;
               if (stUp) stUp.innerHTML = `${data.liveMbps} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>`;
+            } else if (data.phase === 'upload_done') {
+              if (stUp) stUp.innerHTML = `${data.upload} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>`;
             } else if (data.phase === 'complete') {
               lastSpeedResult = data.result;
               if (stLiveSpeed) stLiveSpeed.textContent = data.result.download;
+              if (stDown) stDown.innerHTML = `${data.result.download} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>`;
+              if (stUp) stUp.innerHTML = `${data.result.upload} <span style="font-size:0.7rem; font-weight:400; color:var(--text-dim);">Mbps</span>`;
               if (stStatusText) stStatusText.textContent = 'Hoàn tất đo tốc độ';
               if (stGaugeCircle) stGaugeCircle.classList.remove('testing');
               if (stRatingBanner) {

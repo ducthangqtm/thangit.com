@@ -1531,7 +1531,6 @@ textarea::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
   padding: 8px 6px;
   background: rgba(13, 18, 29, 0.85);
   border: 1px solid var(--border-subtle);
@@ -1542,6 +1541,23 @@ textarea::placeholder {
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+}
+
+.speed-server-btn-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.flag-icon-vn {
+  width: 17px;
+  height: 11px;
+  display: inline-block;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+  vertical-align: middle;
 }
 
 .speed-server-btn:hover {
@@ -1561,6 +1577,10 @@ textarea::placeholder {
   .speed-server-btn {
     font-size: 0.68rem;
     padding: 7px 4px;
+  }
+  .flag-icon-vn {
+    width: 15px;
+    height: 10px;
   }
 }
 

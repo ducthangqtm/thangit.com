@@ -294,11 +294,20 @@
 
           <!-- Server Region Selector Switch -->
           <div class="speed-server-switch-wrap" id="st-server-switch" role="group" aria-label="Chọn máy chủ kiểm tra">
-            <button type="button" class="speed-server-btn active" data-server="vn">
-              <span>🇻🇳 Trong Nước</span>
+            <button type="button" class="speed-server-btn active" data-server="vn" title="Kiểm tra máy chủ trong nước">
+              <span class="speed-server-btn-content">
+                <svg class="flag-icon-vn" viewBox="0 0 30 20" width="18" height="12" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect width="30" height="20" fill="#da251d" rx="2"/>
+                  <polygon fill="#ffeb3b" points="15,4 16.35,8.15 20.71,8.15 17.18,10.71 18.53,14.85 15,12.29 11.47,14.85 12.82,10.71 9.29,8.15 13.65,8.15"/>
+                </svg>
+                <span>Trong Nước</span>
+              </span>
             </button>
-            <button type="button" class="speed-server-btn" data-server="global">
-              <span>🌐 Quốc Tế</span>
+            <button type="button" class="speed-server-btn" data-server="global" title="Kiểm tra máy chủ quốc tế">
+              <span class="speed-server-btn-content">
+                <i class="fas fa-globe" style="color: #38bdf8; font-size: 0.82rem;" aria-hidden="true"></i>
+                <span>Quốc Tế</span>
+              </span>
             </button>
           </div>
 
@@ -813,8 +822,8 @@
   </div>
 
   <script src="/js/qrcode.min.js?_v=20260911"></script>
-  <script src="/js/tools.js?_v=20260913_wifi"></script>
-  <script src="/js/core.js?_v=20260913_wifi"></script>
+  <script src="/js/tools.js?_v=20260913_st"></script>
+  <script src="/js/core.js?_v=20260913_st"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Tab switching between Công Cụ Mạng, Hồ Sơ, Đồ Công Nghệ
