@@ -409,18 +409,20 @@ function initSubnetUI() {
       const hosts = document.getElementById('res-hosts')?.textContent || '';
       const type = document.getElementById('res-type')?.textContent || '';
 
-      const summary = [
-        `=== BẢNG TỔNG HỢP SUBNET & CIDR ===`,
-        `Địa chỉ IP: ${ip}/${prefix}`,
-        `Subnet Mask: ${mask}`,
-        `Wildcard Mask: ${wildcard}`,
-        `Network ID: ${net}`,
-        `Broadcast IP: ${bcast}`,
-        `Dải IP khả dụng: ${range}`,
-        `Số lượng Host: ${hosts}`,
-        `Phân loại: ${type}`,
-        `Công cụ tính toán: https://thangit.com`
-      ].join('\n');
+      const summary = (typeof window !== 'undefined' && typeof window.formatSubnetSummaryText === 'function')
+        ? window.formatSubnetSummaryText({ ip, prefix, mask, wildcard, net, bcast, range, hosts, type })
+        : [
+            `=== BẢNG TỔNG HỢP SUBNET & CIDR ===`,
+            `Địa chỉ IP: ${ip}/${prefix}`,
+            `Subnet Mask: ${mask}`,
+            `Wildcard Mask: ${wildcard}`,
+            `Network ID: ${net}`,
+            `Broadcast IP: ${bcast}`,
+            `Dải IP khả dụng: ${range}`,
+            `Số lượng Host: ${hosts}`,
+            `Phân loại: ${type}`,
+            `Thắng iT • thangit.com`
+          ].join('\n');
 
       navigator.clipboard.writeText(summary).then(() => {
         showToast('📋 Đã sao chép toàn bộ bảng Subnet!');
@@ -527,7 +529,7 @@ function initWifiQrUI() {
           </style>
         </head>
         <body>
-          <div class="card">
+          <div class="card" id="wifi-print-card">
             <h2>📶 QUÉT ĐỂ KẾT NỐI WI-FI</h2>
             <p>Mở ứng dụng Camera điện thoại để quét và kết nối tự động</p>
             <img src="${dataUrl}" class="qr-img" alt="Wi-Fi QR">
@@ -536,7 +538,7 @@ function initWifiQrUI() {
               <div class="info-item">Mật khẩu: <strong>${pass}</strong></div>
               <div class="info-item">Bảo mật: <span>${auth}</span></div>
             </div>
-            <div class="footer">Hạ Tầng Mạng Thắng IT • thangit.com</div>
+            <div class="footer">Thắng iT • thangit.com</div>
           </div>
           <script>
             window.onload = function() {
@@ -805,12 +807,17 @@ function initIpDnsUI() {
     btnCopySpeed.addEventListener('click', () => {
       if (!lastSpeedResult) return;
       const srvName = lastSpeedResult.serverName || (currentServerRegion === 'global' ? 'Singapore Edge (Quốc Tế)' : 'Cloudflare VN');
-      const text = `📊 KẾT QUẢ ĐO TỐC ĐỘ MẠNG — Thắng iT (thangit.com)\n` +
-        `• Máy chủ: ${srvName}\n` +
-        `• Ping: ${lastSpeedResult.ping} ms (Jitter: ${lastSpeedResult.jitter} ms)\n` +
-        `• Download: ${lastSpeedResult.download} Mbps\n` +
-        `• Upload: ${lastSpeedResult.upload} Mbps\n` +
-        `• Đánh giá: ${lastSpeedResult.rating}`;
+      const text = (typeof window !== 'undefined' && typeof window.formatSpeedtestShareText === 'function')
+        ? window.formatSpeedtestShareText(lastSpeedResult, srvName)
+        : [
+            `📊 KẾT QUẢ ĐO TỐC ĐỘ MẠNG`,
+            `• Máy chủ: ${srvName}`,
+            `• Ping: ${lastSpeedResult.ping} ms (Jitter: ${lastSpeedResult.jitter} ms)`,
+            `• Download: ${lastSpeedResult.download} Mbps`,
+            `• Upload: ${lastSpeedResult.upload} Mbps`,
+            `• Đánh giá: ${lastSpeedResult.rating}`,
+            `Thắng iT • thangit.com`
+          ].join('\n');
       navigator.clipboard.writeText(text).then(() => {
         showToast('📋 Đã sao chép kết quả đo tốc độ!');
       }).catch(() => {
@@ -886,8 +893,33 @@ function initIpDnsUI() {
             </div>
           `).join('')}
         </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06); font-size:0.72rem; color:var(--text-dim);">
+          <span>Thắng iT • thangit.com</span>
+          <button type="button" class="tool-btn-secondary" id="btn-copy-dns-all" style="padding:4px 8px; font-size:0.72rem; margin:0; width:auto;">
+            <i class="far fa-copy"></i> Sao chép tất cả
+          </button>
+        </div>
       `;
       initCopyButtons();
+      const btnCopyDnsAll = document.getElementById('btn-copy-dns-all');
+      if (btnCopyDnsAll) {
+        btnCopyDnsAll.addEventListener('click', () => {
+          const allText = (typeof window !== 'undefined' && typeof window.formatDnsResultsText === 'function')
+            ? window.formatDnsResultsText(domain, type, answers)
+            : [
+                `🌐 KẾT QUẢ TRA CỨU DNS (${type})`,
+                `Tên miền: ${domain}`,
+                `Số bản ghi: ${answers.length}`,
+                ...answers.map(ans => `• ${ans.data} (TTL: ${ans.TTL || 0}s)`),
+                `Thắng iT • thangit.com`
+              ].join('\n');
+          navigator.clipboard.writeText(allText).then(() => {
+            showToast('📋 Đã sao chép toàn bộ bản ghi DNS!');
+          }).catch(() => {
+            showToast('📋 Đã sao chép!');
+          });
+        });
+      }
     } catch (err) {
       resultsBox.innerHTML = `
         <div style="padding:1rem; text-align:center; color:var(--neon-rose); font-size:0.85rem;">

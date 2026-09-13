@@ -566,3 +566,52 @@ async function runNetworkSpeedTest(onProgress, serverRegion = 'vn') {
   return result;
 }
 
+/* ==========================================================================
+   8. UNIFIED BRANDING & EXPORT FORMATTERS
+   ========================================================================== */
+const BRANDING_SIGNATURE = 'Thắng iT • thangit.com';
+
+function formatSubnetSummaryText(data) {
+  return [
+    `=== BẢNG TỔNG HỢP SUBNET & CIDR ===`,
+    `Địa chỉ IP: ${data.ip}/${data.prefix}`,
+    `Subnet Mask: ${data.mask}`,
+    `Wildcard Mask: ${data.wildcard}`,
+    `Network ID: ${data.net}`,
+    `Broadcast IP: ${data.bcast}`,
+    `Dải IP khả dụng: ${data.range}`,
+    `Số lượng Host: ${data.hosts}`,
+    `Phân loại: ${data.type}`,
+    BRANDING_SIGNATURE
+  ].join('\n');
+}
+
+function formatSpeedtestShareText(res, srvName) {
+  return [
+    `📊 KẾT QUẢ ĐO TỐC ĐỘ MẠNG`,
+    `• Máy chủ: ${srvName || 'Cloudflare Edge'}`,
+    `• Ping: ${res.ping} ms (Jitter: ${res.jitter} ms)`,
+    `• Download: ${res.download} Mbps`,
+    `• Upload: ${res.upload} Mbps`,
+    `• Đánh giá: ${res.rating}`,
+    BRANDING_SIGNATURE
+  ].join('\n');
+}
+
+function formatDnsResultsText(domain, type, answers) {
+  return [
+    `🌐 KẾT QUẢ TRA CỨU DNS (${type})`,
+    `Tên miền: ${domain}`,
+    `Số bản ghi: ${answers.length}`,
+    ...answers.map(ans => `• ${ans.data} (TTL: ${ans.TTL || 0}s)`),
+    BRANDING_SIGNATURE
+  ].join('\n');
+}
+
+if (typeof window !== 'undefined') {
+  window.BRANDING_SIGNATURE = BRANDING_SIGNATURE;
+  window.formatSubnetSummaryText = formatSubnetSummaryText;
+  window.formatSpeedtestShareText = formatSpeedtestShareText;
+  window.formatDnsResultsText = formatDnsResultsText;
+}
+
