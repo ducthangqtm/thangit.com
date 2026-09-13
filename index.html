@@ -475,10 +475,15 @@
           </div>
 
           <div class="wifi-action-btns">
-            <button type="button" class="tool-btn-action" id="btn-download-wifi-qr">
-              <i class="fas fa-download"></i> Tải Ảnh PNG
-            </button>
-            <button type="button" class="tool-btn-secondary" id="btn-print-wifi-qr">
+            <div class="wifi-download-row">
+              <button type="button" class="tool-btn-action" id="btn-download-wifi-card" title="Tải toàn bộ thẻ Wi-Fi để in hoặc lưu ảnh">
+                <i class="fas fa-id-card"></i> Tải Thẻ Wi-Fi
+              </button>
+              <button type="button" class="tool-btn-secondary" id="btn-download-wifi-qr" title="Tải chỉ mã QR">
+                <i class="fas fa-qrcode"></i> Tải Mã QR
+              </button>
+            </div>
+            <button type="button" class="tool-btn-secondary wifi-btn-print" id="btn-print-wifi-qr" title="In trực tiếp thẻ dán tường">
               <i class="fas fa-print"></i> In Mã Dán Tường
             </button>
           </div>
@@ -796,9 +801,20 @@
 
   <div class="toast-msg" id="global-toast">📋 Đã sao chép!</div>
 
+  <!-- Modal Xem trước & Lưu ảnh Wi-Fi trên thiết bị di động -->
+  <div class="wifi-modal-overlay" id="wifi-image-modal" style="display: none;">
+    <div class="wifi-modal-content">
+      <button type="button" class="wifi-modal-close" id="wifi-modal-close" aria-label="Đóng">&times;</button>
+      <div class="wifi-modal-img-wrap">
+        <img id="wifi-modal-img" src="" alt="Wi-Fi Preview">
+      </div>
+      <p class="wifi-modal-hint">💡 Nhấn giữ ảnh để Lưu vào Thư viện ảnh (Save Image)</p>
+    </div>
+  </div>
+
   <script src="/js/qrcode.min.js?_v=20260911"></script>
-  <script src="/js/tools.js?_v=20260911"></script>
-  <script src="/js/core.js?_v=20260913"></script>
+  <script src="/js/tools.js?_v=20260913_wifi"></script>
+  <script src="/js/core.js?_v=20260913_wifi"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Tab switching between Công Cụ Mạng, Hồ Sơ, Đồ Công Nghệ

@@ -1231,9 +1231,116 @@ textarea::placeholder {
 }
 
 .wifi-action-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.wifi-download-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+  width: 100%;
+}
+
+.wifi-download-row button {
+  white-space: nowrap;
+  font-size: 0.82rem;
+  padding: 10px 8px;
+  min-width: 0;
+}
+
+.wifi-btn-print {
+  width: 100%;
+  font-size: 0.82rem;
+  padding: 9px 12px;
+}
+
+@media (max-width: 480px) {
+  .wifi-download-row button {
+    font-size: 0.76rem;
+    padding: 9px 4px;
+    gap: 5px;
+  }
+  .wifi-btn-print {
+    font-size: 0.78rem;
+    padding: 8px 10px;
+  }
+}
+
+/* Wi-Fi Image Preview Modal (iOS & Mobile Fallback) */
+.wifi-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 16px;
+}
+
+.wifi-modal-content {
+  position: relative;
+  background: #0d1322;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 16px;
+  padding: 20px 16px 14px;
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 240, 255, 0.15);
+}
+
+.wifi-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.wifi-modal-close:hover {
+  color: #fff;
+}
+
+.wifi-modal-img-wrap {
+  max-height: 65vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  width: 100%;
+}
+
+.wifi-modal-img-wrap img {
+  max-width: 100%;
+  max-height: 62vh;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #fff;
+}
+
+.wifi-modal-hint {
+  margin-top: 12px;
+  margin-bottom: 2px;
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  text-align: center;
+  font-weight: 500;
 }
 
 /* Cloudflare DNS Results List */

@@ -356,6 +356,240 @@ function formatWifiQrString(ssid, pass, auth, hidden) {
   return qr;
 }
 
+/**
+ * Offscreen Canvas Generator for Printable/Sharable Wi-Fi Card
+ * Generates crisp 800px width card design for printing or saving
+ */
+function drawRoundRectHelper(ctx, x, y, width, height, radius, fill, stroke) {
+  ctx.beginPath();
+  if (typeof ctx.roundRect === 'function') {
+    ctx.roundRect(x, y, width, height, radius);
+  } else {
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+  }
+  if (fill) ctx.fill();
+  if (stroke) ctx.stroke();
+}
+
+function fitCanvasText(ctx, text, maxWidth) {
+  if (!text) return '';
+  if (ctx.measureText(text).width <= maxWidth) return text;
+  let len = text.length;
+  while (len > 3 && ctx.measureText(text.slice(0, len) + '...').width > maxWidth) {
+    len--;
+  }
+  return text.slice(0, len) + '...';
+}
+
+function generateWifiCardCanvas(qrCanvas, wifiData) {
+  const isNoPass = !wifiData.pass || wifiData.isNoPass || wifiData.auth === 'nopass' || wifiData.auth === 'none' || wifiData.auth === 'open';
+  const width = 800;
+  const height = isNoPass ? 780 : 840;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  // 1. Crisp White Background
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, width, height);
+
+  // 2. Dashed Border Card Frame (Poster look)
+  ctx.save();
+  ctx.strokeStyle = '#334155';
+  ctx.lineWidth = 3;
+  ctx.setLineDash([8, 6]);
+  drawRoundRectHelper(ctx, 20, 20, width - 40, height - 40, 20, false, true);
+  ctx.restore();
+
+  // 3. Header Title & Instruction
+  ctx.fillStyle = '#0f172a';
+  ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('📶 QUÉT ĐỂ KẾT NỐI WI-FI', width / 2, 75);
+
+  ctx.fillStyle = '#64748b';
+  ctx.font = '16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillText('Mở ứng dụng Camera điện thoại để quét và kết nối tự động', width / 2, 108);
+
+  // 4. Centered QR Code
+  const qrSize = 360;
+  const qrX = (width - qrSize) / 2;
+  const qrY = 132;
+
+  // Subtle border box behind QR code
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 1.5;
+  drawRoundRectHelper(ctx, qrX - 8, qrY - 8, qrSize + 16, qrSize + 16, 12, true, true);
+
+  if (qrCanvas) {
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
+  }
+
+  // 5. Information Credentials Box
+  const boxX = 60;
+  const boxY = 525;
+  const boxW = width - 120;
+  const boxH = isNoPass ? 130 : 185;
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 1.5;
+  drawRoundRectHelper(ctx, boxX, boxY, boxW, boxH, 16, true, true);
+
+  const maxValWidth = boxW - 220;
+
+  // SSID Row
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#475569';
+  ctx.font = '18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillText('Tên Wi-Fi (SSID):', boxX + 24, boxY + 44);
+
+  ctx.fillStyle = '#0f172a';
+  ctx.font = 'bold 20px "Courier New", Courier, monospace';
+  const displaySsid = fitCanvasText(ctx, wifiData.ssid || 'Mạng Wi-Fi', maxValWidth);
+  ctx.fillText(displaySsid, boxX + 190, boxY + 44);
+
+  if (!isNoPass) {
+    // Password Row
+    ctx.fillStyle = '#475569';
+    ctx.font = '18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Mật khẩu:', boxX + 24, boxY + 94);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 20px "Courier New", Courier, monospace';
+    const displayPass = fitCanvasText(ctx, wifiData.pass || '', maxValWidth);
+    ctx.fillText(displayPass, boxX + 190, boxY + 94);
+
+    // Auth Row
+    ctx.fillStyle = '#475569';
+    ctx.font = '18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Chuẩn bảo mật:', boxX + 24, boxY + 144);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = '18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText(wifiData.authText || wifiData.auth || 'WPA2/WPA3', boxX + 190, boxY + 144);
+  } else {
+    // Auth Row for No Password
+    ctx.fillStyle = '#475569';
+    ctx.font = '18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Chuẩn bảo mật:', boxX + 24, boxY + 94);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = '18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Mạng công cộng (Không mật khẩu)', boxX + 190, boxY + 94);
+  }
+
+  // 6. Branding Signature Footer
+  const footerY = isNoPass ? 710 : 770;
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(typeof BRANDING_SIGNATURE !== 'undefined' ? BRANDING_SIGNATURE : 'Thắng iT • thangit.com', width / 2, footerY);
+
+  return canvas;
+}
+
+/**
+ * Mobile-First Save/Share Image Utility
+ * Native Web Share API allows saving directly to Camera Roll (Photos) on iOS & Android
+ */
+async function saveCanvasImageWithShare(canvas, fileName, shareTitle) {
+  if (!canvas) return;
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  // 1. Try Mobile Native Web Share API first
+  if (navigator.share && typeof canvas.toBlob === 'function') {
+    try {
+      const fileData = await new Promise((resolve) => {
+        canvas.toBlob((blob) => {
+          if (!blob) return resolve(null);
+          try {
+            const file = new File([blob], fileName, { type: 'image/png' });
+            resolve({ blob, file });
+          } catch (e) {
+            resolve(null);
+          }
+        }, 'image/png');
+      });
+
+      if (fileData && fileData.file && navigator.canShare && navigator.canShare({ files: [fileData.file] })) {
+        try {
+          await navigator.share({
+            files: [fileData.file],
+            title: shareTitle || 'Wi-Fi Card'
+          });
+          if (typeof showToast === 'function') showToast('✅ Đã chia sẻ / lưu ảnh thành công!');
+          return;
+        } catch (shareErr) {
+          if (shareErr.name === 'AbortError') {
+            // User cancelled share sheet
+            return;
+          }
+        }
+      }
+    } catch (err) {}
+  }
+
+  // 2. Desktop or standard fallback: virtual download link
+  const dataUrl = canvas.toDataURL('image/png');
+  const link = document.createElement('a');
+  link.download = fileName;
+  link.href = dataUrl;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  if (typeof showToast === 'function') showToast('📥 Đang tải ảnh xuống...');
+
+  // 3. If iOS Safari, also display image in modal so user can long-press to save to Photos
+  if (isIOS) {
+    showWifiImageModal(dataUrl);
+  }
+}
+
+function showWifiImageModal(dataUrl) {
+  let modal = document.getElementById('wifi-image-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'wifi-image-modal';
+    modal.className = 'wifi-modal-overlay';
+    modal.innerHTML = `
+      <div class="wifi-modal-content">
+        <button type="button" class="wifi-modal-close" id="wifi-modal-close" aria-label="Đóng">&times;</button>
+        <div class="wifi-modal-img-wrap">
+          <img id="wifi-modal-img" src="" alt="Wi-Fi Preview">
+        </div>
+        <p class="wifi-modal-hint">💡 Nhấn giữ ảnh để Lưu vào Thư viện ảnh (Save Image)</p>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target.closest('#wifi-modal-close')) {
+        modal.style.display = 'none';
+      }
+    });
+  }
+
+  const img = modal.querySelector('#wifi-modal-img');
+  if (img) img.src = dataUrl;
+  modal.style.display = 'flex';
+}
+
 /* ==========================================================================
    7. NETWORK SPEEDTEST ENGINE (Cloudflare Edge & Global Singapore CDN)
    ========================================================================== */
@@ -635,5 +869,8 @@ if (typeof window !== 'undefined') {
   window.formatDnsResultsText = formatDnsResultsText;
   window.getSpeedVerdict = getSpeedVerdict;
   window.formatWifiQrString = formatWifiQrString;
+  window.generateWifiCardCanvas = generateWifiCardCanvas;
+  window.saveCanvasImageWithShare = saveCanvasImageWithShare;
+  window.showWifiImageModal = showWifiImageModal;
 }
 

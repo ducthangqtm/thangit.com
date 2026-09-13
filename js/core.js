@@ -496,18 +496,53 @@ function initWifiQrUI() {
   // Sync initial state
   syncAuthInputState();
 
-  // Download PNG Button
-  const btnDownload = document.getElementById('btn-download-wifi-qr');
-  if (btnDownload) {
-    btnDownload.addEventListener('click', () => {
-      const canvas = document.getElementById('wifi-qr-canvas');
-      if (!canvas) return;
-      const ssid = (ssidInput.value.trim() || 'wifi').replace(/[^a-zA-Z0-9_-]/g, '_');
-      const link = document.createElement('a');
-      link.download = `wifi-qr-${ssid}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      showToast('📥 Đã tải ảnh mã QR Wi-Fi!');
+  // Download Full Wi-Fi Card PNG Button
+  const btnDownloadCard = document.getElementById('btn-download-wifi-card');
+  if (btnDownloadCard) {
+    btnDownloadCard.addEventListener('click', async () => {
+      const qrCanvas = document.getElementById('wifi-qr-canvas');
+      if (!qrCanvas) return;
+      const rawSsid = ssidInput.value.trim() || 'Mạng Wi-Fi';
+      const safeSsid = rawSsid.replace(/[^a-zA-Z0-9_-]/g, '_');
+      const isNoPass = authSelect ? (authSelect.value === 'nopass' || authSelect.value === 'none' || authSelect.value === 'open') : false;
+      const pass = isNoPass ? '' : (passInput.value || '');
+      const auth = authSelect ? authSelect.value : 'WPA';
+      const authText = authSelect ? authSelect.options[authSelect.selectedIndex].text : 'WPA2/WPA3';
+
+      const cardCanvas = typeof generateWifiCardCanvas === 'function'
+        ? generateWifiCardCanvas(qrCanvas, { ssid: rawSsid, pass, auth, authText, isNoPass })
+        : qrCanvas;
+
+      if (typeof saveCanvasImageWithShare === 'function') {
+        await saveCanvasImageWithShare(cardCanvas, `wifi-card-${safeSsid}.png`, `Thẻ Wi-Fi - ${rawSsid}`);
+      } else {
+        const link = document.createElement('a');
+        link.download = `wifi-card-${safeSsid}.png`;
+        link.href = cardCanvas.toDataURL('image/png');
+        link.click();
+        showToast('📥 Đã tải thẻ Wi-Fi!');
+      }
+    });
+  }
+
+  // Download Raw QR Code Image Button
+  const btnDownloadQr = document.getElementById('btn-download-wifi-qr');
+  if (btnDownloadQr) {
+    btnDownloadQr.addEventListener('click', async () => {
+      const qrCanvas = document.getElementById('wifi-qr-canvas');
+      if (!qrCanvas) return;
+      const rawSsid = ssidInput.value.trim() || 'wifi';
+      const safeSsid = rawSsid.replace(/[^a-zA-Z0-9_-]/g, '_');
+
+      if (typeof saveCanvasImageWithShare === 'function') {
+        await saveCanvasImageWithShare(qrCanvas, `wifi-qr-${safeSsid}.png`, `Mã QR Wi-Fi - ${rawSsid}`);
+      } else {
+        const link = document.createElement('a');
+        link.download = `wifi-qr-${safeSsid}.png`;
+        link.href = qrCanvas.toDataURL('image/png');
+        link.click();
+        showToast('📥 Đã tải ảnh mã QR Wi-Fi!');
+      }
     });
   }
 
