@@ -461,14 +461,28 @@ body {
 }
 
 #tools-subnav.tools-subtabs {
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 7px;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 2px 0 10px;
+  width: 100%;
+}
+
+#tools-subnav.tools-subtabs::-webkit-scrollbar {
+  display: none;
 }
 
 #tools-subnav .subtab-btn,
 #tools-subnav .tool-switcher-btn {
-  padding: 9px 4px;
-  font-size: 0.78rem;
+  flex: 1 0 auto;
+  min-width: max-content;
+  padding: 8px 10px;
+  font-size: 0.76rem;
   gap: 4px;
 }
 
@@ -1516,6 +1530,33 @@ textarea::placeholder {
   .port-meta-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Reverse DNS Results UI */
+.rdns-result-card {
+  background: #111726;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rdns-host-highlight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  word-break: break-all;
+  gap: 8px;
 }
 
 /* Speedtest Pro (Cloudflare Edge Engine) - Compact UI */

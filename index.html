@@ -52,7 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20260913_clean">
+  <link rel="stylesheet" href="/css/style.css?v=20260914_rdns">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -221,8 +221,11 @@
         <button type="button" class="tool-switcher-btn subtab-btn active" data-tool="pane-speedtest" title="Đo Tốc Độ Mạng Cloudflare">
           <span>⚡ Speedtest</span>
         </button>
-        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="pane-dns" title="DNS &amp; Tra cứu Port">
-          <span>🌐 DNS &amp; Port</span>
+        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="pane-dns" title="Cloudflare DoH &amp; Reverse DNS">
+          <span>🌐 DNS &amp; Tra Cứu</span>
+        </button>
+        <button type="button" class="tool-switcher-btn subtab-btn" data-tool="pane-port" title="Kiểm Tra &amp; Tra Cứu Port Mạng">
+          <span>🔌 Port Mạng</span>
         </button>
         <button type="button" class="tool-switcher-btn subtab-btn" data-tool="pane-subnet" title="Tính Subnet &amp; CIDR">
           <span>🧮 Subnet</span>
@@ -322,8 +325,8 @@
         </div>
       </div>
 
-      <!-- PANE 2: DNS & PORT (Cloudflare DoH DNS, Open Port Checker, Port Directory) -->
-      <div class="tool-panel" id="pane-dns" data-alias="pane-dns-port">
+      <!-- PANE 2: DNS & TRA CỨU (Cloudflare DoH DNS & Reverse DNS PTR) -->
+      <div class="tool-panel" id="pane-dns">
         <!-- Card 1: Cloudflare DoH DNS -->
         <div class="tool-card">
           <div class="tool-header-row">
@@ -358,7 +361,47 @@
           </div>
         </div>
 
-        <!-- Card 2: Kiểm Tra Mở Port (Port Checker) -->
+        <!-- Card 2: Reverse DNS Lookup (PTR) -->
+        <div class="tool-card" id="card-rdns">
+          <div class="tool-header-row">
+            <h3 class="tool-title"><i class="fas fa-history" style="color:var(--neon-cyan);"></i> Tra Cứu Reverse DNS (PTR)</h3>
+            <span class="tool-tag-badge">IP &rarr; Hostname</span>
+          </div>
+
+          <div class="tool-form-grid" style="grid-template-columns: 1fr;">
+            <div class="tool-field">
+              <label class="tool-label" for="rdns-ip">Địa chỉ IP cần phân giải (IPv4 / IPv6):</label>
+              <input type="text" id="rdns-ip" class="tool-input" placeholder="VD: 8.8.8.8, 1.1.1.1, 2606:4700:4700::1111..." autocomplete="off">
+            </div>
+          </div>
+
+          <!-- Quick IP suggestion chips -->
+          <div class="port-quick-chips" id="rdns-quick-chips">
+            <span class="port-quick-label">Gợi ý nhanh:</span>
+            <div class="port-quick-list">
+              <button type="button" class="port-chip-btn rdns-chip-btn" data-ip="8.8.8.8">8.8.8.8 (Google)</button>
+              <button type="button" class="port-chip-btn rdns-chip-btn" data-ip="1.1.1.1">1.1.1.1 (Cloudflare)</button>
+              <button type="button" class="port-chip-btn rdns-chip-btn" data-ip="9.9.9.9">9.9.9.9 (Quad9)</button>
+              <button type="button" class="port-chip-btn rdns-chip-btn" data-ip="208.67.222.222">208.67.222.222 (OpenDNS)</button>
+              <button type="button" class="port-chip-btn rdns-chip-btn" id="btn-rdns-my-ip" style="border-color:rgba(0,240,255,0.3); color:var(--neon-cyan);">
+                <i class="fas fa-crosshairs"></i> IP WAN của tôi
+              </button>
+            </div>
+          </div>
+
+          <button type="button" class="tool-btn-action" id="btn-query-rdns">
+            <i class="fas fa-search"></i> Tra Cứu Reverse DNS (PTR)
+          </button>
+
+          <div id="rdns-results-container" class="dns-results-box" style="display:none; margin-top:12px;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- PANE 3: PORT MẠNG (Kiểm Tra Mở Port, Tra Cứu Port Mạng) -->
+      <div class="tool-panel" id="pane-port">
+        <!-- Card 1: Kiểm Tra Mở Port (Port Checker) -->
         <div class="tool-card" id="card-port-checker">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-door-open" style="color:var(--neon-cyan);"></i> Kiểm Tra Mở Port (Port Checker)</h3>
@@ -400,7 +443,7 @@
           </div>
         </div>
 
-        <!-- Bottom: Tra Cứu Port Mạng -->
+        <!-- Card 2: Tra Cứu Port Mạng -->
         <div class="tool-card">
           <div class="tool-header-row">
             <h3 class="tool-title"><i class="fas fa-network-wired" style="color:var(--neon-cyan);"></i> Tra Cứu Port Mạng</h3>
@@ -848,8 +891,8 @@
   </div>
 
   <script src="/js/qrcode.min.js?_v=20260911"></script>
-  <script src="/js/tools.js?_v=20260914_port"></script>
-  <script src="/js/core.js?_v=20260914_port2"></script>
+  <script src="/js/tools.js?_v=20260914_rdns"></script>
+  <script src="/js/core.js?_v=20260914_rdns"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Tab switching between Công Cụ Mạng, Hồ Sơ, Đồ Công Nghệ

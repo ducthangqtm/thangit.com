@@ -261,7 +261,7 @@ function initNetworkTools() {
   const toolsContainer = document.getElementById('tab-tools');
   if (!toolsContainer) return;
 
-  // 1. Tool Sub-Switcher
+  // 1. Tool Sub-Switcher (5-in-1 Network Hub)
   initToolSwitcher();
 
   // 2. Subnet Calculator
@@ -278,6 +278,9 @@ function initNetworkTools() {
 
   // 6. Open Port Checker
   initPortCheckerUI();
+
+  // 7. Reverse DNS Lookup (PTR)
+  initReverseDnsUI();
 
   // Fetch WAN IP immediately on page load (#pane-speedtest is active default)
   loadWanIp();
@@ -298,8 +301,8 @@ function initToolSwitcher() {
 
       panels.forEach(p => {
         const isMatch = (p.id === toolId) ||
-          (toolId === 'pane-dns' && (p.id === 'pane-dns' || p.id === 'pane-dns-port')) ||
-          (toolId === 'pane-dns-port' && (p.id === 'pane-dns' || p.id === 'pane-dns-port'));
+          (toolId === 'pane-port' && (p.id === 'pane-port' || p.id === 'pane-dns-port')) ||
+          (toolId === 'pane-dns' && (p.id === 'pane-dns' || p.id === 'pane-dns-port'));
         if (isMatch) {
           p.classList.add('active');
         } else {
@@ -313,12 +316,14 @@ function initToolSwitcher() {
         if (ipVal && (ipVal.textContent.includes('Đang kiểm tra') || ipVal.textContent === '...')) {
           loadWanIp();
         }
-      } else if (toolId === 'pane-dns' || toolId === 'pane-dns-port' || toolId === 'tool-ports' || toolId === 'tool-ipdns') {
+      } else if (toolId === 'pane-port' || toolId === 'pane-dns-port' || toolId === 'tool-ports') {
         const portContainer = document.getElementById('port-items-container');
         if (portContainer && (!portContainer.children || portContainer.children.length === 0)) {
           initPortUI();
         }
         syncPortCheckerWanIp();
+      } else if (toolId === 'pane-dns' || toolId === 'tool-ipdns') {
+        // Tab DNS & Tra Cứu
       } else if (toolId === 'pane-wifi' || toolId === 'tool-wifi') {
         const canvas = document.getElementById('wifi-qr-canvas');
         if (canvas && (!canvas.width || canvas.width < 100)) {
@@ -1006,6 +1011,138 @@ function initIpDnsUI() {
       if (e.key === 'Enter') handleDnsQuery();
     });
   }
+}
+
+/* ==========================================================================
+   5C. REVERSE DNS (PTR) UI CONTROLLER
+   ========================================================================== */
+function initReverseDnsUI() {
+  const btnQuery = document.getElementById('btn-query-rdns');
+  const ipInput = document.getElementById('rdns-ip');
+  const resultsBox = document.getElementById('rdns-results-container');
+  const chipBtns = document.querySelectorAll('#card-rdns .rdns-chip-btn[data-ip]');
+  const btnMyIp = document.getElementById('btn-rdns-my-ip');
+
+  if (!btnQuery || !ipInput || !resultsBox) return;
+
+  // Chip buttons
+  chipBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ip = btn.getAttribute('data-ip');
+      if (ip) {
+        ipInput.value = ip;
+        chipBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        ipInput.focus();
+      }
+    });
+  });
+
+  // "IP WAN của tôi" chip
+  if (btnMyIp) {
+    btnMyIp.addEventListener('click', () => {
+      const ipValEl = document.getElementById('wan-ip-val');
+      const curIp = ipValEl ? ipValEl.textContent.trim() : '';
+      if (curIp && !curIp.includes('...') && !curIp.includes('Đang') && !curIp.includes('Không thể')) {
+        ipInput.value = curIp;
+        chipBtns.forEach(b => b.classList.remove('active'));
+        btnMyIp.classList.add('active');
+        ipInput.focus();
+      } else {
+        showToast('ℹ️ Đang kiểm tra IP WAN, vui lòng thử lại sau giây lát...');
+        if (typeof loadWanIp === 'function') loadWanIp();
+      }
+    });
+  }
+
+  async function handleReverseDnsQuery() {
+    const ip = ipInput.value.trim();
+    if (!ip) {
+      showToast('⚠️ Vui lòng nhập địa chỉ IPv4 hoặc IPv6 cần tra cứu!');
+      ipInput.focus();
+      return;
+    }
+
+    resultsBox.style.display = 'block';
+    resultsBox.innerHTML = `
+      <div style="display:flex; align-items:center; justify-content:center; gap:8px; padding:1.2rem; color:var(--neon-cyan); font-size:0.85rem;">
+        <i class="fas fa-spinner fa-spin"></i> Đang phân giải Reverse DNS (PTR) qua Cloudflare 1.1.1.1...
+      </div>
+    `;
+
+    try {
+      const res = typeof queryReverseDns === 'function'
+        ? await queryReverseDns(ip)
+        : null;
+
+      if (!res) throw new Error('Bộ xử lý Reverse DNS chưa sẵn sàng');
+
+      if (!res.found || !res.hostnames || res.hostnames.length === 0) {
+        resultsBox.innerHTML = `
+          <div style="padding:1rem; text-align:center; color:var(--text-dim); font-size:0.85rem; line-height:1.5;">
+            ℹ️ Không tìm thấy bản ghi <strong>PTR</strong> nào cho IP <strong>${escapeHtml(ip)}</strong> (${escapeHtml(res.arpa)}).
+            <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:6px;">
+              IP này chưa được cấu hình Reverse DNS bởi nhà mạng (ISP) hoặc đơn vị quản trị dải mạng.
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      resultsBox.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:0.75rem; color:var(--text-dim); border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:6px;">
+          <span>Phân giải thành công <strong>${res.hostnames.length}</strong> bản ghi PTR:</span>
+          <span style="color:#00ff9d; font-size:0.7rem;">✓ Cloudflare DoH PTR</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          ${res.hostnames.map(h => `
+            <div class="rdns-host-highlight">
+              <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-right:8px;">
+                <span style="font-size:0.75rem; color:var(--text-dim); margin-right:6px;">Hostname:</span>
+                <span>${escapeHtml(h.hostname)}</span>
+                <span style="color:var(--text-dim); font-size:0.7rem; font-weight:400; margin-left:6px;">(TTL: ${h.TTL}s)</span>
+              </div>
+              <button type="button" class="copy-mini-btn" data-copy="${escapeHtml(h.hostname)}" title="Sao chép Hostname">
+                <i class="far fa-copy"></i>
+              </button>
+            </div>
+          `).join('')}
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding-top:6px; font-size:0.72rem; color:var(--text-dim); font-family:var(--font-mono);">
+          <span>ARPA: ${escapeHtml(res.arpa)}</span>
+          <button type="button" class="tool-btn-secondary" id="btn-copy-rdns-all" style="padding:3px 8px; font-size:0.72rem; margin:0; width:auto;">
+            <i class="far fa-copy"></i> Sao chép
+          </button>
+        </div>
+      `;
+
+      initCopyButtons();
+      const btnCopyAll = document.getElementById('btn-copy-rdns-all');
+      if (btnCopyAll) {
+        btnCopyAll.addEventListener('click', () => {
+          const allText = (typeof formatReverseDnsResultText === 'function')
+            ? formatReverseDnsResultText(res)
+            : res.hostnames.map(h => h.hostname).join('\n');
+          navigator.clipboard.writeText(allText).then(() => {
+            showToast('📋 Đã sao chép kết quả Reverse DNS!');
+          }).catch(() => {
+            showToast('📋 Đã sao chép!');
+          });
+        });
+      }
+    } catch (err) {
+      resultsBox.innerHTML = `
+        <div style="padding:1rem; text-align:center; color:var(--neon-rose); font-size:0.85rem;">
+          ❌ ${escapeHtml(err.message || 'Lỗi khi phân giải Reverse DNS')}
+        </div>
+      `;
+    }
+  }
+
+  btnQuery.addEventListener('click', handleReverseDnsQuery);
+  ipInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleReverseDnsQuery();
+  });
 }
 
 /* Helper: Escape HTML strings */

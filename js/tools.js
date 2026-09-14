@@ -264,6 +264,111 @@ async function queryCloudflareDoH(domain, type) {
 }
 
 /* ==========================================================================
+   4B. REVERSE DNS LOOKUP (PTR: IP -> in-addr.arpa / ip6.arpa)
+   ========================================================================== */
+function convertIpToArpa(ip) {
+  if (!ip || typeof ip !== 'string') return null;
+  ip = ip.trim();
+
+  // IPv4 check
+  if (ip.includes('.')) {
+    const parts = ip.split('.');
+    if (parts.length === 4) {
+      const valid = parts.every(part => {
+        const n = parseInt(part, 10);
+        return !isNaN(n) && n >= 0 && n <= 255 && String(n) === part;
+      });
+      if (valid) {
+        return {
+          arpa: parts.slice().reverse().join('.') + '.in-addr.arpa',
+          type: 'IPv4',
+          cleanIp: ip
+        };
+      }
+    }
+  }
+
+  // IPv6 check
+  if (ip.includes(':')) {
+    try {
+      let parts = ip.split(':');
+      if (parts.length > 8) return null;
+
+      const doubleColonIndex = parts.indexOf('');
+      if (doubleColonIndex !== -1) {
+        const left = parts.slice(0, doubleColonIndex).filter(Boolean);
+        const right = parts.slice(doubleColonIndex + 1).filter(Boolean);
+        const missingCount = 8 - (left.length + right.length);
+        if (missingCount < 0) return null;
+        const middle = Array(missingCount).fill('0000');
+        parts = [...left, ...middle, ...right];
+      }
+
+      if (parts.length === 8) {
+        const fullHex = parts.map(p => p.padStart(4, '0')).join('');
+        if (/^[0-9a-fA-F]{32}$/.test(fullHex)) {
+          const nibbles = fullHex.toLowerCase().split('').reverse().join('.');
+          return {
+            arpa: nibbles + '.ip6.arpa',
+            type: 'IPv6',
+            cleanIp: ip
+          };
+        }
+      }
+    } catch (_) {}
+  }
+
+  return null;
+}
+
+async function queryReverseDns(ip) {
+  const arpaInfo = convertIpToArpa(ip);
+  if (!arpaInfo) {
+    throw new Error('Địa chỉ IP không hợp lệ! Vui lòng nhập đúng định dạng IPv4 (VD: 8.8.8.8) hoặc IPv6.');
+  }
+
+  const data = await queryCloudflareDoH(arpaInfo.arpa, 'PTR');
+  const answers = (data && data.Answer) ? data.Answer : [];
+
+  const hostnames = answers.map(ans => {
+    let hostname = ans.data || '';
+    if (hostname.endsWith('.')) hostname = hostname.slice(0, -1);
+    return {
+      hostname,
+      raw: ans.data,
+      TTL: ans.TTL || 0
+    };
+  });
+
+  return {
+    ip: arpaInfo.cleanIp,
+    arpa: arpaInfo.arpa,
+    type: arpaInfo.type,
+    status: data ? data.Status : -1,
+    hostnames,
+    found: hostnames.length > 0
+  };
+}
+
+function formatReverseDnsResultText(res) {
+  const lines = [
+    `🔄 KẾT QUẢ REVERSE DNS (PTR)`,
+    `Địa chỉ IP: ${res.ip} (${res.type})`,
+    `Tên miền ARPA: ${res.arpa}`,
+  ];
+  if (res.found && res.hostnames.length > 0) {
+    lines.push(`Số bản ghi PTR: ${res.hostnames.length}`);
+    res.hostnames.forEach(h => {
+      lines.push(`• ${h.hostname} (TTL: ${h.TTL}s)`);
+    });
+  } else {
+    lines.push(`Kết quả: Không tìm thấy bản ghi PTR.`);
+  }
+  lines.push(BRANDING_SIGNATURE);
+  return lines.join('\n');
+}
+
+/* ==========================================================================
    5. CLIENT IP & WAN INSPECTOR (ISP & City Detection)
    ========================================================================== */
 async function fetchClientIpInfo() {
@@ -1107,5 +1212,8 @@ if (typeof window !== 'undefined') {
   window.saveCanvasImageWithShare = saveCanvasImageWithShare;
   window.showWifiImageModal = showWifiImageModal;
   window.checkTcpPort = checkTcpPort;
+  window.convertIpToArpa = convertIpToArpa;
+  window.queryReverseDns = queryReverseDns;
+  window.formatReverseDnsResultText = formatReverseDnsResultText;
 }
 
