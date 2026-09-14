@@ -461,29 +461,70 @@ body {
 }
 
 #tools-subnav.tools-subtabs {
-  display: flex !important;
-  align-items: center;
-  gap: 6px;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 5px;
   padding: 2px 0 10px;
   width: 100%;
-}
-
-#tools-subnav.tools-subtabs::-webkit-scrollbar {
-  display: none;
+  box-sizing: border-box;
 }
 
 #tools-subnav .subtab-btn,
 #tools-subnav .tool-switcher-btn {
-  flex: 1 0 auto;
-  min-width: max-content;
-  padding: 8px 10px;
-  font-size: 0.76rem;
-  gap: 4px;
+  width: 100%;
+  min-width: 0;
+  padding: 8px 3px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  gap: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#tools-subnav .subtab-btn span,
+#tools-subnav .tool-switcher-btn span {
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  letter-spacing: -0.2px;
+}
+
+@media (max-width: 480px) {
+  #tools-subnav.tools-subtabs {
+    gap: 4px;
+  }
+  #tools-subnav .subtab-btn,
+  #tools-subnav .tool-switcher-btn {
+    padding: 7px 2px;
+    font-size: 0.70rem;
+    gap: 2px;
+  }
+  #tools-subnav .subtab-btn span,
+  #tools-subnav .tool-switcher-btn span {
+    letter-spacing: -0.3px;
+  }
+}
+
+@media (max-width: 375px) {
+  #tools-subnav.tools-subtabs {
+    gap: 3px;
+  }
+  #tools-subnav .subtab-btn,
+  #tools-subnav .tool-switcher-btn {
+    padding: 6px 1px;
+    font-size: 0.65rem;
+    gap: 1px;
+  }
+  #tools-subnav .subtab-btn span,
+  #tools-subnav .tool-switcher-btn span {
+    letter-spacing: -0.4px;
+  }
 }
 
 .cv-subtabs-wrap {
