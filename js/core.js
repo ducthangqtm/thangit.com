@@ -1126,7 +1126,7 @@ function initPortCheckerUI() {
               Cổng <strong>${portNum}</strong> trên máy chủ <strong>${escapeHtml(host)}</strong> đang mở và phản hồi tín hiệu kết nối TCP thành công từ Internet.
             </div>
             <div class="port-meta-grid">
-              <div class="port-meta-item">
+              <div class="port-meta-item full-width">
                 <span class="port-meta-key">Đích đến:</span>
                 <span class="port-meta-val">${escapeHtml(res.resolvedIp || host)}:${portNum}</span>
               </div>
@@ -1166,7 +1166,7 @@ function initPortCheckerUI() {
               </ul>
             </div>
             <div class="port-meta-grid" style="margin-top:6px;">
-              <div class="port-meta-item">
+              <div class="port-meta-item full-width">
                 <span class="port-meta-key">Đích đến:</span>
                 <span class="port-meta-val">${escapeHtml(res.resolvedIp || host)}:${portNum}</span>
               </div>

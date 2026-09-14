@@ -1468,30 +1468,54 @@ textarea::placeholder {
 
 .port-meta-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 6px;
-  margin-top: 4px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .port-meta-item {
-  background: rgba(0, 0, 0, 0.35);
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  background: rgba(0, 0, 0, 0.38);
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.port-meta-item.full-width {
+  grid-column: 1 / -1;
 }
 
 .port-meta-key {
   color: var(--text-dim);
+  font-size: 0.7rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
 }
 
 .port-meta-val {
   color: var(--neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 600;
+  line-height: 1.35;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  max-width: 100%;
+}
+
+@media (max-width: 360px) {
+  .port-meta-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Speedtest Pro (Cloudflare Edge Engine) - Compact UI */
