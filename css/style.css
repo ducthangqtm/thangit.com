@@ -207,6 +207,81 @@ body {
   white-space: nowrap;
 }
 
+#nav-brand-home {
+  cursor: pointer;
+}
+
+#nav-brand-home:hover {
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.top-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 38px;
+  padding: 0 11px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.top-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(0, 240, 255, 0.4);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.top-nav-btn.active {
+  background: rgba(0, 240, 255, 0.14) !important;
+  border-color: var(--neon-cyan) !important;
+  color: var(--neon-cyan) !important;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3) !important;
+}
+
+@media (max-width: 390px) {
+  .top-nav-btn {
+    height: 36px;
+    padding: 0 8px;
+    font-size: 0.71rem;
+    gap: 2px;
+  }
+}
+
+@media (max-width: 350px) {
+  .top-nav-btn {
+    height: 34px;
+    padding: 0 6px;
+    font-size: 0.66rem;
+  }
+  .badge-status {
+    padding: 0 8px 0 6px;
+    gap: 5px;
+  }
+  .badge-status-title {
+    font-size: 0.88rem;
+  }
+}
+
 .icon-btn {
   width: 40px;
   height: 40px;
@@ -411,54 +486,8 @@ body {
 .social-icon-btn:active { transform: scale(0.94); }
 
 /* ==========================================================================
-   3. PRIMARY TABS & UNIFIED SUB-TABS
+   3. PRIMARY TOOLS BAR & UNIFIED SUB-TABS
    ========================================================================== */
-.category-tabs-wrap {
-  width: 100%;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
-  gap: 6px;
-  padding: 4px 0 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.category-tabs-wrap::-webkit-scrollbar {
-  display: none;
-}
-
-.tab-pill-btn {
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 9px 3px;
-  background: var(--bg-glass);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 13px;
-  color: var(--text-body);
-  font-size: 0.78rem;
-  font-weight: 700;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
-}
-
-.tab-pill-btn:hover {
-  background: rgba(30, 38, 52, 0.95);
-  color: #fff;
-}
-
-.tab-pill-btn.active {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: var(--neon-cyan);
-  color: var(--neon-cyan);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
-}
 
 /* Unified Sub-Tabs Layout Containers */
 .tool-switcher-wrap,
@@ -2430,91 +2459,61 @@ textarea::placeholder {
   box-shadow: 0 6px 16px rgba(0, 240, 255, 0.45);
 }
 
-/* ==========================================================================
-   7. ECOSYSTEM FOOTER
-   ========================================================================== */
-.ecosystem-footer {
-  margin-top: 28px;
-  padding: 20px 0 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+/* Subtle Admin Utility in Affiliate Pane */
+.aff-admin-wrap {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-  text-align: center;
-  font-size: 0.78rem;
-  color: var(--text-dim);
+  padding: 16px 0 8px;
 }
 
-.footer-crosslinks {
+.aff-admin-link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding: 4px 14px;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 6px 14px;
   border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.footer-link {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-size: 0.74rem;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  opacity: 0.8;
+  opacity: 0.7;
   transition: all 0.2s ease;
 }
 
-.footer-link:hover {
+.aff-admin-link:hover {
   opacity: 1;
-  color: var(--text-body);
-  transform: translateY(-1px);
+  color: var(--neon-cyan);
+  border-color: rgba(0, 240, 255, 0.3);
+  background: rgba(0, 240, 255, 0.06);
 }
 
-.footer-link.jump-link:hover { color: var(--neon-amber); }
-.footer-link.admin-link:hover { color: var(--neon-green); }
-
-.footer-sep {
-  color: rgba(255, 255, 255, 0.15);
-  font-size: 0.65rem;
+/* ==========================================================================
+   7. CLEAN ECOSYSTEM FOOTER
+   ========================================================================== */
+.ecosystem-footer {
+  margin-top: 24px;
+  padding: 16px 0 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .footer-copyright-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 0.76rem;
   color: var(--text-dim);
   flex-wrap: wrap;
 }
 
-.footer-brand-link {
-  color: var(--neon-cyan);
-  text-decoration: none;
-  font-weight: 700;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
-}
-
-.footer-brand-link:hover {
-  text-decoration: underline;
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-}
-
 .footer-copyright-row strong {
   color: var(--text-body);
-}
-
-.footer-tagline {
-  font-size: 0.70rem;
-  color: rgba(148, 163, 184, 0.55);
-  font-family: var(--font-mono);
-  letter-spacing: 0.02em;
 }
 
 /* ==========================================================================
