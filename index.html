@@ -52,7 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20260914_depth">
+  <link rel="stylesheet" href="/css/style.css?v=20260914_cvheader">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -541,184 +541,182 @@
     <!-- ===================================================================
          TAB 2: HỒ SƠ & NĂNG LỰC DOANH NGHIỆP
          =================================================================== -->
-    <section class="home-tab-content" id="tab-cv" style="display:none;">
+    <section class="home-tab-content" id="tab-cv" style="display:none; flex-direction:column; gap:14px;">
       
-      <!-- Profile Header Section -->
-      <div class="profile-section cv-profile-section">
-        <div class="avatar-wrapper">
-          <div class="avatar-ring"></div>
-          <img src="/assets/images/avata.jpg?_v=20260911" alt="Ảnh đại diện Nguyễn Đức Thắng" class="avatar-img" width="104" height="104" loading="eager">
-        </div>
-
-        <div class="profile-info">
-          <h2 class="profile-name">
-            Nguyễn Đức Thắng
-            <span class="verified-badge" title="Tài khoản chính thức">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </span>
-          </h2>
-          <span class="cv-role-badge">SENIOR IT NETWORK ENGINEER</span>
-          <p class="profile-bio">10+ Năm Vận Hành Hạ Tầng Mạng Quy Mô Lớn • Automation &amp; Vibe Coder 🚀</p>
-          <div class="cv-contact-row">
-            <a href="tel:0986192092" class="cv-contact-link" title="Gọi điện"><i class="fa-solid fa-phone"></i> 0986.192.092</a>
-            <a href="mailto:ducthangqtm@gmail.com" class="cv-contact-link" title="Gửi email"><i class="fa-solid fa-envelope"></i> ducthangqtm@gmail.com</a>
-            <span><i class="fa-solid fa-location-dot"></i> Hà Nội</span>
-          </div>
-        </div>
-
-        <!-- 4 Squircle Social Buttons: Zalo -> Telegram -> Discord -> GitHub -->
-        <nav class="social-bar" aria-label="Mạng xã hội">
-          <!-- 1. Zalo -->
-          <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="social-icon-btn zalo" aria-label="Zalo Thắng iT" title="Zalo: 0986192092">
-            <span class="zalo-text-badge">Zalo</span>
-          </a>
-
-          <!-- 2. Telegram -->
-          <a href="https://t.me/thangnhayday" target="_blank" rel="noopener noreferrer" class="social-icon-btn telegram" aria-label="Telegram Thắng iT" title="Telegram: @thangnhayday">
-            <i class="fab fa-telegram"></i>
-          </a>
-
-          <!-- 3. Discord -->
-          <a href="https://discord.com/users/thangnhayday" target="_blank" rel="noopener noreferrer" class="social-icon-btn discord" aria-label="Discord: @thangnhayday" title="Discord: @thangnhayday" id="btn-discord-action">
-            <i class="fab fa-discord"></i>
-          </a>
-
-          <!-- 4. GitHub -->
-          <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener noreferrer" class="social-icon-btn github" aria-label="GitHub Thắng iT" title="GitHub: ducthangqtm">
-            <i class="fab fa-github"></i>
-          </a>
-        </nav>
-      </div>
-
-      <!-- Sub-switcher for CV & Git Projects -->
-      <div class="tool-switcher-wrap tools-subtabs cv-subtabs-wrap" id="cv-subnav">
-        <button type="button" class="tool-switcher-btn subtab-btn active" data-cv-tab="cv-profile" title="Hồ Sơ Năng Lực">
-          <span>📄 Hồ Sơ Năng Lực</span>
-        </button>
-        <button type="button" class="tool-switcher-btn subtab-btn" data-cv-tab="cv-git" title="Dự Án Git">
-          <span>🚀 Dự Án Git</span>
-        </button>
-      </div>
-
-      <!-- CV Sub-panel 1: Hồ Sơ Năng Lực (active default) -->
-      <div class="cv-subpanel active" id="cv-profile">
-        <div class="cv-summary-card">
-
-          <!-- Quick Stats Row -->
-          <div class="cv-stats-row">
-            <div class="cv-stat-box">
-              <span class="cv-stat-val">10+</span>
-              <span class="cv-stat-lbl">Năm KN</span>
-            </div>
-            <div class="cv-stat-box">
-              <span class="cv-stat-val">40.000m²</span>
-              <span class="cv-stat-lbl">Logistics</span>
-            </div>
-            <div class="cv-stat-box">
-              <span class="cv-stat-val">500+</span>
-              <span class="cv-stat-lbl">Thiết Bị</span>
-            </div>
-            <div class="cv-stat-box">
-              <span class="cv-stat-val" style="color:var(--neon-green);">99.9%</span>
-              <span class="cv-stat-lbl">Uptime</span>
+      <!-- 1. Horizontal Header Card (Side-by-Side) -->
+      <div class="cv-profile-card">
+        <div class="cv-header-grid">
+          <!-- Left Column: Compact Avatar -->
+          <div class="cv-avatar-col">
+            <div class="cv-avatar-wrap">
+              <div class="cv-avatar-ring"></div>
+              <img src="/assets/images/avata.jpg?_v=20260911" alt="Ảnh đại diện Nguyễn Đức Thắng" class="cv-avatar-img" width="86" height="86" loading="eager">
             </div>
           </div>
 
-          <!-- Professional Summary -->
-          <div class="cv-bio-block">
-            <h3 class="cv-section-title">📌 Tóm Tắt Năng Lực</h3>
-            <p class="cv-bio-text">
-              Kỹ sư hệ thống mạng với 10 năm kinh nghiệm vận hành hạ tầng quy mô lớn. Chuyên gia thiết kế, triển khai hạ tầng mạng kho vận, phân đoạn VLAN bảo mật, Wi-Fi công nghiệp chịu tải cao và VPN đa điểm. Đam mê ứng dụng Python &amp; Flask xây dựng hệ thống tự động hóa quy trình, tối ưu hiệu suất và giảm thiểu rủi ro vận hành 24/7.
-            </p>
-          </div>
-
-          <!-- Work Experience Timeline -->
-          <div class="cv-experience-block">
-            <h3 class="cv-section-title">💼 Kinh Nghiệm Làm Việc Thực Chiến</h3>
-            <div class="cv-timeline">
-              <!-- Job 1 -->
-              <div class="cv-timeline-item">
-                <div class="cv-timeline-header">
-                  <span class="cv-timeline-company">Chi nhánh Cty TNHH Behn Meyer VN</span>
-                  <span class="cv-timeline-date">04/2025 - Hiện tại</span>
-                </div>
-                <div class="cv-timeline-role">IT Network Executive (Bắc Ninh)</div>
-                <ul class="cv-timeline-desc">
-                  <li>Quản trị toàn bộ hạ tầng mạng &amp; hệ thống CNTT chi nhánh (LAN/WAN, Wi-Fi, thiết bị ngoại vi &amp; Server).</li>
-                  <li>Hỗ trợ End-user, quản trị phần cứng/phần mềm doanh nghiệp và kiểm soát an toàn thông tin.</li>
-                  <li>Ứng dụng Python/Flask xây dựng hệ thống tự động hóa đơn hàng, tối ưu quy trình phối hợp vận chuyển.</li>
-                </ul>
-              </div>
-
-              <!-- Job 2 -->
-              <div class="cv-timeline-item">
-                <div class="cv-timeline-header">
-                  <span class="cv-timeline-company">Cty TNHH DB Schenker Việt Nam</span>
-                  <span class="cv-timeline-date">10/2016 - 03/2025</span>
-                </div>
-                <div class="cv-timeline-role">Senior IT Network (Kho VSIP • Đại Đồng • Quảng An)</div>
-                <ul class="cv-timeline-desc">
-                  <li>Thiết kế &amp; triển khai hạ tầng mạng trung tâm kho vận Logistics quy mô 30.000 – 40.000 m².</li>
-                  <li>Quản trị hơn 500 thiết bị IT, vận hành hệ thống Server, LAN, VLANs, Wi-Fi công nghiệp mật độ cao.</li>
-                  <li>Quản trị Azure Domain, Office 365 và hỗ trợ kỹ thuật vận hành hệ thống ERP (WMS, SAP).</li>
-                </ul>
-              </div>
-
-              <!-- Job 3 -->
-              <div class="cv-timeline-item">
-                <div class="cv-timeline-header">
-                  <span class="cv-timeline-company">Cty TNHH Srithai Hà Nội</span>
-                  <span class="cv-timeline-date">11/2015 - 08/2016</span>
-                </div>
-                <div class="cv-timeline-role">Nhân viên IT</div>
-                <ul class="cv-timeline-desc">
-                  <li>Xây dựng hạ tầng mạng nội bộ, hệ thống Camera giám sát &amp; mạng điện thoại doanh nghiệp.</li>
-                  <li>Quản trị người dùng &amp; hỗ trợ kỹ thuật phần mềm ERP Microsoft Dynamics AX.</li>
-                </ul>
-              </div>
+          <!-- Right Column: Info, Contacts, Socials, and Core Skills -->
+          <div class="cv-info-col">
+            <div class="cv-name-row">
+              <h2 class="cv-profile-name">
+                Nguyễn Đức Thắng
+                <span class="verified-badge" title="Tài khoản chính thức">
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                </span>
+              </h2>
             </div>
-          </div>
-
-          <!-- Education -->
-          <div class="cv-education-block">
-            <h3 class="cv-section-title">🎓 Học Vấn &amp; Đào Tạo</h3>
-            <div class="cv-edu-list">
-              <div class="cv-edu-item">
-                <div>
-                  <div class="cv-edu-school">Đại Học Điện Lực</div>
-                  <div class="cv-edu-major">Chuyên ngành: Công nghệ Thông tin</div>
-                </div>
-                <span class="cv-edu-year">2013 - 2015</span>
-              </div>
-              <div class="cv-edu-item">
-                <div>
-                  <div class="cv-edu-school">Bách Khoa - Aptech</div>
-                  <div class="cv-edu-major">Quản trị mạng &amp; Bảo mật hệ thống HDSM</div>
-                </div>
-                <span class="cv-edu-year">2010 - 2013</span>
-              </div>
+            
+            <div class="cv-role-wrap">
+              <span class="cv-role-badge">SENIOR IT NETWORK ENGINEER</span>
             </div>
-          </div>
 
-          <!-- Skills Pills -->
-          <div class="cv-skills-block">
-            <h3 class="cv-section-title">🛠️ Công Nghệ &amp; Kỹ Năng Cốt Lõi</h3>
-            <div class="cv-pills-wrap">
-              <span class="cv-pill">IT Support &amp; Helpdesk</span>
-              <span class="cv-pill">Mạng Văn Phòng (LAN / Wi-Fi)</span>
-              <span class="cv-pill">Xử Lý Sự Cố Máy Tính</span>
-              <span class="cv-pill">Thiết Kế &amp; Phát Triển Website</span>
-              <span class="cv-pill">Vibe Coding &amp; AI Tools</span>
-              <span class="cv-pill">Triển Khai Phần Mềm</span>
+            <p class="cv-profile-bio">10+ Năm Vận Hành Hạ Tầng Mạng Quy Mô Lớn • Automation &amp; Vibe Coder 🚀</p>
+
+            <div class="cv-contact-row cv-header-contacts">
+              <a href="tel:0986192092" class="cv-contact-link" title="Gọi điện"><i class="fa-solid fa-phone"></i> 0986.192.092</a>
+              <a href="mailto:ducthangqtm@gmail.com" class="cv-contact-link" title="Gửi email"><i class="fa-solid fa-envelope"></i> ducthangqtm@gmail.com</a>
+              <span class="cv-contact-item"><i class="fa-solid fa-location-dot"></i> Hà Nội</span>
+            </div>
+
+            <!-- Compact Social Buttons -->
+            <nav class="cv-social-compact" aria-label="Mạng xã hội">
+              <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="cv-social-btn zalo" aria-label="Zalo Thắng iT" title="Zalo: 0986192092">
+                <span class="zalo-text-badge">Zalo</span>
+              </a>
+              <a href="https://t.me/thangnhayday" target="_blank" rel="noopener noreferrer" class="cv-social-btn telegram" aria-label="Telegram Thắng iT" title="Telegram: @thangnhayday">
+                <i class="fab fa-telegram"></i>
+              </a>
+              <a href="https://discord.com/users/thangnhayday" target="_blank" rel="noopener noreferrer" class="cv-social-btn discord" aria-label="Discord: @thangnhayday" title="Discord: @thangnhayday" id="btn-discord-action">
+                <i class="fab fa-discord"></i>
+              </a>
+              <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener noreferrer" class="cv-social-btn github" aria-label="GitHub Thắng iT" title="GitHub: ducthangqtm">
+                <i class="fab fa-github"></i>
+              </a>
+            </nav>
+
+            <!-- Relocated Core Skills Tag Badges -->
+            <div class="cv-header-skills">
+              <div class="cv-header-skills-label">
+                <i class="fa-solid fa-microchip"></i> Kỹ Năng Cốt Lõi:
+              </div>
+              <div class="cv-header-skills-chips">
+                <span class="cv-chip">IT Support &amp; Helpdesk</span>
+                <span class="cv-chip">Mạng LAN / Wi-Fi</span>
+                <span class="cv-chip">Xử Lý Sự Cố Máy Tính</span>
+                <span class="cv-chip">Web Development</span>
+                <span class="cv-chip">Vibe Coding &amp; AI Tools</span>
+                <span class="cv-chip">Triển Khai Phần Mềm</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- CV Sub-panel 2: Dự Án Git -->
-      <div class="cv-subpanel" id="cv-git" style="display:none;">
+      <!-- 2. Flattened Profile Summary Card -->
+      <div class="cv-summary-card">
+        <!-- 1. Stats Row -->
+        <div class="cv-stats-row">
+          <div class="cv-stat-box">
+            <span class="cv-stat-val">10+</span>
+            <span class="cv-stat-lbl">Năm KN</span>
+          </div>
+          <div class="cv-stat-box">
+            <span class="cv-stat-val">40.000m²</span>
+            <span class="cv-stat-lbl">Logistics</span>
+          </div>
+          <div class="cv-stat-box">
+            <span class="cv-stat-val">500+</span>
+            <span class="cv-stat-lbl">Thiết Bị</span>
+          </div>
+          <div class="cv-stat-box">
+            <span class="cv-stat-val" style="color:var(--neon-green);">99.9%</span>
+            <span class="cv-stat-lbl">Uptime</span>
+          </div>
+        </div>
+
+        <!-- 2. Tóm Tắt Năng Lực -->
+        <div class="cv-bio-block">
+          <h3 class="cv-section-title"><i class="fas fa-thumbtack" style="color:var(--neon-cyan);"></i> Tóm Tắt Năng Lực</h3>
+          <p class="cv-bio-text">
+            Kỹ sư hệ thống mạng với 10 năm kinh nghiệm vận hành hạ tầng quy mô lớn. Chuyên gia thiết kế, triển khai hạ tầng mạng kho vận, phân đoạn VLAN bảo mật, Wi-Fi công nghiệp chịu tải cao và VPN đa điểm. Đam mê ứng dụng Python &amp; Flask xây dựng hệ thống tự động hóa quy trình, tối ưu hiệu suất và giảm thiểu rủi ro vận hành 24/7.
+          </p>
+        </div>
+
+        <!-- 3. Kinh Nghiệm Làm Việc Thực Chiến -->
+        <div class="cv-experience-block">
+          <h3 class="cv-section-title"><i class="fas fa-briefcase" style="color:var(--neon-cyan);"></i> Kinh Nghiệm Làm Việc Thực Chiến</h3>
+          <div class="cv-timeline">
+            <!-- Job 1 -->
+            <div class="cv-timeline-item">
+              <div class="cv-timeline-header">
+                <span class="cv-timeline-company">Chi nhánh Cty TNHH Behn Meyer VN</span>
+                <span class="cv-timeline-date">04/2025 - Hiện tại</span>
+              </div>
+              <div class="cv-timeline-role">IT Network Executive (Bắc Ninh)</div>
+              <ul class="cv-timeline-desc">
+                <li>Quản trị toàn bộ hạ tầng mạng &amp; hệ thống CNTT chi nhánh (LAN/WAN, Wi-Fi, thiết bị ngoại vi &amp; Server).</li>
+                <li>Hỗ trợ End-user, quản trị phần cứng/phần mềm doanh nghiệp và kiểm soát an toàn thông tin.</li>
+                <li>Ứng dụng Python/Flask xây dựng hệ thống tự động hóa đơn hàng, tối ưu quy trình phối hợp vận chuyển.</li>
+              </ul>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="cv-timeline-item">
+              <div class="cv-timeline-header">
+                <span class="cv-timeline-company">Cty TNHH DB Schenker Việt Nam</span>
+                <span class="cv-timeline-date">10/2016 - 03/2025</span>
+              </div>
+              <div class="cv-timeline-role">Senior IT Network (Kho VSIP • Đại Đồng • Quảng An)</div>
+              <ul class="cv-timeline-desc">
+                <li>Thiết kế &amp; triển khai hạ tầng mạng trung tâm kho vận Logistics quy mô 30.000 – 40.000 m².</li>
+                <li>Quản trị hơn 500 thiết bị IT, vận hành hệ thống Server, LAN, VLANs, Wi-Fi công nghiệp mật độ cao.</li>
+                <li>Quản trị Azure Domain, Office 365 và hỗ trợ kỹ thuật vận hành hệ thống ERP (WMS, SAP).</li>
+              </ul>
+            </div>
+
+            <!-- Job 3 -->
+            <div class="cv-timeline-item">
+              <div class="cv-timeline-header">
+                <span class="cv-timeline-company">Cty TNHH Srithai Hà Nội</span>
+                <span class="cv-timeline-date">11/2015 - 08/2016</span>
+              </div>
+              <div class="cv-timeline-role">Nhân viên IT</div>
+              <ul class="cv-timeline-desc">
+                <li>Xây dựng hạ tầng mạng nội bộ, hệ thống Camera giám sát &amp; mạng điện thoại doanh nghiệp.</li>
+                <li>Quản trị người dùng &amp; hỗ trợ kỹ thuật phần mềm ERP Microsoft Dynamics AX.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Học Vấn & Đào Tạo -->
+        <div class="cv-education-block">
+          <h3 class="cv-section-title"><i class="fas fa-graduation-cap" style="color:var(--neon-cyan);"></i> Học Vấn &amp; Đào Tạo</h3>
+          <div class="cv-edu-list">
+            <div class="cv-edu-item">
+              <div>
+                <div class="cv-edu-school">Đại Học Điện Lực</div>
+                <div class="cv-edu-major">Chuyên ngành: Công nghệ Thông tin</div>
+              </div>
+              <span class="cv-edu-year">2013 - 2015</span>
+            </div>
+            <div class="cv-edu-item">
+              <div>
+                <div class="cv-edu-school">Bách Khoa - Aptech</div>
+                <div class="cv-edu-major">Quản trị mạng &amp; Bảo mật hệ thống HDSM</div>
+              </div>
+              <span class="cv-edu-year">2010 - 2013</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Dự Án Thực Tế & Mã Nguồn (Rendered directly below education) -->
+      <div class="cv-projects-section">
+        <h3 class="cv-section-title" style="margin: 6px 0 10px 4px; font-size: 0.95rem;">
+          <i class="fa-brands fa-github" style="color:var(--neon-cyan);"></i> Dự Án Thực Tế &amp; Mã Nguồn
+        </h3>
         <div class="git-projects-grid">
           <!-- Card 1: thangit.com -->
           <div class="git-repo-card">
