@@ -52,7 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20260914_cvcenter">
+  <link rel="stylesheet" href="/css/style.css?v=20260914_cvhoriz">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -543,56 +543,64 @@
          =================================================================== -->
     <section class="home-tab-content" id="tab-cv" style="display:none; flex-direction:column; gap:14px;">
       
-      <!-- 1. Center-Aligned Profile Header Card -->
-      <div class="cv-profile-card cv-profile-centered">
-        <!-- Large Centered Avatar (120px) -->
-        <div class="cv-avatar-wrap-centered">
-          <div class="cv-avatar-ring-large"></div>
-          <img src="/assets/images/avata.jpg?_v=20260911" alt="Ảnh đại diện Nguyễn Đức Thắng" class="cv-avatar-img-large" width="120" height="120" loading="eager">
+      <!-- 1. Horizontal 2-Column Profile Card -->
+      <div class="cv-profile-card">
+        <!-- Left Column: Avatar (130px) -->
+        <div class="cv-avatar-wrap">
+          <div class="cv-avatar-ring"></div>
+          <img src="/assets/images/avata.jpg?_v=20260911" alt="Ảnh đại diện Nguyễn Đức Thắng" class="cv-avatar-img" width="130" height="130" loading="eager">
         </div>
 
-        <!-- Centered Name & Verified Badge -->
-        <h2 class="cv-profile-name-centered">
-          Nguyễn Đức Thắng
-          <span class="verified-badge" title="Tài khoản chính thức">
-            <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-          </span>
-        </h2>
+        <!-- Right Column: Info Container -->
+        <div class="cv-info-container">
+          <!-- Name & Verified Badge -->
+          <h2 class="cv-profile-name">
+            Nguyễn Đức Thắng
+            <span class="verified-badge" title="Tài khoản chính thức">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </span>
+          </h2>
 
-        <!-- Role Badge -->
-        <div class="cv-role-wrap">
-          <span class="cv-role-badge">SENIOR IT NETWORK ENGINEER</span>
-        </div>
+          <!-- Role Badge -->
+          <div class="cv-role-wrap">
+            <span class="cv-role-badge">SENIOR IT NETWORK ENGINEER</span>
+          </div>
 
-        <!-- Clean & Straight-Aligned Contact Line -->
-        <div class="cv-contact-row cv-contact-centered">
-          <a href="tel:0986192092" class="cv-contact-link" title="Gọi điện"><i class="fa-solid fa-phone"></i> 0986.192.092</a>
-          <a href="mailto:ducthangqtm@gmail.com" class="cv-contact-link" title="Gửi email"><i class="fa-solid fa-envelope"></i> ducthangqtm@gmail.com</a>
-          <span class="cv-contact-item"><i class="fa-solid fa-location-dot"></i> Thịnh Liên - Phù Đổng - Hà Nội</span>
-        </div>
+          <!-- Contact Details (0.95rem, 2 clean lines) -->
+          <div class="cv-contact-details">
+            <div class="cv-contact-line">
+              <a href="tel:0986192092" class="cv-contact-link" title="Gọi điện"><i class="fa-solid fa-phone"></i> 0986.192.092</a>
+              <span class="cv-contact-dot">•</span>
+              <a href="mailto:ducthangqtm@gmail.com" class="cv-contact-link" title="Gửi email"><i class="fa-solid fa-envelope"></i> ducthangqtm@gmail.com</a>
+            </div>
+            <div class="cv-contact-line">
+              <span class="cv-contact-item"><i class="fa-solid fa-location-dot"></i> Thịnh Liên - Phù Đổng - Hà Nội</span>
+            </div>
+          </div>
 
-        <!-- Centered Social Buttons -->
-        <nav class="cv-social-compact cv-social-centered" aria-label="Mạng xã hội">
-          <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="cv-social-btn zalo" aria-label="Zalo Thắng iT" title="Zalo: 0986192092">
-            <span class="zalo-text-badge">Zalo</span>
-          </a>
-          <a href="https://t.me/thangnhayday" target="_blank" rel="noopener noreferrer" class="cv-social-btn telegram" aria-label="Telegram Thắng iT" title="Telegram: @thangnhayday">
-            <i class="fab fa-telegram"></i>
-          </a>
-          <a href="https://discord.com/users/thangnhayday" target="_blank" rel="noopener noreferrer" class="cv-social-btn discord" aria-label="Discord: @thangnhayday" title="Discord: @thangnhayday" id="btn-discord-action">
-            <i class="fab fa-discord"></i>
-          </a>
-          <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener noreferrer" class="cv-social-btn github" aria-label="GitHub Thắng iT" title="GitHub: ducthangqtm">
-            <i class="fab fa-github"></i>
-          </a>
-        </nav>
+          <!-- Social Buttons (Left-Aligned Row) -->
+          <nav class="cv-social-links" aria-label="Mạng xã hội">
+            <a href="https://zalo.me/0986192092" target="_blank" rel="noopener noreferrer" class="cv-social-btn zalo" aria-label="Zalo Thắng iT" title="Zalo: 0986192092">
+              <span class="zalo-text-badge">Zalo</span>
+            </a>
+            <a href="https://t.me/thangnhayday" target="_blank" rel="noopener noreferrer" class="cv-social-btn telegram" aria-label="Telegram Thắng iT" title="Telegram: @thangnhayday">
+              <i class="fab fa-telegram"></i>
+            </a>
+            <a href="https://discord.com/users/thangnhayday" target="_blank" rel="noopener noreferrer" class="cv-social-btn discord" aria-label="Discord: @thangnhayday" title="Discord: @thangnhayday" id="btn-discord-action">
+              <i class="fab fa-discord"></i>
+            </a>
+            <a href="https://github.com/ducthangqtm" target="_blank" rel="noopener noreferrer" class="cv-social-btn github" aria-label="GitHub Thắng iT" title="GitHub: ducthangqtm">
+              <i class="fab fa-github"></i>
+            </a>
+          </nav>
 
-        <!-- 2 Core Skills Tags (Centered) -->
-        <div class="cv-skills-centered">
-          <span class="cv-chip">IT Support &amp; Helpdesk</span>
-          <span class="cv-chip">Vibe Coding &amp; AI Tools</span>
+          <!-- Core Skills Tags (Left-Aligned Row, 0.88rem) -->
+          <div class="cv-skills-tags">
+            <span class="cv-chip">IT Support &amp; Helpdesk</span>
+            <span class="cv-chip">Vibe Coding &amp; AI Tools</span>
+          </div>
         </div>
       </div>
 

@@ -1951,36 +1951,36 @@ textarea::placeholder {
   gap: 14px;
 }
 
-/* 1. Center-Aligned Profile Header Card */
+/* 1. Horizontal 2-Column Profile Header Card */
 .cv-profile-card {
   background: rgba(17, 26, 46, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-card);
-  padding: 24px 18px 20px;
+  padding: 24px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.4);
   animation: fadeInCard 0.35s ease backwards;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
-  gap: 12px;
+  justify-content: flex-start;
+  gap: 28px;
 }
 
-/* Large Centered Avatar (120px) */
-.cv-avatar-wrap-centered {
+/* Avatar (Left) - 130px x 130px, vertically centered */
+.cv-avatar-wrap {
   position: relative;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 2px;
+  width: 130px;
+  height: 130px;
+  align-self: center;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
 
-.cv-avatar-ring-large {
+.cv-avatar-ring {
   position: absolute;
   inset: -3px;
   border-radius: 50%;
@@ -1988,9 +1988,9 @@ textarea::placeholder {
   animation: rotateRing 6s linear infinite;
 }
 
-.cv-avatar-img-large {
-  width: 120px;
-  height: 120px;
+.cv-avatar-img {
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
   position: relative;
@@ -2000,86 +2000,112 @@ textarea::placeholder {
   display: block;
 }
 
-.cv-profile-name-centered {
-  font-size: 1.35rem;
-  font-weight: 800;
+/* Info Container (Right) */
+.cv-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.cv-profile-name {
+  font-size: 1.6rem;
+  font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
   margin: 0;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
+  gap: 8px;
   color: #ffffff;
+}
+
+.cv-profile-name .verified-badge {
+  display: inline-flex;
+  align-items: center;
+  color: #00f0ff;
 }
 
 .cv-role-wrap {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .cv-role-badge {
   display: inline-flex;
   align-items: center;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.05em;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: var(--radius-pill);
   background: rgba(0, 240, 255, 0.12);
   border: 1px solid rgba(0, 240, 255, 0.3);
   color: var(--neon-cyan);
 }
 
-/* Clean & Straight-Aligned Contact Line */
-.cv-contact-row.cv-contact-centered {
+/* Contact Details: 0.95rem, color: #cbd5e1 */
+.cv-contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 2px 0;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.cv-contact-line {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 8px 14px;
-  margin: 0;
-  font-size: 0.76rem;
-  color: var(--text-dim);
+  gap: 8px 12px;
+  line-height: 1.4;
 }
 
-.cv-contact-row.cv-contact-centered a,
-.cv-contact-row.cv-contact-centered span,
+.cv-contact-dot {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.cv-contact-link,
 .cv-contact-item {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  color: var(--text-dim);
+  gap: 8px;
+  color: #cbd5e1;
   text-decoration: none;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
   transition: color 0.15s ease;
 }
 
-.cv-contact-row.cv-contact-centered a:hover {
+.cv-contact-link:hover {
   color: var(--neon-cyan);
 }
 
-.cv-contact-row.cv-contact-centered i {
+.cv-contact-details i {
   color: var(--neon-cyan);
-  font-size: 0.72rem;
+  font-size: 0.95rem;
 }
 
-/* Centered Social Buttons */
-.cv-social-compact.cv-social-centered {
+/* Social Buttons - clean left-aligned row */
+.cv-social-links {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 2px 0;
+  gap: 10px;
+  margin-top: 2px;
   flex-wrap: wrap;
 }
 
 .cv-social-btn {
-  height: 34px;
-  min-width: 34px;
-  padding: 0 10px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2092,7 +2118,7 @@ textarea::placeholder {
 }
 
 .cv-social-btn i {
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .cv-social-btn.telegram i { color: #2AABEE; }
@@ -2100,7 +2126,7 @@ textarea::placeholder {
 .cv-social-btn.github i { color: #FFFFFF; }
 
 .cv-social-btn .zalo-text-badge {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 800;
   color: #0068FF;
 }
@@ -2112,21 +2138,20 @@ textarea::placeholder {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* 2 Centered Core Skills Tags */
-.cv-skills-centered {
+/* Core Skills Tags - left-aligned, readable 0.88rem */
+.cv-skills-tags {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  gap: 10px;
   margin-top: 2px;
   flex-wrap: wrap;
 }
 
-.cv-skills-centered .cv-chip {
-  font-size: 0.72rem;
+.cv-skills-tags .cv-chip {
+  font-size: 0.88rem;
   font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
   background: rgba(0, 240, 255, 0.08);
   border: 1px solid rgba(0, 240, 255, 0.25);
   color: var(--neon-cyan);
@@ -2134,7 +2159,7 @@ textarea::placeholder {
   transition: all 0.15s ease;
 }
 
-.cv-skills-centered .cv-chip:hover {
+.cv-skills-tags .cv-chip:hover {
   background: rgba(0, 240, 255, 0.16);
   border-color: rgba(0, 240, 255, 0.45);
   transform: translateY(-1px);
@@ -2171,62 +2196,73 @@ textarea::placeholder {
   gap: 10px;
 }
 
-@media (max-width: 480px) {
-  .cv-avatar-wrap-centered,
-  .cv-avatar-img-large {
-    width: 108px;
-    height: 108px;
-  }
-  .cv-profile-name-centered {
-    font-size: 1.22rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .cv-avatar-wrap-centered,
-  .cv-avatar-img-large {
-    width: 96px;
-    height: 96px;
-  }
-  .cv-profile-name-centered {
-    font-size: 1.15rem;
-  }
-  .cv-contact-row.cv-contact-centered {
+/* Mobile Responsive: below 640px stack cleanly centered */
+@media (max-width: 640px) {
+  .cv-profile-card {
     flex-direction: column;
-    gap: 5px;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .cv-avatar-wrap {
+    width: 110px;
+    height: 110px;
+  }
+
+  .cv-avatar-img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .cv-info-container {
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .cv-profile-name {
+    font-size: 1.35rem;
+    justify-content: center;
+  }
+
+  .cv-role-wrap {
+    justify-content: center;
+  }
+
+  .cv-contact-details {
+    align-items: center;
+    font-size: 0.88rem;
+  }
+
+  .cv-contact-line {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .cv-contact-link,
+  .cv-contact-item {
+    font-size: 0.88rem;
+  }
+
+  .cv-social-links {
+    justify-content: center;
+  }
+
+  .cv-skills-tags {
+    justify-content: center;
   }
 }
 
-.cv-contact-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 8px 14px;
-  margin-top: 8px;
-  font-size: 0.76rem;
-  color: var(--text-dim);
-}
-
-.cv-contact-row span,
-.cv-contact-row a,
-.cv-contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--text-dim);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.cv-contact-row a:hover,
-.cv-contact-link:hover {
-  color: var(--neon-cyan);
-}
-
-.cv-contact-row i {
-  color: var(--neon-cyan);
-  font-size: 0.72rem;
+@media (max-width: 400px) {
+  .cv-contact-line {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cv-contact-dot {
+    display: none;
+  }
 }
 
 /* Timeline Experience */
