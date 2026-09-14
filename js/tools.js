@@ -337,6 +337,175 @@ async function fetchClientIpInfo() {
 }
 
 /* ==========================================================================
+   5B. OPEN TCP PORT CHECKER (Globalping Edge API & Timeout Controller)
+   ========================================================================== */
+async function checkTcpPort(target, port, timeoutMs = 5000) {
+  target = (target || '').trim();
+  // Remove protocol scheme (http://, https://, ws://)
+  target = target.replace(/^[a-zA-Z]+:\/\//, '').split('/')[0];
+  
+  // If user pasted host:port into host input
+  if (target.includes(':') && !target.includes('[')) {
+    const parts = target.split(':');
+    if (!port && parts[1]) port = parseInt(parts[1], 10);
+    target = parts[0];
+  }
+
+  port = parseInt(port, 10);
+
+  if (!target) {
+    return { success: false, status: 'error', message: 'Vui lòng nhập địa chỉ IP hoặc Tên miền (Hostname)!' };
+  }
+
+  if (isNaN(port) || port < 1 || port > 65535) {
+    return { success: false, status: 'error', message: 'Cổng (Port) không hợp lệ! Vui lòng nhập số cổng từ 1 đến 65535.' };
+  }
+
+  // RFC 1918 Private IP & Loopback detection
+  const isPrivateIp = (ip) => {
+    if (ip === 'localhost' || ip === '127.0.0.1' || ip.startsWith('127.')) return true;
+    const parts = ip.split('.').map(p => parseInt(p, 10));
+    if (parts.length === 4 && parts.every(p => !isNaN(p) && p >= 0 && p <= 255)) {
+      if (parts[0] === 10) return true; // 10.0.0.0/8
+      if (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) return true; // 172.16.0.0/12
+      if (parts[0] === 192 && parts[1] === 168) return true; // 192.168.0.0/16
+      if (parts[0] === 169 && parts[1] === 254) return true; // APIPA Link-Local
+    }
+    return false;
+  };
+
+  if (isPrivateIp(target)) {
+    return {
+      success: false,
+      status: 'warning',
+      isPrivate: true,
+      message: 'Địa chỉ bạn nhập là IP mạng nội bộ (Private IP: 192.168.x.x, 10.x.x.x, 172.16-31.x.x). Kiểm tra từ Internet yêu cầu IP WAN công cộng (Public IP) hoặc Tên miền (DDNS) đã mở Port Forwarding.'
+    };
+  }
+
+  const abortController = new AbortController();
+  const timer = setTimeout(() => abortController.abort(), timeoutMs);
+  const startTime = performance.now();
+
+  try {
+    // Phase 1: Post TCP ping measurement to Globalping API
+    const createRes = await fetch('https://api.globalping.io/v1/measurements', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        target: target,
+        type: 'ping',
+        limit: 1,
+        locations: [{ continent: 'AS' }], // Prioritize Asia probes for fastest roundtrip
+        measurementOptions: {
+          protocol: 'TCP',
+          port: port,
+          packets: 1
+        }
+      }),
+      signal: abortController.signal
+    });
+
+    if (!createRes.ok) {
+      const errData = await createRes.json().catch(() => ({}));
+      if (errData?.error?.params?.target) {
+        clearTimeout(timer);
+        return {
+          success: false,
+          status: 'warning',
+          message: errData.error.params.target
+        };
+      }
+      throw new Error(`API error ${createRes.status}`);
+    }
+
+    const { id } = await createRes.json();
+    if (!id) throw new Error('Không nhận được ID phiên đo lường');
+
+    // Phase 2: Poll measurement result with 5-second total timeout
+    let measurementData = null;
+    while (performance.now() - startTime < timeoutMs) {
+      await new Promise(r => setTimeout(r, 450));
+      if (performance.now() - startTime >= timeoutMs) break;
+
+      const pollRes = await fetch(`https://api.globalping.io/v1/measurements/${id}`, {
+        cache: 'no-store',
+        signal: abortController.signal
+      });
+
+      if (pollRes.ok) {
+        const pollJson = await pollRes.json();
+        if (pollJson.status === 'finished') {
+          measurementData = pollJson;
+          break;
+        }
+      }
+    }
+
+    clearTimeout(timer);
+
+    if (measurementData && measurementData.results && measurementData.results.length > 0) {
+      const item = measurementData.results[0];
+      const result = item.result || {};
+      const stats = result.stats || {};
+      const probe = item.probe || {};
+      const locationStr = [probe.city, probe.country].filter(Boolean).join(', ');
+
+      if (stats.rcv > 0) {
+        return {
+          success: true,
+          status: 'open',
+          host: target,
+          port: port,
+          latency: stats.avg ? `${stats.avg} ms` : (result.timings?.[0]?.rtt ? `${result.timings[0].rtt} ms` : null),
+          probeLocation: locationStr || 'Asia Edge Probe',
+          resolvedIp: result.resolvedAddress || target,
+          message: '🟢 Port MỞ (Open) - Kết nối thành công từ Internet'
+        };
+      } else {
+        return {
+          success: true,
+          status: 'closed',
+          host: target,
+          port: port,
+          probeLocation: locationStr || 'Asia Edge Probe',
+          resolvedIp: result.resolvedAddress || target,
+          message: '🔴 Port ĐÓNG (Closed) - Chưa thông hoặc bị Firewall chặn'
+        };
+      }
+    }
+
+    // If loop ends without response before timeoutMs, connection timed out
+    return {
+      success: true,
+      status: 'closed',
+      host: target,
+      port: port,
+      isTimeout: true,
+      message: '🔴 Port ĐÓNG (Closed) - Chưa thông hoặc bị Firewall chặn'
+    };
+
+  } catch (err) {
+    clearTimeout(timer);
+    if (err.name === 'AbortError' || (performance.now() - startTime >= timeoutMs)) {
+      return {
+        success: true,
+        status: 'closed',
+        host: target,
+        port: port,
+        isTimeout: true,
+        message: '🔴 Port ĐÓNG (Closed) - Chưa thông hoặc bị Firewall chặn'
+      };
+    }
+    return {
+      success: false,
+      status: 'error',
+      message: 'Không thể kết nối máy chủ đo lường hoặc mạng chập chờn. Vui lòng kiểm tra lại kết nối.'
+    };
+  }
+}
+
+/* ==========================================================================
    6. WI-FI QR STRING FORMATTER (ZXing / iOS / Android Standard)
    ========================================================================== */
 function formatWifiQrString(ssid, pass, auth, hidden) {
@@ -937,5 +1106,6 @@ if (typeof window !== 'undefined') {
   window.generateWifiCardCanvas = generateWifiCardCanvas;
   window.saveCanvasImageWithShare = saveCanvasImageWithShare;
   window.showWifiImageModal = showWifiImageModal;
+  window.checkTcpPort = checkTcpPort;
 }
 

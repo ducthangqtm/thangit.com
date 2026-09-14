@@ -276,6 +276,9 @@ function initNetworkTools() {
   // 5. My IP & Cloudflare DoH DNS
   initIpDnsUI();
 
+  // 6. Open Port Checker
+  initPortCheckerUI();
+
   // Fetch WAN IP immediately on page load (#pane-speedtest is active default)
   loadWanIp();
 }
@@ -294,7 +297,10 @@ function initToolSwitcher() {
       btn.classList.add('active');
 
       panels.forEach(p => {
-        if (p.id === toolId) {
+        const isMatch = (p.id === toolId) ||
+          (toolId === 'pane-dns' && (p.id === 'pane-dns' || p.id === 'pane-dns-port')) ||
+          (toolId === 'pane-dns-port' && (p.id === 'pane-dns' || p.id === 'pane-dns-port'));
+        if (isMatch) {
           p.classList.add('active');
         } else {
           p.classList.remove('active');
@@ -307,11 +313,12 @@ function initToolSwitcher() {
         if (ipVal && (ipVal.textContent.includes('Đang kiểm tra') || ipVal.textContent === '...')) {
           loadWanIp();
         }
-      } else if (toolId === 'pane-dns-port' || toolId === 'tool-ports' || toolId === 'tool-ipdns') {
+      } else if (toolId === 'pane-dns' || toolId === 'pane-dns-port' || toolId === 'tool-ports' || toolId === 'tool-ipdns') {
         const portContainer = document.getElementById('port-items-container');
         if (portContainer && (!portContainer.children || portContainer.children.length === 0)) {
           initPortUI();
         }
+        syncPortCheckerWanIp();
       } else if (toolId === 'pane-wifi' || toolId === 'tool-wifi') {
         const canvas = document.getElementById('wifi-qr-canvas');
         if (canvas && (!canvas.width || canvas.width < 100)) {
@@ -710,6 +717,12 @@ async function loadWanIp() {
     ipValEl.textContent = res.ip;
     ipValEl.style.opacity = '1';
 
+    // Auto-fill port checker host input if empty
+    const portHostInput = document.getElementById('port-check-host');
+    if (portHostInput && !portHostInput.value && res.ip && res.ip !== 'Không thể lấy IP' && res.ip !== 'Không thể kết nối' && res.ip !== '127.0.0.1') {
+      portHostInput.value = res.ip;
+    }
+
     if (ispBadgeEl) {
       let ispInfo = res.isp || res.org || '';
       if (ispInfo.toLowerCase().includes('viettel')) ispInfo = 'Viettel Telecom';
@@ -993,6 +1006,227 @@ function initIpDnsUI() {
       if (e.key === 'Enter') handleDnsQuery();
     });
   }
+}
+
+/* Helper: Escape HTML strings */
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+/* Helper: Sync detected WAN IP to Port Checker input */
+function syncPortCheckerWanIp() {
+  const portHostInput = document.getElementById('port-check-host');
+  const ipValEl = document.getElementById('wan-ip-val');
+  if (portHostInput && !portHostInput.value && ipValEl) {
+    const currentIp = ipValEl.textContent.trim();
+    if (currentIp && !currentIp.includes('...') && !currentIp.includes('Đang') && !currentIp.includes('Không thể')) {
+      portHostInput.value = currentIp;
+    }
+  }
+}
+
+/* ==========================================================================
+   5B. OPEN PORT CHECKER UI CONTROLLER
+   ========================================================================== */
+function initPortCheckerUI() {
+  const btnCheck = document.getElementById('btn-check-port');
+  const hostInput = document.getElementById('port-check-host');
+  const portInput = document.getElementById('port-check-port');
+  const resultBox = document.getElementById('port-check-result');
+  const chipBtns = document.querySelectorAll('#card-port-checker .port-chip-btn');
+
+  if (!btnCheck || !hostInput || !portInput || !resultBox) return;
+
+  // Sync IP if available
+  syncPortCheckerWanIp();
+
+  // Quick port chip clicks
+  chipBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const portVal = btn.getAttribute('data-port');
+      if (portVal) {
+        portInput.value = portVal;
+        chipBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        portInput.focus();
+      }
+    });
+  });
+
+  // Highlight matching chip when user types port manually
+  portInput.addEventListener('input', () => {
+    const currentVal = portInput.value.trim();
+    chipBtns.forEach(b => {
+      if (b.getAttribute('data-port') === currentVal) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+  });
+
+  async function handlePortCheck() {
+    const host = hostInput.value.trim();
+    const port = portInput.value.trim();
+
+    if (!host) {
+      showToast('⚠️ Vui lòng nhập địa chỉ IP hoặc Hostname!');
+      hostInput.focus();
+      return;
+    }
+
+    if (!port) {
+      showToast('⚠️ Vui lòng nhập số Port cần kiểm tra!');
+      portInput.focus();
+      return;
+    }
+
+    const portNum = parseInt(port, 10);
+    if (isNaN(portNum) || portNum < 1 || portNum > 65535) {
+      showToast('⚠️ Cổng (Port) không hợp lệ (1 - 65535)!');
+      portInput.focus();
+      return;
+    }
+
+    // UI Loading state
+    btnCheck.disabled = true;
+    btnCheck.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang kiểm tra...';
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = `
+      <div class="port-status-banner loading">
+        <div class="port-status-header">
+          <i class="fas fa-spinner fa-spin" style="color:var(--neon-cyan);"></i>
+          <span>Đang kiểm tra kết nối tới ${escapeHtml(host)}:${portNum}...</span>
+        </div>
+        <div class="port-status-desc">
+          Đang gửi gói tin TCP SYN từ cụm Cloud Edge tới địa chỉ đích để xác thực cổng kết nối...
+        </div>
+      </div>
+    `;
+
+    try {
+      const res = typeof checkTcpPort === 'function'
+        ? await checkTcpPort(host, portNum, 5000)
+        : { success: false, status: 'error', message: 'Engine kiểm tra port chưa sẵn sàng.' };
+
+      if (res.status === 'open') {
+        resultBox.innerHTML = `
+          <div class="port-status-banner open">
+            <div class="port-status-header" style="color:var(--neon-green);">
+              <i class="fas fa-check-circle"></i>
+              <span>🟢 Port MỞ (Open) - Kết nối thành công từ Internet</span>
+            </div>
+            <div class="port-status-desc">
+              Cổng <strong>${portNum}</strong> trên máy chủ <strong>${escapeHtml(host)}</strong> đang mở và phản hồi tín hiệu kết nối TCP thành công từ Internet.
+            </div>
+            <div class="port-meta-grid">
+              <div class="port-meta-item">
+                <span class="port-meta-key">Đích đến:</span>
+                <span class="port-meta-val">${escapeHtml(res.resolvedIp || host)}:${portNum}</span>
+              </div>
+              ${res.latency ? `
+              <div class="port-meta-item">
+                <span class="port-meta-key">Độ trễ RTT:</span>
+                <span class="port-meta-val" style="color:var(--neon-green);">${escapeHtml(res.latency)}</span>
+              </div>` : ''}
+              <div class="port-meta-item">
+                <span class="port-meta-key">Vị trí Node:</span>
+                <span class="port-meta-val">${escapeHtml(res.probeLocation || 'Asia Edge')}</span>
+              </div>
+              <div class="port-meta-item">
+                <span class="port-meta-key">Giao thức:</span>
+                <span class="port-meta-val">TCP Handshake</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (res.status === 'closed') {
+        resultBox.innerHTML = `
+          <div class="port-status-banner closed">
+            <div class="port-status-header" style="color:var(--neon-rose);">
+              <i class="fas fa-times-circle"></i>
+              <span>🔴 Port ĐÓNG (Closed) - Chưa thông hoặc bị Firewall chặn</span>
+            </div>
+            <div class="port-status-desc">
+              Không thể thiết lập kết nối TCP tới <strong>${escapeHtml(host)}:${portNum}</strong> từ Internet.
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-dim); margin-top:4px; line-height:1.45;">
+              💡 <strong>Các nguyên nhân phổ biến:</strong>
+              <ul style="margin:4px 0 0 16px;">
+                <li>Chưa cấu hình Port Forwarding (NAT Virtual Server/DMZ) trên Router/Modem.</li>
+                <li>Tường lửa (Windows Defender Firewall, iptables, Cloud Security Group) đang chặn cổng ${portNum}.</li>
+                <li>Phần mềm hoặc dịch vụ chưa được khởi chạy (listen) trên thiết bị.</li>
+                <li>Đường truyền nhà mạng (ISP) nằm sau lớp CGNAT chưa mở IP WAN tĩnh/DDNS.</li>
+              </ul>
+            </div>
+            <div class="port-meta-grid" style="margin-top:6px;">
+              <div class="port-meta-item">
+                <span class="port-meta-key">Đích đến:</span>
+                <span class="port-meta-val">${escapeHtml(res.resolvedIp || host)}:${portNum}</span>
+              </div>
+              <div class="port-meta-item">
+                <span class="port-meta-key">Trạng thái:</span>
+                <span class="port-meta-val" style="color:var(--neon-rose);">${res.isTimeout ? 'Hết giờ (Timeout > 5s)' : 'Bị từ chối (Refused)'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (res.status === 'warning') {
+        resultBox.innerHTML = `
+          <div class="port-status-banner warning">
+            <div class="port-status-header" style="color:var(--neon-amber);">
+              <i class="fas fa-exclamation-triangle"></i>
+              <span>⚠️ Cảnh Báo Địa Chỉ IP</span>
+            </div>
+            <div class="port-status-desc" style="color:#ffffff;">
+              ${escapeHtml(res.message)}
+            </div>
+          </div>
+        `;
+      } else {
+        resultBox.innerHTML = `
+          <div class="port-status-banner closed">
+            <div class="port-status-header" style="color:var(--neon-rose);">
+              <i class="fas fa-exclamation-circle"></i>
+              <span>❌ Lỗi Kiểm Tra</span>
+            </div>
+            <div class="port-status-desc">
+              ${escapeHtml(res.message || 'Không thể kiểm tra vào lúc này.')}
+            </div>
+          </div>
+        `;
+      }
+    } catch (err) {
+      resultBox.innerHTML = `
+        <div class="port-status-banner closed">
+          <div class="port-status-header" style="color:var(--neon-rose);">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>❌ Lỗi Kết Nối</span>
+          </div>
+          <div class="port-status-desc">
+            ${escapeHtml(err.message || 'Có lỗi xảy ra trong quá trình kiểm tra port.')}
+          </div>
+        </div>
+      `;
+    } finally {
+      btnCheck.disabled = false;
+      btnCheck.innerHTML = '<i class="fas fa-plug"></i> Kiểm Tra Port';
+    }
+  }
+
+  btnCheck.addEventListener('click', handlePortCheck);
+  hostInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handlePortCheck();
+  });
+  portInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handlePortCheck();
+  });
 }
 
 /* ==========================================================================
