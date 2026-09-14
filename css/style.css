@@ -226,14 +226,14 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
   height: 38px;
-  padding: 0 11px;
+  padding: 0 13px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-pill);
   color: var(--text-dim);
-  font-size: 0.76rem;
+  font-size: 0.77rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -244,6 +244,12 @@ body {
   user-select: none;
 }
 
+.top-nav-btn i {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
 .top-nav-btn:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(0, 240, 255, 0.4);
@@ -251,27 +257,39 @@ body {
   transform: translateY(-1px);
 }
 
+.top-nav-btn:hover i {
+  color: var(--neon-cyan);
+}
+
 .top-nav-btn.active {
-  background: rgba(0, 240, 255, 0.14) !important;
+  background: rgba(0, 240, 255, 0.15) !important;
   border-color: var(--neon-cyan) !important;
   color: var(--neon-cyan) !important;
   box-shadow: 0 0 14px rgba(0, 240, 255, 0.3) !important;
 }
 
+.top-nav-btn.active i {
+  color: var(--neon-cyan) !important;
+}
+
 @media (max-width: 390px) {
   .top-nav-btn {
     height: 36px;
-    padding: 0 8px;
+    padding: 0 9px;
     font-size: 0.71rem;
-    gap: 2px;
+    gap: 4px;
+  }
+  .top-nav-btn i {
+    font-size: 0.76rem;
   }
 }
 
 @media (max-width: 350px) {
   .top-nav-btn {
     height: 34px;
-    padding: 0 6px;
+    padding: 0 7px;
     font-size: 0.66rem;
+    gap: 3px;
   }
   .badge-status {
     padding: 0 8px 0 6px;
