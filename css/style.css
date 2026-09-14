@@ -1499,6 +1499,22 @@ textarea::placeholder {
 }
 
 /* Open Port Checker UI */
+.port-form-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.port-field-host {
+  flex: 7;
+  min-width: 0;
+}
+
+.port-field-port {
+  flex: 3;
+  min-width: 95px;
+}
+
 .port-quick-chips {
   display: flex;
   flex-direction: column;
@@ -1507,15 +1523,24 @@ textarea::placeholder {
 }
 
 .port-quick-label {
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: var(--text-dim);
   font-weight: 500;
 }
 
 .port-quick-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 6px;
+  padding: 2px 1px 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.port-quick-list::-webkit-scrollbar {
+  display: none;
 }
 
 .port-chip-btn {
@@ -1523,11 +1548,13 @@ textarea::placeholder {
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
   font-size: 0.72rem;
-  padding: 4px 8px;
+  padding: 5px 9px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: var(--font-sans);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .port-chip-btn:hover,

@@ -52,7 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20260914_afffix">
+  <link rel="stylesheet" href="/css/style.css?v=20260914_portcompact">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -362,29 +362,26 @@
             <span class="tool-tag-badge">TCP Check</span>
           </div>
 
-          <div class="tool-form-grid">
-            <div class="tool-field">
+          <div class="port-form-row">
+            <div class="tool-field port-field-host">
               <label class="tool-label" for="port-check-host">IP / Hostname:</label>
-              <input type="text" id="port-check-host" class="tool-input" placeholder="VD: 113.161.x.x hoặc domain.com..." autocomplete="off">
+              <input type="text" id="port-check-host" class="tool-input" placeholder="VD: 113.161.x.x..." autocomplete="off">
             </div>
-            <div class="tool-field">
+            <div class="tool-field port-field-port">
               <label class="tool-label" for="port-check-port">Cổng (Port):</label>
-              <input type="number" id="port-check-port" class="tool-input" placeholder="VD: 80, 443, 37777..." min="1" max="65535" autocomplete="off">
+              <input type="number" id="port-check-port" class="tool-input" placeholder="80, 443..." min="1" max="65535" autocomplete="off">
             </div>
           </div>
 
-          <!-- Quick port chips -->
+          <!-- Quick port chips in single row -->
           <div class="port-quick-chips" id="port-quick-chips">
-            <span class="port-quick-label">Gợi ý cổng nhanh:</span>
+            <span class="port-quick-label">Gợi ý cổng phổ biến:</span>
             <div class="port-quick-list">
               <button type="button" class="port-chip-btn" data-port="80">80 (HTTP)</button>
               <button type="button" class="port-chip-btn" data-port="443">443 (HTTPS)</button>
-              <button type="button" class="port-chip-btn" data-port="8080">8080 (Web)</button>
               <button type="button" class="port-chip-btn" data-port="8291">8291 (MikroTik)</button>
-              <button type="button" class="port-chip-btn" data-port="37777">37777 (Dahua)</button>
-              <button type="button" class="port-chip-btn" data-port="8000">8000 (Hikvision)</button>
+              <button type="button" class="port-chip-btn" data-port="37777">37777 (Camera Dahua)</button>
               <button type="button" class="port-chip-btn" data-port="3389">3389 (RDP)</button>
-              <button type="button" class="port-chip-btn" data-port="22">22 (SSH)</button>
             </div>
           </div>
 
