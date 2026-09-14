@@ -1026,6 +1026,23 @@ textarea::placeholder {
   transform: scale(0.98); 
 }
 
+/* Distinct Accent for Reverse DNS (PTR) Submit Button */
+.tool-btn-rdns {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(112, 0, 255, 0.22)) !important;
+  border: 1px solid rgba(0, 240, 255, 0.45) !important;
+  color: var(--neon-cyan) !important;
+  box-shadow: 0 4px 14px rgba(0, 240, 255, 0.12) !important;
+  backdrop-filter: blur(8px);
+}
+
+.tool-btn-rdns:hover {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.22), rgba(112, 0, 255, 0.35)) !important;
+  border-color: var(--neon-cyan) !important;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.3) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
 .tool-btn-secondary {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1965,16 +1982,27 @@ textarea::placeholder {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 8px 14px;
   margin-top: 8px;
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   color: var(--text-dim);
 }
 
-.cv-contact-row span {
+.cv-contact-row span,
+.cv-contact-row a,
+.cv-contact-link {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cv-contact-row a:hover,
+.cv-contact-link:hover {
+  color: var(--neon-cyan);
 }
 
 .cv-contact-row i {
@@ -2408,37 +2436,43 @@ textarea::placeholder {
 .ecosystem-footer {
   margin-top: 28px;
   padding: 20px 0 16px;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-dim);
 }
 
 .footer-crosslinks {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .footer-link {
   color: var(--text-dim);
   text-decoration: none;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  transition: color 0.2s ease, transform 0.2s ease;
+  opacity: 0.8;
+  transition: all 0.2s ease;
 }
 
 .footer-link:hover {
-  color: var(--neon-cyan);
+  opacity: 1;
+  color: var(--text-body);
   transform: translateY(-1px);
 }
 
@@ -2446,8 +2480,8 @@ textarea::placeholder {
 .footer-link.admin-link:hover { color: var(--neon-green); }
 
 .footer-sep {
-  color: rgba(255, 255, 255, 0.18);
-  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.65rem;
 }
 
 .footer-copyright-row {
@@ -2455,14 +2489,30 @@ textarea::placeholder {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 0.78rem;
-  color: var(--text-body);
+  font-size: 0.76rem;
+  color: var(--text-dim);
   flex-wrap: wrap;
 }
 
+.footer-brand-link {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.footer-brand-link:hover {
+  text-decoration: underline;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.footer-copyright-row strong {
+  color: var(--text-body);
+}
+
 .footer-tagline {
-  font-size: 0.72rem;
-  color: var(--text-dim);
+  font-size: 0.70rem;
+  color: rgba(148, 163, 184, 0.55);
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
 }
