@@ -2110,9 +2110,9 @@ textarea::placeholder {
   font-size: 0.95rem;
 }
 
-/* Centered Social Buttons */
+/* Centered Social Buttons (Temporarily hidden) */
 .cv-social-links {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -2163,7 +2163,7 @@ textarea::placeholder {
   justify-content: space-between;
   gap: 12px;
   width: 100%;
-  margin: 0;
+  margin-top: 4px;
   box-sizing: border-box;
 }
 
