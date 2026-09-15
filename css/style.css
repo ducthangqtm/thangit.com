@@ -1951,29 +1951,30 @@ textarea::placeholder {
   gap: 14px;
 }
 
-/* 1. Horizontal 2-Column Profile Header Card */
+/* 1. Center-Aligned Profile Header Card */
+#pane-profile,
 .cv-profile-card {
   background: rgba(17, 26, 46, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-card);
-  padding: 24px;
+  padding: 28px 20px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.4);
   animation: fadeInCard 0.35s ease backwards;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  gap: 28px;
+  text-align: center;
+  gap: 14px;
 }
 
-/* Avatar (Left) - 130px x 130px, vertically centered */
+/* Avatar Centered on Top - 120px x 120px with neon gradient ring */
 .cv-avatar-wrap {
   position: relative;
-  width: 130px;
-  height: 130px;
-  align-self: center;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -1989,8 +1990,8 @@ textarea::placeholder {
 }
 
 .cv-avatar-img {
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
   position: relative;
@@ -2000,27 +2001,19 @@ textarea::placeholder {
   display: block;
 }
 
-/* Info Container (Right) */
-.cv-info-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 10px;
-  width: 100%;
-  min-width: 0;
-}
-
+/* Centered Name & Verified Badge */
 .cv-profile-name {
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
   margin: 0;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   color: #ffffff;
+  text-align: center;
 }
 
 .cv-profile-name .verified-badge {
@@ -2029,30 +2022,37 @@ textarea::placeholder {
   color: #00f0ff;
 }
 
+/* Centered Role Badge */
 .cv-role-wrap {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 
 .cv-role-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.05em;
-  padding: 4px 12px;
+  padding: 4px 14px;
   border-radius: var(--radius-pill);
   background: rgba(0, 240, 255, 0.12);
   border: 1px solid rgba(0, 240, 255, 0.3);
   color: var(--neon-cyan);
 }
 
-/* Contact Details: 0.95rem, color: #cbd5e1 */
+/* Contact Details: 0.95rem, color: #cbd5e1, centered */
 .cv-contact-details {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 6px;
-  margin: 2px 0;
+  margin: 0;
+  width: 100%;
   font-size: 0.95rem;
   color: #cbd5e1;
 }
@@ -2061,14 +2061,16 @@ textarea::placeholder {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 8px 12px;
   line-height: 1.4;
+  text-align: center;
 }
 
 .cv-contact-dot {
   color: var(--text-dim);
   font-size: 0.85rem;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .cv-contact-link,
@@ -2093,12 +2095,13 @@ textarea::placeholder {
   font-size: 0.95rem;
 }
 
-/* Social Buttons - clean left-aligned row */
+/* Centered Social Buttons */
 .cv-social-links {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin-top: 2px;
+  margin: 0;
   flex-wrap: wrap;
 }
 
@@ -2138,12 +2141,13 @@ textarea::placeholder {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* Core Skills Tags - left-aligned, readable 0.88rem */
+/* 2 Core Skills Tags - Centered Side-by-Side */
 .cv-skills-tags {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin-top: 2px;
+  margin: 0;
   flex-wrap: wrap;
 }
 
@@ -2196,62 +2200,16 @@ textarea::placeholder {
   gap: 10px;
 }
 
-/* Mobile Responsive: below 640px stack cleanly centered */
+/* Mobile Responsive: below 640px */
 @media (max-width: 640px) {
+  #pane-profile,
   .cv-profile-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
-    padding: 20px 16px;
-  }
-
-  .cv-avatar-wrap {
-    width: 110px;
-    height: 110px;
-  }
-
-  .cv-avatar-img {
-    width: 110px;
-    height: 110px;
-  }
-
-  .cv-info-container {
-    align-items: center;
-    text-align: center;
-    gap: 10px;
+    padding: 24px 16px;
+    gap: 14px;
   }
 
   .cv-profile-name {
     font-size: 1.35rem;
-    justify-content: center;
-  }
-
-  .cv-role-wrap {
-    justify-content: center;
-  }
-
-  .cv-contact-details {
-    align-items: center;
-    font-size: 0.88rem;
-  }
-
-  .cv-contact-line {
-    justify-content: center;
-    text-align: center;
-  }
-
-  .cv-contact-link,
-  .cv-contact-item {
-    font-size: 0.88rem;
-  }
-
-  .cv-social-links {
-    justify-content: center;
-  }
-
-  .cv-skills-tags {
-    justify-content: center;
   }
 }
 
