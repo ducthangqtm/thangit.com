@@ -272,6 +272,18 @@ body {
   color: var(--neon-cyan) !important;
 }
 
+#nav-btn-cv {
+  min-width: 110px;
+  height: 40px;
+  padding: 0 18px;
+  font-size: 0.82rem;
+  gap: 7px;
+}
+
+#nav-btn-cv i {
+  font-size: 0.88rem;
+}
+
 @media (max-width: 390px) {
   .top-nav-btn {
     height: 36px;
@@ -280,6 +292,12 @@ body {
     gap: 4px;
   }
   .top-nav-btn i {
+    font-size: 0.76rem;
+  }
+  #nav-btn-cv {
+    min-width: 96px;
+    height: 36px;
+    padding: 0 12px;
     font-size: 0.76rem;
   }
 }
@@ -291,12 +309,18 @@ body {
     font-size: 0.66rem;
     gap: 3px;
   }
+  #nav-btn-cv {
+    min-width: 86px;
+    height: 34px;
+    padding: 0 10px;
+    font-size: 0.72rem;
+  }
   .badge-status {
     padding: 0 8px 0 6px;
     gap: 5px;
   }
   .badge-status-title {
-    font-size: 0.88rem;
+    font-size: 0.84rem;
   }
 }
 
