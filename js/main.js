@@ -1,35 +1,34 @@
 /**
  * THANGIT.COM — Main Script & Deep Linking Router
- * Handles direct URL hash navigation (e.g. #hoso, #profile) on page load.
+ * Handles hash-based routing:
+ * - Default: Tools view (Speedtest / DNS / Network Tools) on thangit.com
+ * - ONLY activates Profile tab on #hoso or #profile
  */
 
 (function () {
   'use strict';
 
   /**
-   * Check window.location.hash and activate Profile tab if matched
+   * Check window.location.hash and activate appropriate tab
    */
-  function handleProfileHashRouting() {
+  function handleHashRouting() {
     const hash = (window.location.hash || '').toLowerCase();
+    const profileBtn = document.getElementById('nav-btn-cv') || document.querySelector('.top-nav-btn[data-target="tab-cv"]');
+    const tabCv = document.getElementById('tab-cv');
+    const tabTools = document.getElementById('tab-tools');
+    const paneProfile = document.getElementById('pane-profile');
 
     if (hash === '#hoso' || hash === '#profile') {
-      const profileBtn = document.getElementById('nav-btn-cv') || document.querySelector('.top-nav-btn[data-target="tab-cv"]');
-      const tabCv = document.getElementById('tab-cv');
-      const paneProfile = document.getElementById('pane-profile');
-
-      // If already displayed and active, do not re-trigger
-      if (tabCv && tabCv.style.display !== 'none' && profileBtn && profileBtn.classList.contains('active')) {
-        return;
-      }
-
-      // 1. Remove active states from other navigation buttons
+      // Deactivate other buttons
       document.querySelectorAll('.top-nav-btn').forEach(btn => {
-        if (btn !== profileBtn) {
+        if (btn === profileBtn) {
+          btn.classList.add('active');
+        } else {
           btn.classList.remove('active');
         }
       });
 
-      // 2. Remove active states and hide other tab contents
+      // Hide other tab contents
       document.querySelectorAll('.home-tab-content').forEach(tab => {
         if (tab.id !== 'tab-cv') {
           tab.classList.remove('active');
@@ -37,33 +36,38 @@
         }
       });
 
-      // 3. Trigger click or activate Hồ Sơ tab button
-      if (profileBtn) {
-        if (!profileBtn.classList.contains('active')) {
-          profileBtn.click();
-        }
-        profileBtn.classList.add('active');
-      }
-
-      // 4. Ensure tab-cv and #pane-profile are active and visible immediately
+      // Show tab-cv
       if (tabCv) {
         tabCv.classList.add('active');
-        tabCv.style.display = 'block';
+        tabCv.style.display = 'flex';
       }
-
       if (paneProfile) {
         paneProfile.classList.add('active');
+      }
+    } else {
+      // Default: Ensure Tools view is active and Profile tab is hidden
+      if (profileBtn) {
+        profileBtn.classList.remove('active');
+      }
+      if (tabCv) {
+        tabCv.classList.remove('active');
+        tabCv.style.display = 'none';
+      }
+      if (tabTools) {
+        tabTools.classList.add('active');
+        tabTools.style.display = 'block';
       }
     }
   }
 
   // Check when the DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', handleProfileHashRouting);
+    document.addEventListener('DOMContentLoaded', handleHashRouting);
   } else {
-    handleProfileHashRouting();
+    handleHashRouting();
   }
 
-  // Also support dynamic hash change without reload
-  window.addEventListener('hashchange', handleProfileHashRouting);
+  // Listen for hash and popstate changes
+  window.addEventListener('hashchange', handleHashRouting);
+  window.addEventListener('popstate', handleHashRouting);
 })();

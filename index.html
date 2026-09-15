@@ -147,7 +147,7 @@
         </span>
       </div>
       <div class="nav-actions">
-        <button type="button" class="top-nav-btn active" id="nav-btn-cv" data-target="tab-cv" title="Hồ Sơ &amp; Năng Lực">
+        <button type="button" class="top-nav-btn" id="nav-btn-cv" data-target="tab-cv" title="Hồ Sơ &amp; Năng Lực">
           <i class="fas fa-briefcase"></i> <span>Hồ Sơ</span>
         </button>
         <!-- Temporarily hidden: Affiliate tab button -->
@@ -169,7 +169,7 @@
     <!-- ===================================================================
          TAB 1: CÔNG CỤ MẠNG CHUYÊN SÂU (4-in-1 Network Pro Tools)
          =================================================================== -->
-    <section class="home-tab-content" id="tab-tools" style="display: none;">
+    <section class="home-tab-content active" id="tab-tools">
       
       <!-- Sub-switcher for 5 tools -->
       <div class="tool-switcher-wrap tools-subtabs" id="tools-subnav">
@@ -541,7 +541,7 @@
     <!-- ===================================================================
          TAB 2: HỒ SƠ & NĂNG LỰC DOANH NGHIỆP
          =================================================================== -->
-    <section class="home-tab-content active" id="tab-cv" style="display:flex; flex-direction:column; gap:14px;">
+    <section class="home-tab-content" id="tab-cv" style="display:none; flex-direction:column; gap:14px;">
       
       <!-- 1. Center-Aligned Profile Card -->
       <div class="cv-profile-card" id="pane-profile">
@@ -808,7 +808,7 @@
           if (tabContents[key]) {
             if (key === targetId) {
               tabContents[key].classList.add('active');
-              tabContents[key].style.display = (key === 'tab-aff') ? 'flex' : 'block';
+              tabContents[key].style.display = (key === 'tab-tools') ? 'block' : 'flex';
             } else {
               tabContents[key].classList.remove('active');
               tabContents[key].style.display = 'none';
@@ -823,30 +823,68 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
+      function clearProfileHash() {
+        const hash = (window.location.hash || '').toLowerCase();
+        if (hash === '#hoso' || hash === '#profile') {
+          if (window.history && window.history.pushState) {
+            history.pushState(null, '', window.location.pathname + window.location.search);
+          } else {
+            window.location.hash = '';
+          }
+        }
+      }
+
       navBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const targetId = btn.getAttribute('data-target');
-          switchTab(targetId);
+          if (targetId === 'tab-cv') {
+            if (window.location.hash.toLowerCase() !== '#hoso') {
+              if (window.history && window.history.pushState) {
+                history.pushState(null, '', '#hoso');
+              } else {
+                window.location.hash = '#hoso';
+              }
+            }
+            switchTab('tab-cv');
+          } else {
+            clearProfileHash();
+            switchTab(targetId);
+          }
         });
       });
 
-      // Default active tab on load is Profile/CV tab
-      const currentHash = (window.location.hash || '').toLowerCase();
-      if (currentHash === '#tools' || currentHash === '#congcu') {
-        switchTab('tab-tools');
-      } else {
-        switchTab('tab-cv');
+      // Default behavior: ONLY #hoso or #profile switches to Profile tab; default is Tools
+      function applyHashRouting() {
+        const currentHash = (window.location.hash || '').toLowerCase();
+        if (currentHash === '#hoso' || currentHash === '#profile') {
+          switchTab('tab-cv');
+        } else {
+          switchTab('tab-tools');
+        }
       }
+
+      applyHashRouting();
+      window.addEventListener('hashchange', applyHashRouting);
+      window.addEventListener('popstate', applyHashRouting);
 
       if (navBrand) {
         navBrand.addEventListener('click', () => {
+          clearProfileHash();
           switchTab('tab-tools');
         });
         navBrand.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
+            clearProfileHash();
             switchTab('tab-tools');
           }
+        });
+      }
+
+      const toolsSubnav = document.getElementById('tools-subnav');
+      if (toolsSubnav) {
+        toolsSubnav.addEventListener('click', () => {
+          clearProfileHash();
         });
       }
 
