@@ -2236,6 +2236,10 @@ textarea::placeholder {
   .cv-contact-dot {
     display: none;
   }
+  .cv-skills-tags .cv-chip {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
 }
 
 /* Timeline Experience */
