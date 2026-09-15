@@ -777,6 +777,7 @@
   <script src="/js/qrcode.min.js?_v=20260911"></script>
   <script src="/js/tools.js?_v=20260914_rdns"></script>
   <script src="/js/core.js?_v=20260914_rdns"></script>
+  <script src="/js/main.js?_v=20260915"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Navigation switching between Công Cụ (Home), Hồ Sơ, Đồ Công Nghệ
@@ -800,8 +801,10 @@
         Object.keys(tabContents).forEach(key => {
           if (tabContents[key]) {
             if (key === targetId) {
+              tabContents[key].classList.add('active');
               tabContents[key].style.display = (key === 'tab-aff') ? 'flex' : 'block';
             } else {
+              tabContents[key].classList.remove('active');
               tabContents[key].style.display = 'none';
             }
           }
@@ -824,6 +827,12 @@
           }
         });
       });
+
+      // Direct URL links hash check (#hoso, #profile)
+      const currentHash = (window.location.hash || '').toLowerCase();
+      if (currentHash === '#hoso' || currentHash === '#profile') {
+        switchTab('tab-cv');
+      }
 
       if (navBrand) {
         navBrand.addEventListener('click', () => {
