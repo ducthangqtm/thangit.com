@@ -147,10 +147,11 @@
         </span>
       </div>
       <div class="nav-actions">
-        <button type="button" class="top-nav-btn" id="nav-btn-cv" data-target="tab-cv" title="Hồ Sơ &amp; Năng Lực">
+        <button type="button" class="top-nav-btn active" id="nav-btn-cv" data-target="tab-cv" title="Hồ Sơ &amp; Năng Lực">
           <i class="fas fa-briefcase"></i> <span>Hồ Sơ</span>
         </button>
-        <button type="button" class="top-nav-btn" id="nav-btn-aff" data-target="tab-aff" title="Đồ Công Nghệ Tuyển Chọn">
+        <!-- Temporarily hidden: Affiliate tab button -->
+        <button type="button" class="top-nav-btn" id="nav-btn-aff" data-target="tab-aff" title="Đồ Công Nghệ Tuyển Chọn" style="display: none;">
           <i class="fas fa-bag-shopping"></i> <span>Đồ Tech</span>
         </button>
         <button id="btn-share" class="icon-btn" aria-label="Chia sẻ trang" title="Chia sẻ">
@@ -168,7 +169,7 @@
     <!-- ===================================================================
          TAB 1: CÔNG CỤ MẠNG CHUYÊN SÂU (4-in-1 Network Pro Tools)
          =================================================================== -->
-    <section class="home-tab-content active" id="tab-tools">
+    <section class="home-tab-content" id="tab-tools" style="display: none;">
       
       <!-- Sub-switcher for 5 tools -->
       <div class="tool-switcher-wrap tools-subtabs" id="tools-subnav">
@@ -540,7 +541,7 @@
     <!-- ===================================================================
          TAB 2: HỒ SƠ & NĂNG LỰC DOANH NGHIỆP
          =================================================================== -->
-    <section class="home-tab-content" id="tab-cv" style="display:none; flex-direction:column; gap:14px;">
+    <section class="home-tab-content active" id="tab-cv" style="display:flex; flex-direction:column; gap:14px;">
       
       <!-- 1. Center-Aligned Profile Card -->
       <div class="cv-profile-card" id="pane-profile">
@@ -658,8 +659,8 @@
         </div>
       </div>
 
-      <!-- 3. Dự Án Thực Tế & Mã Nguồn (Single-line horizontal cards) -->
-      <div class="cv-projects-section">
+      <!-- 3. Dự Án Thực Tế & Mã Nguồn (Single-line horizontal cards) - Temporarily hidden -->
+      <div class="cv-projects-section" style="display: none;">
         <h3 class="cv-section-title" style="margin: 4px 0 8px 4px; font-size: 0.95rem;">
           <i class="fa-brands fa-github" style="color:var(--neon-cyan);"></i> Dự Án Thực Tế &amp; Mã Nguồn
         </h3>
@@ -733,8 +734,9 @@
 
     <!-- ===================================================================
          TAB 3: ĐỒ CÔNG NGHỆ (Affiliate Products from data/products.json)
+         [TEMPORARILY HIDDEN]
          =================================================================== -->
-    <section class="home-tab-content" id="tab-aff" style="display:none; flex-direction:column; gap:14px;">
+    <section class="home-tab-content" id="tab-aff" style="display:none !important; flex-direction:column; gap:14px;">
       <!-- Category Filter Sub-tabs -->
       <div class="tool-switcher-wrap tools-subtabs category-tabs-container" id="aff-category-tabs" aria-label="Bộ lọc danh mục sản phẩm"></div>
 
@@ -820,17 +822,15 @@
       navBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const targetId = btn.getAttribute('data-target');
-          if (btn.classList.contains('active')) {
-            switchTab('tab-tools');
-          } else {
-            switchTab(targetId);
-          }
+          switchTab(targetId);
         });
       });
 
-      // Direct URL links hash check (#hoso, #profile)
+      // Default active tab on load is Profile/CV tab
       const currentHash = (window.location.hash || '').toLowerCase();
-      if (currentHash === '#hoso' || currentHash === '#profile') {
+      if (currentHash === '#tools' || currentHash === '#congcu') {
+        switchTab('tab-tools');
+      } else {
         switchTab('tab-cv');
       }
 
