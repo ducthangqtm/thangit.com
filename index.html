@@ -52,7 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css?v=20260915_portsearch">
+  <link rel="stylesheet" href="/css/style.css?v=20260918_cv">
 
   <!-- Structured Data (Schema.org JSON-LD — Entity Graph) -->
   <script type="application/ld+json">
@@ -541,7 +541,8 @@
     <!-- ===================================================================
          TAB 2: HỒ SƠ & NĂNG LỰC DOANH NGHIỆP
          =================================================================== -->
-    <section class="home-tab-content" id="tab-cv" style="display:none; flex-direction:column; gap:14px;">
+    <section class="home-tab-content" id="tab-cv" data-section="hoso" style="display:none; flex-direction:column; gap:14px;">
+      <div id="hoso" style="position:absolute; visibility:hidden; pointer-events:none;"></div>
       
       <!-- 1. Center-Aligned Profile Card -->
       <div class="cv-profile-card" id="pane-profile">
@@ -597,6 +598,13 @@
             <i class="fab fa-github"></i>
           </a>
         </nav>
+
+        <!-- Download CV (PDF) Button -->
+        <div class="cv-download-box">
+          <a href="assets/CV_Nguyen_Duc_Thang_Senior_IT.pdf" download="CV_Nguyen_Duc_Thang_Senior_IT.pdf" target="_blank" rel="noopener noreferrer" class="cv-download-btn" id="btn-download-cv" title="Tải CV Nguyễn Đức Thắng (PDF)">
+            📥 Tải CV (PDF)
+          </a>
+        </div>
 
         <!-- Core Skills Tags (Centered Side-by-Side) -->
         <div class="cv-skills-tags">
