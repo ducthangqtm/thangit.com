@@ -2151,36 +2151,37 @@ textarea::placeholder {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* CV Download CTA Button — Cyber / Dark Tech / AIOps Style */
+/* CV Download CTA Button — Cyber / Dark Tech / AIOps Style (Closing CTA at bottom of Profile) */
 .cv-download-box {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 2px 0 0 0;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 24px;
   box-sizing: border-box;
 }
 
 .cv-download-btn {
   width: 100%;
-  max-width: 420px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 11px 20px;
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.14) 0%, rgba(112, 0, 255, 0.16) 100%);
+  gap: 10px;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(112, 0, 255, 0.18) 100%);
   border: 1px solid rgba(0, 240, 255, 0.45);
-  border-radius: var(--radius-btn);
+  border-radius: var(--radius-card);
   color: #ffffff;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(0, 240, 255, 0.12), inset 0 0 12px rgba(0, 240, 255, 0.08);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
@@ -2199,11 +2200,11 @@ textarea::placeholder {
 }
 
 .cv-download-btn:hover {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.26) 0%, rgba(112, 0, 255, 0.30) 100%);
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.26) 0%, rgba(112, 0, 255, 0.32) 100%);
   border-color: var(--neon-cyan);
   color: #00f0ff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 240, 255, 0.35), 0 0 14px rgba(0, 240, 255, 0.2), inset 0 0 12px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.35), 0 0 18px rgba(0, 240, 255, 0.25), inset 0 0 14px rgba(0, 240, 255, 0.15);
 }
 
 .cv-download-btn:hover::before {
@@ -2216,9 +2217,13 @@ textarea::placeholder {
 }
 
 @media (max-width: 480px) {
+  .cv-download-box {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
   .cv-download-btn {
-    font-size: 0.86rem;
-    padding: 10px 16px;
+    font-size: 0.88rem;
+    padding: 12px 16px;
   }
 }
 
