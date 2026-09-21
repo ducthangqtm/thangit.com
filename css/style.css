@@ -2794,6 +2794,33 @@ textarea::placeholder {
   color: var(--text-body);
 }
 
+.footer-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-social-link:hover {
+  color: var(--neon-cyan);
+}
+
+.footer-social-link i {
+  font-size: 0.9rem;
+}
+
 /* ==========================================================================
    8. PULL-TO-REFRESH & GLOBAL TOAST FEEDBACK
    ========================================================================== */
