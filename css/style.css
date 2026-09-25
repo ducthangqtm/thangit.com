@@ -52,6 +52,8 @@ html {
   color-scheme: dark;
   scroll-behavior: smooth;
   font-size: 15px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 html, body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, strong, b, div {
@@ -130,6 +132,11 @@ body {
 /* Tab Panels Animation */
 .home-tab-content {
   animation: fadeInCard 0.25s ease-out;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 @keyframes fadeInCard {
@@ -151,12 +158,15 @@ body {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-card);
-  padding: 13px 14px 11px 14px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 11px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.4);
   width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   box-sizing: border-box;
 }
 
@@ -255,18 +265,19 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   padding: 4px !important;
-  display: flex !important;
-  align-items: center;
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
   gap: 4px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  white-space: normal;
   scrollbar-width: none;
   -ms-overflow-style: none;
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.45);
   box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
 }
 
 .tools-segmented-track::-webkit-scrollbar,
@@ -278,25 +289,24 @@ body {
   height: 0;
 }
 
-/* Segmented Control Items */
+/* Segmented Control Items (Icon & Label stacked vertically, ultra clean on all mobile screens) */
 .tools-segmented-track .segmented-item,
 #tools-subnav .subtab-btn,
 #tools-subnav .tool-switcher-btn,
 .tool-switcher-btn,
 .subtab-btn {
-  flex: 1 0 auto;
-  display: inline-flex;
+  display: flex !important;
+  flex-direction: column !important;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 7px 13px;
+  gap: 2px;
+  padding: 5px 2px !important;
+  width: 100%;
+  min-width: 0;
   border-radius: 7px;
   background: transparent;
   border: 1px solid transparent;
   color: #94a3b8;
-  font-size: 0.80rem;
-  font-weight: 600;
-  white-space: nowrap;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
@@ -304,18 +314,32 @@ body {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
+  box-sizing: border-box;
+  text-align: center;
 }
 
+.tools-segmented-track .segmented-item .nav-icon,
+#tools-subnav .subtab-btn .nav-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+  display: block;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.tools-segmented-track .segmented-item .nav-label,
+#tools-subnav .subtab-btn .nav-label,
 .tools-segmented-track .segmented-item span,
-#tools-subnav .subtab-btn span,
-#tools-subnav .tool-switcher-btn span,
-.tool-switcher-btn span,
-.subtab-btn span {
-  display: inline-block;
-  font-size: 0.80rem;
+#tools-subnav .subtab-btn span {
+  display: block;
+  font-size: 0.73rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  pointer-events: none;
 }
 
 .tools-segmented-track .segmented-item:hover,
@@ -334,9 +358,15 @@ body {
 .tool-switcher-btn.active,
 .subtab-btn.active {
   background: rgba(17, 26, 46, 0.95) !important;
-  border: 1px solid rgba(0, 240, 255, 0.4) !important;
+  border: 1px solid rgba(0, 240, 255, 0.45) !important;
   color: #00f0ff !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 240, 255, 0.18) !important;
+  font-weight: 700;
+}
+
+.tools-segmented-track .segmented-item.active .nav-label,
+#tools-subnav .subtab-btn.active .nav-label {
+  color: #00f0ff;
   font-weight: 700;
 }
 
@@ -346,12 +376,22 @@ body {
 .tool-panel {
   display: none;
   animation: fadeInTool 0.25s ease-out;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .tool-panel.active {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .tool-card {
@@ -360,11 +400,16 @@ body {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-card);
-  padding: 16px 14px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
 }
 
 .tool-header-row {
@@ -673,8 +718,10 @@ textarea::placeholder {
 /* Tool Key-Value Results Table */
 .tool-result-table {
   width: 100%;
+  max-width: 100%;
   border-collapse: separate;
   border-spacing: 0 6px;
+  box-sizing: border-box;
 }
 
 .tool-result-row {
@@ -684,18 +731,19 @@ textarea::placeholder {
 }
 
 .tool-res-cell-label {
-  padding: 8px 12px;
-  font-size: 0.75rem;
+  padding: 8px 10px;
+  font-size: 0.74rem;
   font-weight: 600;
   color: var(--text-body);
-  width: 38%;
+  width: 36%;
   border-radius: 8px 0 0 8px;
+  white-space: nowrap;
 }
 
 .tool-res-cell-val {
-  padding: 8px 12px;
+  padding: 8px 10px;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 700;
   color: #fff;
   text-align: right;
@@ -703,7 +751,9 @@ textarea::placeholder {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 6px;
+  word-break: break-all;
+  min-width: 0;
 }
 
 .copy-mini-btn {
@@ -1602,7 +1652,6 @@ textarea::placeholder {
 
 /* ==========================================================================
    5. CLEAN ECOSYSTEM FOOTER
-   ========================================================================== */
    ========================================================================== */
 .ecosystem-footer {
   margin-top: 24px;

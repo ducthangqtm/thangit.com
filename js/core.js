@@ -274,10 +274,6 @@ function initToolSwitcher() {
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      try {
-        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      } catch (_) {}
-
       panels.forEach(p => {
         const isMatch = (p.id === toolId) ||
           (toolId === 'pane-port' && (p.id === 'pane-port' || p.id === 'pane-dns-port')) ||
