@@ -1,5 +1,5 @@
 // THANGIT.COM — PWA Service Worker (Network Pro Tools Hub)
-const CACHE_NAME = 'tit-hub-v24';
+const CACHE_NAME = 'tit-hub-v25';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -11,7 +11,7 @@ const ASSETS_TO_CACHE = [
   '/favicon.png',
   '/favicon.ico',
   '/apple-touch-icon.png',
-  '/assets/logo-tit.svg',
+  '/assets/images/logo-tit.svg',
   '/assets/images/avata.jpg'
 ];
 

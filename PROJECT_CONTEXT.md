@@ -41,8 +41,8 @@ thangit.com/
 │   │   ├── icon-192.png         # PWA Icon kích thước 192x192
 │   │   ├── icon-512.png         # PWA Icon kích thước 512x512
 │   │   ├── icon-maskable-192.png# PWA Maskable Icon cho Android
-│   │   └── icon-maskable-512.png# PWA Maskable Icon độ phân giải cao
-│   └── logo-tit.svg             # Logo nhận diện thương hiệu Thắng IT (Vector SVG)
+│   │   ├── icon-maskable-512.png# PWA Maskable Icon độ phân giải cao
+│   │   └── logo-tit.svg         # Logo nhận diện thương hiệu Thắng IT (Vector SVG)
 ├── css/
 │   └── style.css                # Toàn bộ CSS giao diện trang chủ, hệ thống biến màu, hiệu ứng & responsive
 ├── js/
