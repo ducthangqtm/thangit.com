@@ -5,8 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCopyButtons();
-  initServiceWorker();
-  initPullToRefresh();
+  cleanupServiceWorkers();
   initNetworkTools();
 });
 
@@ -59,24 +58,20 @@ function initCopyButtons() {
 }
 
 /* ==========================================================================
-   SERVICE WORKER REGISTRATION & UPDATE
+   SERVICE WORKER CLEANUP (UNREGISTER OLD PWA CACHES)
    ========================================================================== */
-function initServiceWorker() {
+function cleanupServiceWorkers() {
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').then((reg) => {
-        reg.addEventListener('updatefound', () => {
-          const newWorker = reg.installing;
-          if (newWorker) {
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                showToast('⚡ Đã cập nhật phiên bản mới!');
-              }
-            });
-          }
-        });
-      }).catch(() => {});
-    });
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (const reg of registrations) {
+        reg.unregister();
+      }
+    }).catch(() => {});
+  }
+  if ('caches' in window) {
+    caches.keys().then((keys) => {
+      keys.forEach((key) => caches.delete(key));
+    }).catch(() => {});
   }
 }
 
