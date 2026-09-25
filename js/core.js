@@ -5,7 +5,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCopyButtons();
-  initAnimatedFavicon();
   initServiceWorker();
   initPullToRefresh();
   initNetworkTools();
@@ -81,20 +80,6 @@ function initServiceWorker() {
   }
 }
 
-/* ==========================================================================
-   ANIMATED DYNAMIC SVG FAVICON
-   ========================================================================== */
-function initAnimatedFavicon() {
-  const favicon = document.querySelector("link[rel*='icon']");
-  if (!favicon) return;
-
-  let step = 0;
-  setInterval(() => {
-    step = (step + 1) % 360;
-  }, 1000);
-}
-
-/* ==========================================================================
 /* ==========================================================================
    MOBILE PULL TO REFRESH (PWA & STANDALONE SUPPORT)
    ========================================================================== */
