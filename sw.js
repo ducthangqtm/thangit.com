@@ -1,12 +1,10 @@
-// THANGIT.COM — PWA Service Worker (Clean Consolidated Architecture)
-const CACHE_NAME = 'tit-hub-v43';
+// THANGIT.COM — PWA Service Worker (Network Pro Tools Hub)
+const CACHE_NAME = 'tit-hub-v24';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/data/products.json',
   '/css/style.css',
   '/js/core.js',
-  '/js/main.js',
   '/js/tools.js',
   '/js/qrcode.min.js',
   '/manifest.json',
@@ -14,8 +12,7 @@ const ASSETS_TO_CACHE = [
   '/favicon.ico',
   '/apple-touch-icon.png',
   '/assets/logo-tit.svg',
-  '/assets/images/avata.jpg',
-  '/assets/CV_Nguyen_Duc_Thang_Senior_IT.pdf'
+  '/assets/images/avata.jpg'
 ];
 
 self.addEventListener('install', (event) => {
