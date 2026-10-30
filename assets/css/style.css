@@ -284,36 +284,33 @@ body {
   white-space: nowrap;
 }
 
-.btn-action-zalo {
-  background: #00d26a;
-  color: #061e12;
-  border: 1px solid #00d26a;
-  box-shadow: 0 4px 18px rgba(0, 210, 106, 0.35);
-}
-
-.btn-action-zalo:hover {
-  background: #00eb77;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(0, 210, 106, 0.5);
-}
-
+.btn-action-zalo,
 .btn-action-call {
   background: rgba(255, 255, 255, 0.04);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
+.btn-action-zalo:hover {
+  background: rgba(0, 210, 106, 0.1);
+  border-color: #00d26a;
+  color: #00d26a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(0, 210, 106, 0.2);
+}
+
 .btn-action-call:hover {
-  background: rgba(255, 255, 255, 0.09);
+  background: rgba(56, 189, 248, 0.1);
   border-color: #38bdf8;
   color: #38bdf8;
   transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.2);
 }
 
 .btn-action svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
 }
 
 /* Right: Link Cards Column */
