@@ -23,15 +23,15 @@
 
   function createStars() {
     stars = [];
-    const count = Math.min(Math.floor((width * height) / 10000), 90);
+    const count = Math.min(Math.floor((width * height) / 12000), 75);
     for (let i = 0; i < count; i++) {
       stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 1.4 + 0.3,
+        radius: Math.random() * 1.3 + 0.3,
         color: Math.random() > 0.4 ? 'rgba(0, 242, 254, ' : 'rgba(168, 85, 247, ',
-        alpha: Math.random() * 0.7 + 0.2,
-        speed: Math.random() * 0.2 + 0.05,
+        alpha: Math.random() * 0.7 + 0.15,
+        speed: Math.random() * 0.18 + 0.04,
         direction: Math.random() > 0.5 ? 1 : -1
       });
     }
@@ -48,7 +48,7 @@
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
       ctx.fillStyle = s.color + s.alpha + ')';
-      ctx.shadowBlur = 6;
+      ctx.shadowBlur = 4;
       ctx.shadowColor = s.color + '0.5)';
       ctx.fill();
     }
@@ -59,7 +59,7 @@
   resize();
   render();
 
-  // Pause when tab is hidden to conserve device battery and GPU
+  // Pause when tab is hidden to conserve battery
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(animationFrameId);
@@ -80,9 +80,7 @@
     .then(res => res.json())
     .then(data => {
       if (data && data.ip) {
-        wanDisplay.textContent = data.ip;
-      } else {
-        throw new Error('No IP returned');
+        wanDisplay.textContent = 'IP: ' + data.ip;
       }
     })
     .catch(() => {
@@ -90,11 +88,11 @@
         .then(res => res.json())
         .then(data => {
           if (data && data.ip) {
-            wanDisplay.textContent = data.ip;
+            wanDisplay.textContent = 'IP: ' + data.ip;
           }
         })
         .catch(() => {
-          wanDisplay.textContent = 'Tra cứu tại app.thangit.com';
+          wanDisplay.style.display = 'none';
         });
     });
 })();
