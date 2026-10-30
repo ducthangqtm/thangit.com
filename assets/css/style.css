@@ -96,8 +96,8 @@ html, body {
 }
 
 .brand-logo-img {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: block;
 }
@@ -128,12 +128,18 @@ html, body {
   font-size: 0.84rem;
   font-weight: 600;
   transition: all var(--transition);
+  white-space: nowrap;
 }
 
 .btn-zalo-nav svg {
   width: 15px;
   height: 15px;
   fill: currentColor;
+  flex-shrink: 0;
+}
+
+.zalo-short {
+  display: none;
 }
 
 .btn-zalo-nav:hover {
@@ -212,12 +218,15 @@ html, body {
   margin-bottom: 14px;
 }
 
+/* Căn chỉnh lề 2 bên (Justified) */
 .profile-bio {
   font-size: 0.92rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 22px;
   max-width: 440px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 /* Action Buttons (Zalo / Call) */
@@ -289,7 +298,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 18px;
+  padding: 13px 18px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
@@ -311,6 +320,8 @@ html, body {
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
+  flex: 1;
 }
 
 .card-icon-box {
@@ -358,6 +369,8 @@ html, body {
 .card-text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
 .card-title {
@@ -365,13 +378,20 @@ html, body {
   font-weight: 700;
   color: #ffffff;
   line-height: 1.3;
+  text-transform: lowercase;
 }
 
+/* Thu gọn mô tả đúng 1 dòng (Tránh rớt dòng trên mọi thiết bị) */
 .card-desc {
   font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.4;
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: lowercase;
+  display: block;
 }
 
 .card-arrow {
@@ -385,21 +405,6 @@ html, body {
 .hub-link-card:hover .card-arrow {
   color: var(--cyan-neon);
   transform: translate(2px, -2px);
-}
-
-/* Live IP WAN subtle indicator */
-.ip-wan-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.08);
-  padding: 1px 7px;
-  border-radius: var(--radius-sm);
-  margin-left: 6px;
-  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 /* ==========================================================================
@@ -442,36 +447,54 @@ html, body {
 }
 
 /* ==========================================================================
-   MOBILE FIRST RESPONSIVE (< 768px - EXACT MATCH TO USER'S MOBILE SCREENSHOT)
+   MOBILE FIRST RESPONSIVE (< 768px)
    ========================================================================== */
 @media (max-width: 768px) {
   .site-header {
-    padding: 14px 0;
+    padding: 12px 0;
   }
 
-  .brand-sub {
+  /* Ẩn chữ Nguyễn Đức Thắng trên logo theo đúng yêu cầu */
+  .brand-title {
     display: none;
   }
 
+  .brand-logo-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Thu gọn nút Zalo header thành nút Zalo nhỏ gọn 1 dòng */
+  .btn-zalo-nav {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+  }
+
+  .zalo-full {
+    display: none;
+  }
+
+  .zalo-short {
+    display: inline;
+  }
+
   .hub-main {
-    padding: 14px 0 30px;
+    padding: 14px 0 26px;
   }
 
   .hub-layout {
     grid-template-columns: 1fr;
-    gap: 22px;
-    text-align: center;
+    gap: 20px;
   }
 
   .profile-col {
     align-items: center;
-    text-align: center;
   }
 
   .avatar-wrapper {
     width: 96px;
     height: 96px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
 
   .profile-name {
@@ -484,12 +507,15 @@ html, body {
     margin-bottom: 10px;
   }
 
+  /* Giới thiệu căn lề 2 bên (Justified) */
   .profile-bio {
-    font-size: 0.84rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.55;
     margin-bottom: 18px;
     max-width: 100%;
     padding: 0 4px;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .action-buttons {
@@ -513,7 +539,6 @@ html, body {
 
   .card-left {
     gap: 12px;
-    text-align: left;
   }
 
   .card-icon-box {
@@ -531,9 +556,13 @@ html, body {
     font-size: 0.94rem;
   }
 
+  /* Đảm bảo mô tả link luôn gọn gàng 1 dòng duy nhất trên điện thoại */
   .card-desc {
     font-size: 0.76rem;
     line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .footer-inner {

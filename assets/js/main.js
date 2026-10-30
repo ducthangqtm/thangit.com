@@ -1,10 +1,10 @@
 /**
- * Thắng iT Hub (thangit.com)
- * Vanilla JavaScript: Starfield Neon Space Animation & Realtime IP WAN Lookup
+ * thangit.com
+ * Vanilla JavaScript: Starfield Neon Space Animation
  */
 
 /* ==========================================================================
-   1. STARFIELD CANVAS ANIMATION (CYBERPUNK NEON SPACE)
+   STARFIELD CANVAS ANIMATION (CYBERPUNK NEON SPACE)
    ========================================================================== */
 (function initStars() {
   const canvas = document.getElementById('star-canvas');
@@ -67,32 +67,4 @@
       render();
     }
   });
-})();
-
-/* ==========================================================================
-   2. ASYNC WAN IP PREVIEW
-   ========================================================================== */
-(function fetchPublicIP() {
-  const wanDisplay = document.getElementById('wanDisplay');
-  if (!wanDisplay) return;
-
-  fetch('https://api.ipify.org?format=json')
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.ip) {
-        wanDisplay.textContent = 'IP: ' + data.ip;
-      }
-    })
-    .catch(() => {
-      fetch('https://api64.ipify.org?format=json')
-        .then(res => res.json())
-        .then(data => {
-          if (data && data.ip) {
-            wanDisplay.textContent = 'IP: ' + data.ip;
-          }
-        })
-        .catch(() => {
-          wanDisplay.style.display = 'none';
-        });
-    });
 })();
