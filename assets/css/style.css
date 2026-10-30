@@ -124,37 +124,54 @@ body {
   margin-left: 6px;
 }
 
-.btn-zalo-nav {
+/* Status Badge (Online Indicator) */
+.status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   padding: 6px 14px;
-  background: rgba(0, 210, 106, 0.12);
-  border: 1px solid rgba(0, 210, 106, 0.4);
+  background: rgba(0, 210, 106, 0.1);
+  border: 1px solid rgba(0, 210, 106, 0.35);
   border-radius: var(--radius-full);
   color: #00d26a;
-  text-decoration: none;
   font-size: 0.84rem;
   font-weight: 600;
-  transition: all var(--transition);
+  letter-spacing: 0.02em;
   white-space: nowrap;
+  user-select: none;
+  box-shadow: 0 0 12px rgba(0, 210, 106, 0.15);
 }
 
-.btn-zalo-nav svg {
-  width: 15px;
-  height: 15px;
-  fill: currentColor;
-  flex-shrink: 0;
+.status-pulse-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  background-color: #00d26a;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00d26a;
 }
 
-.zalo-short {
-  display: none;
+.status-pulse-dot::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(0, 210, 106, 0.45);
+  animation: pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
 }
 
-.btn-zalo-nav:hover {
-  background: rgba(0, 210, 106, 0.22);
-  border-color: #00d26a;
-  box-shadow: 0 0 14px rgba(0, 210, 106, 0.35);
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
 }
 
 /* ==========================================================================
@@ -458,19 +475,6 @@ body {
   color: var(--cyan-neon);
 }
 
-/* Discreet utility link */
-.discreet-footer-link {
-  color: #475569;
-  text-decoration: none;
-  font-size: 0.76rem;
-  margin-left: 12px;
-  transition: color var(--transition);
-}
-
-.discreet-footer-link:hover {
-  color: #94a3b8;
-}
-
 /* ==========================================================================
    MOBILE FIRST RESPONSIVE (< 768px)
    ========================================================================== */
@@ -496,18 +500,16 @@ body {
     height: 36px;
   }
 
-  /* Thu gọn nút Zalo header thành nút Zalo nhỏ gọn 1 dòng */
-  .btn-zalo-nav {
+  /* Status badge thu gọn trên mobile */
+  .status-badge {
     padding: 5px 12px;
     font-size: 0.8rem;
+    gap: 6px;
   }
 
-  .zalo-full {
-    display: none;
-  }
-
-  .zalo-short {
-    display: inline;
+  .status-pulse-dot {
+    width: 7px;
+    height: 7px;
   }
 
   .hub-main {
@@ -650,10 +652,5 @@ body {
     gap: 6px;
     text-align: center;
     font-size: 0.76rem;
-  }
-
-  .discreet-footer-link {
-    display: block;
-    margin: 4px 0 0;
   }
 }
