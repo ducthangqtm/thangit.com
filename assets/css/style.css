@@ -519,6 +519,7 @@ body {
 }
 
 .eyebrow-cyan { color: var(--cyan-neon); }
+.eyebrow-blue { color: #60a5fa; }
 .eyebrow-purple { color: var(--purple-neon); }
 .eyebrow-emerald { color: var(--emerald-neon); }
 
@@ -744,6 +745,70 @@ body {
 .feature-card:hover .kw-tag {
   color: var(--cyan-neon);
   border-color: rgba(0, 242, 254, 0.25);
+}
+
+/* ==========================================================================
+   PORTFOLIO & ABOUT SECTION (ducthangnguyen.com)
+   ========================================================================== */
+.portfolio-hub-card {
+  --border-color: #3b82f6;
+  --hover-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.4), 0 0 20px rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.3);
+  padding: 40px;
+  background: linear-gradient(170deg, rgba(14, 25, 48, 0.88) 0%, rgba(10, 15, 27, 0.96) 100%);
+  cursor: pointer;
+}
+
+.portfolio-hub-card:hover {
+  transform: translateY(-6px) scale(1.008);
+  background: rgba(18, 32, 60, 0.95);
+  border-color: #60a5fa;
+  box-shadow: 0 12px 50px -10px rgba(59, 130, 246, 0.45), 0 0 25px rgba(59, 130, 246, 0.3);
+}
+
+.portfolio-hub-card:hover::before {
+  opacity: 1;
+}
+
+.portfolio-icon-box {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #60a5fa;
+  box-shadow: 0 0 22px rgba(59, 130, 246, 0.25);
+}
+
+.portfolio-domain-pill {
+  font-family: var(--font-mono);
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  font-size: 0.88rem;
+  padding: 3px 12px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+.btn-launch-portfolio {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.02rem;
+  padding: 14px 30px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.45);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all var(--transition-smooth);
+}
+
+.btn-launch-portfolio:hover,
+.portfolio-hub-card:hover .btn-launch-portfolio {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 45px rgba(59, 130, 246, 0.75);
+  filter: brightness(1.1);
+  color: #ffffff;
 }
 
 /* ==========================================================================
@@ -1129,8 +1194,8 @@ body {
   gap: 8px;
 }
 
-.cloudflare-dot {
-  color: #f6821f;
+.network-dot {
+  color: #00f2fe;
 }
 
 /* ==========================================================================
@@ -1143,6 +1208,7 @@ body {
     grid-template-columns: 1fr;
   }
   .tools-hub-card,
+  .portfolio-hub-card,
   .lab-hub-card,
   .fitness-hub-card {
     padding: 30px 22px;
@@ -1152,6 +1218,7 @@ body {
     align-items: flex-start;
   }
   .btn-launch-tools,
+  .btn-launch-portfolio,
   .btn-launch-lab,
   .btn-launch-fitness {
     width: 100%;

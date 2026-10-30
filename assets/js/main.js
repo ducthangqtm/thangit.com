@@ -70,25 +70,23 @@
 })();
 
 /* ==========================================================================
-   2. ASYNC WAN IP PREVIEW (CLOUDFLARE TRACE / IPIFY)
+   2. ASYNC WAN IP PREVIEW
    ========================================================================== */
 (function fetchPublicIP() {
   const wanDisplay = document.getElementById('wanDisplay');
   if (!wanDisplay) return;
 
-  // Try fast Cloudflare trace first, fallback to ipify
-  fetch('https://cloudflare.com/cdn-cgi/trace', { cache: 'no-store' })
-    .then(response => response.text())
+  fetch('https://api.ipify.org?format=json')
+    .then(res => res.json())
     .then(data => {
-      const match = data.match(/ip=([^\n]+)/);
-      if (match && match[1]) {
-        wanDisplay.textContent = match[1];
+      if (data && data.ip) {
+        wanDisplay.textContent = data.ip;
       } else {
-        throw new Error('Trace unparsed');
+        throw new Error('No IP returned');
       }
     })
     .catch(() => {
-      fetch('https://api.ipify.org?format=json')
+      fetch('https://api64.ipify.org?format=json')
         .then(res => res.json())
         .then(data => {
           if (data && data.ip) {
