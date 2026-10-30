@@ -18,14 +18,22 @@
 
   <!-- Canonical & Alternate -->
   <link rel="canonical" href="https://thangit.com/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://thangit.com/sitemap.xml">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="googleafac34c31ccd7308">
+
+  <!-- Open Graph / Facebook / Zalo -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thangit.com/">
   <meta property="og:title" content="thangit.com — network pro tools hub & digital ecosystem">
   <meta property="og:description"
     content="tiện ích mạng thực chiến: tra cứu ip, speedtest băng thông cao, doh dns, port checker. hệ sinh thái công nghệ nguyễn đức thắng.">
-  <meta property="og:image" content="assets/images/avatar.jpg">
+  <meta property="og:image" content="https://thangit.com/assets/images/avatar.jpg">
+  <meta property="og:image:secure_url" content="https://thangit.com/assets/images/avatar.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="800">
+  <meta property="og:image:alt" content="Nguyễn Đức Thắng - Thắng iT">
   <meta property="og:site_name" content="thangit.com hub">
   <meta property="og:locale" content="vi_VN">
 
@@ -35,7 +43,7 @@
   <meta property="twitter:title" content="thangit.com — network pro tools hub & digital ecosystem">
   <meta property="twitter:description"
     content="tiện ích mạng thực chiến: tra cứu ip, speedtest băng thông cao, doh dns, port checker.">
-  <meta property="twitter:image" content="assets/images/avatar.jpg">
+  <meta property="twitter:image" content="https://thangit.com/assets/images/avatar.jpg">
 
   <!-- Favicon SVG (Custom Animated TîT Badge) -->
   <link rel="icon" type="image/svg+xml" href="assets/images/logo-tit.svg">
@@ -54,23 +62,51 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "thangit.com",
-    "url": "https://thangit.com/",
-    "description": "bộ tiện ích mạng thực chiến chuyên sâu: tra cứu ip, speedtest, doh dns & ptr, port checker.",
-    "publisher": {
-      "@type": "Person",
-      "name": "Nguyễn Đức Thắng",
-      "jobTitle": "IT Engineer",
-      "url": "https://ducthangnguyen.com",
-      "sameAs": [
-        "https://thangit.com",
-        "https://github.com/ducthangqtm",
-        "https://thangnhayday.com"
-      ],
-      "image": "https://thangit.com/assets/images/avatar.jpg"
-    },
-    "image": "https://thangit.com/assets/images/avatar.jpg"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://thangit.com/#website",
+        "url": "https://thangit.com/",
+        "name": "thangit.com",
+        "description": "Bộ tiện ích mạng thực chiến chuyên sâu: tra cứu IP, Speedtest, DoH DNS & PTR, Port Checker.",
+        "inLanguage": "vi-VN",
+        "publisher": {
+          "@id": "https://thangit.com/#person"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://thangit.com/#person",
+        "name": "Nguyễn Đức Thắng",
+        "alternateName": ["Thắng iT", "ducthangnguyen"],
+        "jobTitle": "IT Engineer",
+        "url": "https://ducthangnguyen.com",
+        "image": "https://thangit.com/assets/images/avatar.jpg",
+        "sameAs": [
+          "https://thangit.com",
+          "https://app.thangit.com",
+          "https://ducthangnguyen.com",
+          "https://github.com/ducthangqtm",
+          "https://thangnd.io.vn",
+          "https://thangnhayday.com"
+        ]
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://thangit.com/#webpage",
+        "url": "https://thangit.com/",
+        "name": "thangit.com — network pro tools hub & digital ecosystem",
+        "isPartOf": {
+          "@id": "https://thangit.com/#website"
+        },
+        "about": {
+          "@id": "https://thangit.com/#person"
+        },
+        "mainEntity": {
+          "@id": "https://thangit.com/#person"
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -228,7 +264,8 @@
       <div class="container">
         <div class="footer-inner">
           <div>
-            Email: <a href="mailto:ducthangqtm@gmail.com" class="footer-meta-link">ducthangqtm@gmail.com</a> • Bắc Ninh &amp; Hà Nội
+            Email: <a href="mailto:ducthangqtm@gmail.com" class="footer-meta-link">ducthangqtm@gmail.com</a> • Bắc Ninh
+            &amp; Hà Nội
           </div>
           <div>
             © 2026 Nguyễn Đức Thắng

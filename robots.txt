@@ -1,0 +1,6 @@
+# robots.txt for https://thangit.com
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: https://thangit.com/sitemap.xml
