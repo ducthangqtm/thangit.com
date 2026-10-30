@@ -4,3 +4,4 @@ Allow: /
 
 # Sitemap Index
 Sitemap: https://thangit.com/sitemap.xml
+
